@@ -267,6 +267,15 @@ const EMPRESA = {
   estadosDondeVendemos:['Yucatán','[PLACEHOLDER — resto de estados donde venden]'],
 };
 
+// Lista para el desplegable de "Estado" en el formulario de contacto.
+const ESTADOS_MEXICO = [
+  'Aguascalientes','Baja California','Baja California Sur','Campeche','Chiapas','Chihuahua',
+  'Ciudad de México','Coahuila','Colima','Durango','Guanajuato','Guerrero','Hidalgo','Jalisco',
+  'Estado de México','Michoacán','Morelos','Nayarit','Nuevo León','Oaxaca','Puebla','Querétaro',
+  'Quintana Roo','San Luis Potosí','Sinaloa','Sonora','Tabasco','Tamaulipas','Tlaxcala',
+  'Veracruz','Yucatán','Zacatecas','Fuera de México',
+];
+
 // ---------------- Posicionamiento de marca (Misión / Visión / Valores / Quiénes somos) ----------------
 const MARCA_RC = {
   mision:'Crear soluciones que protejan, conecten y hagan posible el deporte.',
