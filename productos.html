@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Productos — Redes Perimetrales, Deportivas y Porterías | Grupo RC</title>
+<meta name="description" content="Catálogo de Grupo RC: redes perimetrales, redes deportivas, redes para porterías, porterías, baloneras y redes de protección.">
+<link rel="canonical" href="/productos.html">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-nivel="raiz">
+<div id="site-header"></div>
+
+<section class="hero-interior">
+  <div class="envolvente">
+    <div class="migas"><a href="index.html">Inicio</a> / Productos</div>
+    <h1>Productos</h1>
+    <p>Fabricamos y manejamos soluciones con distintos materiales, medidas y calibres. Explora por tipo de producto o por deporte.</p>
+  </div>
+</section>
+
+<section class="franja-chica">
+  <div class="envolvente">
+    <span class="ojo">Por tipo de producto</span>
+    <h2 style="margin-bottom:24px;">Categorías</h2>
+    <div class="grid-cards g4" id="cont-categorias"></div>
+  </div>
+</section>
+
+<section class="franja-chica" style="background:var(--hueso);">
+  <div class="envolvente">
+    <span class="ojo">Por deporte</span>
+    <h2 style="margin-bottom:24px;">Explora por disciplina</h2>
+    <div class="grid-cards g5" id="cont-deportes"></div>
+  </div>
+</section>
+
+<section class="franja">
+  <div class="envolvente">
+    <span class="ojo">Catálogo completo</span>
+    <h2 style="margin-bottom:24px;">Todos los productos</h2>
+    <div class="grid-cards g4" id="cont-todos"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+  renderHeader('productos');
+  renderFooter();
+  document.getElementById('cont-categorias').innerHTML = CATEGORIAS.map(c=>`
+    <a class="tarjeta-producto" href="productos/${c.slug}.html">
+      <div class="foto-ph"><span><b>${c.nombre}</b></span></div>
+      <div class="tarjeta-producto-body"><h3>${c.nombre}</h3><p>${c.descripcionCorta}</p></div>
+    </a>`).join('');
+  document.getElementById('cont-deportes').innerHTML = DEPORTES.map(d=>`
+    <a class="tarjeta-cliente" href="productos.html#${d.slug}" style="min-height:70px;"><span>${d.nombre}</span></a>`).join('');
+  document.getElementById('cont-todos').innerHTML = PRODUCTOS.map(renderProductCard).join('');
+</script>
+</body>
+</html>

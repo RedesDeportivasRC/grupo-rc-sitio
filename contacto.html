@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto — Pide tu cotización | Grupo RC</title>
+<meta name="description" content="Contáctanos para cotizar tu red perimetral, red deportiva o portería. Teléfono, WhatsApp y formulario de cotización.">
+<link rel="canonical" href="/contacto.html">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-nivel="raiz">
+<div id="site-header"></div>
+
+<section class="hero-interior">
+  <div class="envolvente">
+    <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Contacto</div>
+    <h1>Pide tu cotización.</h1>
+    <p>Te respondemos el mismo día hábil. El teléfono es la vía más rápida si tu proyecto es urgente.</p>
+  </div>
+</section>
+
+<section class="franja">
+  <div class="envolvente" style="display:grid;grid-template-columns:.85fr 1.15fr;gap:50px;">
+    <div>
+      <h2 style="font-size:1.6rem;">Datos de contacto</h2>
+      <div style="margin-top:22px;display:grid;gap:20px;">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:42px;height:42px;border-radius:10px;background:var(--azul);display:flex;align-items:center;justify-content:center;flex-shrink:0;">📞</div>
+          <div><b style="display:block;">Teléfono / WhatsApp</b><span id="dato-telefono" style="color:var(--gris);font-size:.88rem;"></span></div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:42px;height:42px;border-radius:10px;background:var(--azul);display:flex;align-items:center;justify-content:center;flex-shrink:0;">✉️</div>
+          <div><b style="display:block;">Correo</b><span id="dato-correo" style="color:var(--gris);font-size:.88rem;"></span></div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:42px;height:42px;border-radius:10px;background:var(--azul);display:flex;align-items:center;justify-content:center;flex-shrink:0;">📍</div>
+          <div><b style="display:block;">Ubicación</b><span id="dato-direccion" style="color:var(--gris);font-size:.88rem;"></span></div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:42px;height:42px;border-radius:10px;background:var(--azul);display:flex;align-items:center;justify-content:center;flex-shrink:0;">🕒</div>
+          <div><b style="display:block;">Horario</b><span id="dato-horario" style="color:var(--gris);font-size:.88rem;"></span></div>
+        </div>
+      </div>
+    </div>
+    <form class="form-contacto" action="#" method="post">
+      <div class="fila-2">
+        <div><label>Nombre</label><input type="text" autocomplete="name" required></div>
+        <div><label>Empresa (opcional)</label><input type="text" autocomplete="organization"></div>
+      </div>
+      <div class="fila-2">
+        <div><label>Teléfono</label><input type="tel" autocomplete="tel" required></div>
+        <div><label>Correo</label><input type="email" autocomplete="email" required></div>
+      </div>
+      <div class="fila-2">
+        <div><label>Estado</label><input type="text" autocomplete="address-level1" placeholder="¿Desde dónde nos contactas?"></div>
+        <div><label>¿Qué necesitas?</label>
+          <select>
+            <option>Redes perimetrales</option>
+            <option>Redes deportivas</option>
+            <option>Redes para porterías</option>
+            <option>Porterías completas</option>
+            <option>Tengo un proyecto / no estoy seguro</option>
+          </select>
+        </div>
+      </div>
+      <div><label>Cuéntanos tu proyecto</label><textarea placeholder="Medidas, cantidad, ubicación..."></textarea></div>
+      <div><label>Foto de referencia (opcional)</label><input type="file" accept="image/*"></div>
+      <button type="submit" class="btn btn-azul" style="justify-self:start;margin-top:6px;">Enviar solicitud</button>
+    </form>
+  </div>
+</section>
+
+<section class="franja-chica" style="background:var(--hueso);">
+  <div class="envolvente" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+    <div><h2 style="font-size:1.3rem;">¿Prefieres hablar directo?</h2><p style="color:var(--gris);font-size:.88rem;">Escríbenos por WhatsApp, es lo más rápido.</p></div>
+    <a href="https://wa.me/529995538184" class="btn btn-negro">Abrir WhatsApp</a>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+  renderHeader('contacto'); renderFooter();
+  document.getElementById('dato-telefono').textContent = EMPRESA.telefono;
+  document.getElementById('dato-correo').textContent = EMPRESA.correo;
+  document.getElementById('dato-direccion').textContent = EMPRESA.direccion + ' · envíos a todo México';
+  document.getElementById('dato-horario').textContent = EMPRESA.horarios;
+</script>
+</body>
+</html>

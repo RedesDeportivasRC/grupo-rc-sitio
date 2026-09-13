@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosotros | Grupo RC</title>
+<meta name="description" content="Grupo RC — más de 25 años de experiencia en redes deportivas y soluciones de protección para espacios deportivos en México.">
+<link rel="canonical" href="/nosotros.html">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-nivel="raiz">
+<div id="site-header"></div>
+
+<section class="hero-interior">
+  <div class="envolvente">
+    <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Nosotros</div>
+    <h1>Que el deporte<br>no se detenga.</h1>
+    <p>Esa es la razón por la que existe Grupo RC — no vendemos redes, ayudamos a que los espacios deportivos estén protegidos y listos para jugar.</p>
+  </div>
+</section>
+
+<!-- Quiénes somos -->
+<section class="franja">
+  <div class="envolvente" style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;">
+    <div class="foto-ph" style="min-height:340px;"><span>Foto — equipo / taller / instalación</span></div>
+    <div>
+      <span class="ojo">Quiénes somos</span>
+      <h2>Más de 25 años de experiencia.</h2>
+      <p class="kicker" id="texto-quienes-somos" style="margin-top:16px;max-width:none;"></p>
+    </div>
+  </div>
+</section>
+
+<!-- Misión y Visión -->
+<section class="franja" style="background:var(--azul-osc);color:#fff;">
+  <div class="envolvente">
+    <div class="grid-cards g2" style="gap:44px;">
+      <div>
+        <span class="ojo" style="color:var(--azul);">Misión</span>
+        <h2 style="color:#fff;font-size:1.7rem;" id="texto-mision-corta"></h2>
+        <p style="color:#9fc3d1;margin-top:14px;" id="texto-mision-larga"></p>
+      </div>
+      <div>
+        <span class="ojo" style="color:var(--azul);">Visión</span>
+        <h2 style="color:#fff;font-size:1.7rem;" id="texto-vision-corta"></h2>
+        <p style="color:#9fc3d1;margin-top:14px;" id="texto-vision-larga"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Valores -->
+<section class="franja" style="background:var(--hueso);">
+  <div class="envolvente">
+    <span class="ojo">Lo que nos define</span>
+    <h2 style="margin-bottom:28px;">Nuestros valores</h2>
+    <div class="grid-cards g4" id="cont-valores"></div>
+  </div>
+</section>
+
+<!-- Filosofía RC -->
+<section class="franja">
+  <div class="envolvente centrado" style="max-width:680px;">
+    <span class="ojo">Filosofía RC</span>
+    <div id="cont-filosofia" style="margin-top:18px;display:grid;gap:14px;"></div>
+    <p style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.5px;margin-top:30px;color:var(--azul-osc);">
+      GRUPO RC EXISTE PARA QUE EL DEPORTE PUEDA SEGUIR.
+    </p>
+  </div>
+</section>
+
+<section class="franja-chica" style="background:var(--hueso);">
+  <div class="envolvente centrado" style="max-width:600px;">
+    <h2>¿Tienes un espacio que proteger?</h2>
+    <p class="kicker centrado">Empecemos por escuchar tu proyecto.</p>
+    <a href="contacto.html" class="btn btn-negro" style="margin-top:16px;">Hablar con un asesor</a>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+  renderHeader('nosotros'); renderFooter();
+  document.getElementById('texto-quienes-somos').textContent = MARCA_RC.quienesSomos;
+  document.getElementById('texto-mision-corta').textContent = MARCA_RC.mision;
+  document.getElementById('texto-mision-larga').textContent = MARCA_RC.misionTexto;
+  document.getElementById('texto-vision-corta').textContent = MARCA_RC.vision;
+  document.getElementById('texto-vision-larga').textContent = MARCA_RC.visionTexto;
+  document.getElementById('cont-valores').innerHTML = MARCA_RC.valores.map(v=>`
+    <div>
+      <h3 style="font-family:'Manrope';font-weight:800;font-size:1.02rem;color:var(--azul-osc);">${v.nombre}</h3>
+      <p style="color:var(--gris);font-size:.85rem;margin-top:6px;">${v.texto}</p>
+    </div>`).join('');
+  document.getElementById('cont-filosofia').innerHTML = MARCA_RC.filosofia.map(linea=>`<p style="color:var(--gris);font-size:1rem;">${linea}</p>`).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galería de fotos | Grupo RC</title>
+<meta name="description" content="Galería de fotografías de Grupo RC: productos, proyectos y aplicaciones de nuestras redes.">
+<link rel="canonical" href="/galeria.html">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-nivel="raiz">
+<div id="site-header"></div>
+
+<section class="hero-interior">
+  <div class="envolvente">
+    <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Galería</div>
+    <h1>Galería.</h1>
+    <p>Fotografía estilo portafolio de nuestros productos, proyectos y aplicaciones.</p>
+  </div>
+</section>
+
+<section class="franja-chica">
+  <div class="envolvente" style="display:flex;gap:10px;flex-wrap:wrap;">
+    <button class="btn btn-negro btn-chico" data-filtro="todos">Todo</button>
+    <button class="btn btn-linea btn-chico" data-filtro="producto">Producto</button>
+    <button class="btn btn-linea btn-chico" data-filtro="proyecto">Proyecto</button>
+    <button class="btn btn-linea btn-chico" data-filtro="deporte">Deporte</button>
+    <button class="btn btn-linea btn-chico" data-filtro="aplicacion">Aplicación</button>
+  </div>
+</section>
+
+<section class="franja">
+  <div class="envolvente">
+    <div class="grid-cards g3" id="cont-galeria" style="grid-auto-rows:220px;"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+  renderHeader('galeria');
+  renderFooter();
+  // [PLACEHOLDER] — hasta que subas fotos reales, esto es un set de ejemplo con la
+  // categorización lista (producto/proyecto/deporte/aplicación) para filtrar.
+  const FOTOS_GALERIA = Array.from({length:9}).map((_,i)=>({
+    categoria:['producto','proyecto','deporte','aplicacion'][i%4],
+    titulo:`[PLACEHOLDER foto ${i+1}]`,
+  }));
+  function pintarGaleria(filtro){
+    const lista = filtro==='todos' ? FOTOS_GALERIA : FOTOS_GALERIA.filter(f=>f.categoria===filtro);
+    document.getElementById('cont-galeria').innerHTML = lista.map(f=>`<div class="foto-ph"><span>${f.titulo}</span></div>`).join('');
+  }
+  pintarGaleria('todos');
+  document.querySelectorAll('[data-filtro]').forEach(btn=>{
+    btn.onclick = ()=>{
+      document.querySelectorAll('[data-filtro]').forEach(b=>b.className='btn btn-linea btn-chico');
+      btn.className = 'btn btn-negro btn-chico';
+      pintarGaleria(btn.dataset.filtro);
+    };
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Videos destacados | Grupo RC</title>
+<meta name="description" content="Videos de instalaciones, fabricación y proyectos de Grupo RC.">
+<link rel="canonical" href="/videos.html">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-nivel="raiz">
+<div id="site-header"></div>
+
+<section class="hero-interior">
+  <div class="envolvente">
+    <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Videos</div>
+    <h1>Videos destacados.</h1>
+    <p>Instalaciones, fabricación y proyectos reales, en video.</p>
+  </div>
+</section>
+
+<section class="franja">
+  <div class="envolvente">
+    <div class="grid-cards g3" id="cont-videos"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+  renderHeader('videos');
+  renderFooter();
+  document.getElementById('cont-videos').innerHTML = VIDEOS.map(v=>`
+    <div>
+      <div style="position:relative;border-radius:14px;overflow:hidden;">
+        <div class="foto-ph oscuro" style="min-height:200px;"><span>${v.titulo}</span></div>
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;">▶</div>
+      </div>
+      <p style="margin-top:10px;font-size:.82rem;color:var(--gris);">${v.categoria}</p>
+    </div>`).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recursos y Descargas | Grupo RC</title>
+<meta name="description" content="Catálogo, manual de instalación y fichas técnicas de Grupo RC para descargar.">
+<link rel="canonical" href="/recursos.html">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-nivel="raiz">
+<div id="site-header"></div>
+
+<section class="hero-interior">
+  <div class="envolvente">
+    <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Recursos</div>
+    <h1>Recursos y descargas.</h1>
+    <p>Todo lo que necesitas antes de decidir: catálogo, manual de instalación y fichas técnicas.</p>
+  </div>
+</section>
+
+<section class="franja">
+  <div class="envolvente">
+    <div class="grid-cards g2" id="cont-recursos"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+  renderHeader('recursos');
+  renderFooter();
+  document.getElementById('cont-recursos').innerHTML = RECURSOS.map(renderResourceCard).join('');
+</script>
+</body>
+</html>

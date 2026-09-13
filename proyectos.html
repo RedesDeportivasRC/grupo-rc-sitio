@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyectos — Instalaciones entregadas | Grupo RC</title>
+<meta name="description" content="Portafolio de proyectos de Grupo RC: instalaciones de redes perimetrales, deportivas y porterías en escuelas, hoteles y complejos deportivos.">
+<link rel="canonical" href="/proyectos.html">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-nivel="raiz">
+<div id="site-header"></div>
+
+<section class="hero-interior">
+  <div class="envolvente">
+    <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Proyectos</div>
+    <h1>Proyectos entregados.</h1>
+    <p>Instalaciones reales, en canchas, escuelas, hoteles y complejos deportivos de todo el país.</p>
+  </div>
+</section>
+
+<section class="franja">
+  <div class="envolvente">
+    <div class="grid-cards g3" id="cont-proyectos"></div>
+  </div>
+</section>
+
+<section class="franja-chica" style="background:var(--hueso);">
+  <div class="envolvente centrado" style="max-width:600px;">
+    <h2>¿Tu proyecto sigue?</h2>
+    <p class="kicker centrado">Cuéntanos qué necesitas resolver, no hace falta que sepas el producto exacto.</p>
+    <a href="contacto.html" class="btn btn-negro" style="margin-top:14px;">Contarles mi proyecto</a>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+  renderHeader('proyectos');
+  renderFooter();
+  document.getElementById('cont-proyectos').innerHTML = PROYECTOS.map(pr => `
+    <div class="tarjeta-proyecto" id="${pr.slug}">
+      <div class="foto-ph oscuro"><span>${pr.fotos[0]}</span></div>
+      <div class="tarjeta-proyecto-body">
+        <span>${pr.tipo}</span>
+        <h3>${pr.nombre}</h3>
+      </div>
+    </div>
+  `).join('');
+</script>
+</body>
+</html>

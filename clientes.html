@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clientes — Empresas que confían en nosotros | Grupo RC</title>
+<meta name="description" content="Escuelas, hoteles, clubes y empresas que confían en Grupo RC para sus redes perimetrales y deportivas.">
+<link rel="canonical" href="/clientes.html">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-nivel="raiz">
+<div id="site-header"></div>
+
+<section class="hero-interior">
+  <div class="envolvente">
+    <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Clientes</div>
+    <h1>Empresas que confían en nosotros.</h1>
+    <p>[PLACEHOLDER] Logos y testimonios pendientes de autorización para publicar.</p>
+  </div>
+</section>
+
+<section class="franja">
+  <div class="envolvente">
+    <div class="grid-cards g4" id="cont-clientes"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+  renderHeader('clientes');
+  renderFooter();
+  document.getElementById('cont-clientes').innerHTML = CLIENTES.map(renderClientCard).join('');
+</script>
+</body>
+</html>
