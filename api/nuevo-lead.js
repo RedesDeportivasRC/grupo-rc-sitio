@@ -100,6 +100,7 @@ export default async function handler(req, res) {
           product: producto || null,
           estado: estado || null,
           stage: "nuevo",
+          origen: "Página web",
         }),
       });
       const creado = await crear.json();
