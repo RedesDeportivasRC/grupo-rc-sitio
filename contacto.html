@@ -96,7 +96,8 @@
 
   document.getElementById('form-contacto').addEventListener('submit', async (e)=>{
     e.preventDefault();
-    const recaptchaToken = await grecaptcha.execute('RECAPTCHA_SITE_KEY', { action: 'contacto' });
+    let recaptchaToken = '';
+    try{ recaptchaToken = await grecaptcha.execute('RECAPTCHA_SITE_KEY', { action: 'contacto' }); }catch(e){ /* aún no configurado — se envía sin verificación */ }
     const ok = await enviarLeadFormulario({
       nombre: document.getElementById('c-nombre').value.trim(),
       empresa: document.getElementById('c-empresa').value.trim(),
