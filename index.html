@@ -197,7 +197,8 @@
   document.getElementById('ci-estado').insertAdjacentHTML('beforeend', ESTADOS_MEXICO.map(e=>`<option>${e}</option>`).join(''));
   document.getElementById('form-contacto-inicio').addEventListener('submit', async (e)=>{
     e.preventDefault();
-    const recaptchaToken = await grecaptcha.execute('RECAPTCHA_SITE_KEY', { action: 'contacto' });
+    let recaptchaToken = '';
+    try{ recaptchaToken = await grecaptcha.execute('RECAPTCHA_SITE_KEY', { action: 'contacto' }); }catch(e){ /* aún no configurado — se envía sin verificación */ }
     const ok = await enviarLeadFormulario({
       nombre: document.getElementById('ci-nombre').value.trim(),
       telefono: document.getElementById('ci-telefono').value.trim(),
