@@ -42,19 +42,20 @@
         </div>
       </div>
     </div>
-    <form class="form-contacto" action="#" method="post">
+    <form class="form-contacto" id="form-contacto" autocomplete="on">
+      <input type="text" name="sitioWeb" id="c-honeypot" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;">
       <div class="fila-2">
-        <div><label>Nombre</label><input type="text" autocomplete="name" required></div>
-        <div><label>Empresa (opcional)</label><input type="text" autocomplete="organization"></div>
+        <div><label>Nombre</label><input type="text" id="c-nombre" autocomplete="name" required></div>
+        <div><label>Empresa (opcional)</label><input type="text" id="c-empresa" autocomplete="organization"></div>
       </div>
       <div class="fila-2">
-        <div><label>Teléfono</label><input type="tel" autocomplete="tel" required></div>
-        <div><label>Correo</label><input type="email" autocomplete="email" required></div>
+        <div><label>Teléfono</label><input type="tel" id="c-telefono" autocomplete="tel" required></div>
+        <div><label>Correo</label><input type="email" id="c-correo" autocomplete="email" required></div>
       </div>
       <div class="fila-2">
-        <div><label>Estado</label><input type="text" autocomplete="address-level1" placeholder="¿Desde dónde nos contactas?"></div>
+        <div><label>Estado</label><input type="text" id="c-estado" autocomplete="address-level1" placeholder="¿Desde dónde nos contactas?"></div>
         <div><label>¿Qué necesitas?</label>
-          <select>
+          <select id="c-producto">
             <option>Redes perimetrales</option>
             <option>Redes deportivas</option>
             <option>Redes para porterías</option>
@@ -63,9 +64,9 @@
           </select>
         </div>
       </div>
-      <div><label>Cuéntanos tu proyecto</label><textarea placeholder="Medidas, cantidad, ubicación..."></textarea></div>
-      <div><label>Foto de referencia (opcional)</label><input type="file" accept="image/*"></div>
-      <button type="submit" class="btn btn-azul" style="justify-self:start;margin-top:6px;">Enviar solicitud</button>
+      <div><label>Cuéntanos tu proyecto</label><textarea id="c-mensaje" placeholder="Medidas, cantidad, ubicación..."></textarea></div>
+      <button type="submit" class="btn btn-azul" id="c-btn" style="justify-self:start;margin-top:6px;">Enviar solicitud</button>
+      <div id="c-status" style="font-size:.85rem;"></div>
     </form>
   </div>
 </section>
@@ -86,6 +87,21 @@
   document.getElementById('dato-correo').textContent = EMPRESA.correo;
   document.getElementById('dato-direccion').textContent = EMPRESA.direccion + ' · envíos a todo México';
   document.getElementById('dato-horario').textContent = EMPRESA.horarios;
+
+  document.getElementById('form-contacto').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const ok = await enviarLeadFormulario({
+      nombre: document.getElementById('c-nombre').value.trim(),
+      empresa: document.getElementById('c-empresa').value.trim(),
+      telefono: document.getElementById('c-telefono').value.trim(),
+      correo: document.getElementById('c-correo').value.trim(),
+      estado: document.getElementById('c-estado').value.trim(),
+      producto: document.getElementById('c-producto').value,
+      mensaje: document.getElementById('c-mensaje').value.trim(),
+      sitioWeb: document.getElementById('c-honeypot').value,
+    }, { botón: document.getElementById('c-btn'), status: document.getElementById('c-status') });
+    if(ok) document.getElementById('form-contacto').reset();
+  });
 </script>
 </body>
 </html>
