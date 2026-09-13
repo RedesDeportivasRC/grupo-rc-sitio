@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Método no permitido" });
   }
 
-  const { nombre, telefono, correo, estado, producto, mensaje, empresa, sitioWeb } = req.body || {};
+  const { nombre, telefono, correo, estado, producto, mensaje, empresa, sitioWeb, recaptchaToken } = req.body || {};
 
   // "sitioWeb" es un campo trampa (honeypot): invisible para una persona, pero los
   // robots que llenan formularios automáticamente casi siempre lo rellenan igual.
@@ -27,6 +27,28 @@ export default async function handler(req, res) {
 
   if (!telefono || !nombre) {
     return res.status(400).json({ error: "Nombre y teléfono son obligatorios." });
+  }
+
+  // Verifica con Google que quien llenó el formulario se comportó como una persona,
+  // no como un robot — esto corre invisible, el cliente nunca ve ningún captcha.
+  const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY;
+  if (recaptchaSecret) {
+    if (!recaptchaToken) {
+      return res.status(400).json({ error: "No se pudo verificar el formulario, intenta de nuevo." });
+    }
+    try {
+      const verifica = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `secret=${recaptchaSecret}&response=${recaptchaToken}`,
+      });
+      const resultado = await verifica.json();
+      if (!resultado.success || (typeof resultado.score === "number" && resultado.score < 0.5)) {
+        return res.status(400).json({ error: "No se pudo verificar el formulario, intenta de nuevo." });
+      }
+    } catch (e) {
+      // Si Google no responde, no bloqueamos al cliente por un problema que no es suyo.
+    }
   }
 
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
