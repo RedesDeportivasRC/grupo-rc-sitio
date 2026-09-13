@@ -179,37 +179,47 @@
 <script src="assets/js/data.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
-  renderHeader('inicio');
-  renderFooter();
-  document.getElementById('cont-categorias').innerHTML = CATEGORIAS.slice(0,4).map(c=>`
-    <a class="tarjeta-producto" href="productos/${c.slug}.html">
-      <div class="foto-ph"><span><b>${c.nombre}</b></span></div>
-      <div class="tarjeta-producto-body"><h3>${c.nombre}</h3><p>${c.descripcionCorta}</p></div>
-    </a>`).join('');
-  document.getElementById('cont-productos-destacados').innerHTML = PRODUCTOS.slice(0,4).map(renderProductCard).join('');
-  document.getElementById('cont-proyectos').innerHTML = PROYECTOS.slice(0,3).map(renderProjectCard).join('');
-  document.getElementById('cont-videos').innerHTML = VIDEOS.map(v=>`
-    <div style="position:relative;border-radius:14px;overflow:hidden;">
-      <div class="foto-ph oscuro" style="min-height:180px;"><span>${v.titulo}</span></div>
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;">▶</div>
-    </div>`).join('');
-
-  document.getElementById('ci-estado').insertAdjacentHTML('beforeend', ESTADOS_MEXICO.map(e=>`<option>${e}</option>`).join(''));
   document.getElementById('form-contacto-inicio').addEventListener('submit', async (e)=>{
     e.preventDefault();
-    let recaptchaToken = '';
-    try{ recaptchaToken = await grecaptcha.execute('RECAPTCHA_SITE_KEY', { action: 'contacto' }); }catch(e){ /* aún no configurado — se envía sin verificación */ }
-    const ok = await enviarLeadFormulario({
-      nombre: document.getElementById('ci-nombre').value.trim(),
-      telefono: document.getElementById('ci-telefono').value.trim(),
-      correo: document.getElementById('ci-correo').value.trim(),
-      estado: document.getElementById('ci-estado').value.trim(),
-      mensaje: document.getElementById('ci-mensaje').value.trim(),
-      sitioWeb: document.getElementById('ci-honeypot').value,
-      recaptchaToken,
-    }, { botón: document.getElementById('ci-btn'), status: document.getElementById('ci-status') });
-    if(ok) document.getElementById('form-contacto-inicio').reset();
+    const status = document.getElementById('ci-status');
+    try{
+      let recaptchaToken = '';
+      try{ recaptchaToken = await grecaptcha.execute('RECAPTCHA_SITE_KEY', { action: 'contacto' }); }catch(err){ /* aún no configurado — se envía sin verificación */ }
+      const ok = await enviarLeadFormulario({
+        nombre: document.getElementById('ci-nombre').value.trim(),
+        telefono: document.getElementById('ci-telefono').value.trim(),
+        correo: document.getElementById('ci-correo').value.trim(),
+        estado: document.getElementById('ci-estado').value.trim(),
+        mensaje: document.getElementById('ci-mensaje').value.trim(),
+        sitioWeb: document.getElementById('ci-honeypot').value,
+        recaptchaToken,
+      }, { botón: document.getElementById('ci-btn'), status });
+      if(ok) document.getElementById('form-contacto-inicio').reset();
+    }catch(err){
+      status.style.color = '#d9534f';
+      status.textContent = '❌ Error inesperado: ' + err.message;
+    }
   });
+
+  try{
+    renderHeader('inicio');
+    renderFooter();
+    document.getElementById('cont-categorias').innerHTML = CATEGORIAS.slice(0,4).map(c=>`
+      <a class="tarjeta-producto" href="productos/${c.slug}.html">
+        <div class="foto-ph"><span><b>${c.nombre}</b></span></div>
+        <div class="tarjeta-producto-body"><h3>${c.nombre}</h3><p>${c.descripcionCorta}</p></div>
+      </a>`).join('');
+    document.getElementById('cont-productos-destacados').innerHTML = PRODUCTOS.slice(0,4).map(renderProductCard).join('');
+    document.getElementById('cont-proyectos').innerHTML = PROYECTOS.slice(0,3).map(renderProjectCard).join('');
+    document.getElementById('cont-videos').innerHTML = VIDEOS.map(v=>`
+      <div style="position:relative;border-radius:14px;overflow:hidden;">
+        <div class="foto-ph oscuro" style="min-height:180px;"><span>${v.titulo}</span></div>
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;">▶</div>
+      </div>`).join('');
+    document.getElementById('ci-estado').insertAdjacentHTML('beforeend', ESTADOS_MEXICO.map(e=>`<option>${e}</option>`).join(''));
+  }catch(err){
+    console.error('Error preparando la página:', err);
+  }
 </script>
 </body>
 </html>
