@@ -147,3 +147,35 @@ function renderResourceCard(r){
       <div><b>${r.nombre}</b><span>${r.descripcion}</span></div>
     </div>`;
 }
+
+// Envía los datos de cualquier formulario de contacto del sitio al lead-capture,
+// que los guarda directo en la misma tabla que usa el CRM. Reutilizable en Inicio y Contacto.
+async function enviarLeadFormulario(datos, elementosStatus){
+  const { botón, status } = elementosStatus;
+  if(!datos.telefono || !datos.nombre){
+    status.textContent = 'Nombre y teléfono son obligatorios.';
+    status.style.color = '#d9534f';
+    return false;
+  }
+  botón.disabled = true;
+  status.style.color = 'var(--gris)';
+  status.textContent = 'Enviando…';
+  try{
+    const resp = await fetch('/api/nuevo-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(datos),
+    });
+    const resultado = await resp.json();
+    if(!resp.ok) throw new Error(resultado.error || 'No se pudo enviar.');
+    status.style.color = '#1e9e57';
+    status.textContent = '✅ ¡Listo! Te contactamos pronto.';
+    botón.disabled = false;
+    return true;
+  }catch(e){
+    status.style.color = '#d9534f';
+    status.textContent = '❌ ' + e.message;
+    botón.disabled = false;
+    return false;
+  }
+}
