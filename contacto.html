@@ -87,30 +87,42 @@
 <script src="assets/js/data.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
-  renderHeader('contacto'); renderFooter();
-  document.getElementById('dato-telefono').textContent = EMPRESA.telefono;
-  document.getElementById('dato-correo').textContent = EMPRESA.correo;
-  document.getElementById('dato-direccion').textContent = EMPRESA.direccion + ' · envíos a todo México';
-  document.getElementById('dato-horario').textContent = EMPRESA.horarios;
-  document.getElementById('c-estado').insertAdjacentHTML('beforeend', ESTADOS_MEXICO.map(e=>`<option>${e}</option>`).join(''));
-
+  // Conectamos el botón de enviar ANTES que cualquier otra cosa — así, aunque algo
+  // más abajo en la página falle, el formulario siempre va a intentar enviarse.
   document.getElementById('form-contacto').addEventListener('submit', async (e)=>{
     e.preventDefault();
-    let recaptchaToken = '';
-    try{ recaptchaToken = await grecaptcha.execute('RECAPTCHA_SITE_KEY', { action: 'contacto' }); }catch(e){ /* aún no configurado — se envía sin verificación */ }
-    const ok = await enviarLeadFormulario({
-      nombre: document.getElementById('c-nombre').value.trim(),
-      empresa: document.getElementById('c-empresa').value.trim(),
-      telefono: document.getElementById('c-telefono').value.trim(),
-      correo: document.getElementById('c-correo').value.trim(),
-      estado: document.getElementById('c-estado').value.trim(),
-      producto: document.getElementById('c-producto').value,
-      mensaje: document.getElementById('c-mensaje').value.trim(),
-      sitioWeb: document.getElementById('c-honeypot').value,
-      recaptchaToken,
-    }, { botón: document.getElementById('c-btn'), status: document.getElementById('c-status') });
-    if(ok) document.getElementById('form-contacto').reset();
+    const status = document.getElementById('c-status');
+    try{
+      let recaptchaToken = '';
+      try{ recaptchaToken = await grecaptcha.execute('RECAPTCHA_SITE_KEY', { action: 'contacto' }); }catch(err){ /* aún no configurado — se envía sin verificación */ }
+      const ok = await enviarLeadFormulario({
+        nombre: document.getElementById('c-nombre').value.trim(),
+        empresa: document.getElementById('c-empresa').value.trim(),
+        telefono: document.getElementById('c-telefono').value.trim(),
+        correo: document.getElementById('c-correo').value.trim(),
+        estado: document.getElementById('c-estado').value.trim(),
+        producto: document.getElementById('c-producto').value,
+        mensaje: document.getElementById('c-mensaje').value.trim(),
+        sitioWeb: document.getElementById('c-honeypot').value,
+        recaptchaToken,
+      }, { botón: document.getElementById('c-btn'), status });
+      if(ok) document.getElementById('form-contacto').reset();
+    }catch(err){
+      status.style.color = '#d9534f';
+      status.textContent = '❌ Error inesperado: ' + err.message;
+    }
   });
+
+  try{
+    renderHeader('contacto'); renderFooter();
+    document.getElementById('dato-telefono').textContent = EMPRESA.telefono;
+    document.getElementById('dato-correo').textContent = EMPRESA.correo;
+    document.getElementById('dato-direccion').textContent = EMPRESA.direccion + ' · envíos a todo México';
+    document.getElementById('dato-horario').textContent = EMPRESA.horarios;
+    document.getElementById('c-estado').insertAdjacentHTML('beforeend', ESTADOS_MEXICO.map(e=>`<option>${e}</option>`).join(''));
+  }catch(err){
+    console.error('Error preparando la página:', err);
+  }
 </script>
 </body>
 </html>
