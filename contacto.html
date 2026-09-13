@@ -7,6 +7,7 @@
 <meta name="description" content="Contáctanos para cotizar tu red perimetral, red deportiva o portería. Teléfono, WhatsApp y formulario de cotización.">
 <link rel="canonical" href="/contacto.html">
 <link rel="stylesheet" href="assets/css/styles.css">
+<script src="https://www.google.com/recaptcha/api.js?render=RECAPTCHA_SITE_KEY"></script>
 </head>
 <body data-nivel="raiz">
 <div id="site-header"></div>
@@ -53,7 +54,11 @@
         <div><label>Correo</label><input type="email" id="c-correo" autocomplete="email" required></div>
       </div>
       <div class="fila-2">
-        <div><label>Estado</label><input type="text" id="c-estado" autocomplete="address-level1" placeholder="¿Desde dónde nos contactas?"></div>
+        <div><label>Estado</label>
+          <select id="c-estado" autocomplete="address-level1">
+            <option value="">¿Desde dónde nos contactas?</option>
+          </select>
+        </div>
         <div><label>¿Qué necesitas?</label>
           <select id="c-producto">
             <option>Redes perimetrales</option>
@@ -87,9 +92,11 @@
   document.getElementById('dato-correo').textContent = EMPRESA.correo;
   document.getElementById('dato-direccion').textContent = EMPRESA.direccion + ' · envíos a todo México';
   document.getElementById('dato-horario').textContent = EMPRESA.horarios;
+  document.getElementById('c-estado').insertAdjacentHTML('beforeend', ESTADOS_MEXICO.map(e=>`<option>${e}</option>`).join(''));
 
   document.getElementById('form-contacto').addEventListener('submit', async (e)=>{
     e.preventDefault();
+    const recaptchaToken = await grecaptcha.execute('RECAPTCHA_SITE_KEY', { action: 'contacto' });
     const ok = await enviarLeadFormulario({
       nombre: document.getElementById('c-nombre').value.trim(),
       empresa: document.getElementById('c-empresa').value.trim(),
@@ -99,6 +106,7 @@
       producto: document.getElementById('c-producto').value,
       mensaje: document.getElementById('c-mensaje').value.trim(),
       sitioWeb: document.getElementById('c-honeypot').value,
+      recaptchaToken,
     }, { botón: document.getElementById('c-btn'), status: document.getElementById('c-status') });
     if(ok) document.getElementById('form-contacto').reset();
   });
