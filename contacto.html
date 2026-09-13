@@ -50,7 +50,16 @@
         <div><label>Empresa (opcional)</label><input type="text" id="c-empresa" autocomplete="organization"></div>
       </div>
       <div class="fila-2">
-        <div><label>Teléfono</label><input type="tel" id="c-telefono" autocomplete="tel" required></div>
+        <div><label>Teléfono</label>
+          <div style="display:flex;gap:6px;">
+            <select id="c-lada" style="flex:0 0 92px;">
+              <option value="+52" selected>🇲🇽 +52</option>
+              <option value="+1">🇺🇸 +1</option>
+              <option value="otro">Otro</option>
+            </select>
+            <input type="tel" id="c-telefono" autocomplete="tel-national" inputmode="numeric" maxlength="10" placeholder="10 dígitos" required style="flex:1;">
+          </div>
+        </div>
         <div><label>Correo</label><input type="email" id="c-correo" autocomplete="email" required></div>
       </div>
       <div class="fila-2">
@@ -89,16 +98,27 @@
 <script>
   // Conectamos el botón de enviar ANTES que cualquier otra cosa — así, aunque algo
   // más abajo en la página falle, el formulario siempre va a intentar enviarse.
+  document.getElementById('c-telefono').addEventListener('input', (e)=>{
+    e.target.value = e.target.value.replace(/\D/g,'').slice(0,10);
+  });
+
   document.getElementById('form-contacto').addEventListener('submit', async (e)=>{
     e.preventDefault();
     const status = document.getElementById('c-status');
+    const digitos = document.getElementById('c-telefono').value.trim();
+    if(digitos.length !== 10){
+      status.style.color = '#d9534f';
+      status.textContent = 'El teléfono debe tener exactamente 10 dígitos.';
+      return;
+    }
+    const lada = document.getElementById('c-lada').value;
     try{
       let recaptchaToken = '';
       try{ recaptchaToken = await grecaptcha.execute('RECAPTCHA_SITE_KEY', { action: 'contacto' }); }catch(err){ /* aún no configurado — se envía sin verificación */ }
       const ok = await enviarLeadFormulario({
         nombre: document.getElementById('c-nombre').value.trim(),
         empresa: document.getElementById('c-empresa').value.trim(),
-        telefono: document.getElementById('c-telefono').value.trim(),
+        telefono: (lada === 'otro' ? '' : lada) + digitos,
         correo: document.getElementById('c-correo').value.trim(),
         estado: document.getElementById('c-estado').value.trim(),
         producto: document.getElementById('c-producto').value,
