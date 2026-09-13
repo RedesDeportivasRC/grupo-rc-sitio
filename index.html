@@ -9,6 +9,7 @@
 <meta property="og:description" content="Fabricación e instalación de redes perimetrales, deportivas y porterías a la medida.">
 <link rel="canonical" href="/index.html">
 <link rel="stylesheet" href="assets/css/styles.css">
+<script src="https://www.google.com/recaptcha/api.js?render=RECAPTCHA_SITE_KEY"></script>
 </head>
 <body data-nivel="raiz">
 
@@ -160,7 +161,11 @@
       </div>
       <div class="fila-2">
         <div><label>Correo</label><input type="email" id="ci-correo" autocomplete="email" required></div>
-        <div><label>Estado</label><input type="text" id="ci-estado" autocomplete="address-level1" placeholder="¿Desde dónde nos contactas?"></div>
+        <div><label>Estado</label>
+          <select id="ci-estado" autocomplete="address-level1">
+            <option value="">¿Desde dónde nos contactas?</option>
+          </select>
+        </div>
       </div>
       <div><label>¿Qué necesitas?</label><textarea id="ci-mensaje" placeholder="Cuéntanos tu proyecto..."></textarea></div>
       <button type="submit" class="btn btn-azul" id="ci-btn" style="justify-self:start;">Enviar solicitud</button>
@@ -189,8 +194,10 @@
       <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;">▶</div>
     </div>`).join('');
 
+  document.getElementById('ci-estado').insertAdjacentHTML('beforeend', ESTADOS_MEXICO.map(e=>`<option>${e}</option>`).join(''));
   document.getElementById('form-contacto-inicio').addEventListener('submit', async (e)=>{
     e.preventDefault();
+    const recaptchaToken = await grecaptcha.execute('RECAPTCHA_SITE_KEY', { action: 'contacto' });
     const ok = await enviarLeadFormulario({
       nombre: document.getElementById('ci-nombre').value.trim(),
       telefono: document.getElementById('ci-telefono').value.trim(),
@@ -198,6 +205,7 @@
       estado: document.getElementById('ci-estado').value.trim(),
       mensaje: document.getElementById('ci-mensaje').value.trim(),
       sitioWeb: document.getElementById('ci-honeypot').value,
+      recaptchaToken,
     }, { botón: document.getElementById('ci-btn'), status: document.getElementById('ci-status') });
     if(ok) document.getElementById('form-contacto-inicio').reset();
   });
