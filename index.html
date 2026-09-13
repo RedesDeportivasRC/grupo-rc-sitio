@@ -157,7 +157,16 @@
       <input type="text" id="ci-honeypot" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;">
       <div class="fila-2">
         <div><label>Nombre</label><input type="text" id="ci-nombre" autocomplete="name" required></div>
-        <div><label>Teléfono</label><input type="tel" id="ci-telefono" autocomplete="tel" required></div>
+        <div><label>Teléfono</label>
+          <div style="display:flex;gap:6px;">
+            <select id="ci-lada" style="flex:0 0 92px;">
+              <option value="+52" selected>🇲🇽 +52</option>
+              <option value="+1">🇺🇸 +1</option>
+              <option value="otro">Otro</option>
+            </select>
+            <input type="tel" id="ci-telefono" autocomplete="tel-national" inputmode="numeric" maxlength="10" placeholder="10 dígitos" required style="flex:1;">
+          </div>
+        </div>
       </div>
       <div class="fila-2">
         <div><label>Correo</label><input type="email" id="ci-correo" autocomplete="email" required></div>
@@ -179,15 +188,26 @@
 <script src="assets/js/data.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
+  document.getElementById('ci-telefono').addEventListener('input', (e)=>{
+    e.target.value = e.target.value.replace(/\D/g,'').slice(0,10);
+  });
+
   document.getElementById('form-contacto-inicio').addEventListener('submit', async (e)=>{
     e.preventDefault();
     const status = document.getElementById('ci-status');
+    const digitos = document.getElementById('ci-telefono').value.trim();
+    if(digitos.length !== 10){
+      status.style.color = '#d9534f';
+      status.textContent = 'El teléfono debe tener exactamente 10 dígitos.';
+      return;
+    }
+    const lada = document.getElementById('ci-lada').value;
     try{
       let recaptchaToken = '';
       try{ recaptchaToken = await grecaptcha.execute('RECAPTCHA_SITE_KEY', { action: 'contacto' }); }catch(err){ /* aún no configurado — se envía sin verificación */ }
       const ok = await enviarLeadFormulario({
         nombre: document.getElementById('ci-nombre').value.trim(),
-        telefono: document.getElementById('ci-telefono').value.trim(),
+        telefono: (lada === 'otro' ? '' : lada) + digitos,
         correo: document.getElementById('ci-correo').value.trim(),
         estado: document.getElementById('ci-estado').value.trim(),
         mensaje: document.getElementById('ci-mensaje').value.trim(),
