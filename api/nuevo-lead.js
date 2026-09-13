@@ -56,6 +56,20 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "Falta configurar SUPABASE_SERVICE_ROLE_KEY en este proyecto." });
   }
 
+  // Diagnóstico: confirma que la llave guardada de verdad sea "service_role" y no "anon"
+  // u otra cosa — las dos empiezan exactamente igual, así que no basta con verla a simple vista.
+  try {
+    const partes = serviceKey.split(".");
+    const payload = JSON.parse(Buffer.from(partes[1], "base64").toString("utf8"));
+    if (payload.role !== "service_role") {
+      return res.status(500).json({
+        error: `La llave guardada en SUPABASE_SERVICE_ROLE_KEY es de tipo "${payload.role}", no "service_role". Vuelve a copiarla de Supabase (Settings → API → Legacy anon, service_role API keys → service_role) y guárdala de nuevo.`,
+      });
+    }
+  } catch (e) {
+    return res.status(500).json({ error: "La llave guardada en SUPABASE_SERVICE_ROLE_KEY no tiene un formato válido — revísala." });
+  }
+
   const headersSupabase = {
     apikey: serviceKey,
     Authorization: `Bearer ${serviceKey}`,
