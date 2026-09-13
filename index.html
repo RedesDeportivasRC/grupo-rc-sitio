@@ -152,17 +152,19 @@
       <h2>Pide tu cotización</h2>
       <p class="kicker">Te respondemos el mismo día hábil. El teléfono es la vía más rápida.</p>
     </div>
-    <form class="form-contacto" action="#" method="post">
+    <form class="form-contacto" id="form-contacto-inicio">
+      <input type="text" id="ci-honeypot" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;">
       <div class="fila-2">
-        <div><label>Nombre</label><input type="text" autocomplete="name" required></div>
-        <div><label>Teléfono</label><input type="tel" autocomplete="tel" required></div>
+        <div><label>Nombre</label><input type="text" id="ci-nombre" autocomplete="name" required></div>
+        <div><label>Teléfono</label><input type="tel" id="ci-telefono" autocomplete="tel" required></div>
       </div>
       <div class="fila-2">
-        <div><label>Correo</label><input type="email" autocomplete="email" required></div>
-        <div><label>Estado</label><input type="text" autocomplete="address-level1" placeholder="¿Desde dónde nos contactas?"></div>
+        <div><label>Correo</label><input type="email" id="ci-correo" autocomplete="email" required></div>
+        <div><label>Estado</label><input type="text" id="ci-estado" autocomplete="address-level1" placeholder="¿Desde dónde nos contactas?"></div>
       </div>
-      <div><label>¿Qué necesitas?</label><textarea placeholder="Cuéntanos tu proyecto..."></textarea></div>
-      <button type="submit" class="btn btn-azul" style="justify-self:start;">Enviar solicitud</button>
+      <div><label>¿Qué necesitas?</label><textarea id="ci-mensaje" placeholder="Cuéntanos tu proyecto..."></textarea></div>
+      <button type="submit" class="btn btn-azul" id="ci-btn" style="justify-self:start;">Enviar solicitud</button>
+      <div id="ci-status" style="font-size:.85rem;"></div>
     </form>
   </div>
 </section>
@@ -186,6 +188,19 @@
       <div class="foto-ph oscuro" style="min-height:180px;"><span>${v.titulo}</span></div>
       <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;">▶</div>
     </div>`).join('');
+
+  document.getElementById('form-contacto-inicio').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const ok = await enviarLeadFormulario({
+      nombre: document.getElementById('ci-nombre').value.trim(),
+      telefono: document.getElementById('ci-telefono').value.trim(),
+      correo: document.getElementById('ci-correo').value.trim(),
+      estado: document.getElementById('ci-estado').value.trim(),
+      mensaje: document.getElementById('ci-mensaje').value.trim(),
+      sitioWeb: document.getElementById('ci-honeypot').value,
+    }, { botón: document.getElementById('ci-btn'), status: document.getElementById('ci-status') });
+    if(ok) document.getElementById('form-contacto-inicio').reset();
+  });
 </script>
 </body>
 </html>
