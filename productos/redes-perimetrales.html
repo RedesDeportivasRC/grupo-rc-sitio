@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redes Perimetrales — A la medida para deporte, obra e industria | Grupo RC</title>
+<meta name="description" content="Redes perimetrales fabricadas a la medida: canchas, fútbol 7 y 11, básquetbol, construcción, anticaídas, pajareras, ganado, anaqueles y más.">
+<link rel="canonical" href="/productos/redes-perimetrales.html">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body data-nivel="sub">
+<div id="site-header"></div>
+
+<section class="hero-interior">
+  <div class="envolvente">
+    <div class="migas" style="color:#9fc3d1;"><a href="../index.html" style="color:#9fc3d1;">Inicio</a> / <a href="../productos.html" style="color:#9fc3d1;">Productos</a> / Redes Perimetrales</div>
+    <h1>Una red.<br>Muchas soluciones.</h1>
+    <p>Nuestro producto más fuerte. La misma red perimetral cierra una cancha, protege una obra, contiene ganado o resguarda una pajarera — todo a la medida.</p>
+    <a href="../contacto.html" class="btn btn-azul" style="margin-top:20px;">Cotizar mi proyecto</a>
+  </div>
+</section>
+
+<section class="franja" id="usos">
+  <div class="envolvente">
+    <span class="ojo">Aplicaciones</span>
+    <h2>No solo para canchas</h2>
+    <p class="kicker">La red perimetral es, ante todo, un sistema de cerramiento — el deporte es uno de sus muchos usos.</p>
+    <div class="grid-cards g4" style="margin-top:30px;">
+      <div class="tarjeta-producto"><div class="foto-ph"><span>Fútbol / fútbol rápido / fut7 / fut11</span></div><div class="tarjeta-producto-body"><h3>Canchas de fútbol</h3></div></div>
+      <div class="tarjeta-producto"><div class="foto-ph"><span>Básquetbol y voleibol</span></div><div class="tarjeta-producto-body"><h3>Otras canchas</h3></div></div>
+      <div class="tarjeta-producto"><div class="foto-ph"><span>Escuelas, hoteles, clubes, universidades</span></div><div class="tarjeta-producto-body"><h3>Complejos e instituciones</h3></div></div>
+      <div class="tarjeta-producto"><div class="foto-ph"><span>Anticaídas y resguardo de obra</span></div><div class="tarjeta-producto-body"><h3>Construcción</h3></div></div>
+      <div class="tarjeta-producto"><div class="foto-ph"><span>Pajareras y jaulas</span></div><div class="tarjeta-producto-body"><h3>Aves y viveros</h3></div></div>
+      <div class="tarjeta-producto"><div class="foto-ph"><span>Corrales y cercado</span></div><div class="tarjeta-producto-body"><h3>Ganado</h3></div></div>
+      <div class="tarjeta-producto"><div class="foto-ph"><span>Racks y almacenes</span></div><div class="tarjeta-producto-body"><h3>Anaqueles</h3></div></div>
+      <div class="tarjeta-producto"><div class="foto-ph"><span>Separación de espacios / industrial</span></div><div class="tarjeta-producto-body"><h3>Otros usos especiales</h3></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="franja" style="background:var(--hueso);">
+  <div class="envolvente" style="display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;">
+    <div class="foto-ph" style="min-height:280px;"><span>Foto — detalle de trama de la red</span></div>
+    <div>
+      <span class="ojo">Ficha técnica</span>
+      <h2>Especificaciones</h2>
+      <p class="kicker">Cada proyecto se cotiza a la medida — esta es una referencia general.</p>
+      <details class="ficha" open style="margin-top:20px;">
+        <summary>Ver especificaciones técnicas</summary>
+        <table>
+          <tr><td>Material</td><td>[PLACEHOLDER — confirmar]</td></tr>
+          <tr><td>Aberturas disponibles</td><td>1", 2", 3", 4"</td></tr>
+          <tr><td>Color</td><td>Blanco, negro, [otros a confirmar]</td></tr>
+          <tr><td>Medidas</td><td>A la medida — se cotiza por m²</td></tr>
+          <tr><td>Instalación</td><td>Incluida / disponible según proyecto</td></tr>
+        </table>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="franja">
+  <div class="envolvente">
+    <span class="ojo">Relacionado</span>
+    <h2 style="margin-bottom:24px;">También te puede interesar</h2>
+    <div class="grid-cards g3" id="cont-relacionados"></div>
+  </div>
+</section>
+
+<section class="franja-chica">
+  <div class="envolvente">
+    <div class="banner-ancho">
+      <div><h2>¿Cuánto necesitas cubrir?</h2><p>Mándanos las medidas de tu espacio y te preparamos una cotización.</p></div>
+      <a href="../contacto.html" class="btn btn-azul">Cotizar ahora</a>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+  renderHeader('productos');
+  renderFooter();
+  document.getElementById('cont-relacionados').innerHTML = PRODUCTOS.filter(p=>p.categoria!=='redes-perimetrales').slice(0,3).map(renderProductCard).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redes Deportivas — Básquetbol, Voleibol y más | Grupo RC</title>
+<meta name="description" content="Redes deportivas para jugar: básquetbol, voleibol y usos especiales, fabricadas por Grupo RC.">
+<link rel="canonical" href="/productos/redes-deportivas.html">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body data-nivel="sub">
+<div id="site-header"></div>
+
+<section class="hero-interior">
+  <div class="envolvente">
+    <div class="migas" style="color:#9fc3d1;"><a href="../index.html" style="color:#9fc3d1;">Inicio</a> / <a href="../productos.html" style="color:#9fc3d1;">Productos</a> / Redes Deportivas</div>
+    <h1>Redes para jugar.</h1>
+    <p>Distintas a las redes perimetrales: estas son las que se usan directamente en el juego — básquetbol, voleibol y otras disciplinas.</p>
+    <a href="../contacto.html" class="btn btn-azul" style="margin-top:20px;">Cotizar</a>
+  </div>
+</section>
+
+<section class="franja">
+  <div class="envolvente">
+    <span class="ojo">Catálogo</span>
+    <h2 style="margin-bottom:24px;">Redes deportivas</h2>
+    <div class="grid-cards g3" id="cont-productos"></div>
+  </div>
+</section>
+
+<section class="franja" style="background:var(--hueso);">
+  <div class="envolvente centrado" style="max-width:640px;">
+    <span class="ojo">Fútbol</span>
+    <h2>¿Buscas redes de portería?</h2>
+    <p class="kicker centrado">Tenemos su propia sección, con tejido hexagonal y las porterías completas.</p>
+    <a href="porterias.html" class="btn btn-negro" style="margin-top:16px;">Ver porterías</a>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+  renderHeader('productos');
+  renderFooter();
+  document.getElementById('cont-productos').innerHTML = PRODUCTOS.filter(p=>p.categoria==='redes-deportivas').map(renderProductCard).join('');
+</script>
+</body>
+</html>

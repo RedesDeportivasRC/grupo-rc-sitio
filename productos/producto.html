@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="titulo-pagina">Producto | Grupo RC</title>
+<meta name="description" id="meta-descripcion" content="">
+<link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body data-nivel="sub">
+<div id="site-header"></div>
+
+<div id="contenido-producto"></div>
+
+<section class="franja">
+  <div class="envolvente">
+    <span class="ojo">También te puede interesar</span>
+    <h2 style="margin-bottom:24px;">Productos relacionados</h2>
+    <div class="grid-cards g3" id="cont-relacionados"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+  renderHeader('productos');
+  renderFooter();
+
+  const params = new URLSearchParams(window.location.search);
+  const sku = params.get('sku');
+  const p = PRODUCTOS.find(x=>x.sku===sku) || PRODUCTOS[0];
+
+  document.getElementById('titulo-pagina').textContent = `${p.nombre} | Grupo RC`;
+  document.getElementById('meta-descripcion').setAttribute('content', p.descripcionCorta);
+
+  document.getElementById('contenido-producto').innerHTML = `
+    <section class="franja-chica">
+      <div class="envolvente">
+        <div class="migas"><a href="../index.html">Inicio</a> / <a href="../productos.html">Productos</a> / <a href="${p.categoria}.html">${categoriaNombre(p.categoria)}</a> / ${p.nombre}</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:44px;">
+          <div class="grid-cards g2">
+            <div class="foto-ph" style="grid-column:span 2;min-height:280px;"><span>${p.fotos[0]||'Foto pendiente'}</span></div>
+            ${(p.fotos.slice(1)||[]).map(f=>`<div class="foto-ph" style="min-height:130px;"><span>${f}</span></div>`).join('')}
+          </div>
+          <div>
+            <span class="ojo">${categoriaNombre(p.categoria)}${p.subcategoria?' · '+p.subcategoria:''}</span>
+            <h1>${p.nombre}</h1>
+            <p class="kicker">${p.descripcionCorta}</p>
+            <p style="margin-top:16px;color:var(--gris);font-size:.92rem;">${p.descripcionCompleta}</p>
+            <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;">
+              <a href="../contacto.html" class="btn btn-azul">Cotizar este producto</a>
+              <a href="https://wa.me/529995538184" class="btn btn-linea">Preguntar por WhatsApp</a>
+            </div>
+            <details class="ficha" style="margin-top:26px;" open>
+              <summary>Ficha técnica</summary>
+              <table>
+                <tr><td>SKU</td><td>${p.sku}</td></tr>
+                <tr><td>Material</td><td>${p.material||'—'}</td></tr>
+                <tr><td>Calibre</td><td>${p.calibre||'—'}</td></tr>
+                <tr><td>Color</td><td>${(p.color||[]).join(', ')||'—'}</td></tr>
+                <tr><td>Medidas</td><td>${p.medidas||'—'}</td></tr>
+                <tr><td>Disponibilidad</td><td>${p.disponibilidad||'—'}</td></tr>
+              </table>
+            </details>
+            <div style="margin-top:18px;">
+              <span class="ojo">Usos</span>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+                ${(p.usos||[]).map(u=>`<span style="background:var(--hueso);border-radius:100px;padding:6px 14px;font-size:.78rem;">${u}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+
+  document.getElementById('cont-relacionados').innerHTML = (p.productosRelacionados||[])
+    .map(sku=>PRODUCTOS.find(x=>x.sku===sku || x.sku.toLowerCase().includes(sku)))
+    .filter(Boolean).map(renderProductCard).join('') || PRODUCTOS.filter(x=>x.sku!==p.sku).slice(0,3).map(renderProductCard).join('');
+</script>
+</body>
+</html>
