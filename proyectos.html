@@ -34,12 +34,14 @@
 </section>
 
 <div id="site-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
+(async ()=>{
   renderHeader('proyectos');
   renderFooter();
-  document.getElementById('cont-proyectos').innerHTML = PROYECTOS.map(pr => `
+  document.getElementById('cont-proyectos').innerHTML = (await obtenerProyectos()).map(pr => `
     <div class="tarjeta-proyecto" id="${pr.slug}">
       <div class="foto-ph oscuro"><span>${pr.fotos[0]}</span></div>
       <div class="tarjeta-proyecto-body">
@@ -48,6 +50,7 @@
       </div>
     </div>
   `).join('');
+})();
 </script>
 </body>
 </html>
