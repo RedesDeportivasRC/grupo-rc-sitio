@@ -21,15 +21,18 @@
 </section>
 
 <div id="site-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="../assets/js/data.js"></script>
 <script src="../assets/js/common.js"></script>
 <script>
+(async ()=>{
   renderHeader('productos');
   renderFooter();
 
+  const TODOS_LOS_PRODUCTOS = await obtenerProductos();
   const params = new URLSearchParams(window.location.search);
   const sku = params.get('sku');
-  const p = PRODUCTOS.find(x=>x.sku===sku) || PRODUCTOS[0];
+  const p = TODOS_LOS_PRODUCTOS.find(x=>x.sku===sku) || TODOS_LOS_PRODUCTOS[0];
 
   document.getElementById('titulo-pagina').textContent = `${p.nombre} | Grupo RC`;
   document.getElementById('meta-descripcion').setAttribute('content', p.descripcionCorta);
@@ -76,8 +79,9 @@
   `;
 
   document.getElementById('cont-relacionados').innerHTML = (p.productosRelacionados||[])
-    .map(sku=>PRODUCTOS.find(x=>x.sku===sku || x.sku.toLowerCase().includes(sku)))
-    .filter(Boolean).map(renderProductCard).join('') || PRODUCTOS.filter(x=>x.sku!==p.sku).slice(0,3).map(renderProductCard).join('');
+    .map(sku=>TODOS_LOS_PRODUCTOS.find(x=>x.sku===sku || x.sku.toLowerCase().includes(sku)))
+    .filter(Boolean).map(renderProductCard).join('') || TODOS_LOS_PRODUCTOS.filter(x=>x.sku!==p.sku).slice(0,3).map(renderProductCard).join('');
+})();
 </script>
 </body>
 </html>
