@@ -44,9 +44,11 @@
 </section>
 
 <div id="site-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
+(async ()=>{
   renderHeader('productos');
   renderFooter();
   document.getElementById('cont-categorias').innerHTML = CATEGORIAS.map(c=>`
@@ -56,7 +58,8 @@
     </a>`).join('');
   document.getElementById('cont-deportes').innerHTML = DEPORTES.map(d=>`
     <a class="tarjeta-cliente" href="productos.html#${d.slug}" style="min-height:70px;"><span>${d.nombre}</span></a>`).join('');
-  document.getElementById('cont-todos').innerHTML = PRODUCTOS.map(renderProductCard).join('');
+  document.getElementById('cont-todos').innerHTML = (await obtenerProductos()).map(renderProductCard).join('');
+})();
 </script>
 </body>
 </html>
