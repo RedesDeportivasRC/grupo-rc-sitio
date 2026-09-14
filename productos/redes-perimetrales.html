@@ -77,12 +77,15 @@
 </section>
 
 <div id="site-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="../assets/js/data.js"></script>
 <script src="../assets/js/common.js"></script>
 <script>
+(async ()=>{
   renderHeader('productos');
   renderFooter();
-  document.getElementById('cont-relacionados').innerHTML = PRODUCTOS.filter(p=>p.categoria!=='redes-perimetrales').slice(0,3).map(renderProductCard).join('');
+  document.getElementById('cont-relacionados').innerHTML = (await obtenerProductos()).filter(p=>p.categoria!=='redes-perimetrales').slice(0,3).map(renderProductCard).join('');
+})();
 </script>
 </body>
 </html>
