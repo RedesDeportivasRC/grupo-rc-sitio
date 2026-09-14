@@ -185,6 +185,7 @@
 
 <div id="site-footer"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
@@ -221,6 +222,7 @@
     }
   });
 
+  (async ()=>{
   try{
     renderHeader('inicio');
     renderFooter();
@@ -229,8 +231,8 @@
         <div class="foto-ph"><span><b>${c.nombre}</b></span></div>
         <div class="tarjeta-producto-body"><h3>${c.nombre}</h3><p>${c.descripcionCorta}</p></div>
       </a>`).join('');
-    document.getElementById('cont-productos-destacados').innerHTML = PRODUCTOS.slice(0,4).map(renderProductCard).join('');
-    document.getElementById('cont-proyectos').innerHTML = PROYECTOS.slice(0,3).map(renderProjectCard).join('');
+    document.getElementById('cont-productos-destacados').innerHTML = (await obtenerProductos()).slice(0,4).map(renderProductCard).join('');
+    document.getElementById('cont-proyectos').innerHTML = (await obtenerProyectos()).slice(0,3).map(renderProjectCard).join('');
     document.getElementById('cont-videos').innerHTML = VIDEOS.map(v=>`
       <div style="position:relative;border-radius:14px;overflow:hidden;">
         <div class="foto-ph oscuro" style="min-height:180px;"><span>${v.titulo}</span></div>
@@ -240,6 +242,7 @@
   }catch(err){
     console.error('Error preparando la página:', err);
   }
+  })();
 </script>
 </body>
 </html>
