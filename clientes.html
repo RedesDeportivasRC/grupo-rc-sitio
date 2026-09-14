@@ -26,12 +26,15 @@
 </section>
 
 <div id="site-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
+(async ()=>{
   renderHeader('clientes');
   renderFooter();
-  document.getElementById('cont-clientes').innerHTML = CLIENTES.map(renderClientCard).join('');
+  document.getElementById('cont-clientes').innerHTML = (await obtenerClientes()).map(renderClientCard).join('');
+})();
 </script>
 </body>
 </html>
