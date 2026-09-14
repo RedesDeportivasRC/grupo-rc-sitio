@@ -27,17 +27,6 @@ function renderHeader(activo){
         <button class="menu-movil-btn" id="btn-menu-movil">☰</button>
       </div>
     </header>
-    <div class="barra-top">
-      <div class="envolvente">
-        <div class="grupo">
-          <a href="tel:${EMPRESA.telefonoHref}">📞 ${EMPRESA.telefono}</a>
-          <a href="https://wa.me/${EMPRESA.whatsapp}">💬 WhatsApp</a>
-          <a href="mailto:${EMPRESA.correo}">✉️ ${EMPRESA.correo}</a>
-        </div>
-        <span>${EMPRESA.horarios} · ${EMPRESA.estadosDondeVendemos[0]}, México</span>
-      </div>
-    </div>
-    <a href="${base}contacto.html" class="btn btn-azul btn-chico" id="btn-cotiza-flotante">Cotiza / Contacto</a>
     <div id="menu-movil-overlay" style="display:none;position:fixed;inset:0;background:rgba(10,26,36,.6);z-index:200;">
       <div style="background:#fff;max-width:320px;margin-left:auto;height:100%;padding:20px;display:flex;flex-direction:column;gap:4px;overflow-y:auto;">
         <button id="btn-cerrar-menu-movil" style="align-self:flex-end;background:none;border:none;font-size:1.6rem;cursor:pointer;margin-bottom:10px;">✕</button>
