@@ -13,6 +13,20 @@ function rutaBase(){
 function renderHeader(activo){
   const base = rutaBase();
   document.getElementById('site-header').innerHTML = `
+    <header class="site">
+      <div class="envolvente">
+        <a href="${base}index.html" class="logo"><img src="${base}assets/img/logo-160.png" class="logo-marca"> ${EMPRESA.nombre}</a>
+        <nav class="principal">
+          <a href="${base}productos.html" class="${activo==='productos'?'activo':''}">Productos</a>
+          <a href="${base}clientes.html" class="${activo==='clientes'?'activo':''}">Clientes</a>
+          <a href="${base}galeria.html" class="${activo==='galeria'?'activo':''}">Galería</a>
+          <a href="${base}blog.html" class="${activo==='blog'?'activo':''}">Blog</a>
+          <a href="${base}recursos.html" class="${activo==='recursos'?'activo':''}">Recursos</a>
+          <a href="${base}nosotros.html" class="${activo==='nosotros'?'activo':''}">Nosotros</a>
+        </nav>
+        <button class="menu-movil-btn" id="btn-menu-movil">☰</button>
+      </div>
+    </header>
     <div class="barra-top">
       <div class="envolvente">
         <div class="grupo">
@@ -23,31 +37,12 @@ function renderHeader(activo){
         <span>${EMPRESA.horarios} · ${EMPRESA.estadosDondeVendemos[0]}, México</span>
       </div>
     </div>
-    <header class="site">
-      <div class="envolvente">
-        <a href="${base}index.html" class="logo"><img src="${base}assets/img/logo-160.png" class="logo-marca"> ${EMPRESA.nombre}</a>
-        <nav class="principal">
-          <a href="${base}productos.html" class="${activo==='productos'?'activo':''}">Productos</a>
-          <a href="${base}proyectos.html" class="${activo==='proyectos'?'activo':''}">Proyectos</a>
-          <a href="${base}clientes.html" class="${activo==='clientes'?'activo':''}">Clientes</a>
-          <a href="${base}galeria.html" class="${activo==='galeria'?'activo':''}">Galería</a>
-          <a href="${base}blog.html" class="${activo==='blog'?'activo':''}">Blog</a>
-          <a href="${base}recursos.html" class="${activo==='recursos'?'activo':''}">Recursos</a>
-          <a href="${base}nosotros.html" class="${activo==='nosotros'?'activo':''}">Nosotros</a>
-        </nav>
-        <div class="header-derecha">
-          <span class="header-tel">📞 ${EMPRESA.telefono}</span>
-          <a href="${base}contacto.html" class="btn btn-azul btn-chico">Cotiza / Contacto</a>
-          <button class="menu-movil-btn" id="btn-menu-movil">☰</button>
-        </div>
-      </div>
-    </header>
+    <a href="${base}contacto.html" class="btn btn-azul btn-chico" id="btn-cotiza-flotante">Cotiza / Contacto</a>
     <div id="menu-movil-overlay" style="display:none;position:fixed;inset:0;background:rgba(10,26,36,.6);z-index:200;">
       <div style="background:#fff;max-width:320px;margin-left:auto;height:100%;padding:20px;display:flex;flex-direction:column;gap:4px;overflow-y:auto;">
         <button id="btn-cerrar-menu-movil" style="align-self:flex-end;background:none;border:none;font-size:1.6rem;cursor:pointer;margin-bottom:10px;">✕</button>
         <a href="${base}index.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Inicio</a>
         <a href="${base}productos.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Productos</a>
-        <a href="${base}proyectos.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Proyectos</a>
         <a href="${base}clientes.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Clientes</a>
         <a href="${base}galeria.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Galería</a>
         <a href="${base}blog.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Blog</a>
@@ -84,7 +79,6 @@ function renderFooter(){
           <div>
             <h4>Empresa</h4>
             <a href="${base}nosotros.html">Nosotros</a>
-            <a href="${base}proyectos.html">Proyectos</a>
             <a href="${base}clientes.html">Clientes</a>
             <a href="${base}blog.html">Blog</a>
           </div>
