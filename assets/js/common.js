@@ -42,11 +42,29 @@ function renderHeader(activo){
         </div>
       </div>
     </header>
+    <div id="menu-movil-overlay" style="display:none;position:fixed;inset:0;background:rgba(10,26,36,.6);z-index:200;">
+      <div style="background:#fff;max-width:320px;margin-left:auto;height:100%;padding:20px;display:flex;flex-direction:column;gap:4px;overflow-y:auto;">
+        <button id="btn-cerrar-menu-movil" style="align-self:flex-end;background:none;border:none;font-size:1.6rem;cursor:pointer;margin-bottom:10px;">✕</button>
+        <a href="${base}index.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Inicio</a>
+        <a href="${base}productos.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Productos</a>
+        <a href="${base}proyectos.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Proyectos</a>
+        <a href="${base}clientes.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Clientes</a>
+        <a href="${base}galeria.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Galería</a>
+        <a href="${base}blog.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Blog</a>
+        <a href="${base}recursos.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Recursos</a>
+        <a href="${base}nosotros.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Nosotros</a>
+        <a href="${base}contacto.html" class="btn btn-azul" style="margin-top:16px;text-align:center;">Cotiza / Contacto</a>
+        <a href="tel:${EMPRESA.telefonoHref}" style="padding:12px 4px;margin-top:6px;">📞 ${EMPRESA.telefono}</a>
+      </div>
+    </div>
   `;
   const btnMovil = document.getElementById('btn-menu-movil');
-  if(btnMovil) btnMovil.onclick = ()=>{
-    window.location.href = base + 'contacto.html'; // en el MVP, en móvil el botón lleva directo a contacto/menú simplificado
-  };
+  const overlayMovil = document.getElementById('menu-movil-overlay');
+  if(btnMovil && overlayMovil){
+    btnMovil.onclick = ()=>{ overlayMovil.style.display = 'block'; };
+    overlayMovil.onclick = (e)=>{ if(e.target === overlayMovil) overlayMovil.style.display = 'none'; };
+    document.getElementById('btn-cerrar-menu-movil').onclick = ()=>{ overlayMovil.style.display = 'none'; };
+  }
 }
 
 function renderFooter(){
