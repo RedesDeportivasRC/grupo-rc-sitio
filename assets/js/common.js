@@ -98,11 +98,22 @@ function categoriaNombre(slug){
   return c ? c.nombre : slug;
 }
 
+// Muestra la foto real (con su texto alternativo para Google Imágenes) cuando ya existe
+// una URL subida desde AndyControl; si todavía es un texto de marcador, muestra el cuadro
+// gris de siempre. claseExtra son las mismas clases que usaba el marcador (foto-ph, oscuro...).
+function fotoOMarcador(url, altDescriptivo, claseExtra=''){
+  if(url && /^https?:\/\//.test(url)){
+    return `<img src="${url}" alt="${altDescriptivo}" loading="lazy" class="${claseExtra}" style="width:100%;height:100%;object-fit:cover;">`;
+  }
+  return `<div class="foto-ph ${claseExtra}"><span>${url||'Foto pendiente'}</span></div>`;
+}
+
 function renderProductCard(p){
   const base = rutaBase();
+  const alt = `${p.nombre} — ${categoriaNombre(p.categoria)} | Grupo RC`;
   return `
     <a class="tarjeta-producto" href="${base}productos/producto.html?sku=${p.sku}">
-      <div class="foto-ph"><span><b>${p.nombre}</b>${p.fotos[0]||'Foto pendiente'}</span></div>
+      ${fotoOMarcador(p.fotos[0], alt)}
       <div class="tarjeta-producto-body">
         <span class="tarjeta-producto-cat">${categoriaNombre(p.categoria)}</span>
         <h3>${p.nombre}</h3>
@@ -113,9 +124,10 @@ function renderProductCard(p){
 }
 
 function renderProjectCard(pr){
+  const alt = `Proyecto ${pr.nombre}${pr.ubicacion?' en '+pr.ubicacion:''} — ${pr.tipo||''} | Grupo RC`;
   return `
     <a class="tarjeta-proyecto" href="${rutaBase()}proyectos.html#${pr.slug}">
-      <div class="foto-ph oscuro"><span>${pr.fotos[0]||'Foto pendiente'}</span></div>
+      ${fotoOMarcador(pr.fotos[0], alt, 'oscuro')}
       <div class="tarjeta-proyecto-body">
         <span>${pr.tipo}</span>
         <h3>${pr.nombre}</h3>
@@ -136,6 +148,9 @@ function renderBlogCard(b){
 }
 
 function renderClientCard(c){
+  if(c.logo && /^https?:\/\//.test(c.logo)){
+    return `<div class="tarjeta-cliente"><img src="${c.logo}" alt="${c.nombre} — cliente de Grupo RC" loading="lazy" style="max-width:100%;max-height:60px;object-fit:contain;"></div>`;
+  }
   return `<div class="tarjeta-cliente"><span>${c.nombre}</span></div>`;
 }
 
