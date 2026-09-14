@@ -69,7 +69,6 @@ nav.principal a:hover{color:var(--azul);}
 .menu-movil-btn{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;}
 .header-derecha{display:flex;align-items:center;gap:18px;}
 .header-tel{font-weight:700;font-size:.86rem;display:flex;align-items:center;gap:6px;}
-#btn-cotiza-flotante{position:fixed;top:96px;right:20px;z-index:150;box-shadow:0 6px 18px rgba(10,26,36,.25);}
 
 /* ============ FOOTER ============ */
 footer.site{background:var(--negro);color:#c7ced2;padding:64px 0 24px;font-size:.88rem;}
@@ -152,9 +151,9 @@ details.ficha td:first-child{color:var(--gris);width:40%;}
 }
 @media (max-width:720px){
   nav.principal,.header-tel{display:none;}
-  #btn-cotiza-flotante{top:96px;right:14px;font-size:.75rem;padding:9px 14px;}
   .menu-movil-btn{display:block;}
   .g2,.g5,.g4,.g3{grid-template-columns:1fr;}
+  .grid-responsive-2col{grid-template-columns:1fr!important;}
   .fila-2{grid-template-columns:1fr;}
   .banner-ancho{flex-direction:column;align-items:flex-start;padding:36px 24px;}
   .franja{padding:56px 0;}
