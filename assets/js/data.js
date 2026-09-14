@@ -265,6 +265,11 @@ const EMPRESA = {
   direccion:'C. 114 #581-1 x 29 y 29A, Los Ángeles, Caucel, Mérida, Yucatán, México',
   horarios:'Lunes a viernes, 9:00 a.m. – 6:00 p.m.',
   estadosDondeVendemos:['Yucatán','[PLACEHOLDER — resto de estados donde venden]'],
+  redes:{
+    facebook:'https://facebook.com/redesdeportivasrc',
+    instagram:'https://instagram.com/redesdeportivasrc',
+    youtube:'https://www.youtube.com/@RedesDeportivasRC',
+  },
 };
 
 // Lista para el desplegable de "Estado" en el formulario de contacto.
