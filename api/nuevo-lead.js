@@ -129,6 +129,36 @@ export default async function handler(req, res) {
       }),
     });
 
+    // 3) Avisa por correo — si esto falla, no afecta que el lead ya se haya guardado bien.
+    const resendKey = process.env.RESEND_API_KEY;
+    const correoAviso = process.env.CORREO_AVISO_LEADS || "redesdeportivasrc@gmail.com";
+    if (resendKey) {
+      try {
+        await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
+          body: JSON.stringify({
+            from: "Grupo RC — Página web <onboarding@resend.dev>",
+            to: [correoAviso],
+            subject: `📩 Nuevo lead: ${nombre}`,
+            html: `
+              <h2>Nuevo contacto desde la página web</h2>
+              <p><b>Nombre:</b> ${nombre}</p>
+              <p><b>Teléfono:</b> ${telefonoLimpio}</p>
+              ${correo ? `<p><b>Correo:</b> ${correo}</p>` : ""}
+              ${empresa ? `<p><b>Empresa:</b> ${empresa}</p>` : ""}
+              ${estado ? `<p><b>Estado:</b> ${estado}</p>` : ""}
+              ${producto ? `<p><b>Necesita:</b> ${producto}</p>` : ""}
+              ${mensaje ? `<p><b>Mensaje:</b> ${mensaje}</p>` : ""}
+              <p style="margin-top:16px;color:#888;font-size:13px;">Ya está guardado en tu CRM, listo para darle seguimiento.</p>
+            `,
+          }),
+        });
+      } catch (e) {
+        // No interrumpe la respuesta al cliente si el correo falla.
+      }
+    }
+
     return res.status(200).json({ ok: true });
   } catch (e) {
     return res.status(500).json({ error: e.message });
