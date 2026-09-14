@@ -263,7 +263,7 @@ const EMPRESA = {
   whatsapp:'529995538184',
   correo:'redesdeportivasrc@gmail.com',
   direccion:'C. 114 #581-1 x 29 y 29A, Los Ángeles, Caucel, Mérida, Yucatán, México',
-  horarios:'[PLACEHOLDER]',
+  horarios:'Lunes a viernes, 9:00 a.m. – 6:00 p.m.',
   estadosDondeVendemos:['Yucatán','[PLACEHOLDER — resto de estados donde venden]'],
 };
 
