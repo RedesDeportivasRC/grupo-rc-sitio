@@ -77,14 +77,14 @@
   </div>
 </section>
 
-<!-- PROYECTOS -->
+<!-- CLIENTES -->
 <section class="franja" style="background:var(--azul-osc);">
   <div class="envolvente">
     <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;">
-      <div><span class="ojo" style="color:var(--azul);">Portafolio</span><h2 style="color:#fff;">Proyectos entregados</h2></div>
-      <a href="proyectos.html" class="btn btn-blanco">Ver todos los proyectos</a>
+      <div><span class="ojo" style="color:var(--azul);">Confían en nosotros</span><h2 style="color:#fff;">Clientes</h2></div>
+      <a href="clientes.html" class="btn btn-blanco">Ver todos los clientes</a>
     </div>
-    <div class="grid-cards g3" style="margin-top:32px;" id="cont-proyectos"></div>
+    <div class="grid-cards g4" style="margin-top:32px;" id="cont-clientes-inicio"></div>
   </div>
 </section>
 
@@ -232,7 +232,7 @@
         <div class="tarjeta-producto-body"><h3>${c.nombre}</h3><p>${c.descripcionCorta}</p></div>
       </a>`).join('');
     document.getElementById('cont-productos-destacados').innerHTML = (await obtenerProductos()).slice(0,4).map(renderProductCard).join('');
-    document.getElementById('cont-proyectos').innerHTML = (await obtenerProyectos()).slice(0,3).map(renderProjectCard).join('');
+    document.getElementById('cont-clientes-inicio').innerHTML = (await obtenerClientes()).slice(0,4).map(renderClientCard).join('');
     document.getElementById('cont-videos').innerHTML = VIDEOS.map(v=>`
       <div style="position:relative;border-radius:14px;overflow:hidden;">
         <div class="foto-ph oscuro" style="min-height:180px;"><span>${v.titulo}</span></div>
