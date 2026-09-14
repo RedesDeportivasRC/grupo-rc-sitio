@@ -27,7 +27,19 @@ function renderHeader(activo){
         <button class="menu-movil-btn" id="btn-menu-movil">☰</button>
       </div>
     </header>
-    <a href="https://wa.me/${EMPRESA.whatsapp}" target="_blank" rel="noopener" id="btn-whatsapp-flotante" title="Escríbenos por WhatsApp">💬</a>
+    <button id="btn-whatsapp-flotante" title="Escríbenos por WhatsApp" aria-label="Abrir chat de WhatsApp">
+      <svg viewBox="0 0 32 32" width="30" height="30" fill="#fff"><path d="M16.001 2.667c-7.363 0-13.334 5.97-13.334 13.333 0 2.351.615 4.646 1.782 6.666l-1.893 6.917 7.084-1.857a13.27 13.27 0 0 0 6.361 1.62h.006c7.362 0 13.333-5.971 13.333-13.334S23.363 2.667 16.001 2.667zm7.831 18.822c-.334.938-1.657 1.719-2.706 1.945-.72.153-1.66.276-4.828-1.037-4.05-1.678-6.657-5.796-6.86-6.063-.194-.267-1.646-2.192-1.646-4.182s1.036-2.968 1.404-3.375c.334-.367.729-.459.972-.459.243 0 .486.002.699.013.224.011.526-.085.822.626.334.802 1.132 2.772 1.232 2.974.1.202.166.437.033.703-.133.267-.199.433-.4.667-.2.234-.421.522-.6.7-.2.201-.408.42-.175.822.234.401 1.038 1.712 2.229 2.774 1.531 1.365 2.821 1.788 3.222 1.988.4.201.634.167.867-.1.234-.267.999-1.166 1.266-1.566.267-.401.533-.334.9-.2.367.133 2.335 1.101 2.735 1.302.4.2.667.3.767.467.1.167.1.964-.234 1.899z"/></svg>
+    </button>
+    <div id="whatsapp-popup" style="display:none;">
+      <div class="whatsapp-popup-header">
+        <img src="${base}assets/img/logo-160.png">
+        <div><b>${EMPRESA.nombre}</b><span>Normalmente responde en minutos</span></div>
+        <button id="whatsapp-popup-cerrar" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="whatsapp-popup-burbuja">👋 ¡Hola! ¿En qué podemos ayudarte con tu proyecto de redes?</div>
+      <textarea id="whatsapp-popup-texto" placeholder="Escribe tu mensaje..." rows="3">Hola, me interesa cotizar...</textarea>
+      <button id="whatsapp-popup-enviar" class="btn btn-azul" style="width:100%;background:#25D366;">Enviar por WhatsApp</button>
+    </div>
     <div id="menu-movil-overlay" style="display:none;position:fixed;inset:0;background:rgba(10,26,36,.6);z-index:200;">
       <div style="background:#fff;max-width:320px;margin-left:auto;height:100%;padding:20px;display:flex;flex-direction:column;gap:4px;overflow-y:auto;">
         <button id="btn-cerrar-menu-movil" style="align-self:flex-end;background:none;border:none;font-size:1.6rem;cursor:pointer;margin-bottom:10px;">✕</button>
@@ -49,6 +61,17 @@ function renderHeader(activo){
     btnMovil.onclick = ()=>{ overlayMovil.style.display = 'block'; };
     overlayMovil.onclick = (e)=>{ if(e.target === overlayMovil) overlayMovil.style.display = 'none'; };
     document.getElementById('btn-cerrar-menu-movil').onclick = ()=>{ overlayMovil.style.display = 'none'; };
+  }
+
+  const btnWA = document.getElementById('btn-whatsapp-flotante');
+  const popupWA = document.getElementById('whatsapp-popup');
+  if(btnWA && popupWA){
+    btnWA.onclick = ()=>{ popupWA.style.display = popupWA.style.display === 'none' ? 'flex' : 'none'; };
+    document.getElementById('whatsapp-popup-cerrar').onclick = ()=>{ popupWA.style.display = 'none'; };
+    document.getElementById('whatsapp-popup-enviar').onclick = ()=>{
+      const texto = document.getElementById('whatsapp-popup-texto').value.trim();
+      window.open(`https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent(texto)}`, '_blank');
+    };
   }
 }
 
@@ -84,6 +107,11 @@ function renderFooter(){
             <a href="tel:${EMPRESA.telefonoHref}">📞 ${EMPRESA.telefono}</a>
             <a href="https://wa.me/${EMPRESA.whatsapp}">💬 WhatsApp</a>
             <a href="mailto:${EMPRESA.correo}">✉️ ${EMPRESA.correo}</a>
+            <div style="display:flex;gap:14px;margin-top:12px;">
+              <a href="${EMPRESA.redes.facebook}" target="_blank" rel="noopener" title="Facebook" style="margin:0;">📘</a>
+              <a href="${EMPRESA.redes.instagram}" target="_blank" rel="noopener" title="Instagram" style="margin:0;">📷</a>
+              <a href="${EMPRESA.redes.youtube}" target="_blank" rel="noopener" title="YouTube" style="margin:0;">▶️</a>
+            </div>
           </div>
         </div>
         <div class="footer-abajo">
