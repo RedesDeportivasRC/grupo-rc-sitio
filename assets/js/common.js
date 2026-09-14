@@ -148,6 +148,65 @@ function renderResourceCard(r){
     </div>`;
 }
 
+/* ==========================================================================
+   Contenido alimentado desde AndyControl (Supabase) — productos, proyectos y
+   clientes reales. Si la base de datos aún no tiene nada, o falla la conexión,
+   se usa el catálogo de ejemplo de data.js como respaldo, para que la página
+   nunca se vea vacía.
+   ========================================================================== */
+const SITIO_SUPABASE_URL = "https://jofotwgbbdysrywgxkwi.supabase.co";
+const SITIO_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpvZm90d2diYmR5c3J5d2d4a3dpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg1ODIwNzgsImV4cCI6MjEwNDE1ODA3OH0.4vQYhfbLAu-ITdaHPga-xr5jjaV5TzZZESGVb1-tNWg";
+let _sbSitio = null;
+function clienteSitio(){
+  if(!_sbSitio && window.supabase) _sbSitio = supabase.createClient(SITIO_SUPABASE_URL, SITIO_SUPABASE_ANON_KEY);
+  return _sbSitio;
+}
+
+function mapearProducto(p){
+  return {
+    sku: p.sku, nombre: p.nombre, categoria: p.categoria, subcategoria: p.subcategoria,
+    descripcionCorta: p.descripcion_corta, descripcionCompleta: p.descripcion_completa,
+    fotos: p.fotos && p.fotos.length ? p.fotos : ['Foto pendiente'],
+    material: p.material, calibre: p.calibre, color: p.color||[], medidas: p.medidas,
+    usos: p.usos||[], caracteristicas: p.caracteristicas||[], precio: p.precio,
+    disponibilidad: p.disponibilidad, productosRelacionados: p.productos_relacionados||[],
+    descargas: [], etiquetas: p.etiquetas||[], estado: p.activo ? 'activo' : 'inactivo',
+  };
+}
+function mapearProyecto(p){
+  return {
+    slug: p.slug || p.id, nombre: p.nombre, cliente: p.cliente, ubicacion: p.ubicacion, tipo: p.tipo,
+    fotos: p.fotos && p.fotos.length ? p.fotos : ['Foto pendiente'],
+    descripcion: p.descripcion, productosUsados: p.productos_usados||[], fecha: p.fecha,
+    categorias: p.categorias||[], video: p.video, testimonio: p.testimonio,
+  };
+}
+function mapearCliente(c){
+  return { nombre: c.nombre, logo: c.logo, sector: c.sector, ubicacion: c.ubicacion, proyectoRelacionado: c.proyecto_relacionado, testimonio: c.testimonio, fotos: [] };
+}
+
+async function obtenerProductos(){
+  try{
+    const { data, error } = await clienteSitio().from('sitio_productos').select('*').eq('activo', true).order('orden', {ascending:true});
+    if(error || !data || data.length===0) return PRODUCTOS;
+    return data.map(mapearProducto);
+  }catch(e){ return PRODUCTOS; }
+}
+async function obtenerProyectos(){
+  try{
+    const { data, error } = await clienteSitio().from('sitio_proyectos').select('*').eq('activo', true).order('orden', {ascending:true});
+    if(error || !data || data.length===0) return PROYECTOS;
+    return data.map(mapearProyecto);
+  }catch(e){ return PROYECTOS; }
+}
+async function obtenerClientes(){
+  try{
+    const { data, error } = await clienteSitio().from('sitio_clientes').select('*').eq('activo', true).order('orden', {ascending:true});
+    if(error || !data || data.length===0) return CLIENTES;
+    return data.map(mapearCliente);
+  }catch(e){ return CLIENTES; }
+}
+
 // Envía los datos de cualquier formulario de contacto del sitio al lead-capture,
 // que los guarda directo en la misma tabla que usa el CRM. Reutilizable en Inicio y Contacto.
 async function enviarLeadFormulario(datos, elementosStatus){
