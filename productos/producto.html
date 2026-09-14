@@ -43,8 +43,8 @@
         <div class="migas"><a href="../index.html">Inicio</a> / <a href="../productos.html">Productos</a> / <a href="${p.categoria}.html">${categoriaNombre(p.categoria)}</a> / ${p.nombre}</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:44px;">
           <div class="grid-cards g2">
-            <div class="foto-ph" style="grid-column:span 2;min-height:280px;"><span>${p.fotos[0]||'Foto pendiente'}</span></div>
-            ${(p.fotos.slice(1)||[]).map(f=>`<div class="foto-ph" style="min-height:130px;"><span>${f}</span></div>`).join('')}
+            <div style="grid-column:span 2;min-height:280px;overflow:hidden;border-radius:var(--radio);">${fotoOMarcador(p.fotos[0], p.nombre+' — '+categoriaNombre(p.categoria)+' | Grupo RC')}</div>
+            ${(p.fotos.slice(1)||[]).map((f,i)=>`<div style="min-height:130px;overflow:hidden;border-radius:var(--radio);">${fotoOMarcador(f, p.nombre+' foto '+(i+2)+' | Grupo RC')}</div>`).join('')}
           </div>
           <div>
             <span class="ojo">${categoriaNombre(p.categoria)}${p.subcategoria?' · '+p.subcategoria:''}</span>
