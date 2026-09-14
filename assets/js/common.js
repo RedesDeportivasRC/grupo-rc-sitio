@@ -27,6 +27,7 @@ function renderHeader(activo){
         <button class="menu-movil-btn" id="btn-menu-movil">☰</button>
       </div>
     </header>
+    <a href="https://wa.me/${EMPRESA.whatsapp}" target="_blank" rel="noopener" id="btn-whatsapp-flotante" title="Escríbenos por WhatsApp">💬</a>
     <div id="menu-movil-overlay" style="display:none;position:fixed;inset:0;background:rgba(10,26,36,.6);z-index:200;">
       <div style="background:#fff;max-width:320px;margin-left:auto;height:100%;padding:20px;display:flex;flex-direction:column;gap:4px;overflow-y:auto;">
         <button id="btn-cerrar-menu-movil" style="align-self:flex-end;background:none;border:none;font-size:1.6rem;cursor:pointer;margin-bottom:10px;">✕</button>
@@ -60,6 +61,7 @@ function renderFooter(){
           <div>
             <div class="logo" style="color:#fff;margin-bottom:12px;"><img src="${base}assets/img/logo-160.png" class="logo-marca"> ${EMPRESA.nombre}</div>
             <p style="max-width:30ch;opacity:.8;">${EMPRESA.nombreLargo} — fabricación e instalación de redes perimetrales, deportivas y porterías.</p>
+            <p style="margin-top:8px;font-style:italic;opacity:.65;font-size:.82rem;">"${EMPRESA.frase}"</p>
           </div>
           <div>
             <h4>Productos</h4>
