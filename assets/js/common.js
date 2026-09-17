@@ -108,9 +108,9 @@ function renderFooter(){
             <a href="https://wa.me/${EMPRESA.whatsapp}">💬 WhatsApp</a>
             <a href="mailto:${EMPRESA.correo}">✉️ ${EMPRESA.correo}</a>
             <div style="display:flex;gap:14px;margin-top:12px;">
-              <a href="${EMPRESA.redes.facebook}" target="_blank" rel="noopener" title="Facebook" style="margin:0;">📘</a>
-              <a href="${EMPRESA.redes.instagram}" target="_blank" rel="noopener" title="Instagram" style="margin:0;">📷</a>
-              <a href="${EMPRESA.redes.youtube}" target="_blank" rel="noopener" title="YouTube" style="margin:0;">▶️</a>
+              <a href="${EMPRESA.redes.facebook}" target="_blank" rel="noopener" title="Facebook" style="margin:0;display:inline-flex;"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M22 12.06C22 6.51 17.52 2 12 2S2 6.51 2 12.06C2 17.08 5.66 21.23 10.44 22v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.78-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.78l-.45 2.91h-2.33V22C18.34 21.23 22 17.08 22 12.06z"/></svg></a>
+              <a href="${EMPRESA.redes.instagram}" target="_blank" rel="noopener" title="Instagram" style="margin:0;display:inline-flex;"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2zm0 1.98c-3.14 0-3.5.01-4.74.07-1.02.05-1.58.22-1.95.36-.49.19-.84.42-1.2.79-.37.36-.6.71-.79 1.2-.14.37-.31.93-.36 1.95-.06 1.24-.07 1.6-.07 4.74s.01 3.5.07 4.74c.05 1.02.22 1.58.36 1.95.19.49.42.84.79 1.2.36.37.71.6 1.2.79.37.14.93.31 1.95.36 1.24.06 1.6.07 4.74.07s3.5-.01 4.74-.07c1.02-.05 1.58-.22 1.95-.36.49-.19.84-.42 1.2-.79.37-.36.6-.71.79-1.2.14-.37.31-.93.36-1.95.06-1.24.07-1.6.07-4.74s-.01-3.5-.07-4.74c-.05-1.02-.22-1.58-.36-1.95-.19-.49-.42-.84-.79-1.2-.36-.37-.71-.6-1.2-.79-.37-.14-.93-.31-1.95-.36-1.24-.06-1.6-.07-4.74-.07zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.98a3.02 3.02 0 100 6.04 3.02 3.02 0 000-6.04zm5.2-2.4a1.17 1.17 0 110 2.34 1.17 1.17 0 010-2.34z"/></svg></a>
+              <a href="${EMPRESA.redes.youtube}" target="_blank" rel="noopener" title="YouTube" style="margin:0;display:inline-flex;"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M23 12s0-3.55-.45-5.26a2.9 2.9 0 00-2.04-2.05C18.8 4.24 12 4.24 12 4.24s-6.8 0-8.51.45A2.9 2.9 0 001.45 6.74C1 8.45 1 12 1 12s0 3.55.45 5.26a2.9 2.9 0 002.04 2.05c1.71.45 8.51.45 8.51.45s6.8 0 8.51-.45a2.9 2.9 0 002.04-2.05C23 15.55 23 12 23 12zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg></a>
             </div>
           </div>
         </div>
@@ -251,6 +251,34 @@ async function obtenerClientes(){
     if(error || !data || data.length===0) return CLIENTES;
     return data.map(mapearCliente);
   }catch(e){ return CLIENTES; }
+}
+
+// Fotos del banner rotativo del Inicio — si todavía no hay ninguna subida, se devuelve una
+// lista vacía y el Inicio muestra su cuadro de marcador de siempre, sin romperse.
+async function obtenerFotosBanner(){
+  try{
+    const { data, error } = await clienteSitio().from('sitio_banner').select('foto').eq('activo', true).order('orden', {ascending:true});
+    if(error || !data) return [];
+    return data.map(f=>f.foto);
+  }catch(e){ return []; }
+}
+
+// Arma un carrusel simple de fundido cruzado — nada de librerías, solo opacidad con transición.
+// Rota sola cada 4.5 segundos sin parar. Si solo hay 1 foto (o ninguna), no hace falta animar nada.
+function iniciarCarruselBanner(contenedorId, fotos){
+  const cont = document.getElementById(contenedorId);
+  if(!cont || fotos.length === 0) return;
+  cont.innerHTML = fotos.map((url,i)=>
+    `<img src="${url}" alt="Redes Deportivas RC — trabajo realizado" loading="${i===0?'eager':'lazy'}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:${i===0?1:0};transition:opacity 1.2s ease;">`
+  ).join('');
+  if(fotos.length < 2) return;
+  let indice = 0;
+  setInterval(()=>{
+    const imgs = cont.querySelectorAll('img');
+    imgs[indice].style.opacity = 0;
+    indice = (indice + 1) % imgs.length;
+    imgs[indice].style.opacity = 1;
+  }, 4500);
 }
 
 // Envía los datos de cualquier formulario de contacto del sitio al lead-capture,
