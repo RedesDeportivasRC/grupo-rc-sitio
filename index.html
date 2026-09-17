@@ -27,10 +27,9 @@
         <a href="productos.html" class="btn btn-linea" style="color:#fff;">Ver productos</a>
       </div>
     </div>
-    <div class="grid-responsive-2col" style="display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:130px 130px;gap:12px;">
-      <div class="foto-ph oscuro" style="grid-row:span 2;min-height:272px;"><span>Foto — cancha con red perimetral</span></div>
-      <div class="foto-ph oscuro"><span>Foto — portería instalada</span></div>
-      <div class="foto-ph oscuro"><span>Foto — instalación en proceso</span></div>
+    <div class="banner-carrusel-wrap" style="position:relative;border-radius:14px;overflow:hidden;min-height:330px;background:#1a1a1a;">
+      <div id="banner-carrusel" style="position:absolute;inset:0;"></div>
+      <div id="banner-carrusel-vacio" class="foto-ph oscuro" style="position:absolute;inset:0;"><span>Foto — trabajo realizado</span></div>
     </div>
   </div>
 </section>
@@ -226,6 +225,11 @@
   try{
     renderHeader('inicio');
     renderFooter();
+    const fotosBanner = await obtenerFotosBanner();
+    if(fotosBanner.length > 0){
+      document.getElementById('banner-carrusel-vacio').style.display = 'none';
+      iniciarCarruselBanner('banner-carrusel', fotosBanner);
+    }
     document.getElementById('cont-categorias').innerHTML = CATEGORIAS.slice(0,4).map(c=>`
       <a class="tarjeta-producto" href="productos/${c.slug}.html">
         <div class="foto-ph"><span><b>${c.nombre}</b></span></div>
