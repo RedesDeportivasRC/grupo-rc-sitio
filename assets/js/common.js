@@ -269,7 +269,7 @@ function iniciarCarruselBanner(contenedorId, fotos){
   const cont = document.getElementById(contenedorId);
   if(!cont || fotos.length === 0) return;
   cont.innerHTML = fotos.map((url,i)=>
-    `<img src="${url}" alt="Redes Deportivas RC — trabajo realizado" loading="${i===0?'eager':'lazy'}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:${i===0?1:0};transition:opacity 1.2s ease;">`
+    `<img src="${url}" alt="Redes Deportivas RC — trabajo realizado" loading="${i===0?'eager':'lazy'}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:${i===0?1:0};transition:opacity 1.2s ease;">`
   ).join('');
   if(fotos.length < 2) return;
   let indice = 0;
