@@ -26,29 +26,29 @@ acceso al repo `panel-directivo-rc` ni a su carpeta `/docs`**.
   confirmado todavía** — no lo inventes; si una tarea lo requiere, repórtalo como información
   faltante en vez de improvisarlo.
 
-## PUEDE HACER SIN CONFIRMACIÓN
+## FLUJO NORMAL — trabaja de corrido sobre "desarrollo", sin detenerte a pedir permiso
 
-Cambios dentro del alcance explícitamente solicitado que no afecten datos reales, contenido de
-marca no confirmado, ni infraestructura sensible. Ejemplos: ajustar estilos, corregir
-responsividad, agregar una sección con contenido que la tarea ya te dio explícitamente.
+Interfaz, estilos, responsividad, botones, filtros, ordenamiento, secciones con contenido que la
+tarea ya te dio explícitamente. Trabaja directo sobre la rama persistente `desarrollo` de este
+repo (URL fija de Vercel) — no crees una rama nueva por tarea; Reinier pide correcciones sucesivas
+sobre la misma URL hasta decir "ya quedó", momento en el que se promueve a producción. Antes de
+empezar, consulta `tareas_rc` (proyecto `panel-directivo-rc`) si tienes esa conectividad; si no la
+tienes, dilo e igual continúa — no le pidas a Reinier que entre a Supabase manualmente solo para
+revisarla por ti.
 
-## REQUIERE CONFIRMACIÓN explícita de Reinier antes de proceder
+## FLUJO SENSIBLE — detente y pide autorización explícita ANTES de proceder
 
 - Cualquier texto de marca, producto, testimonio o cifra de negocio que no esté ya confirmado
   arriba o dado explícitamente en la tarea.
 - Cambios a `/api/nuevo-lead.js` o a cómo se capturan leads.
-- Cambios a la estructura de datos en Supabase.
+- Modificar o borrar estructura/datos de Supabase que ya existen. Crear algo nuevo con default
+  seguro es FLUJO NORMAL — ante la duda, trátalo como que requiere autorización.
 - Cualquier decisión de negocio que la tarea no haya definido explícitamente.
-
-## NUNCA DEBE HACER, con o sin autorización
-
-- Exponer credenciales, tokens o llaves de API (especialmente `SUPABASE_SERVICE_ROLE_KEY`) en
-  código, commits, logs o la salida de una tarea.
-- Borrar datos reales.
-- Reproducir contenido con derechos de autor ajeno (logos de terceros, texto o imágenes sin
-  licencia) — los íconos de redes sociales ya existen como SVG propio en `common.js`, reutilízalos.
-- Hardcodear contenido de productos/clientes/banner que debería administrarse desde AndyControl.
-- Inventar contenido de marca o negocio no confirmado.
+- Exponer credenciales/tokens (especialmente `SUPABASE_SERVICE_ROLE_KEY`), borrar datos reales, o
+  hardcodear contenido de productos/clientes/banner que debería administrarse desde AndyControl —
+  esto nunca se hace, ni con autorización.
+- Reproducir contenido con derechos de autor ajeno — los íconos de redes sociales ya existen como
+  SVG propio en `common.js`, reutilízalos en vez de buscar alternativas.
 - Publicar a producción fuera del flujo autorizado.
 
 ## NO AMPLIAR EL ALCANCE
@@ -58,9 +58,8 @@ hallazgo y recomienda una tarea separada.
 
 ## Trabajo en paralelo
 
-Antes de tocar cualquier archivo, revisa la tabla `tareas_rc` en Supabase (proyecto
-`panel-directivo-rc`) — si otra tarea activa ya tiene ese archivo registrado, no lo toques en
-paralelo.
+Trabaja siempre en tu propia rama. Ver la nota de `tareas_rc` en FLUJO NORMAL arriba: revisar esa
+tabla es deseable, no un requisito bloqueante si no tienes cómo consultarla.
 
 ## Entrega de cambios
 
