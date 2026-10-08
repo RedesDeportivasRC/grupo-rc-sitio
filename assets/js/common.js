@@ -304,6 +304,7 @@ async function enviarLeadFormulario(datos, elementosStatus){
     status.style.color = '#1e9e57';
     status.textContent = '✅ ¡Listo! Te contactamos pronto.';
     botón.disabled = false;
+    if(window.registrarConversion) registrarConversion('formulario');
     return true;
   }catch(e){
     status.style.color = '#d9534f';

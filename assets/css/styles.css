@@ -3,7 +3,7 @@
    Paleta: azul de marca + negro/blanco + dorado como acento
    Tipografía: display condensada + texto neutro, mucho espacio
    ============================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap');
+/* Tipografías: se cargan con <link> en el <head> de cada página (más rápido que @import). */
 
 :root{
   --azul:#2bbdf3;
@@ -179,4 +179,58 @@ details.ficha td:first-child{color:var(--gris);width:40%;}
   .fila-2{grid-template-columns:1fr;}
   .banner-ancho{flex-direction:column;align-items:flex-start;padding:36px 24px;}
   .franja{padding:56px 0;}
+}
+
+/* ============ Páginas de aterrizaje para anuncios (/lp/) ============ */
+.lp-header{background:#fff;border-bottom:1px solid var(--linea);position:sticky;top:0;z-index:60;}
+.lp-header .envolvente{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;gap:14px;}
+.lp-header .logo-marca{width:46px;height:46px;}
+.lp-header .logo{font-size:1.45rem;}
+.lp-header-acciones{display:flex;gap:10px;align-items:center;}
+.lp-tel{font-weight:700;font-size:.9rem;}
+.btn-wa{background:#25D366;color:#fff;}
+.lp-hero{background:var(--azul-osc);color:#fff;padding:56px 0 64px;}
+.lp-hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:start;}
+.lp-hero h1{color:#fff;}
+.lp-hero p.lp-sub{color:#9fc3d1;max-width:52ch;margin-top:14px;font-size:1.08rem;}
+.lp-puntos{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:10px;}
+.lp-puntos li{display:flex;gap:10px;align-items:flex-start;font-weight:600;}
+.lp-puntos li::before{content:'✓';color:var(--azul);font-weight:800;}
+.lp-ctas{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap;}
+.lp-form{background:#fff;color:var(--negro);border-radius:var(--radio);padding:26px;box-shadow:0 18px 40px rgba(0,0,0,.25);}
+.lp-form h2{font-size:1.9rem;}
+.lp-form p.lp-form-nota{color:var(--gris);font-size:.85rem;margin:6px 0 16px;}
+.lp-form form{display:grid;gap:12px;}
+.lp-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+.lp-chips span{border:1.5px solid var(--linea);border-radius:100px;padding:9px 16px;font-weight:600;font-size:.88rem;background:#fff;}
+.lp-galeria{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px;}
+.lp-galeria img{width:100%;height:200px;object-fit:cover;border-radius:12px;}
+.lp-pasos{counter-reset:paso;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:28px;}
+.lp-paso{border:1px solid var(--linea);border-radius:var(--radio);padding:24px;background:#fff;}
+.lp-paso::before{counter-increment:paso;content:counter(paso);display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:var(--azul);font-weight:800;margin-bottom:12px;}
+.lp-paso h3{font-family:'Manrope',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:6px;}
+.lp-paso p{color:var(--gris);font-size:.9rem;}
+.lp-modelos{width:100%;border-collapse:collapse;margin-top:24px;font-size:.95rem;background:#fff;border-radius:var(--radio);overflow:hidden;}
+.lp-modelos th,.lp-modelos td{padding:14px 16px;border-bottom:1px solid var(--linea);text-align:left;}
+.lp-modelos th{background:var(--hueso);font-size:.78rem;text-transform:uppercase;letter-spacing:.6px;color:var(--gris);}
+.lp-faq details{border-bottom:1px solid var(--linea);padding:18px 0;}
+.lp-faq summary{cursor:pointer;font-weight:700;}
+.lp-faq details p{color:var(--gris);margin-top:10px;max-width:70ch;}
+.lp-footer{background:var(--negro);color:#c7ced2;padding:36px 0 96px;font-size:.86rem;}
+.lp-footer .envolvente{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+.lp-footer a{color:#fff;}
+.lp-barra-movil{display:none;}
+@media (max-width:860px){
+  .lp-hero-grid{grid-template-columns:1fr;}
+  .lp-galeria{grid-template-columns:repeat(2,1fr);}
+  .lp-galeria img{height:150px;}
+  .lp-pasos{grid-template-columns:1fr;}
+}
+@media (max-width:720px){
+  .lp-tel,.lp-header .btn{display:none;}
+  .lp-hero{padding:36px 0 44px;}
+  .lp-ctas .btn{flex:1;justify-content:center;}
+  .lp-barra-movil{display:grid;grid-template-columns:1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:150;box-shadow:0 -6px 18px rgba(0,0,0,.18);}
+  .lp-barra-movil a{padding:16px 10px;text-align:center;font-weight:800;font-size:.95rem;}
+  .lp-modelos th,.lp-modelos td{padding:11px 10px;font-size:.86rem;}
 }
