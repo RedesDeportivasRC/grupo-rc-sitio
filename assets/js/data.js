@@ -261,7 +261,7 @@ const EMPRESA = {
   telefono:'999 553 8184',
   telefonoHref:'+529995538184',
   whatsapp:'529995538184',
-  correo:'redesdeportivasrc@gmail.com',
+  correo:'contacto@redesdeportivasrc.com',
   direccion:'C. 114 #581-1 x 29 y 29A, Los Ángeles, Caucel, Mérida, Yucatán, México',
   horarios:'Lunes a viernes, 9:00 a.m. – 6:00 p.m.',
   mapaUrl:'https://maps.app.goo.gl/9jCNwpsFQGWjsxzC6',  // liga de Google Maps que mandó Reinier (8 oct 2026)
