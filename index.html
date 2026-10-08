@@ -70,7 +70,7 @@
 <section class="franja" style="background:var(--azul-osc);" id="seccion-testimonios">
   <div class="envolvente">
     <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;">
-      <div><span class="ojo" style="color:var(--azul);">Lo que dicen en Facebook</span><h2 style="color:#fff;">Clientes satisfechos</h2></div>
+      <div><span class="ojo" style="color:var(--azul);">Lo que dicen nuestros clientes</span><h2 style="color:#fff;">Clientes satisfechos</h2><div class="testimonios-resumen" id="cont-testimonios-resumen"></div></div>
       <a href="https://facebook.com/redesdeportivasrc" target="_blank" rel="noopener" class="btn btn-blanco">Ver nuestra página de Facebook</a>
     </div>
     <div class="testimonios" id="cont-testimonios"></div>
@@ -127,6 +127,7 @@
       <span class="ojo">Hablemos</span>
       <h2>Pide tu cotización</h2>
       <p class="kicker">Te respondemos el mismo día hábil. El teléfono es la vía más rápida.</p>
+      <div id="mapa-inicio"></div>
     </div>
     <form class="form-contacto" id="form-contacto-inicio">
       <input type="text" id="ci-honeypot" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;">
@@ -203,7 +204,8 @@
     renderFooter();
     iniciarHeroSlider('hero-slider', HERO_SLIDES);
     renderFortalezas('cont-fortalezas');
-    renderTestimonios('cont-testimonios', 'seccion-testimonios');
+    renderTestimonios('cont-testimonios', 'seccion-testimonios', true);
+    renderMapa('mapa-inicio');
     document.getElementById('cont-categorias').innerHTML = CATEGORIAS.slice(0,4).map(c=>`
       <a class="tarjeta-producto" href="${urlCategoria(c.slug)}">
         ${c.slug==='redes-perimetrales' ? '<img src="assets/img/trabajos/cancha-multiusos-perimetral.jpg" alt="Redes perimetrales · Grupo RC" loading="lazy">' : `<div class="foto-ph" style="min-height:190px;border-radius:0;"><span>${c.nombre}</span></div>`}

@@ -264,6 +264,8 @@ const EMPRESA = {
   correo:'redesdeportivasrc@gmail.com',
   direccion:'C. 114 #581-1 x 29 y 29A, Los Ángeles, Caucel, Mérida, Yucatán, México',
   horarios:'Lunes a viernes, 9:00 a.m. – 6:00 p.m.',
+  mapaUrl:'https://maps.app.goo.gl/9jCNwpsFQGWjsxzC6',  // liga de Google Maps que mandó Reinier (8 oct 2026)
+  mapaBusqueda:'Redes Deportivas RC, C. 114 581, Caucel, Mérida, Yucatán',
   estadosDondeVendemos:['Yucatán','[PLACEHOLDER — resto de estados donde venden]'],
   redes:{
     facebook:'https://facebook.com/redesdeportivasrc',
@@ -312,11 +314,28 @@ const FORTALEZAS = [
   { ico:'🛒', titulo:'También en Mercado Libre', texto:'Ya estamos en Mercado Libre.' },
 ];
 
-// ---------------- CLIENTES SATISFECHOS (comentarios reales de Facebook) ----------------
-// Solo comentarios reales, copiados tal cual de Facebook, con permiso o públicos en la página.
-// Mientras esté vacío, la sección no aparece en el sitio publicado.
-// Formato: { nombre:'Juan Pérez', texto:'...', lugar:'Mérida, Yucatán', fuente:'Facebook', fecha:'2026-09' }
-const TESTIMONIOS = [];
+// ---------------- CLIENTES SATISFECHOS ----------------
+// Comentarios REALES copiados tal cual de Facebook (Recomendaciones) y Google Maps.
+// Capturas que mandó Reinier el 8 oct 2026. Nunca inventar ni editar el sentido de un comentario.
+// Nombre + inicial del apellido. Si queda vacío, la sección no aparece en el sitio publicado.
+// inicio:true = aparece en la página de Inicio; todos aparecen en Clientes.
+const RESUMEN_OPINIONES = { facebookPct:100, facebookTotal:19 };
+const TESTIMONIOS = [
+  { nombre:'Carlos Lobo R.', fuente:'facebook', lugar:'Guadalajara', inicio:true, texto:'Recomiendo ampliamente a GRUPO RC. Me atendieron y ayudaron en todo momento con asesoría cuando fue requerida mientras instalaba una red. Estando yo en Guadalajara me hicieron llegar la red en tiempo y forma, además me ayudaron con asesoría vía telefónica para su instalación.' },
+  { nombre:'Rommel S.', fuente:'google', inicio:true, texto:'Súper recomendable, personas amables y comprometidas con su trabajo. Me asesoraron y ayudaron a instalar una red que les compré, son rápidos en la entrega y manejan buena calidad de sus materiales. Les he comprado redes perimetrales y porterías.' },
+  { nombre:'Arturo V.', fuente:'facebook', lugar:'Linares, N.L.', inicio:true, texto:'Muy buen producto, atención al cliente rápida y buena, envío rápido, recomendados.' },
+  { nombre:'Rogelio Axel S.', fuente:'facebook', inicio:true, texto:'Buena atención y rapidez en la compra. El producto era más que lo que esperaba, muy detallado y profesional. Recomendado al 100.' },
+  { nombre:'Raúl Medina C.', fuente:'facebook', inicio:true, texto:'Muy buena atención y la portería y la red de muy buena calidad, mi hijo está super feliz, lo recomiendo ampliamente.' },
+  { nombre:'Roger V.', fuente:'google', inicio:true, texto:'¡Los recomiendo mucho! Excelente compra, el personal fue muy amable y me asesoró en todo momento, ayudándome a elegir justo lo que necesitaba.' },
+  { nombre:'Emmanuel C.', fuente:'facebook', texto:'Muy buen material en las redes y las porterías muy resistente y muy práctico y las baloneras muy buenas.' },
+  { nombre:'Alexis V.', fuente:'facebook', texto:'¡Redes de excelente calidad! Quedé encantado con el material, calidad y precio. Muchas gracias.' },
+  { nombre:'Academia de Béisbol JV', fuente:'facebook', texto:'Recomendable ampliamente. Una atención muy buena. Seguimiento. Entrega en un tiempo muy aceptable.' },
+  { nombre:'José E. G.', fuente:'facebook', texto:'Excelente calidad en las redes y excelente atención. 100% recomendable.' },
+  { nombre:'Max H.', fuente:'facebook', texto:'Muy rápidos en enviar y a buen precio.' },
+  { nombre:'Pina V.', fuente:'facebook', texto:'El más feliz con su balonera. Son de muy buena calidad y la entrega rapidísima.' },
+  { nombre:'Juan E.', fuente:'facebook', texto:'Baloneras de muy buena calidad, resistentes y muy útiles, 100% recomendado.' },
+  { nombre:'Eduardo P.', fuente:'facebook', texto:'Los recomiendo, buena y pronta atención, ¡la mejor opción!' },
+];
 
 // ---------------- Posicionamiento de marca (Misión / Visión / Valores / Quiénes somos) ----------------
 const MARCA_RC = {

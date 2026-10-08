@@ -301,8 +301,8 @@ details.ficha td:first-child{color:var(--gris);width:40%;}
 .testimonio-avatar{width:44px;height:44px;border-radius:50%;background:var(--azul);color:var(--negro);display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;}
 .testimonio-pie b{display:block;font-size:.92rem;}
 .testimonio-pie small{display:flex;align-items:center;gap:6px;color:var(--gris);font-size:.76rem;}
-.testimonio-ejemplo{border-top-color:var(--dorado);}
-.testimonio-ejemplo p{color:var(--gris);font-style:italic;}
+.testimonio-estrellas{color:#f5b301;letter-spacing:2px;font-size:1rem;margin-bottom:8px;}
+.testimonios-resumen{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fff;color:var(--negro);border-radius:999px;padding:8px 16px;font-size:.88rem;margin-top:14px;}
 .logos-clientes{display:flex;flex-wrap:wrap;gap:16px;margin-top:36px;align-items:center;}
 .logos-clientes .tarjeta-cliente{background:#fff;min-width:150px;}
 @media (max-width:980px){ .testimonios{grid-template-columns:1fr 1fr;} }
@@ -315,3 +315,11 @@ details.ficha td:first-child{color:var(--gris);width:40%;}
 @media (max-width:720px){ .galeria-inicio{grid-template-columns:1fr 1fr;grid-auto-rows:150px;} }
 /* En tarjetas el nombre ya va abajo: el recuadro de marca no lo repite. */
 .tarjeta-producto .foto-ph span,.tarjeta-blog .foto-ph span{display:none;}
+
+/* Mapa de ubicación */
+.mapa-rc{background:#fff;border-radius:var(--radio);overflow:hidden;border-top:5px solid var(--azul);box-shadow:0 6px 24px rgba(0,0,0,.08);margin-top:24px;}
+.mapa-rc iframe{display:block;width:100%;height:280px;border:0;}
+.mapa-rc-pie{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 18px;}
+.mapa-rc-pie b{display:block;font-size:.95rem;}
+.mapa-rc-pie span{color:var(--gris);font-size:.82rem;}
+.testimonio > :first-child{padding-right:34px;}

@@ -45,6 +45,7 @@
           <div><b style="display:block;">Horario</b><span id="dato-horario" style="color:var(--gris);font-size:.88rem;"></span></div>
         </div>
       </div>
+      <div id="mapa-contacto"></div>
     </div>
     <form class="form-contacto" id="form-contacto" autocomplete="on">
       <input type="text" name="sitioWeb" id="c-honeypot" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;">
@@ -137,7 +138,7 @@
   });
 
   try{
-    renderHeader('contacto'); renderFooter();
+    renderHeader('contacto'); renderFooter(); renderMapa('mapa-contacto');
     document.getElementById('dato-telefono').textContent = EMPRESA.telefono;
     document.getElementById('dato-correo').textContent = EMPRESA.correo;
     document.getElementById('dato-direccion').textContent = EMPRESA.direccion + ' · envíos a todo México';

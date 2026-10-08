@@ -411,24 +411,39 @@ function renderFortalezas(contId){
 
 // Comentarios reales de clientes (TESTIMONIOS en data.js). En el sitio publicado, si no hay
 // ninguno la sección se oculta; en la vista previa muestra tarjetas de muestra del formato.
-function renderTestimonios(contId, seccionId){
+// Mapa de Google con la ubicación del taller (sin llave de API) + botón "Cómo llegar".
+function renderMapa(contId){
+  const cont = document.getElementById(contId);
+  if(!cont || !EMPRESA.mapaBusqueda) return;
+  cont.innerHTML = `
+    <div class="mapa-rc">
+      <iframe title="Ubicación de Redes Deportivas RC en Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q=${encodeURIComponent(EMPRESA.mapaBusqueda)}&z=16&output=embed"></iframe>
+      <div class="mapa-rc-pie">
+        <div><b>Redes Deportivas RC</b><span>${EMPRESA.direccion}</span></div>
+        <a class="btn btn-azul btn-chico" href="${EMPRESA.mapaUrl}" target="_blank" rel="noopener">📍 Cómo llegar</a>
+      </div>
+    </div>`;
+}
+
+function renderTestimonios(contId, seccionId, soloInicio){
   const cont = document.getElementById(contId);
   if(!cont) return;
-  const enVistaPrevia = /vercel\.app$|^localhost$|^127\./.test(location.hostname);
   const iconoFb = '<svg width="13" height="13" viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12.06C22 6.51 17.52 2 12 2S2 6.51 2 12.06C2 17.08 5.66 21.23 10.44 22v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.78-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.78l-.45 2.91h-2.33V22C18.34 21.23 22 17.08 22 12.06z"/></svg>';
-  const tarjeta = (t, ejemplo)=>`
-    <div class="testimonio${ejemplo?' testimonio-ejemplo':''}">
+  const iconoG = '<svg width="13" height="13" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.5 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h5.9a5 5 0 0 1-2.2 3.3v2.7h3.5c2.1-1.9 3.3-4.7 3.3-8z"/><path fill="#34A853" d="M12 23c3 0 5.4-1 7.2-2.7l-3.5-2.7c-1 .7-2.2 1-3.7 1-2.9 0-5.3-1.9-6.2-4.5H2.2v2.8A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.8 14.1a6.6 6.6 0 0 1 0-4.2V7.1H2.2a11 11 0 0 0 0 9.8l3.6-2.8z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.6l3.1-3.1A11 11 0 0 0 2.2 7.1l3.6 2.8C6.7 7.3 9.1 5.4 12 5.4z"/></svg>';
+  const lista = TESTIMONIOS.filter(t => !soloInicio || t.inicio);
+  if(!lista.length){ const sec = document.getElementById(seccionId); if(sec) sec.style.display = 'none'; return; }
+  cont.innerHTML = lista.map(t=>`
+    <div class="testimonio">
+      ${t.fuente==='google' ? '<div class="testimonio-estrellas" aria-label="5 estrellas en Google">★★★★★</div>' : ''}
       <p>${t.texto}</p>
       <div class="testimonio-pie">
         <div class="testimonio-avatar">${t.nombre.split(' ').map(x=>x[0]).slice(0,2).join('')}</div>
-        <div><b>${t.nombre}</b><small>${iconoFb} ${ejemplo ? 'Muestra del formato' : 'Recomienda a Redes Deportivas RC'}${t.lugar?' · '+t.lugar:''}</small></div>
+        <div><b>${t.nombre}</b><small>${t.fuente==='google' ? iconoG+' Opinión en Google' : iconoFb+' Recomienda a Redes Deportivas RC'}${t.lugar?' · '+t.lugar:''}</small></div>
       </div>
-    </div>`;
-  if(TESTIMONIOS.length){
-    cont.innerHTML = TESTIMONIOS.map(t=>tarjeta(t,false)).join('');
-  }else if(enVistaPrevia){
-    cont.innerHTML = [1,2,3].map(i=>tarjeta({ nombre:'Cliente '+i, texto:'Aquí va el comentario real que tu cliente dejó en Facebook, copiado tal cual. Esta tarjeta de muestra solo se ve en la vista previa.' }, true)).join('');
-  }else{
-    const sec = document.getElementById(seccionId); if(sec) sec.style.display = 'none';
+    </div>`).join('');
+  const resumen = document.getElementById(contId+'-resumen');
+  if(resumen && typeof RESUMEN_OPINIONES !== 'undefined'){
+    resumen.innerHTML = `${iconoFb} <b>Recomendado por el ${RESUMEN_OPINIONES.facebookPct}%</b> en Facebook · ${RESUMEN_OPINIONES.facebookTotal} opiniones`;
   }
 }

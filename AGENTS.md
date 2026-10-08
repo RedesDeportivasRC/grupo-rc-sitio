@@ -89,4 +89,5 @@ archivo ya cubre lo necesario para una tarea normal.
   donde falta foto se pinta el recuadro de marca (`.foto-ph`). Al cargar datos reales desaparecen solos.
 - Banner del Inicio, fortalezas, fotos reales y comentarios de clientes viven en data.js
   (`HERO_SLIDES`, `FORTALEZAS`, `FOTOS_TRABAJOS`, `TESTIMONIOS`). `TESTIMONIOS` solo lleva comentarios
-  reales copiados de Facebook; vacío = la sección se oculta en producción.
+  reales copiados de Facebook o Google (nombre + inicial); `inicio:true` = sale en Inicio; vacío = la sección se oculta.
+- Mapa: `renderMapa(id)` usa `EMPRESA.mapaBusqueda` (iframe sin llave de API) y `EMPRESA.mapaUrl` (botón "Cómo llegar").
