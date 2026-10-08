@@ -293,20 +293,27 @@ details.ficha td:first-child{color:var(--gris);width:40%;}
 @media (max-width:560px){ .fortalezas .envolvente{grid-template-columns:repeat(2,1fr);padding:0;} .fortaleza{border-bottom:1px solid rgba(11,14,16,.14);} .fortaleza:nth-child(odd){border-right:1px solid rgba(11,14,16,.14);} .fortaleza:nth-child(even){border-right:none;} }
 
 /* ============ Clientes satisfechos (comentarios de Facebook, formato RC) ============ */
-.testimonios{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:32px;}
-.testimonio{background:#fff;color:var(--negro);border-radius:var(--radio);padding:26px 24px 20px;border-top:5px solid var(--azul);position:relative;display:flex;flex-direction:column;}
-.testimonio::before{content:'\201C';position:absolute;top:6px;right:18px;font-family:'Bebas Neue',sans-serif;font-size:5rem;line-height:1;color:var(--azul);opacity:.35;}
-.testimonio p{font-size:.98rem;line-height:1.6;flex:1;}
-.testimonio-pie{display:flex;align-items:center;gap:12px;margin-top:18px;padding-top:14px;border-top:1px solid var(--linea);}
-.testimonio-avatar{width:44px;height:44px;border-radius:50%;background:var(--azul);color:var(--negro);display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;}
-.testimonio-pie b{display:block;font-size:.92rem;}
-.testimonio-pie small{display:flex;align-items:center;gap:6px;color:var(--gris);font-size:.76rem;}
-.testimonio-estrellas{color:#f5b301;letter-spacing:2px;font-size:1rem;margin-bottom:8px;}
+.testimonios{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 32px)/3);gap:16px;margin-top:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;scrollbar-width:thin;scrollbar-color:var(--azul) transparent;}
+.testimonio{background:#fff;color:var(--negro);border-radius:var(--radio);padding:16px 18px 14px;border-top:4px solid var(--azul);position:relative;display:flex;flex-direction:column;scroll-snap-align:start;}
+.testimonio::before{content:'\201C';position:absolute;top:2px;right:12px;font-family:'Bebas Neue',sans-serif;font-size:3.2rem;line-height:1;color:var(--azul);opacity:.35;}
+.testimonio p{font-size:.9rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.testimonio.abierto p{-webkit-line-clamp:unset;display:block;}
+.testimonio-mas{background:none;border:0;padding:4px 0 0;color:#0b87b8;font-weight:700;font-size:.8rem;cursor:pointer;align-self:flex-start;font-family:inherit;}
+.testimonio-pie{display:flex;align-items:center;gap:10px;margin-top:auto;padding-top:10px;border-top:1px solid var(--linea);}
+.testimonio-cuerpo{flex:1;margin-bottom:10px;}
+.testimonio-avatar{width:34px;height:34px;border-radius:50%;background:var(--azul);color:var(--negro);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;flex-shrink:0;}
+.testimonio-pie b{display:block;font-size:.85rem;}
+.testimonio-pie small{display:flex;align-items:center;gap:5px;color:var(--gris);font-size:.72rem;}
+.testimonio-estrellas{color:#f5b301;letter-spacing:2px;font-size:.85rem;margin-bottom:4px;}
 .testimonios-resumen{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fff;color:var(--negro);border-radius:999px;padding:8px 16px;font-size:.88rem;margin-top:14px;}
+.testimonios-nav{display:flex;justify-content:center;gap:10px;margin-top:10px;}
+.testimonios-nav button{width:40px;height:40px;border-radius:50%;border:2px solid var(--azul);background:transparent;color:var(--azul);font-size:1.5rem;line-height:1;cursor:pointer;}
+.testimonios-nav button:hover{background:var(--azul);color:var(--negro);}
+@media (max-width:720px){ .testimonios-resumen{font-size:.78rem;padding:7px 12px;gap:5px;} }
 .logos-clientes{display:flex;flex-wrap:wrap;gap:16px;margin-top:36px;align-items:center;}
 .logos-clientes .tarjeta-cliente{background:#fff;min-width:150px;}
-@media (max-width:980px){ .testimonios{grid-template-columns:1fr 1fr;} }
-@media (max-width:720px){ .testimonios{grid-template-columns:1fr;} }
+@media (max-width:980px){ .testimonios{grid-auto-columns:calc((100% - 16px)/2);} }
+@media (max-width:720px){ .testimonios{grid-auto-columns:85%;} }
 
 /* ============ Galería del Inicio ============ */
 .galeria-inicio{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;gap:12px;margin-top:30px;}
@@ -322,4 +329,4 @@ details.ficha td:first-child{color:var(--gris);width:40%;}
 .mapa-rc-pie{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 18px;}
 .mapa-rc-pie b{display:block;font-size:.95rem;}
 .mapa-rc-pie span{color:var(--gris);font-size:.82rem;}
-.testimonio > :first-child{padding-right:34px;}
+.testimonio-cuerpo > :first-child{padding-right:28px;}

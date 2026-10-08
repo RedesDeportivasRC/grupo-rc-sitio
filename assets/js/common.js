@@ -435,13 +435,33 @@ function renderTestimonios(contId, seccionId, soloInicio){
   if(!lista.length){ const sec = document.getElementById(seccionId); if(sec) sec.style.display = 'none'; return; }
   cont.innerHTML = lista.map(t=>`
     <div class="testimonio">
-      ${t.fuente==='google' ? '<div class="testimonio-estrellas" aria-label="5 estrellas en Google">★★★★★</div>' : ''}
-      <p>${t.texto}</p>
+      <div class="testimonio-cuerpo">
+        ${t.fuente==='google' ? '<div class="testimonio-estrellas" aria-label="5 estrellas en Google">★★★★★</div>' : ''}
+        <p>${t.texto}</p>
+        <button type="button" class="testimonio-mas" hidden>Ver más</button>
+      </div>
       <div class="testimonio-pie">
         <div class="testimonio-avatar">${t.nombre.split(' ').map(x=>x[0]).slice(0,2).join('')}</div>
         <div><b>${t.nombre}</b><small>${t.fuente==='google' ? iconoG+' Opinión en Google' : iconoFb+' Recomienda a Redes Deportivas RC'}${t.lugar?' · '+t.lugar:''}</small></div>
       </div>
     </div>`).join('');
+  // "Ver más" solo en los comentarios que no caben en 3 líneas
+  cont.querySelectorAll('.testimonio').forEach(card=>{
+    const p = card.querySelector('p'), btn = card.querySelector('.testimonio-mas');
+    if(p.scrollHeight > p.clientHeight + 2) btn.hidden = false;
+    btn.addEventListener('click', ()=>{ btn.textContent = card.classList.toggle('abierto') ? 'Ver menos' : 'Ver más'; });
+  });
+  // Flechas para recorrer la fila (solo si hay más tarjetas de las que caben)
+  cont.parentNode.querySelector('.testimonios-nav')?.remove();
+  if(cont.scrollWidth > cont.clientWidth + 4){
+    const nav = document.createElement('div');
+    nav.className = 'testimonios-nav';
+    nav.innerHTML = '<button type="button" aria-label="Anteriores">‹</button><button type="button" aria-label="Siguientes">›</button>';
+    const paso = ()=> (cont.querySelector('.testimonio')?.offsetWidth || 300) + 16;
+    nav.children[0].onclick = ()=> cont.scrollBy({ left:-paso(), behavior:'smooth' });
+    nav.children[1].onclick = ()=> cont.scrollBy({ left: paso(), behavior:'smooth' });
+    cont.after(nav);
+  }
   const resumen = document.getElementById(contId+'-resumen');
   if(resumen && typeof RESUMEN_OPINIONES !== 'undefined'){
     resumen.innerHTML = `${iconoFb} <b>Recomendado por el ${RESUMEN_OPINIONES.facebookPct}%</b> en Facebook · ${RESUMEN_OPINIONES.facebookTotal} opiniones`;
