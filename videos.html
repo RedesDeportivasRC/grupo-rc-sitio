@@ -35,7 +35,18 @@
 <script>
   renderHeader('videos');
   renderFooter();
-  document.getElementById('cont-videos').innerHTML = VIDEOS.map(v=>`
+  // Mientras no haya videos con liga real, se manda a los canales donde ya están publicados.
+  const videosReales = VIDEOS.filter(v=>v.url);
+  if(!videosReales.length){
+    document.getElementById('cont-videos').outerHTML = `
+      <div class="banner-ancho">
+        <div><h2>Mira nuestros videos</h2><p>Instalaciones, fabricación y proyectos reales. Publicamos en YouTube y en Facebook.</p></div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="${EMPRESA.redes.youtube}" target="_blank" rel="noopener" class="btn btn-azul">Ver en YouTube</a>
+          <a href="${EMPRESA.redes.facebook}" target="_blank" rel="noopener" class="btn btn-blanco">Ver en Facebook</a>
+        </div>
+      </div>`;
+  }else document.getElementById('cont-videos').innerHTML = videosReales.map(v=>`
     <div>
       <div style="position:relative;border-radius:14px;overflow:hidden;">
         <div class="foto-ph oscuro" style="min-height:200px;"><span>${v.titulo}</span></div>

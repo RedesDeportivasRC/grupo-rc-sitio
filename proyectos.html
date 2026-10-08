@@ -19,7 +19,7 @@
   <div class="envolvente">
     <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Proyectos</div>
     <h1>Proyectos entregados.</h1>
-    <p>Instalaciones reales, en canchas, escuelas, hoteles y complejos deportivos de todo el país.</p>
+    <p>Instalaciones reales en canchas, escuelas, hoteles y complejos deportivos.</p>
   </div>
 </section>
 
@@ -47,7 +47,7 @@
   renderFooter();
   document.getElementById('cont-proyectos').innerHTML = (await obtenerProyectos()).map(pr => `
     <div class="tarjeta-proyecto" id="${pr.slug}">
-      <div class="foto-ph oscuro"><span>${pr.fotos[0]}</span></div>
+      ${fotoOMarcador(pr.fotos[0], pr.nombre, 'oscuro')}
       <div class="tarjeta-proyecto-body">
         <span>${pr.tipo}</span>
         <h3>${pr.nombre}</h3>

@@ -85,3 +85,8 @@ archivo ya cubre lo necesario para una tarea normal.
   a WhatsApp, a teléfono y los formularios enviados. Los identificadores (Google Ads y píxel de
   Meta) se llenan en el objeto `MEDICION`; vacíos = no se carga nada externo.
 - Las tipografías se cargan con `<link>` en el `<head>` de cada página, no con `@import` en el CSS.
+- Textos "[PLACEHOLDER …]" / "[EJEMPLO …]" nunca se muestran: `esMarcador()` en common.js los oculta y
+  donde falta foto se pinta el recuadro de marca (`.foto-ph`). Al cargar datos reales desaparecen solos.
+- Banner del Inicio, fortalezas, fotos reales y comentarios de clientes viven en data.js
+  (`HERO_SLIDES`, `FORTALEZAS`, `FOTOS_TRABAJOS`, `TESTIMONIOS`). `TESTIMONIOS` solo lleva comentarios
+  reales copiados de Facebook; vacío = la sección se oculta en producción.

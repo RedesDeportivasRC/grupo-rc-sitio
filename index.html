@@ -18,24 +18,11 @@
 
 <div id="site-header"></div>
 
-<!-- HERO -->
-<section class="hero-interior" style="background:var(--negro);padding-top:70px;padding-bottom:70px;">
-  <div class="envolvente grid-responsive-2col" style="display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;">
-    <div>
-      <span class="ojo">Asesoría · Fabricación · Instalación</span>
-      <h1 style="color:#fff;">Que el deporte<br>no se detenga.</h1>
-      <p>Ayudamos a que tu espacio deportivo esté correctamente protegido y listo para jugar — con la asesoría, la red y la instalación que tu proyecto realmente necesita.</p>
-      <div style="display:flex;gap:14px;margin-top:26px;flex-wrap:wrap;">
-        <a href="contacto.html" class="btn btn-azul">Cotiza ahora</a>
-        <a href="productos.html" class="btn btn-linea" style="color:#fff;">Ver productos</a>
-      </div>
-    </div>
-    <div class="banner-carrusel-wrap" style="position:relative;border-radius:14px;overflow:hidden;min-height:420px;background:#1a1a1a;">
-      <div id="banner-carrusel" style="position:absolute;inset:0;"></div>
-      <div id="banner-carrusel-vacio" class="foto-ph oscuro" style="position:absolute;inset:0;"><span>Foto — trabajo realizado</span></div>
-    </div>
-  </div>
-</section>
+<!-- BANNER PRINCIPAL (a todo lo ancho, diapositivas en data.js → HERO_SLIDES) -->
+<section class="hero-slider" id="hero-slider" aria-label="Lo que hacemos en Grupo RC"></section>
+
+<!-- FORTALEZAS -->
+<section class="fortalezas"><div class="envolvente" id="cont-fortalezas"></div></section>
 
 <!-- CATEGORÍAS PRINCIPALES -->
 <section class="franja">
@@ -59,11 +46,11 @@
       <a href="productos/redes-perimetrales.html" class="btn btn-negro">Conoce las redes perimetrales</a>
     </div>
     <div class="grid-cards g5" style="margin-top:36px;">
-      <div class="tarjeta-producto"><div class="foto-ph"><span>Deporte</span></div></div>
-      <div class="tarjeta-producto"><div class="foto-ph"><span>Construcción</span></div></div>
-      <div class="tarjeta-producto"><div class="foto-ph"><span>Pajareras</span></div></div>
-      <div class="tarjeta-producto"><div class="foto-ph"><span>Ganado</span></div></div>
-      <div class="tarjeta-producto"><div class="foto-ph"><span>Anaqueles</span></div></div>
+      <div class="tarjeta-producto"><img src="assets/img/trabajos/cancha-futbol-perimetral.jpg" alt="Red perimetral en cancha de fútbol · Grupo RC" loading="lazy" style="height:200px;"><div class="tarjeta-producto-body"><h3>Deporte</h3></div></div>
+      <div class="tarjeta-producto"><div class="foto-ph" style="min-height:200px;border-radius:0;"><span>Construcción</span></div><div class="tarjeta-producto-body"><h3>Construcción</h3></div></div>
+      <div class="tarjeta-producto"><div class="foto-ph" style="min-height:200px;border-radius:0;"><span>Pajareras</span></div><div class="tarjeta-producto-body"><h3>Pajareras</h3></div></div>
+      <div class="tarjeta-producto"><div class="foto-ph" style="min-height:200px;border-radius:0;"><span>Ganado</span></div><div class="tarjeta-producto-body"><h3>Ganado</h3></div></div>
+      <div class="tarjeta-producto"><div class="foto-ph" style="min-height:200px;border-radius:0;"><span>Anaqueles</span></div><div class="tarjeta-producto-body"><h3>Anaqueles</h3></div></div>
     </div>
   </div>
 </section>
@@ -79,21 +66,22 @@
   </div>
 </section>
 
-<!-- CLIENTES -->
-<section class="franja" style="background:var(--azul-osc);">
+<!-- CLIENTES SATISFECHOS (comentarios reales de Facebook → TESTIMONIOS en data.js) -->
+<section class="franja" style="background:var(--azul-osc);" id="seccion-testimonios">
   <div class="envolvente">
     <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;">
-      <div><span class="ojo" style="color:var(--azul);">Confían en nosotros</span><h2 style="color:#fff;">Clientes</h2></div>
-      <a href="clientes.html" class="btn btn-blanco">Ver todos los clientes</a>
+      <div><span class="ojo" style="color:var(--azul);">Lo que dicen en Facebook</span><h2 style="color:#fff;">Clientes satisfechos</h2></div>
+      <a href="https://facebook.com/redesdeportivasrc" target="_blank" rel="noopener" class="btn btn-blanco">Ver nuestra página de Facebook</a>
     </div>
-    <div class="grid-cards g4" style="margin-top:32px;" id="cont-clientes-inicio"></div>
+    <div class="testimonios" id="cont-testimonios"></div>
+    <div class="logos-clientes" id="cont-clientes-inicio"></div>
   </div>
 </section>
 
 <!-- POR QUÉ GRUPO RC -->
 <section class="franja">
   <div class="envolvente grid-responsive-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;">
-    <div class="foto-ph" style="min-height:320px;"><span>Foto — taller / fabricación</span></div>
+    <img src="assets/img/trabajos/red-perimetral-campo.jpg" alt="Red perimetral instalada por Grupo RC" loading="lazy" style="width:100%;height:440px;object-fit:cover;border-radius:var(--radio);">
     <div>
       <span class="ojo">Por qué Grupo RC</span>
       <h2>25 años ayudando a elegir bien.</h2>
@@ -115,22 +103,7 @@
       <div><span class="ojo">Material fotográfico</span><h2>Galería</h2></div>
       <a href="galeria.html" class="btn btn-linea">Ver galería completa</a>
     </div>
-    <div class="grid-cards g4" style="margin-top:30px;grid-auto-rows:160px;">
-      <div class="foto-ph" style="grid-column:span 2;grid-row:span 2;min-height:100%;"><span>Foto destacada</span></div>
-      <div class="foto-ph"><span>Foto</span></div>
-      <div class="foto-ph"><span>Foto</span></div>
-      <div class="foto-ph"><span>Foto</span></div>
-      <div class="foto-ph"><span>Foto</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- VIDEOS -->
-<section class="franja">
-  <div class="envolvente">
-    <span class="ojo">Contenido</span>
-    <h2>Videos destacados</h2>
-    <div class="grid-cards g3" style="margin-top:28px;" id="cont-videos"></div>
+    <div class="galeria-inicio" id="cont-galeria-inicio"></div>
   </div>
 </section>
 
@@ -228,23 +201,22 @@
   try{
     renderHeader('inicio');
     renderFooter();
-    const fotosBanner = await obtenerFotosBanner();
-    if(fotosBanner.length > 0){
-      document.getElementById('banner-carrusel-vacio').style.display = 'none';
-      iniciarCarruselBanner('banner-carrusel', fotosBanner);
-    }
+    iniciarHeroSlider('hero-slider', HERO_SLIDES);
+    renderFortalezas('cont-fortalezas');
+    renderTestimonios('cont-testimonios', 'seccion-testimonios');
     document.getElementById('cont-categorias').innerHTML = CATEGORIAS.slice(0,4).map(c=>`
-      <a class="tarjeta-producto" href="productos/${c.slug}.html">
-        <div class="foto-ph"><span><b>${c.nombre}</b></span></div>
+      <a class="tarjeta-producto" href="${urlCategoria(c.slug)}">
+        ${c.slug==='redes-perimetrales' ? '<img src="assets/img/trabajos/cancha-multiusos-perimetral.jpg" alt="Redes perimetrales · Grupo RC" loading="lazy">' : `<div class="foto-ph" style="min-height:190px;border-radius:0;"><span>${c.nombre}</span></div>`}
         <div class="tarjeta-producto-body"><h3>${c.nombre}</h3><p>${c.descripcionCorta}</p></div>
       </a>`).join('');
     document.getElementById('cont-productos-destacados').innerHTML = (await obtenerProductos()).slice(0,4).map(renderProductCard).join('');
-    document.getElementById('cont-clientes-inicio').innerHTML = (await obtenerClientes()).slice(0,4).map(renderClientCard).join('');
-    document.getElementById('cont-videos').innerHTML = VIDEOS.map(v=>`
-      <div style="position:relative;border-radius:14px;overflow:hidden;">
-        <div class="foto-ph oscuro" style="min-height:180px;"><span>${v.titulo}</span></div>
-        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;">▶</div>
-      </div>`).join('');
+    document.getElementById('cont-clientes-inicio').innerHTML = (await obtenerClientes()).slice(0,6).map(renderClientCard).join('');
+    // Galería: fotos reales del taller/obras + las del banner que se suben desde AndyControl.
+    const fotosBanner = await obtenerFotosBanner();
+    document.getElementById('cont-galeria-inicio').innerHTML = [
+      ...FOTOS_TRABAJOS.map(f=>({ src:'assets/img/trabajos/'+f.archivo, alt:f.alt })),
+      ...fotosBanner.map(u=>({ src:u, alt:'Trabajo realizado por Grupo RC' })),
+    ].slice(0,9).map(f=>`<img src="${f.src}" alt="${f.alt} · Grupo RC" loading="lazy">`).join('');
     document.getElementById('ci-estado').insertAdjacentHTML('beforeend', ESTADOS_MEXICO.map(e=>`<option>${e}</option>`).join(''));
   }catch(err){
     console.error('Error preparando la página:', err);

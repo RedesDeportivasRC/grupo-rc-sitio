@@ -19,7 +19,7 @@
   <div class="envolvente">
     <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Galería</div>
     <h1>Galería.</h1>
-    <p>Fotografía estilo portafolio de nuestros productos, proyectos y aplicaciones.</p>
+    <p>Redes que ya están trabajando: canchas, escuelas, obras y más.</p>
   </div>
 </section>
 
@@ -40,22 +40,20 @@
 </section>
 
 <div id="site-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
   renderHeader('galeria');
   renderFooter();
-  // [PLACEHOLDER] — hasta que subas fotos reales, esto es un set de ejemplo con la
-  // categorización lista (producto/proyecto/deporte/aplicación) para filtrar.
-  const FOTOS_GALERIA = Array.from({length:9}).map((_,i)=>({
-    categoria:['producto','proyecto','deporte','aplicacion'][i%4],
-    titulo:`[PLACEHOLDER foto ${i+1}]`,
-  }));
+  // Fotos reales: las de assets/img/trabajos (FOTOS_TRABAJOS) + las del banner que se suben en AndyControl.
+  let FOTOS_GALERIA = FOTOS_TRABAJOS.map(f=>({ categoria:f.categoria, src:'assets/img/trabajos/'+f.archivo, alt:f.alt }));
   function pintarGaleria(filtro){
     const lista = filtro==='todos' ? FOTOS_GALERIA : FOTOS_GALERIA.filter(f=>f.categoria===filtro);
-    document.getElementById('cont-galeria').innerHTML = lista.map(f=>`<div class="foto-ph"><span>${f.titulo}</span></div>`).join('');
+    document.getElementById('cont-galeria').innerHTML = lista.map(f=>`<img src="${f.src}" alt="${f.alt} · Grupo RC" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">`).join('') || '<p style="color:var(--gris);">Pronto subiremos fotos de esta categoría.</p>';
   }
   pintarGaleria('todos');
+  obtenerFotosBanner().then(fotos=>{ FOTOS_GALERIA = FOTOS_GALERIA.concat(fotos.map(u=>({ categoria:'proyecto', src:u, alt:'Trabajo realizado por Grupo RC' }))); pintarGaleria('todos'); });
   document.querySelectorAll('[data-filtro]').forEach(btn=>{
     btn.onclick = ()=>{
       document.querySelectorAll('[data-filtro]').forEach(b=>b.className='btn btn-linea btn-chico');

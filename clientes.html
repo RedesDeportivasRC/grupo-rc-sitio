@@ -19,13 +19,20 @@
   <div class="envolvente">
     <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Clientes</div>
     <h1>Empresas que confían en nosotros.</h1>
-    <p>[PLACEHOLDER] Logos y testimonios pendientes de autorización para publicar.</p>
+    <p>Escuelas, hoteles, clubes y complejos deportivos que ya trabajan con nuestras redes.</p>
   </div>
 </section>
 
 <section class="franja">
   <div class="envolvente">
     <div class="grid-cards g4" id="cont-clientes"></div>
+  </div>
+</section>
+
+<section class="franja" style="background:var(--azul-osc);" id="seccion-testimonios">
+  <div class="envolvente">
+    <span class="ojo" style="color:var(--azul);">Lo que dicen en Facebook</span><h2 style="color:#fff;">Clientes satisfechos</h2>
+    <div class="testimonios" id="cont-testimonios"></div>
   </div>
 </section>
 
@@ -38,6 +45,7 @@
   renderHeader('clientes');
   renderFooter();
   document.getElementById('cont-clientes').innerHTML = (await obtenerClientes()).map(renderClientCard).join('');
+  renderTestimonios('cont-testimonios', 'seccion-testimonios');
 })();
 </script>
 </body>

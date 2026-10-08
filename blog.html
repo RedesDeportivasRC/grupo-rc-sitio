@@ -19,7 +19,7 @@
   <div class="envolvente">
     <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Blog</div>
     <h1>Blog.</h1>
-    <p>Guías prácticas para elegir, instalar y mantener tus redes. Los artículos de abajo son contenido de ejemplo — se sustituyen por redacción real.</p>
+    <p>Guías prácticas para elegir, instalar y mantener tus redes. Estamos preparando las primeras; mientras tanto, pregúntanos lo que necesites por WhatsApp.</p>
   </div>
 </section>
 
@@ -35,7 +35,9 @@
 <script>
   renderHeader('blog');
   renderFooter();
-  document.getElementById('cont-blog').innerHTML = BLOG_POSTS.map(renderBlogCard).join('');
+  // Mientras los artículos no tengan texto real, se muestran como "Próximamente" y no llevan a ninguna parte.
+  document.getElementById('cont-blog').innerHTML = BLOG_POSTS.map(b=>esMarcador(b.contenido) ? `
+    <div class="tarjeta-blog">${fotoOMarcador(null, b.titulo)}<div class="tarjeta-blog-body"><span>${b.categoria} · Próximamente</span><h3>${b.titulo}</h3></div></div>` : renderBlogCard(b)).join('');
 </script>
 </body>
 </html>

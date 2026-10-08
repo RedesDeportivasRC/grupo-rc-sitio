@@ -281,6 +281,43 @@ const ESTADOS_MEXICO = [
   'Veracruz','Yucatán','Zacatecas','Fuera de México',
 ];
 
+// ---------------- FOTOS REALES DE TRABAJOS (assets/img/trabajos) ----------------
+const FOTOS_TRABAJOS = [
+  { archivo:'cancha-multiusos-perimetral.jpg', alt:'Red perimetral negra en cancha multiusos', categoria:'proyecto' },
+  { archivo:'cancha-futbol-perimetral.jpg', alt:'Red perimetral en cancha de fútbol de pasto sintético', categoria:'deporte' },
+  { archivo:'red-perimetral-campo.jpg', alt:'Red perimetral instalada en campo abierto', categoria:'proyecto' },
+  { archivo:'detalle-malla-cancha.jpg', alt:'Detalle de la malla romboidal frente a una cancha', categoria:'producto' },
+  { archivo:'estructura-red-altura.jpg', alt:'Red perimetral de altura sobre muro', categoria:'aplicacion' },
+  { archivo:'red-perimetral-cielo.jpg', alt:'Red perimetral alta vista desde abajo', categoria:'producto' },
+];
+
+// ---------------- BANNER PRINCIPAL DEL INICIO ----------------
+// Cada diapositiva: foto (o null = fondo de marca), texto corto y botón.
+const HERO_SLIDES = [
+  { foto:'cancha-multiusos-perimetral.jpg', ojo:'Redes perimetrales a la medida', titulo:'Que el deporte no se detenga.', texto:'Fabricamos la red exacta para tu cancha, escuela u obra, con las medidas de tu espacio.', boton:{ texto:'Ver redes perimetrales', url:'productos/redes-perimetrales.html' } },
+  { foto:'cancha-futbol-perimetral.jpg', ojo:'Experiencia', titulo:'Más de 25 años en redes.', texto:'Más de 25 años comercializando redes y más de 20 instalándolas. Sabemos qué funciona en cada cancha.', boton:{ texto:'Conócenos', url:'nosotros.html' } },
+  { foto:'red-perimetral-campo.jpg', ojo:'Envíos', titulo:'Enviamos a toda la República.', texto:'Tu cotización ya incluye el envío. Estándar a domicilio de 4 a 8 días hábiles, o urgente por aerolínea en 24 a 48 horas.', boton:{ texto:'Cotizar con envío', url:'contacto.html' } },
+  { foto:'estructura-red-altura.jpg', ojo:'Asesoría', titulo:'Te asesoramos en la instalación.', texto:'Te decimos qué abertura, qué altura y qué fijación necesitas. En Yucatán la instalamos nosotros.', boton:{ texto:'Pedir asesoría', url:'contacto.html' } },
+  { foto:null, ojo:'Porterías', titulo:'Porterías oficiales, fútbol 7 y micro.', texto:'Fabricación artesanal con red hexagonal tipo colmena, el estilo de las porterías europeas.', boton:{ texto:'Ver porterías', url:'productos/porterias.html' } },
+  { foto:'detalle-malla-cancha.jpg', ojo:'Fabricación a la medida', titulo:'Hecha para tu espacio.', texto:'Aberturas de 1", 2", 3" y 4", en blanco o negro.', boton:{ texto:'Cotizar mi red', url:'contacto.html' } },
+];
+
+// ---------------- FORTALEZAS (franja bajo el banner) ----------------
+const FORTALEZAS = [
+  { ico:'🏆', titulo:'+25 años en redes', texto:'Y más de 20 instalando.' },
+  { ico:'🚚', titulo:'Envíos a toda la República', texto:'La cotización incluye el envío.' },
+  { ico:'🛠️', titulo:'Asesoría en instalación', texto:'Abertura, altura y fijación.' },
+  { ico:'📐', titulo:'Fabricación a la medida', texto:'Con las medidas de tu espacio.' },
+  { ico:'👷', titulo:'Capacitamos instaladores', texto:'En diferentes partes de México.' },
+  { ico:'🛒', titulo:'También en Mercado Libre', texto:'Ya estamos en Mercado Libre.' },
+];
+
+// ---------------- CLIENTES SATISFECHOS (comentarios reales de Facebook) ----------------
+// Solo comentarios reales, copiados tal cual de Facebook, con permiso o públicos en la página.
+// Mientras esté vacío, la sección no aparece en el sitio publicado.
+// Formato: { nombre:'Juan Pérez', texto:'...', lugar:'Mérida, Yucatán', fuente:'Facebook', fecha:'2026-09' }
+const TESTIMONIOS = [];
+
 // ---------------- Posicionamiento de marca (Misión / Visión / Valores / Quiénes somos) ----------------
 const MARCA_RC = {
   mision:'Crear soluciones que protejan, conecten y hagan posible el deporte.',

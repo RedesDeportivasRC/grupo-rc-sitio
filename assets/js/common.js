@@ -123,6 +123,28 @@ function renderFooter(){
   `;
 }
 
+// ---------------- Limpieza de contenido pendiente ----------------
+// Mientras falten datos reales, los textos tipo "[PLACEHOLDER ...]" o "[EJEMPLO ...]" nunca se
+// muestran al público: se ocultan y la tarjeta muestra el recuadro de marca en su lugar.
+function esMarcador(t){
+  return typeof t === 'string' && /\[(PLACEHOLDER|EJEMPLO|CONTENIDO DE EJEMPLO|otros)|^Foto pendiente$/i.test(t.trim());
+}
+function limpio(t){ return (t && !esMarcador(t)) ? t : null; }
+function listaLimpia(a){ return (a||[]).filter(x=>x && !esMarcador(x)); }
+function esUrl(t){ return typeof t === 'string' && /^https?:\/\/|^(\.\.\/)?assets\//.test(t); }
+
+// Página a la que lleva cada categoría (no todas tienen página propia todavía).
+const PAGINA_CATEGORIA = {
+  'redes-perimetrales':'productos/redes-perimetrales.html',
+  'redes-deportivas':'productos/redes-deportivas.html',
+  'porterias':'productos/porterias.html',
+  'redes-para-porterias':'productos/porterias.html',
+  'redes-de-proteccion':'productos/redes-perimetrales.html',
+  'baloneras':'productos/producto.html?sku=RC-BALO-001',
+  'soluciones-especiales':'contacto.html',
+};
+function urlCategoria(slug){ return rutaBase() + (PAGINA_CATEGORIA[slug] || 'productos.html'); }
+
 // ---------------- Renderizadores de tarjetas (consumen data.js) ----------------
 function categoriaNombre(slug){
   const c = CATEGORIAS.find(c=>c.slug===slug);
@@ -133,10 +155,12 @@ function categoriaNombre(slug){
 // una URL subida desde AndyControl; si todavía es un texto de marcador, muestra el cuadro
 // gris de siempre. claseExtra son las mismas clases que usaba el marcador (foto-ph, oscuro...).
 function fotoOMarcador(url, altDescriptivo, claseExtra=''){
-  if(url && /^https?:\/\//.test(url)){
+  if(esUrl(url)){
     return `<img src="${url}" alt="${altDescriptivo}" loading="lazy" class="${claseExtra}" style="width:100%;height:100%;object-fit:cover;">`;
   }
-  return `<div class="foto-ph ${claseExtra}"><span>${url||'Foto pendiente'}</span></div>`;
+  // Sin foto real: recuadro de marca con el nombre (nunca el texto del marcador).
+  const etiqueta = String(altDescriptivo||'').split(/ — | \| /)[0];
+  return `<div class="foto-ph ${claseExtra}"><span>${etiqueta}</span></div>`;
 }
 
 function renderProductCard(p){
@@ -169,9 +193,9 @@ function renderProjectCard(pr){
 function renderBlogCard(b){
   return `
     <a class="tarjeta-blog" href="${rutaBase()}blog.html#${b.slug}">
-      <div class="foto-ph"><span>${b.imagen}</span></div>
+      ${fotoOMarcador(b.imagen, b.titulo)}
       <div class="tarjeta-blog-body">
-        <span>${b.categoria} · EJEMPLO</span>
+        <span>${b.categoria}</span>
         <h3>${b.titulo}</h3>
         <p>${b.extracto}</p>
       </div>
@@ -187,11 +211,13 @@ function renderClientCard(c){
 
 function renderResourceCard(r){
   const iconos = {'Catálogo':'📘','Manual':'🛠️','Ficha técnica':'📐','Guía':'📄'};
+  // Si el PDF ya está subido se descarga; si no, se pide por WhatsApp y se lo mandamos.
+  const liga = esUrl(r.archivo) ? r.archivo : `https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent('Hola, ¿me pueden mandar el '+r.nombre.toLowerCase()+'?')}`;
   return `
-    <div class="tarjeta-recurso">
+    <a class="tarjeta-recurso" href="${liga}" target="_blank" rel="noopener">
       <div class="icono">${iconos[r.categoria]||'📄'}</div>
-      <div><b>${r.nombre}</b><span>${r.descripcion}</span></div>
-    </div>`;
+      <div><b>${r.nombre}</b><span>${r.descripcion}</span><span style="color:var(--azul);font-weight:700;margin-top:4px;">${esUrl(r.archivo)?'Descargar PDF':'Pídelo por WhatsApp →'}</span></div>
+    </a>`;
 }
 
 /* ==========================================================================
@@ -212,7 +238,7 @@ function mapearProducto(p){
   return {
     sku: p.sku, nombre: p.nombre, categoria: p.categoria, subcategoria: p.subcategoria,
     descripcionCorta: p.descripcion_corta, descripcionCompleta: p.descripcion_completa,
-    fotos: p.fotos && p.fotos.length ? p.fotos : ['Foto pendiente'],
+    fotos: p.fotos||[],
     material: p.material, calibre: p.calibre, color: p.color||[], medidas: p.medidas,
     usos: p.usos||[], caracteristicas: p.caracteristicas||[], precio: p.precio,
     disponibilidad: p.disponibilidad, productosRelacionados: p.productos_relacionados||[],
@@ -222,7 +248,7 @@ function mapearProducto(p){
 function mapearProyecto(p){
   return {
     slug: p.slug || p.id, nombre: p.nombre, cliente: p.cliente, ubicacion: p.ubicacion, tipo: p.tipo,
-    fotos: p.fotos && p.fotos.length ? p.fotos : ['Foto pendiente'],
+    fotos: p.fotos||[],
     descripcion: p.descripcion, productosUsados: p.productos_usados||[], fecha: p.fecha,
     categorias: p.categorias||[], video: p.video, testimonio: p.testimonio,
   };
@@ -231,26 +257,43 @@ function mapearCliente(c){
   return { nombre: c.nombre, logo: c.logo, sector: c.sector, ubicacion: c.ubicacion, proyectoRelacionado: c.proyecto_relacionado, testimonio: c.testimonio, fotos: [] };
 }
 
+// Quita de cualquier registro los textos de marcador: strings → null, listas → sin marcadores,
+// y si no queda ninguna foto real deja [null] para que se pinte el recuadro de marca.
+function sinMarcadores(o){
+  const r = {};
+  for(const [k,v] of Object.entries(o)){
+    if(Array.isArray(v)) r[k] = k==='fotos' ? v.filter(esUrl) : listaLimpia(v);
+    else r[k] = esMarcador(v) ? null : v;
+  }
+  if(!r.fotos || !r.fotos.length) r.fotos = [null];
+  r.descripcionCorta = r.descripcionCorta || '';
+  r.descripcionCompleta = r.descripcionCompleta || '';
+  return r;
+}
+
 async function obtenerProductos(){
+  let lista = PRODUCTOS;
   try{
     const { data, error } = await clienteSitio().from('sitio_productos').select('*').eq('activo', true).order('orden', {ascending:true});
-    if(error || !data || data.length===0) return PRODUCTOS;
-    return data.map(mapearProducto);
-  }catch(e){ return PRODUCTOS; }
+    if(!error && data && data.length) lista = data.map(mapearProducto);
+  }catch(e){}
+  return lista.map(sinMarcadores);
 }
 async function obtenerProyectos(){
+  let lista = PROYECTOS;
   try{
     const { data, error } = await clienteSitio().from('sitio_proyectos').select('*').eq('activo', true).order('orden', {ascending:true});
-    if(error || !data || data.length===0) return PROYECTOS;
-    return data.map(mapearProyecto);
-  }catch(e){ return PROYECTOS; }
+    if(!error && data && data.length) lista = data.map(mapearProyecto);
+  }catch(e){}
+  return lista.filter(p=>!esMarcador(p.nombre)).map(sinMarcadores).map(p=>({...p, tipo: p.tipo || 'Proyecto'}));
 }
 async function obtenerClientes(){
+  let lista = CLIENTES;
   try{
     const { data, error } = await clienteSitio().from('sitio_clientes').select('*').eq('activo', true).order('orden', {ascending:true});
-    if(error || !data || data.length===0) return CLIENTES;
-    return data.map(mapearCliente);
-  }catch(e){ return CLIENTES; }
+    if(!error && data && data.length) lista = data.map(mapearCliente);
+  }catch(e){}
+  return lista.filter(c=>!esMarcador(c.nombre)).map(sinMarcadores);
 }
 
 // Fotos del banner rotativo del Inicio — si todavía no hay ninguna subida, se devuelve una
@@ -311,5 +354,81 @@ async function enviarLeadFormulario(datos, elementosStatus){
     status.textContent = '❌ ' + e.message;
     botón.disabled = false;
     return false;
+  }
+}
+
+// ---------------- Banner principal a todo lo ancho ----------------
+// Diapositivas con foto, texto y botón; cambian solas cada 6 s con fundido y un acercamiento
+// suave. Flechas, puntos y deslizar con el dedo en celular. Se pausa si la pestaña no se ve.
+function iniciarHeroSlider(contId, slides){
+  const cont = document.getElementById(contId);
+  if(!cont || !slides.length) return;
+  const base = rutaBase();
+  cont.innerHTML = slides.map((s,i)=>`
+    <div class="hs-slide${i===0?' activo':''}" aria-hidden="${i!==0}">
+      ${s.foto ? `<img class="hs-foto" src="${base}assets/img/trabajos/${s.foto}" alt="${s.ojo} · Grupo RC" ${i===0?'fetchpriority="high"':'loading="lazy"'}>` : '<div class="hs-sin-foto"></div>'}
+      <div class="hs-velo"></div>
+      <div class="hs-texto">
+        <span class="ojo">${s.ojo}</span>
+        ${i===0?'<h1>':'<h2>'}${s.titulo}${i===0?'</h1>':'</h2>'}
+        <p>${s.texto}</p>
+        <div class="hs-botones">
+          <a href="https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent('Hola, vi su página y quiero cotizar.')}" target="_blank" rel="noopener" class="btn btn-wa">💬 Cotizar por WhatsApp</a>
+          <a href="${base}${s.boton.url}" class="btn btn-linea" style="color:#fff;">${s.boton.texto}</a>
+        </div>
+      </div>
+    </div>`).join('') + `
+    <button class="hs-flecha ant" aria-label="Anterior">‹</button>
+    <button class="hs-flecha sig" aria-label="Siguiente">›</button>
+    <div class="hs-puntos">${slides.map((_,i)=>`<button aria-label="Ir a la diapositiva ${i+1}" class="${i===0?'activo':''}"></button>`).join('')}</div>`;
+
+  const items = cont.querySelectorAll('.hs-slide');
+  const puntos = cont.querySelectorAll('.hs-puntos button');
+  let actual = 0, timer = null;
+  function ir(n){
+    items[actual].classList.remove('activo'); items[actual].setAttribute('aria-hidden','true'); puntos[actual].classList.remove('activo');
+    actual = (n + items.length) % items.length;
+    items[actual].classList.add('activo'); items[actual].setAttribute('aria-hidden','false'); puntos[actual].classList.add('activo');
+    reiniciar();
+  }
+  function reiniciar(){ clearInterval(timer); timer = setInterval(()=>{ if(!document.hidden) ir(actual+1); }, 6000); }
+  cont.querySelector('.hs-flecha.ant').onclick = ()=>ir(actual-1);
+  cont.querySelector('.hs-flecha.sig').onclick = ()=>ir(actual+1);
+  puntos.forEach((p,i)=>p.onclick = ()=>ir(i));
+  let x0 = null;
+  cont.addEventListener('touchstart', e=>{ x0 = e.touches[0].clientX; }, {passive:true});
+  cont.addEventListener('touchend', e=>{
+    if(x0===null) return; const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if(Math.abs(dx) > 45) ir(actual + (dx < 0 ? 1 : -1));
+  });
+  reiniciar();
+}
+
+function renderFortalezas(contId){
+  const cont = document.getElementById(contId);
+  if(cont) cont.innerHTML = FORTALEZAS.map(f=>`<div class="fortaleza"><div class="ico">${f.ico}</div><b>${f.titulo}</b><span>${f.texto}</span></div>`).join('');
+}
+
+// Comentarios reales de clientes (TESTIMONIOS en data.js). En el sitio publicado, si no hay
+// ninguno la sección se oculta; en la vista previa muestra tarjetas de muestra del formato.
+function renderTestimonios(contId, seccionId){
+  const cont = document.getElementById(contId);
+  if(!cont) return;
+  const enVistaPrevia = /vercel\.app$|^localhost$|^127\./.test(location.hostname);
+  const iconoFb = '<svg width="13" height="13" viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12.06C22 6.51 17.52 2 12 2S2 6.51 2 12.06C2 17.08 5.66 21.23 10.44 22v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.78-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.78l-.45 2.91h-2.33V22C18.34 21.23 22 17.08 22 12.06z"/></svg>';
+  const tarjeta = (t, ejemplo)=>`
+    <div class="testimonio${ejemplo?' testimonio-ejemplo':''}">
+      <p>${t.texto}</p>
+      <div class="testimonio-pie">
+        <div class="testimonio-avatar">${t.nombre.split(' ').map(x=>x[0]).slice(0,2).join('')}</div>
+        <div><b>${t.nombre}</b><small>${iconoFb} ${ejemplo ? 'Muestra del formato' : 'Recomienda a Redes Deportivas RC'}${t.lugar?' · '+t.lugar:''}</small></div>
+      </div>
+    </div>`;
+  if(TESTIMONIOS.length){
+    cont.innerHTML = TESTIMONIOS.map(t=>tarjeta(t,false)).join('');
+  }else if(enVistaPrevia){
+    cont.innerHTML = [1,2,3].map(i=>tarjeta({ nombre:'Cliente '+i, texto:'Aquí va el comentario real que tu cliente dejó en Facebook, copiado tal cual. Esta tarjeta de muestra solo se ve en la vista previa.' }, true)).join('');
+  }else{
+    const sec = document.getElementById(seccionId); if(sec) sec.style.display = 'none';
   }
 }
