@@ -497,3 +497,22 @@ nav.principal{align-items:center;}
   .articulo-cuerpo figure.fig-vertical figcaption{text-align:left;}
   .articulo-cuerpo .articulo-cta, .articulo-cuerpo .tabla-articulo, .articulo-cuerpo figure:not(.fig-vertical){clear:both;}
 }
+
+/* Nosotros: ubicación */
+.nosotros-ubicacion{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center;}
+.datos-empresa{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:14px;}
+.datos-empresa li{display:flex;flex-direction:column;gap:2px;border-left:4px solid var(--azul);padding-left:14px;}
+.datos-empresa b{font-size:.78rem;text-transform:uppercase;letter-spacing:.6px;color:var(--gris);}
+.datos-empresa a{color:var(--negro);font-weight:700;}
+@media (max-width:860px){ .nosotros-ubicacion{grid-template-columns:1fr;} }
+
+/* Animaciones de entrada */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);}
+.rv.rv-zoom{transform:scale(.88);}
+.rv.rv-in{opacity:1;transform:none;}
+@media (prefers-reduced-motion: reduce){ .rv{opacity:1;transform:none;transition:none;} }
+
+/* Página de opiniones: todas en rejilla, sin carrusel */
+.testimonios.testimonios-rejilla{grid-auto-flow:row;grid-template-columns:repeat(3,1fr);overflow:visible;scroll-snap-type:none;margin-top:0;}
+@media (max-width:980px){ .testimonios.testimonios-rejilla{grid-template-columns:1fr 1fr;} }
+@media (max-width:640px){ .testimonios.testimonios-rejilla{grid-template-columns:1fr;} }

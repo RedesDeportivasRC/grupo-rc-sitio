@@ -17,22 +17,23 @@
 
 <section class="hero-interior">
   <div class="envolvente">
-    <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Clientes</div>
-    <h1>Empresas que confían en nosotros.</h1>
-    <p>Escuelas, hoteles, clubes y complejos deportivos que ya trabajan con nuestras redes.</p>
+    <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Opiniones</div>
+    <h1>Opiniones de nuestros clientes.</h1>
+    <p>Comentarios reales de clientes de redes deportivas, redes perimetrales y porterías en Facebook y Google.</p>
+    <div class="testimonios-resumen" id="cont-testimonios-resumen" style="margin-top:14px;"></div>
   </div>
 </section>
 
-<section class="franja">
+<section class="franja" id="seccion-testimonios">
   <div class="envolvente">
-    <div class="grid-cards g4" id="cont-clientes"></div>
+    <div class="testimonios testimonios-rejilla" id="cont-testimonios"></div>
   </div>
 </section>
 
-<section class="franja-chica" style="background:var(--azul-osc);" id="seccion-testimonios">
+<section class="franja-chica" style="background:var(--hueso);" id="seccion-clientes" hidden>
   <div class="envolvente">
-    <span class="ojo" style="color:var(--azul);">Lo que dicen nuestros clientes</span><h2 style="color:#fff;">Clientes satisfechos</h2><div class="testimonios-resumen" id="cont-testimonios-resumen"></div>
-    <div class="testimonios" id="cont-testimonios"></div>
+    <span class="ojo">Confían en nosotros</span><h2>Algunos de nuestros clientes</h2>
+    <div class="grid-cards g4" id="cont-clientes" style="margin-top:20px;"></div>
   </div>
 </section>
 
@@ -41,12 +42,15 @@
 <script src="assets/js/data.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
-(async ()=>{
-  renderHeader('clientes');
-  renderFooter();
-  document.getElementById('cont-clientes').innerHTML = (await obtenerClientes()).map(renderClientCard).join('');
-  renderTestimonios('cont-testimonios', 'seccion-testimonios');
-})();
+renderHeader('clientes');
+renderFooter();
+renderTestimonios('cont-testimonios', 'seccion-testimonios');
+revelar('cont-testimonios');
+obtenerClientes().then(lista=>{
+  if(lista.length < 3) return; // con uno o dos logos se ve vacío; se muestra cuando haya más
+  document.getElementById('cont-clientes').innerHTML = lista.map(renderClientCard).join('');
+  document.getElementById('seccion-clientes').hidden = false;
+}).catch(()=>{});
 </script>
 </body>
 </html>

@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="assets/css/styles.css">
 <script src="assets/js/medicion.js"></script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SportingGoodsStore","name":"Redes Deportivas RC","alternateName":"Grupo RC","description":"Fabricación e instalación de redes deportivas, redes perimetrales, redes para porterías, porterías de fútbol y jaulas de bateo a la medida.","url":"https://www.redesdeportivasrc.com/","logo":"https://www.redesdeportivasrc.com/assets/img/logo.png","image":"https://www.redesdeportivasrc.com/assets/img/trabajos/red-perimetral-negra-cancha-futbol-pasto-sintetico.jpg","telephone":"+52 999 553 8184","email":"contacto@redesdeportivasrc.com","address":{"@type":"PostalAddress","streetAddress":"Calle 114 #581, Caucel","addressLocality":"Mérida","addressRegion":"Yucatán","addressCountry":"MX"},"areaServed":[{"@type":"State","name":"Yucatán"},{"@type":"Country","name":"México"}],"hasMap":"https://maps.app.goo.gl/9jCNwpsFQGWjsxzC6","founder":{"@type":"Person","name":"Reinier Coral"}}
+{"@context":"https://schema.org","@type":"SportingGoodsStore","name":"Redes Deportivas RC","alternateName":"Grupo RC","description":"Fabricación e instalación de redes deportivas, redes perimetrales, redes para porterías, porterías de fútbol y jaulas de bateo a la medida.","url":"https://www.redesdeportivasrc.com/","logo":"https://www.redesdeportivasrc.com/assets/img/logo.png","image":"https://www.redesdeportivasrc.com/assets/img/trabajos/red-perimetral-negra-cancha-futbol-pasto-sintetico.jpg","telephone":"+52 999 553 8184","email":"contacto@redesdeportivasrc.com","address":{"@type":"PostalAddress","streetAddress":"Calle 114 #581-1 x 29 y 29A, Los Ángeles, Caucel","addressLocality":"Mérida","addressRegion":"Yucatán","addressCountry":"MX"},"areaServed":[{"@type":"State","name":"Yucatán"},{"@type":"Country","name":"México"}],"openingHours":"Mo-Fr 09:00-18:00","hasMap":"https://maps.app.goo.gl/9jCNwpsFQGWjsxzC6","founder":{"@type":"Person","name":"Reinier Coral"}}
 </script>
 </head>
 <body data-nivel="raiz">
@@ -111,7 +111,6 @@
       <a href="clientes.html" class="btn btn-linea" style="color:#fff;">Ver más opiniones <span aria-hidden="true">→</span></a>
     </div>
     <div class="testimonios" id="cont-testimonios"></div>
-    <div class="logos-clientes" id="cont-clientes-inicio"></div>
   </div>
 </section>
 
@@ -162,7 +161,6 @@
       </div>
       <div id="ci-status" style="font-size:.85rem;"></div>
     </form>
-    <div id="mapa-inicio"></div>
   </div>
 </section>
 
@@ -216,10 +214,8 @@
     renderProyectosInicio('cont-proyectos-inicio');
     document.getElementById('cont-blog-inicio').innerHTML = BLOG_POSTS.filter(b=>!esMarcador(b.contenido)).slice(0,3).map(renderBlogCard).join('');
     renderTestimonios('cont-testimonios', 'seccion-testimonios', true);
-    renderMapa('mapa-inicio');
     const ligaWA = `https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent('Hola, vi su página y quiero hablar con un asesor.')}`;
     document.querySelectorAll('[data-wa-asesor]').forEach(a=>{ a.href = ligaWA; a.target = '_blank'; a.rel = 'noopener'; });
-    document.getElementById('cont-clientes-inicio').innerHTML = (await obtenerClientes()).slice(0,6).map(renderClientCard).join('');
     // Galería: fotos reales del taller/obras + las del banner que se suben desde AndyControl.
     const fotosBanner = await obtenerFotosBanner();
     const fotosGaleria = [
@@ -229,6 +225,8 @@
     // 1 foto grande + filas completas de 4 (sin huecos)
     const nGaleria = fotosGaleria.length <= 1 ? fotosGaleria.length : 1 + 4*Math.min(2, Math.floor((fotosGaleria.length-1)/4));
     document.getElementById('cont-galeria-inicio').innerHTML = fotosGaleria.slice(0,nGaleria).map(f=>`<img src="${f.src}" alt="${f.alt}" loading="lazy">`).join('');
+    ['cont-fortalezas','cont-productos-inicio','cont-asesoria','cont-blog-inicio'].forEach(id=>revelar(id));
+    revelar('cont-galeria-inicio', true);
     document.getElementById('ci-estado').insertAdjacentHTML('beforeend', ESTADOS_MEXICO.map(e=>`<option>${e}</option>`).join(''));
   }catch(err){
     console.error('Error preparando la página:', err);

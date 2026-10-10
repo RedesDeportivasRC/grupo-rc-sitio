@@ -35,7 +35,7 @@ function renderHeader(activo){
             <a href="${base}productos.html" class="${activo==='productos'?'activo':''}">Productos <span class="flechita">▾</span></a>
             <div class="nav-sub">${CATEGORIAS.map(c=>`<a href="${urlCategoria(c.slug)}">${c.nombre}</a>`).join('')}<a href="${base}productos.html"><b>Ver todo el catálogo</b></a></div>
           </div>
-          <a href="${base}clientes.html" class="${activo==='clientes'?'activo':''}">Clientes</a>
+          <a href="${base}clientes.html" class="${activo==='clientes'?'activo':''}">Opiniones</a>
           <a href="${base}galeria.html" class="${activo==='galeria'?'activo':''}">Galería</a>
           <a href="${base}blog.html" class="${activo==='blog'?'activo':''}">Blog</a>
           <div class="nav-menu">
@@ -66,7 +66,7 @@ function renderHeader(activo){
         <button id="btn-cerrar-menu-movil" style="align-self:flex-end;background:none;border:none;font-size:1.6rem;cursor:pointer;margin-bottom:10px;">✕</button>
         <a href="${base}index.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Inicio</a>
         <a href="${base}productos.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Productos</a>
-        <a href="${base}clientes.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Clientes</a>
+        <a href="${base}clientes.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Opiniones</a>
         <a href="${base}galeria.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Galería</a>
         <a href="${base}blog.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Blog</a>
         <a href="${base}recursos.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Recursos</a>
@@ -114,7 +114,7 @@ function renderFooter(){
           <div>
             <h4>Empresa</h4>
             <a href="${base}nosotros.html">Nosotros</a>
-            <a href="${base}clientes.html">Clientes</a>
+            <a href="${base}clientes.html">Opiniones</a>
             <a href="${base}blog.html">Blog</a>
           </div>
           <div>
@@ -272,16 +272,32 @@ function renderProyectosInicio(contId){
 }
 
 // Flechas ‹ › debajo de una fila deslizable (solo si no caben todas las tarjetas).
-function agregarFlechas(cont){
+function agregarFlechas(cont, autoSegundos){
   cont.parentNode.querySelector(':scope > .testimonios-nav[data-de="'+cont.id+'"]')?.remove();
+  clearInterval(cont._auto);
   if(cont.scrollWidth <= cont.clientWidth + 4) return;
   const nav = document.createElement('div');
   nav.className = 'testimonios-nav'; nav.dataset.de = cont.id;
   nav.innerHTML = '<button type="button" aria-label="Anteriores">‹</button><button type="button" aria-label="Siguientes">›</button>';
   const paso = ()=> (cont.firstElementChild?.offsetWidth || 300) + 16;
-  nav.children[0].onclick = ()=> cont.scrollBy({ left:-paso(), behavior:'smooth' });
-  nav.children[1].onclick = ()=> cont.scrollBy({ left: paso(), behavior:'smooth' });
+  // Cuántas tarjetas se ven a la vez (3 en PC, 2 en tablet, 1 en celular)
+  const visibles = ()=> Math.max(1, Math.round(cont.clientWidth / paso()));
+  const detener = ()=>{ clearInterval(cont._auto); cont._auto = null; };
+  nav.children[0].onclick = ()=>{ detener(); cont.scrollBy({ left:-paso(), behavior:'smooth' }); };
+  nav.children[1].onclick = ()=>{ detener(); cont.scrollBy({ left: paso(), behavior:'smooth' }); };
   cont.after(nav);
+  // Avance automático de grupo en grupo; se detiene para siempre en cuanto la persona toca, desliza o abre una tarjeta.
+  if(autoSegundos && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    let pausa = false;
+    cont.addEventListener('mouseenter', ()=> pausa = true);
+    cont.addEventListener('mouseleave', ()=> pausa = false);
+    ['pointerdown','wheel','touchstart','keydown'].forEach(ev=> cont.addEventListener(ev, detener, { passive:true }));
+    cont._auto = setInterval(()=>{
+      if(pausa || document.hidden) return;
+      const final = cont.scrollLeft + cont.clientWidth >= cont.scrollWidth - 8;
+      cont.scrollTo({ left: final ? 0 : cont.scrollLeft + paso()*visibles(), behavior:'smooth' });
+    }, autoSegundos*1000);
+  }
 }
 
 function renderClientCard(c){
@@ -533,9 +549,26 @@ function renderTestimonios(contId, seccionId, soloInicio){
     if(p.scrollHeight > p.clientHeight + 2) btn.hidden = false;
     btn.addEventListener('click', ()=>{ btn.textContent = card.classList.toggle('abierto') ? 'Ver menos' : 'Ver más'; });
   });
-  agregarFlechas(cont);
+  agregarFlechas(cont, 9);
   const resumen = document.getElementById(contId+'-resumen');
   if(resumen && typeof RESUMEN_OPINIONES !== 'undefined'){
     resumen.innerHTML = `${iconoFb} <b>Recomendado por el ${RESUMEN_OPINIONES.facebookPct}%</b> en Facebook · ${RESUMEN_OPINIONES.facebookTotal} opiniones`;
   }
+}
+
+// Animación de entrada: los elementos de un contenedor aparecen uno por uno (o en orden aleatorio) al llegar a ellos.
+function revelar(cont, aleatorio){
+  if(typeof cont === 'string') cont = document.getElementById(cont);
+  if(!cont || !cont.children.length) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  const items = [...cont.children];
+  items.forEach(el=>{ el.classList.remove('rv-in'); el.classList.add('rv'); if(aleatorio) el.classList.add('rv-zoom'); });
+  const orden = items.map((_,i)=>i);
+  if(aleatorio) for(let i=orden.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [orden[i],orden[j]]=[orden[j],orden[i]]; }
+  const obs = new IntersectionObserver(entradas=>{
+    if(!entradas.some(e=>e.isIntersecting)) return;
+    obs.disconnect();
+    orden.forEach((idx,k)=>{ const el = items[idx]; el.style.transitionDelay = Math.round(k*Math.min(aleatorio?110:140, 2200/items.length))+'ms'; requestAnimationFrame(()=> el.classList.add('rv-in')); });
+  }, { threshold:0.15 });
+  obs.observe(cont);
 }
