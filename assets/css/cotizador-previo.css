@@ -74,6 +74,8 @@
 .cp [hidden]{display:none!important;}
 @media (max-width:980px){ .cp-opciones{grid-template-columns:repeat(2,1fr);} }
 @media (max-width:560px){
+  /* 16px o más: así el iPhone no hace zoom al tocar un campo */
+  .cp input,.cp select,.cp textarea{font-size:16px;}
   .cp-paso{padding:18px 14px;}
   .cp-opciones{gap:10px;}
   .cp-opciones.cp-2{grid-template-columns:repeat(2,1fr);}
