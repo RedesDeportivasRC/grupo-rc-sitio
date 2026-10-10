@@ -213,12 +213,13 @@
     inicial: ()=>({ modelo:null, cantidad:'2', trav:'', poste:'', psup:'', pinf:'', color:'' }),
     pintar(st){
       return `<h3 class="cp-titulo"><span class="cp-num">1</span>Ingresa las medidas de tu portería</h3>
-        <p class="cp-ayuda">Si tu portería es de una medida estándar, tócala y llenamos las medidas por ti. Si no, mídela como en la imagen.</p>
+        <p class="cp-ayuda">Si tu portería es de una medida estándar, tócala y llenamos las medidas por ti. Si no, mídela como en las imágenes.</p>
         ${chips('modelo', [...MODELOS_PORTERIA, { v:'otra', t:'Otra medida' }], st.modelo)}
         <div class="cp-medir">
-          <img src="${rutaBase()}assets/img/cotizar/medidas-red-porteria-travesano-poste-profundidad.webp" alt="Cómo medir una portería para cotizar su red: A travesaño (ancho), B poste (altura), C profundidad superior y D profundidad inferior" width="800" height="800" loading="lazy">
-          <div class="cp-campos cp-c2">${medida('trav','A · Travesaño (ancho)',st.trav)}${medida('poste','B · Poste (altura)',st.poste)}${medida('psup','C · Profundidad superior',st.psup)}${medida('pinf','D · Profundidad inferior',st.pinf)}</div>
+          <figure><img src="${rutaBase()}assets/img/cotizar/medidas-porteria-frente-travesano-poste.webp" alt="Portería vista de frente: A travesaño (ancho, de poste a poste) y B poste (altura, del suelo al travesaño)" width="770" height="580" loading="lazy"><figcaption>De frente: ancho y altura</figcaption></figure>
+          <figure><img src="${rutaBase()}assets/img/cotizar/medidas-porteria-perfil-profundidad-superior-inferior.webp" alt="Portería vista de lado: C profundidad superior y D profundidad inferior" width="635" height="705" loading="lazy"><figcaption>De lado: qué tanto entra hacia atrás</figcaption></figure>
         </div>
+        <div class="cp-campos cp-c4">${medida('trav','A · Travesaño (ancho)',st.trav)}${medida('poste','B · Poste (altura)',st.poste)}${medida('psup','C · Profundidad superior',st.psup)}${medida('pinf','D · Profundidad inferior',st.pinf)}</div>
         <div class="cp-campos cp-c2">${cantidad('cantidad','Redes (2 = un par)',st.cantidad)}<div><label>Color (opcional)</label><input type="text" maxlength="40" data-campo="color" value="${esc(st.color)}"></div></div>`;
     },
     alElegir(st, grupo, valor){
