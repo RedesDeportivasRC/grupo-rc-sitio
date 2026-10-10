@@ -298,10 +298,42 @@
     },
   };
 
+  // Estado y ciudad con sugerencias mientras se escribe (municipios y ciudades de SEPOMEX,
+  // assets/data/municipios-mx.json: el mismo catálogo de códigos postales que usa Envíos).
+  let municipios = null;
+  const cargarMunicipios = ()=> municipios || (municipios = fetch(rutaBase() + 'assets/data/municipios-mx.json').then(r=> r.json()).catch(()=> ({})));
+  const sinAcentos = (t)=> String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+  function conectarLugar(raiz, uid){
+    const est = raiz.querySelector('[name=estado]'), ciu = raiz.querySelector('[name=ciudad]');
+    const lista = raiz.querySelector('#cp-ciudades-' + uid);
+    const estados = typeof ESTADOS_MEXICO !== 'undefined' ? ESTADOS_MEXICO : [];
+    const estadoValido = ()=> estados.find(e=> sinAcentos(e) === sinAcentos(est.value));
+    const pintar = async ()=>{
+      const m = await cargarMunicipios();
+      const e = estadoValido(), t = sinAcentos(ciu.value);
+      let opciones = [];
+      if(e) opciones = m[e] || [];
+      else if(t.length >= 2) opciones = Object.entries(m).flatMap(([es, cs])=> cs.filter(c=> sinAcentos(c).startsWith(t)).map(c=> `${c}, ${es}`)).slice(0, 40);
+      lista.innerHTML = opciones.map(o=> `<option value="${esc(o)}">`).join('');
+    };
+    est.addEventListener('focus', cargarMunicipios);
+    est.addEventListener('change', ()=>{ const e = estadoValido(); if(e) est.value = e; pintar(); });
+    est.addEventListener('input', ()=>{ if(estadoValido()) pintar(); });
+    ciu.addEventListener('focus', pintar);
+    ciu.addEventListener('input', ()=>{
+      // Si eligió "Ciudad, Estado" sin haber puesto estado, se separan solos.
+      const partes = ciu.value.split(', ');
+      if(partes.length === 2 && !estadoValido() && estados.includes(partes[1])){ ciu.value = partes[0]; est.value = partes[1]; }
+      if(!estadoValido()) pintar();
+    });
+  }
+
   // ---------------------------------------------------------------------------
+  let montados = 0;
   function montar(raiz, clave){
     const P = PRODUCTOS[clave];
     if(!P) return;
+    const uid = ++montados;
     let st = P.inicial();
     raiz.classList.add('cp');
     raiz.innerHTML = `
@@ -317,13 +349,12 @@
               <div><label>WhatsApp (10 dígitos)</label><input type="tel" name="telefono" autocomplete="tel-national" inputmode="numeric" maxlength="14" placeholder="999 123 4567" required></div>
             </div>
             <div class="fila-2">
-              <div><label>Correo</label><input type="email" name="correo" autocomplete="email" required></div>
-              <div><label>Ciudad</label><input type="text" name="ciudad" autocomplete="address-level2" maxlength="80" required></div>
+              <div><label>Estado</label><input type="text" name="estado" list="cp-estados-${uid}" autocomplete="address-level1" maxlength="60" placeholder="Empieza a escribir…"></div>
+              <div><label>Ciudad o municipio</label><input type="text" name="ciudad" list="cp-ciudades-${uid}" autocomplete="address-level2" maxlength="80" placeholder="Empieza a escribir…"></div>
             </div>
-            <div class="fila-2">
-              <div><label>Estado</label><select name="estado" autocomplete="address-level1" required><option value="">Selecciona tu estado</option>${(typeof ESTADOS_MEXICO !== 'undefined' ? ESTADOS_MEXICO : []).map(e=>`<option>${esc(e)}</option>`).join('')}</select></div>
-              <div></div>
-            </div>
+            <datalist id="cp-estados-${uid}">${(typeof ESTADOS_MEXICO !== 'undefined' ? ESTADOS_MEXICO : []).map(e=>`<option value="${esc(e)}">`).join('')}</datalist>
+            <datalist id="cp-ciudades-${uid}"></datalist>
+            <div><label>Correo (opcional)</label><input type="email" name="correo" autocomplete="email"></div>
             <div><label>Comentarios (opcional)</label><textarea name="comentario" rows="3" placeholder="Ej. para qué la usarás, dónde va o si tienes fecha límite"></textarea></div>
             <div class="cp-error" data-error role="alert"></div>
             <button type="submit" class="btn cp-enviar">Solicitar cotización</button>
@@ -347,6 +378,7 @@
         <a class="btn btn-wa" data-wa href="https://wa.me/${WA}" target="_blank" rel="noopener">💬 Escríbenos por WhatsApp</a>
       </div>`;
     const q = (s)=> raiz.querySelector(s);
+    conectarLugar(raiz, uid);
     const caja = q('[data-producto]'), form = q('form');
 
     function refrescar(){
@@ -393,9 +425,7 @@
       if((r.items||[]).some(it=> (it.secciones||[]).some(s=> s.largo > 500 || s.alto > 60))) return falta('Revisa las medidas: parecen demasiado grandes (están en metros).');
       if(!v('nombre')) return falta('Escribe tu nombre.', 'nombre');
       if(tel.length !== 10) return falta('Escribe tu WhatsApp a 10 dígitos.', 'telefono');
-      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('correo'))) return falta('Escribe un correo válido.', 'correo');
-      if(!v('ciudad')) return falta('Escribe tu ciudad.', 'ciudad');
-      if(!v('estado')) return falta('Selecciona tu estado.', 'estado');
+      if(v('correo') && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('correo'))) return falta('Revisa tu correo (o déjalo vacío).', 'correo');
       btn.disabled = true; btn.textContent = 'Enviando…';
       try{
         const resp = await fetch('/api/solicitar-cotizacion', {
