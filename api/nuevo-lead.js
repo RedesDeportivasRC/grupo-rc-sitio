@@ -123,7 +123,7 @@ export default async function handler(req, res) {
       headers: headersSupabase,
       body: JSON.stringify({
         contact_id: contactId,
-        type: "nota",
+        type: "observacion", // "nota" no existe en activities_type_check: la base la rechazaba y el mensaje se perdía
         notes: partesNota,
         created_by_name: "Formulario web",
       }),
