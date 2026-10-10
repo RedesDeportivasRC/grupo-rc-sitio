@@ -287,6 +287,13 @@ const ESTADOS_MEXICO = [
 
 // ---------------- FOTOS REALES DE TRABAJOS (assets/img/trabajos) ----------------
 const FOTOS_TRABAJOS = [
+  { archivo:'red-antipalomas-instalada-domo-cancha-multiusos.jpg', alt:'Red antipalomas negra instalada bajo el techo de un domo de cancha multiusos', categoria:'perimetral' },
+  { archivo:'red-antipalomas-domo-cancha-vista-desde-canastilla.jpg', alt:'Red antipalomas bajo el techo de un domo deportivo vista desde una canastilla', categoria:'perimetral' },
+  { archivo:'instalacion-red-antipalomas-andamio-domo-cancha.jpg', alt:'Instaladores colocando red antipalomas desde un andamio en un domo deportivo', categoria:'instalacion' },
+  { archivo:'instalacion-red-antipalomas-arco-domo-canastilla.jpg', alt:'Instalación de red antipalomas en el arco de un domo con camión canastilla', categoria:'instalacion' },
+  { archivo:'instaladores-red-antipalomas-andamio-arnes.jpg', alt:'Instaladores con arnés fijando red antipalomas bajo el techo de un domo', categoria:'instalacion' },
+  { archivo:'instalacion-red-antipalomas-camion-canastilla-domo.jpg', alt:'Camión canastilla para instalar red antipalomas bajo el techo de un domo', categoria:'instalacion' },
+  { archivo:'red-antipalomas-bajo-techo-domo-deportivo.jpg', alt:'Red antipalomas negra bajo la lámina del techo de un domo deportivo', categoria:'perimetral' },
   { archivo:'jaula-de-bateo-estructura-azul-red-negra-parque.jpg', alt:'Jaula de bateo con estructura de tubo azul y red negra en un parque', categoria:'perimetral' },
   { archivo:'jaula-de-bateo-tubo-forrado-azul-techo-de-red.jpg', alt:'Jaula de bateo con postes forrados en azul y techo de red negra', categoria:'perimetral' },
   { archivo:'jaula-de-bateo-red-negra-rombo-1-pulgada.jpg', alt:'Red negra de rombo de 1 pulgada en una jaula de bateo', categoria:'perimetral' },
