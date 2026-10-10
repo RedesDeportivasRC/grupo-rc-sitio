@@ -592,10 +592,13 @@ nav.principal{align-items:center;}
 .mm-logo img{width:44px;height:44px;border-radius:50%;object-fit:cover;}
 #btn-cerrar-menu-movil{background:none;border:none;font-size:1.5rem;cursor:pointer;padding:6px;}
 .mm-item{display:flex;justify-content:space-between;align-items:center;padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);cursor:pointer;list-style:none;}
-.mm-item::-webkit-details-marker{display:none;}
-.mm-grupo summary.mm-item::after{content:'▾';color:var(--azul);transition:transform .2s;}
-.mm-grupo[open] summary.mm-item::after{transform:rotate(180deg);}
-.mm-grupo[open]{background:#f5fbfe;border-radius:8px;}
+.mm-fila{display:flex;align-items:stretch;border-bottom:1px solid var(--linea);}
+.mm-fila .mm-item{flex:1;border-bottom:none;}
+.mm-flecha{flex:0 0 52px;background:none;border:none;border-left:1px solid var(--linea);color:var(--azul);font-size:1.2rem;cursor:pointer;}
+.mm-flecha::before{content:'▾';display:inline-block;transition:transform .2s;}
+.mm-grupo.abierto .mm-flecha::before{transform:rotate(180deg);}
+.mm-lista{display:none;background:#f5fbfe;}
+.mm-grupo.abierto .mm-lista{display:block;}
 .mm-sub{display:block;padding:9px 4px 9px 18px;font-size:.92rem;border-bottom:1px solid var(--linea);}
 .mm-cta{margin-top:16px;text-align:center;justify-content:center;}
 .mm-tel{padding:12px 4px;margin-top:4px;}
