@@ -321,7 +321,7 @@ const PRODUCTOS_INICIO = [
   { slug:'redes-perimetrales', titulo:'Redes Perimetrales', texto:'Protección y delimitación de espacios.', foto:'trabajos/cancha-futbol-perimetral.jpg' },
   { slug:'porterias', titulo:'Porterías de Fútbol', texto:'Modelos para fútbol 11, fútbol 7 y fútbol rápido.', foto:'blog/errores-comprar-redes-deportivas/errores-comprar-redes-deportivas-foto-1.jpg' },
   { slug:'redes-para-porterias', titulo:'Redes para Porterías', texto:'Tejido hexagonal tipo colmena.', foto:'blog/redes-deportivas-artesanales-yucatan/redes-deportivas-artesanales-yucatan-foto-6.jpg' },
-  { slug:'redes-deportivas', titulo:'Redes Deportivas', texto:'Básquetbol, voleibol y usos especiales.', foto:'blog/errores-comprar-redes-deportivas/errores-comprar-redes-deportivas-foto-4.jpg' },
+  { slug:'redes-deportivas', titulo:'Redes Deportivas', texto:'Básquetbol, voleibol y usos especiales.', foto:'blog/errores-comprar-redes-deportivas/errores-comprar-redes-deportivas-foto-4.jpg' },  { slug:'jaulas-bateo', titulo:'Jaulas de Bateo', texto:'Redes para béisbol y sóftbol a la medida.', foto:null },
 ];
 
 // ---------------- INICIO: asesoría (cada pregunta lleva a su artículo del blog) ----------------

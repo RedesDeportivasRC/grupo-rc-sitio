@@ -163,6 +163,7 @@ const PAGINA_CATEGORIA = {
   'redes-de-proteccion':'productos/redes-perimetrales.html',
   'baloneras':'productos/producto.html?sku=RC-BALO-001',
   'soluciones-especiales':'contacto.html',
+  'jaulas-bateo':'contacto.html',
 };
 function urlCategoria(slug){ return rutaBase() + (PAGINA_CATEGORIA[slug] || 'productos.html'); }
 
@@ -241,7 +242,7 @@ function renderProductosInicio(contId){
   if(!cont) return;
   cont.innerHTML = PRODUCTOS_INICIO.map(p=>`
     <a class="producto-foto" href="${urlCategoria(p.slug)}">
-      ${p.foto ? `<img src="assets/img/${p.foto}" alt="${p.titulo} · Grupo RC" loading="lazy">` : '<div class="foto-ph"></div>'}
+      ${p.foto ? `<img src="assets/img/${p.foto}" alt="${p.alt || p.titulo}" loading="lazy">` : '<div class="foto-ph"></div>'}
       <div class="producto-foto-texto"><h3>${p.titulo}</h3><p>${p.texto}</p></div>
       <span class="circulo-flecha" aria-hidden="true">→</span>
     </a>`).join('');
@@ -264,7 +265,7 @@ function renderProyectosInicio(contId){
   if(!cont) return;
   cont.innerHTML = PROYECTOS_INICIO.map(p=>`
     <div class="proyecto-tarjeta">
-      <div class="proyecto-tarjeta-foto"><img src="assets/img/${p.foto}" alt="${p.titulo} · Grupo RC" loading="lazy"><span class="chip-cat">${p.etiqueta}</span></div>
+      <div class="proyecto-tarjeta-foto"><img src="assets/img/${p.foto}" alt="${p.alt || p.titulo}" loading="lazy"><span class="chip-cat">${p.etiqueta}</span></div>
       <div class="proyecto-tarjeta-body"><h3>${p.titulo}</h3><p>${p.texto}</p></div>
     </div>`).join('');
   agregarFlechas(cont);
