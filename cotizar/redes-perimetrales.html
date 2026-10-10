@@ -153,6 +153,7 @@
           <div><label for="cp-uso">¿Para qué es la red? (opcional)</label><textarea id="cp-uso" rows="3" placeholder="Ej. cancha de fútbol 7 en una escuela, la quiero sobre una barda de 2 m"></textarea></div>
           <div class="cp-error" id="cp-error" role="alert"></div>
           <button type="submit" class="btn cp-enviar" id="cp-enviar">Solicitar cotización</button>
+          <p class="cp-tip" style="font-size:.88rem;">¿No sabes qué poner? <a class="cp-wa-liga" href="https://wa.me/529995538184" target="_blank" rel="noopener" style="color:#1a9e4b;font-weight:700;">Escríbenos directo por WhatsApp</a> y te ayudamos.</p>
         </form>
       </div>
     </div>
@@ -161,11 +162,14 @@
     <div class="cp-paso cp-listo" id="cp-listo">
       <h2>✅ ¡Recibimos tu solicitud!</h2>
       <p id="cp-listo-txt">Un asesor revisa tus medidas y te manda la cotización por WhatsApp.</p>
-      <button type="button" class="btn btn-linea" id="cp-otra">Cotizar otra red</button>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a class="btn btn-wa" id="cp-wa-listo" href="https://wa.me/529995538184" target="_blank" rel="noopener">💬 Escríbenos por WhatsApp</a>
+        <button type="button" class="btn btn-linea" id="cp-otra">Cotizar otra red</button>
+      </div>
     </div>
 
     <!-- Siempre visible -->
-    <div class="cp-ayuda-wa">
+    <div class="cp-ayuda-wa" id="cp-ayuda-wa">
       <div>
         <h2>¿Quieres que te ayudemos con tu proyecto?</h2>
         <p>Si no tienes claras las medidas o qué red te conviene, escríbenos y te asesoramos sin compromiso.</p>
@@ -307,7 +311,9 @@
       txt += ' Tengo pensado: ' + TEXTO_FORMA[estado.tipo].nombre + ', ' +
         lista.map(s=> `${s.cant} de ${fmt(s.largo)} x ${fmt(s.alto)} m`).join('; ') + '.';
     }
-    $('cp-wa').href = 'https://wa.me/529995538184?text=' + encodeURIComponent(txt);
+    const liga = 'https://wa.me/529995538184?text=' + encodeURIComponent(txt);
+    $('cp-wa').href = liga;
+    document.querySelectorAll('.cp-wa-liga').forEach(a=> a.href = liga);
   }
 
   document.querySelectorAll('.cp-opcion').forEach(b=> b.addEventListener('click', ()=>{
@@ -367,6 +373,8 @@
       if(window.registrarConversion) registrarConversion('formulario');
       $('cp-flujo').style.display = 'none';
       $('cp-listo-txt').textContent = `Gracias, ${nombre.split(' ')[0]}. Un asesor revisa tus medidas (${fmt(m2De(lista))} m²) y te manda la cotización por WhatsApp al ${tel.replace(/(\d{3})(\d{3})(\d{4})/, '$1 $2 $3')}.`;
+      $('cp-wa-listo').href = 'https://wa.me/529995538184?text=' + encodeURIComponent(`Hola, soy ${nombre}. Acabo de pedir una cotización de red perimetral en la página (${fmt(m2De(lista))} m²) y tengo una duda.`);
+      $('cp-ayuda-wa').style.display = 'none'; // en la confirmación ya va el botón de WhatsApp
       $('cp-listo').style.display = 'block';
       $('cp-listo').scrollIntoView({ behavior:'smooth', block:'center' });
     }catch(err){
@@ -380,7 +388,7 @@
     estado.tipo = null; estado.medidas = { largo:'', ancho:'', alto:'' }; estado.filas = [{ cant:'1', largo:'', alto:'' }]; estado.abertura = null;
     document.querySelectorAll('.cp-opcion, .cp-chip').forEach(x=> x.setAttribute('aria-pressed','false'));
     $('cp-paso-medidas').hidden = true; $('cp-paso-datos').hidden = true;
-    $('cp-listo').style.display = 'none'; $('cp-flujo').style.display = '';
+    $('cp-listo').style.display = 'none'; $('cp-flujo').style.display = ''; $('cp-ayuda-wa').style.display = '';
     actualizarWhatsApp(null);
     window.scrollTo({ top:0, behavior:'smooth' });
   };
