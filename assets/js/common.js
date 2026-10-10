@@ -448,7 +448,7 @@ function iniciarHeroSlider(contId, slides){
   const base = rutaBase();
   cont.innerHTML = slides.map((s,i)=>`
     <div class="hs-slide${i===0?' activo':''}" aria-hidden="${i!==0}">
-      ${s.foto ? `<img class="hs-foto" src="${base}assets/img/trabajos/${s.foto}" alt="${s.ojo} · Grupo RC" ${i===0?'fetchpriority="high"':'loading="lazy"'}>` : '<div class="hs-sin-foto"></div>'}
+      ${s.foto ? `<img class="hs-foto" src="${base}assets/img/trabajos/${s.foto}" alt="${s.alt || s.ojo}" ${i===0?'fetchpriority="high"':'loading="lazy"'}>` : '<div class="hs-sin-foto"></div>'}
       <div class="hs-velo"></div>
       <div class="hs-texto">
         <span class="ojo">${s.ojo}</span>

@@ -57,7 +57,7 @@
   renderFooter();
   document.getElementById('cont-categorias').innerHTML = CATEGORIAS.map(c=>`
     <a class="tarjeta-producto" href="${urlCategoria(c.slug)}">
-      ${c.slug==='redes-perimetrales' ? '<img src="assets/img/trabajos/cancha-multiusos-perimetral.jpg" alt="Redes perimetrales · Grupo RC" loading="lazy">' : `<div class="foto-ph" style="min-height:190px;border-radius:0;"><span>${c.nombre}</span></div>`}
+      ${c.slug==='redes-perimetrales' ? '<img src="assets/img/trabajos/red-perimetral-negra-cancha-multiusos-basquetbol.jpg" alt="Red perimetral negra con postes en una cancha multiusos de básquetbol" loading="lazy">' : `<div class="foto-ph" style="min-height:190px;border-radius:0;"><span>${c.nombre}</span></div>`}
       <div class="tarjeta-producto-body"><h3>${c.nombre}</h3><p>${c.descripcionCorta}</p></div>
     </a>`).join('');
   document.getElementById('cont-deportes').innerHTML = DEPORTES.map(d=>`

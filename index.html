@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://www.redesdeportivasrc.com/">
 <meta property="og:title" content="Redes deportivas, redes perimetrales y porterías a la medida en Mérida">
 <meta property="og:description" content="Fabricación e instalación de redes perimetrales, redes deportivas y porterías a la medida. Mérida, Yucatán, con envíos a todo México.">
-<meta property="og:image" content="https://www.redesdeportivasrc.com/assets/img/trabajos/cancha-futbol-perimetral.jpg">
+<meta property="og:image" content="https://www.redesdeportivasrc.com/assets/img/trabajos/red-perimetral-negra-cancha-futbol-pasto-sintetico.jpg">
 <link rel="canonical" href="https://www.redesdeportivasrc.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="assets/css/styles.css">
 <script src="assets/js/medicion.js"></script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SportingGoodsStore","name":"Redes Deportivas RC","alternateName":"Grupo RC","description":"Fabricación e instalación de redes deportivas, redes perimetrales, redes para porterías, porterías de fútbol y jaulas de bateo a la medida.","url":"https://www.redesdeportivasrc.com/","logo":"https://www.redesdeportivasrc.com/assets/img/logo.png","image":"https://www.redesdeportivasrc.com/assets/img/trabajos/cancha-futbol-perimetral.jpg","telephone":"+52 999 553 8184","email":"contacto@redesdeportivasrc.com","address":{"@type":"PostalAddress","streetAddress":"Calle 114 #581, Caucel","addressLocality":"Mérida","addressRegion":"Yucatán","addressCountry":"MX"},"areaServed":[{"@type":"State","name":"Yucatán"},{"@type":"Country","name":"México"}],"hasMap":"https://maps.app.goo.gl/9jCNwpsFQGWjsxzC6","founder":{"@type":"Person","name":"Reinier Coral"}}
+{"@context":"https://schema.org","@type":"SportingGoodsStore","name":"Redes Deportivas RC","alternateName":"Grupo RC","description":"Fabricación e instalación de redes deportivas, redes perimetrales, redes para porterías, porterías de fútbol y jaulas de bateo a la medida.","url":"https://www.redesdeportivasrc.com/","logo":"https://www.redesdeportivasrc.com/assets/img/logo.png","image":"https://www.redesdeportivasrc.com/assets/img/trabajos/red-perimetral-negra-cancha-futbol-pasto-sintetico.jpg","telephone":"+52 999 553 8184","email":"contacto@redesdeportivasrc.com","address":{"@type":"PostalAddress","streetAddress":"Calle 114 #581, Caucel","addressLocality":"Mérida","addressRegion":"Yucatán","addressCountry":"MX"},"areaServed":[{"@type":"State","name":"Yucatán"},{"@type":"Country","name":"México"}],"hasMap":"https://maps.app.goo.gl/9jCNwpsFQGWjsxzC6","founder":{"@type":"Person","name":"Reinier Coral"}}
 </script>
 </head>
 <body data-nivel="raiz">
@@ -57,7 +57,7 @@
       <a class="btn btn-wa" data-wa-asesor href="#">💬 Hablar con un asesor <span aria-hidden="true">→</span></a>
     </div>
     <div class="asesoria-foto">
-      <img src="assets/img/trabajos/red-perimetral-cielo.jpg" alt="Red perimetral negra de gran altura para cancha deportiva vista desde abajo" loading="lazy">
+      <img src="assets/img/trabajos/red-perimetral-negra-gran-altura-vista-desde-abajo.jpg" alt="Red perimetral negra de gran altura para cancha deportiva vista desde abajo" loading="lazy">
       <div><p>La mejor decisión es la que te da seguridad, respaldo y asesoría.</p><span>Grupo RC</span></div>
     </div>
   </div>
@@ -228,7 +228,7 @@
     ];
     // 1 foto grande + filas completas de 4 (sin huecos)
     const nGaleria = fotosGaleria.length <= 1 ? fotosGaleria.length : 1 + 4*Math.min(2, Math.floor((fotosGaleria.length-1)/4));
-    document.getElementById('cont-galeria-inicio').innerHTML = fotosGaleria.slice(0,nGaleria).map(f=>`<img src="${f.src}" alt="${f.alt} · Grupo RC" loading="lazy">`).join('');
+    document.getElementById('cont-galeria-inicio').innerHTML = fotosGaleria.slice(0,nGaleria).map(f=>`<img src="${f.src}" alt="${f.alt}" loading="lazy">`).join('');
     document.getElementById('ci-estado').insertAdjacentHTML('beforeend', ESTADOS_MEXICO.map(e=>`<option>${e}</option>`).join(''));
   }catch(err){
     console.error('Error preparando la página:', err);
