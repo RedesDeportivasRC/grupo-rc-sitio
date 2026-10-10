@@ -35,12 +35,12 @@ function renderHeader(activo){
             <a href="${base}productos.html" class="${activo==='productos'?'activo':''}">Productos <span class="flechita">▾</span></a>
             <div class="nav-sub">${CATEGORIAS.map(c=>`<a href="${urlCategoria(c.slug)}">${c.nombre}</a>`).join('')}<a href="${base}productos.html"><b>Ver todo el catálogo</b></a></div>
           </div>
-          <a href="${base}clientes.html" class="${activo==='clientes'?'activo':''}">Opiniones</a>
+          <a href="${base}clientes.html" class="${activo==='clientes'?'activo':''}">Clientes</a>
           <a href="${base}galeria.html" class="${activo==='galeria'?'activo':''}">Galería</a>
           <a href="${base}blog.html" class="${activo==='blog'?'activo':''}">Blog</a>
           <div class="nav-menu">
             <a href="${base}recursos.html" class="${activo==='recursos'?'activo':''}">Recursos <span class="flechita">▾</span></a>
-            <div class="nav-sub"><a href="${base}recursos.html">Descargas</a><a href="${base}videos.html">Videos</a><a href="${base}proyectos.html">Proyectos</a><a href="${base}contacto.html">Contacto</a></div>
+            <div class="nav-sub"><a href="${base}recursos.html">Descargas</a><a href="${base}videos.html">Videos</a><a href="${base}clientes.html">Proyectos</a><a href="${base}contacto.html">Contacto</a></div>
           </div>
           <a href="${base}nosotros.html" class="${activo==='nosotros'?'activo':''}">Nosotros</a>
         </nav>
@@ -72,12 +72,12 @@ function renderHeader(activo){
           <div class="mm-fila"><a href="${base}productos.html" class="mm-item">Productos</a><button type="button" class="mm-flecha" aria-label="Ver productos" aria-expanded="false"></button></div>
           <div class="mm-lista">${CATEGORIAS.map(c=>`<a href="${urlCategoria(c.slug)}" class="mm-sub">${c.nombre}</a>`).join('')}</div>
         </div>
-        <a href="${base}clientes.html" class="mm-item">Opiniones</a>
+        <a href="${base}clientes.html" class="mm-item">Clientes</a>
         <a href="${base}galeria.html" class="mm-item">Galería</a>
         <a href="${base}blog.html" class="mm-item">Blog</a>
         <div class="mm-grupo">
           <div class="mm-fila"><a href="${base}recursos.html" class="mm-item">Recursos</a><button type="button" class="mm-flecha" aria-label="Ver recursos" aria-expanded="false"></button></div>
-          <div class="mm-lista"><a href="${base}recursos.html" class="mm-sub">Descargas</a><a href="${base}videos.html" class="mm-sub">Videos</a><a href="${base}proyectos.html" class="mm-sub">Proyectos</a></div>
+          <div class="mm-lista"><a href="${base}recursos.html" class="mm-sub">Descargas</a><a href="${base}videos.html" class="mm-sub">Videos</a><a href="${base}clientes.html" class="mm-sub">Proyectos</a></div>
         </div>
         <a href="${base}nosotros.html" class="mm-item">Nosotros</a>
         <a href="${base}contacto.html" class="btn btn-azul mm-cta">Cotiza / Contacto</a>
@@ -127,33 +127,33 @@ function renderFooter(){
     <footer class="site">
       <div class="envolvente">
         <div class="footer-grid">
-          <div>
+          <div class="f-marca">
             <div class="logo" style="color:#fff;margin-bottom:12px;"><img src="${base}assets/img/logo-160.png" class="logo-marca"> ${EMPRESA.nombre}</div>
             <p style="max-width:30ch;opacity:.8;">${EMPRESA.nombreLargo} — fabricación e instalación de redes perimetrales, deportivas y porterías.</p>
             <p style="margin-top:8px;font-style:italic;opacity:.65;font-size:.82rem;">"${EMPRESA.frase}"</p>
           </div>
-          <div>
+          <div class="f-prod">
             <h4>Productos</h4>
-            ${CATEGORIAS.slice(0,5).map(c=>`<a href="${base}productos/${c.slug}.html">${c.nombre}</a>`).join('')}
+            ${CATEGORIAS.map(c=>`<a href="${base}productos/${c.slug}.html">${c.nombre}</a>`).join('')}
           </div>
-          <div>
+          <div class="f-emp">
             <h4>Empresa</h4>
             <a href="${base}nosotros.html">Nosotros</a>
-            <a href="${base}clientes.html">Opiniones</a>
+            <a href="${base}clientes.html">Clientes</a>
             <a href="${base}blog.html">Blog</a>
           </div>
-          <div>
+          <div class="f-rec">
             <h4>Recursos</h4>
             <a href="${base}galeria.html">Galería</a>
             <a href="${base}videos.html">Videos</a>
             <a href="${base}recursos.html">Descargas</a>
           </div>
-          <div>
+          <div class="f-cont">
             <h4>Contacto</h4>
             <a href="tel:${EMPRESA.telefonoHref}">📞 ${EMPRESA.telefono}</a>
             <a href="https://wa.me/${EMPRESA.whatsapp}">💬 WhatsApp</a>
             <a href="mailto:${EMPRESA.correo}">✉️ ${EMPRESA.correo}</a>
-            <div style="display:flex;gap:14px;margin-top:12px;">
+            <div class="f-redes" style="display:flex;gap:14px;margin-top:12px;">
               <a href="${EMPRESA.redes.facebook}" target="_blank" rel="noopener" title="Facebook" style="margin:0;display:inline-flex;"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M22 12.06C22 6.51 17.52 2 12 2S2 6.51 2 12.06C2 17.08 5.66 21.23 10.44 22v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.78-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.78l-.45 2.91h-2.33V22C18.34 21.23 22 17.08 22 12.06z"/></svg></a>
               <a href="${EMPRESA.redes.instagram}" target="_blank" rel="noopener" title="Instagram" style="margin:0;display:inline-flex;"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2zm0 1.98c-3.14 0-3.5.01-4.74.07-1.02.05-1.58.22-1.95.36-.49.19-.84.42-1.2.79-.37.36-.6.71-.79 1.2-.14.37-.31.93-.36 1.95-.06 1.24-.07 1.6-.07 4.74s.01 3.5.07 4.74c.05 1.02.22 1.58.36 1.95.19.49.42.84.79 1.2.36.37.71.6 1.2.79.37.14.93.31 1.95.36 1.24.06 1.6.07 4.74.07s3.5-.01 4.74-.07c1.02-.05 1.58-.22 1.95-.36.49-.19.84-.42 1.2-.79.37-.36.6-.71.79-1.2.14-.37.31-.93.36-1.95.06-1.24.07-1.6.07-4.74s-.01-3.5-.07-4.74c-.05-1.02-.22-1.58-.36-1.95-.19-.49-.42-.84-.79-1.2-.36-.37-.71-.6-1.2-.79-.37-.14-.93-.31-1.95-.36-1.24-.06-1.6-.07-4.74-.07zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.98a3.02 3.02 0 100 6.04 3.02 3.02 0 000-6.04zm5.2-2.4a1.17 1.17 0 110 2.34 1.17 1.17 0 010-2.34z"/></svg></a>
               <a href="${EMPRESA.redes.youtube}" target="_blank" rel="noopener" title="YouTube" style="margin:0;display:inline-flex;"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M23 12s0-3.55-.45-5.26a2.9 2.9 0 00-2.04-2.05C18.8 4.24 12 4.24 12 4.24s-6.8 0-8.51.45A2.9 2.9 0 001.45 6.74C1 8.45 1 12 1 12s0 3.55.45 5.26a2.9 2.9 0 002.04 2.05c1.71.45 8.51.45 8.51.45s6.8 0 8.51-.45a2.9 2.9 0 002.04-2.05C23 15.55 23 12 23 12zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg></a>
@@ -228,7 +228,7 @@ function renderProductCard(p){
 function renderProjectCard(pr){
   const alt = `Proyecto ${pr.nombre}${pr.ubicacion?' en '+pr.ubicacion:''} — ${pr.tipo||''} | Grupo RC`;
   return `
-    <a class="tarjeta-proyecto" href="${rutaBase()}proyectos.html#${pr.slug}">
+    <a class="tarjeta-proyecto" href="${rutaBase()}clientes.html">
       ${fotoOMarcador(pr.fotos[0], alt, 'oscuro')}
       <div class="tarjeta-proyecto-body">
         <span>${pr.tipo}</span>
@@ -577,7 +577,7 @@ function renderTestimonios(contId, seccionId, soloInicio){
   agregarFlechas(cont, 9);
   const resumen = document.getElementById(contId+'-resumen');
   if(resumen && typeof RESUMEN_OPINIONES !== 'undefined'){
-    resumen.innerHTML = `${iconoFb} <b>Recomendado por el ${RESUMEN_OPINIONES.facebookPct}%</b> en Facebook · ${RESUMEN_OPINIONES.facebookTotal} opiniones`;
+    resumen.innerHTML = `${iconoFb.replace('width="13" height="13"','width="22" height="22"')}<span><b>Recomendado por el ${RESUMEN_OPINIONES.facebookPct}%</b> en Facebook<small>${RESUMEN_OPINIONES.facebookTotal} opiniones</small></span>`;
   }
 }
 

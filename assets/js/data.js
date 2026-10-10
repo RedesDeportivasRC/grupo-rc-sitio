@@ -288,6 +288,17 @@ const ESTADOS_MEXICO = [
 
 // ---------------- FOTOS REALES DE TRABAJOS (assets/img/trabajos) ----------------
 const FOTOS_TRABAJOS = [
+  { archivo:'cancha-usos-multiples-colegio-charbel-red-voleibol-naranja.jpg', alt:'Cancha de usos múltiples del Colegio Charbel en Mérida con red de voleibol', categoria:'voleibol' },
+  { archivo:'red-voleibol-personalizada-nombre-colegio-charbel.jpg', alt:'Red de voleibol personalizada con el nombre Charbel tejido', categoria:'voleibol' },
+  { archivo:'red-basquetbol-roja-azul-colegio-charbel.jpg', alt:'Red de básquetbol roja y azul en el Colegio Charbel', categoria:'basquetbol' },
+  { archivo:'porteria-infantil-naranja-cancha-colegio-charbel.jpg', alt:'Portería infantil naranja en el Colegio Charbel', categoria:'porterias' },
+  { archivo:'porteria-red-hexagonal-blanca-universidad-modelo-merida.jpg', alt:'Portería con red hexagonal blanca en la Universidad Modelo, Mérida', categoria:'porterias' },
+  { archivo:'porteria-empotrada-red-hexagonal-universidad-modelo.jpg', alt:'Portería empotrada con red hexagonal en la Universidad Modelo', categoria:'porterias' },
+  { archivo:'red-hexagonal-porteria-detalle-cancha-azul-universidad-modelo.jpg', alt:'Detalle de red hexagonal de portería sobre pasto sintético azul', categoria:'porterias' },
+  { archivo:'instalacion-red-antipalomas-domo-morelos-progreso.jpg', alt:'Instalación de red antipalomas en el Domo Morelos de Progreso, Yucatán', categoria:'instalacion' },
+  { archivo:'instaladores-red-antipalomas-andamio-domo-morelos.jpg', alt:'Instaladores colocando red antipalomas desde andamio en el Domo Morelos', categoria:'instalacion' },
+  { archivo:'instalacion-red-perimetral-escuela-cirilo-montes-de-oca-tekax.jpg', alt:'Instalación de red perimetral en la escuela Cirilo Montes de Oca, Tekax', categoria:'perimetral' },
+  { archivo:'red-perimetral-andamio-cancha-escuela-tekax.jpg', alt:'Red perimetral colocada desde andamio en cancha escolar de Tekax', categoria:'perimetral' },
   { archivo:'red-contencion-golf-hotel-chable-poste-verde-vista-dron.jpg', alt:'Poste verde con red de contención de golf en Hotel Chablé, vista desde dron', categoria:'perimetral' },
   { archivo:'instalacion-red-contencion-golf-hotel-chable-vista-dron.jpg', alt:'Instalación de red de contención de golf en Hotel Chablé vista desde dron', categoria:'instalacion' },
   { archivo:'red-contencion-golf-gran-altura-hotel-chable-desde-abajo.jpg', alt:'Red de contención de golf de gran altura en Hotel Chablé vista desde abajo', categoria:'perimetral' },
@@ -335,7 +346,6 @@ const FOTOS_TRABAJOS = [
   { archivo:'red-voleibol-personalizada-letras-tejidas-roja-verde.jpg', alt:'Red de voleibol personalizada roja con borde verde y letras tejidas', categoria:'voleibol' },
   { archivo:'red-voleibol-hexagonal-roja-amarilla-negra.jpg', alt:'Bloqueo en una red de voleibol hexagonal roja, amarilla y negra', categoria:'voleibol' },
   { archivo:'red-nylon-negra-detalle-malla-rombo.jpg', alt:'Mano detrás de una red de nylon negra que muestra el tamaño de la malla en rombo', categoria:'perimetral' },
-  { archivo:'instalacion-red-perimetral-canastilla-elevada-cancha-futbol.jpg', alt:'Instalador colocando red perimetral desde una canastilla elevada en una cancha de fútbol', categoria:'instalacion' },
   { archivo:'instalacion-red-perimetral-escalera-sobre-barda.jpg', alt:'Instalador colocando una red perimetral sobre una barda desde una escalera', categoria:'instalacion' },
   { archivo:'red-perimetral-sobre-barda-blanca-postes.jpg', alt:'Red perimetral sobre barda blanca con postes metálicos tipo escalera', categoria:'perimetral' },
   { archivo:'instalacion-red-en-altura-estructura-metalica.jpg', alt:'Trabajadores instalando una red en altura sobre una estructura metálica', categoria:'instalacion' },
@@ -423,6 +433,44 @@ const PROYECTOS_INICIO = [
 // Capturas que mandó Reinier el 8 oct 2026. Nunca inventar ni editar el sentido de un comentario.
 // Nombre + inicial del apellido. Si queda vacío, la sección no aparece en el sitio publicado.
 // inicio:true = aparece en la página de Inicio; todos aparecen en Clientes.
+// Clientes y proyectos (Reinier, 2026-10-10). "tipo" es la etiqueta que se ve en la tarjeta;
+// si no hay datos del cliente se pone como proyecto. Las fotos viven en assets/img/trabajos/.
+const CLIENTES_RC = [
+  { slug:'hotel-chable', nombre:'Hotel Chablé', lugar:'Yucatán', tipo:'Hotel · Proyecto completo',
+    texto:'Llevamos el proyecto de principio a fin: cimentación y colocación de postes con grúa, y la fabricación e instalación de una red de contención de gran altura para el campo de golf, en nylon alquitranado negro.',
+    productos:[['Redes perimetrales','redes-perimetrales']],
+    fotos:[['red-contencion-golf-hotel-chable-poste-verde-vista-dron.jpg','Red de contención de golf con postes verdes en el Hotel Chablé, vista desde dron'],
+           ['grua-colocacion-poste-red-contencion-golf-hotel-chable.jpg','Grúa colocando un poste para la red de contención de golf del Hotel Chablé'],
+           ['red-contencion-golf-gran-altura-hotel-chable-desde-abajo.jpg','Red de contención de golf de gran altura vista desde abajo en el Hotel Chablé'],
+           ['base-concreto-poste-red-contencion-golf-obra.jpg','Camión grúa colocando un poste de la red de contención de golf']] },
+  { slug:'universidad-modelo', nombre:'Universidad Modelo', lugar:'Mérida, Yucatán', tipo:'Universidad',
+    texto:'Sus porterías tenían malla ciclónica muy oxidada, que ya era peligrosa para los jugadores. La reemplazamos por redes para portería en tejido hexagonal, más seguras y con mejor vista.',
+    productos:[['Redes para porterías','redes-para-porterias']],
+    fotos:[['porteria-red-hexagonal-blanca-universidad-modelo-merida.jpg','Portería con red hexagonal blanca nueva en la cancha de la Universidad Modelo en Mérida'],
+           ['porteria-empotrada-red-hexagonal-universidad-modelo.jpg','Portería empotrada en el muro con red hexagonal en la Universidad Modelo'],
+           ['red-hexagonal-porteria-detalle-cancha-azul-universidad-modelo.jpg','Detalle de la red hexagonal de portería sobre cancha de pasto sintético azul'],
+           ['cancha-pasto-sintetico-azul-universidad-modelo-merida.jpg','Cancha de pasto sintético azul de la Universidad Modelo en Mérida']] },
+  { slug:'domo-morelos', nombre:'Domo Morelos', lugar:'Progreso, Yucatán', tipo:'Gobierno municipal',
+    texto:'A solicitud del Ayuntamiento de Progreso, encabezado por el presidente municipal Erik Rihani González, instalamos una red antipalomas en el domo. Las palomas anidaban en la estructura y sus heces manchaban la cancha y a los usuarios.',
+    productos:[['Redes de protección','redes-de-proteccion']],
+    fotos:[['instalacion-red-antipalomas-domo-morelos-progreso.jpg','Instalación de red antipalomas en el Domo Morelos de Progreso, Yucatán'],
+           ['instaladores-red-antipalomas-andamio-domo-morelos.jpg','Instaladores colocando la red antipalomas desde un andamio en el Domo Morelos'],
+           ['red-antipalomas-sujecion-estructura-domo-morelos.jpg','Sujeción de la red antipalomas a la estructura del domo'],
+           ['presidente-municipal-progreso-visita-domo-morelos-red-antipalomas.jpg','Visita del presidente municipal de Progreso al Domo Morelos con la red antipalomas instalada']] },
+  { slug:'escuela-cirilo-montes-de-oca', nombre:'Escuela Primaria Cirilo Montes de Oca', lugar:'Tekax, Yucatán', tipo:'Escuela · Gobierno municipal',
+    texto:'La cancha de la escuela ya tenía un proyecto avanzado y nos encargaron la red perimetral. El cliente fue el Ayuntamiento de Tekax, encabezado por el presidente municipal Hervé Manuel Vallejos Sansores.',
+    productos:[['Redes perimetrales','redes-perimetrales']],
+    fotos:[['instalacion-red-perimetral-escuela-cirilo-montes-de-oca-tekax.jpg','Instalación de red perimetral en la cancha de la escuela primaria Cirilo Montes de Oca en Tekax'],
+           ['red-perimetral-andamio-cancha-escuela-tekax.jpg','Instalador colocando la red perimetral desde un andamio en una cancha escolar de Tekax']] },
+  { slug:'colegio-charbel', nombre:'Colegio Charbel', lugar:'Mérida, Yucatán', tipo:'Colegio',
+    texto:'Convertimos su patio en una cancha de usos múltiples: un par de porterías infantiles, redes para sus canastas de básquetbol y una red de voleibol con el nombre del colegio tejido en la malla.',
+    productos:[['Porterías','porterias'],['Redes de voleibol y básquetbol','redes-deportivas']],
+    fotos:[['cancha-usos-multiples-colegio-charbel-red-voleibol-naranja.jpg','Cancha de usos múltiples del Colegio Charbel con red de voleibol y postes naranjas'],
+           ['red-voleibol-personalizada-nombre-colegio-charbel.jpg','Red de voleibol personalizada con el nombre Charbel tejido'],
+           ['red-basquetbol-roja-azul-colegio-charbel.jpg','Red de básquetbol roja y azul en el aro del Colegio Charbel'],
+           ['porteria-infantil-naranja-cancha-colegio-charbel.jpg','Portería infantil naranja en la cancha de usos múltiples del Colegio Charbel']] },
+];
+
 const RESUMEN_OPINIONES = { facebookPct:100, facebookTotal:19 };
 const TESTIMONIOS = [
   { nombre:'Carlos Lobo R.', fuente:'facebook', lugar:'Guadalajara', inicio:true, texto:'Recomiendo ampliamente a GRUPO RC. Me atendieron y ayudaron en todo momento con asesoría cuando fue requerida mientras instalaba una red. Estando yo en Guadalajara me hicieron llegar la red en tiempo y forma, además me ayudaron con asesoría vía telefónica para su instalación.' },
