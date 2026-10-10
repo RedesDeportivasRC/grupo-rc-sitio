@@ -528,7 +528,7 @@ function renderMapa(contId){
   cont.innerHTML = `
     <div class="mapa-rc">
       <iframe title="Ubicación de Redes Deportivas RC en Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-        src="https://maps.google.com/maps?q=${encodeURIComponent(EMPRESA.mapaBusqueda)}&z=16&output=embed"></iframe>
+        src="https://maps.google.com/maps?q=${encodeURIComponent(EMPRESA.mapaCoords || EMPRESA.mapaBusqueda)}&z=16&output=embed"></iframe>
       <div class="mapa-rc-pie">
         <div><b>Redes Deportivas RC</b><span>${EMPRESA.direccion}</span></div>
         <a class="btn btn-azul btn-chico" href="${EMPRESA.mapaUrl}" target="_blank" rel="noopener">📍 Cómo llegar</a>

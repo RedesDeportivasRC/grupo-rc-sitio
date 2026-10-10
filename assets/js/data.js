@@ -267,7 +267,8 @@ const EMPRESA = {
   direccion:'C. 114 #581-1 x 29 y 29A, Los Ángeles, Caucel, Mérida, Yucatán, México',
   horarios:'Lunes a viernes, 9:00 a.m. – 6:00 p.m.',
   mapaUrl:'https://maps.app.goo.gl/9jCNwpsFQGWjsxzC6',  // liga de Google Maps que mandó Reinier (8 oct 2026)
-  mapaBusqueda:'Redes Deportivas RC, C. 114 581, Caucel, Mérida, Yucatán',
+  mapaBusqueda:'Redes Deportivas RC, Los Ángeles, Caucel, Mérida, Yuc.',  // buscar por nombre del negocio: con el número de calle Google ponía el pin en C. 37-39
+  mapaCoords:'',  // si Reinier manda lat,lng de su chincheta, ponerlas aquí y el mapa las usa
   estadosDondeVendemos:['Yucatán','[PLACEHOLDER — resto de estados donde venden]'],
   redes:{
     facebook:'https://facebook.com/redesdeportivasrc',
