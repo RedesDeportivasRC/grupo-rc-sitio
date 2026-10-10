@@ -297,7 +297,7 @@ const FOTOS_TRABAJOS = [
 // ---------------- BANNER PRINCIPAL DEL INICIO ----------------
 // Cada diapositiva: foto (o null = fondo de marca), texto corto y botón.
 const HERO_SLIDES = [
-  { foto:'cancha-multiusos-perimetral.jpg', ojo:'Redes deportivas a tu medida', titulo:'Protege tus espacios deportivos con redes fabricadas a la medida.', texto:'Soluciones en redes perimetrales, porterías y equipamiento deportivo para canchas, escuelas, clubes y espacios recreativos.', boton:{ texto:'🎧 Habla con un asesor', url:'tel:+529995538184' } },
+  { foto:'cancha-multiusos-perimetral.jpg', ojo:'Fabricantes de redes deportivas en Mérida, Yucatán', titulo:'Protege tus espacios deportivos con redes perimetrales fabricadas a la medida.', texto:'Soluciones en redes perimetrales, porterías y equipamiento deportivo para canchas, escuelas, clubes y espacios recreativos.', boton:{ texto:'🎧 Habla con un asesor', url:'tel:+529995538184' } },
   { foto:'cancha-futbol-perimetral.jpg', ojo:'Experiencia', titulo:'Más de 25 años en redes.', texto:'Más de 25 años comercializando redes y más de 20 instalándolas. Sabemos qué funciona en cada cancha.', boton:{ texto:'Conócenos', url:'nosotros.html' } },
   { foto:'red-perimetral-campo.jpg', ojo:'Envíos', titulo:'Enviamos a toda la República.', texto:'Tu cotización ya incluye el envío. Estándar a domicilio de 4 a 8 días hábiles, o urgente por aerolínea en 24 a 48 horas.', boton:{ texto:'Cotizar con envío', url:'contacto.html' } },
   { foto:'estructura-red-altura.jpg', ojo:'Asesoría', titulo:'Te asesoramos en la instalación.', texto:'Te decimos qué abertura, qué altura y qué fijación necesitas. En Yucatán la instalamos nosotros.', boton:{ texto:'Pedir asesoría', url:'contacto.html' } },
