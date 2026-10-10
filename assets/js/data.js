@@ -8,13 +8,13 @@
 
 // ---------------- CATEGORÍAS (por tipo de producto) ----------------
 const CATEGORIAS = [
-  { slug:'redes-perimetrales', nombre:'Redes Perimetrales', descripcionCorta:'Una red, muchas soluciones: deporte, protección y contención.' },
-  { slug:'redes-deportivas', nombre:'Redes Deportivas', descripcionCorta:'Redes para jugar: básquetbol, voleibol y usos especiales.' },
-  { slug:'redes-para-porterias', nombre:'Redes para Porterías', descripcionCorta:'Tejido hexagonal de alta resistencia para arcos de fútbol.' },
-  { slug:'porterias', nombre:'Porterías', descripcionCorta:'Porterías completas, fabricadas artesanalmente, en distintas medidas.' },
-  { slug:'baloneras', nombre:'Baloneras', descripcionCorta:'Almacenamiento y transporte de balones para equipos e instalaciones.' },
-  { slug:'redes-de-proteccion', nombre:'Redes de Protección y Seguridad', descripcionCorta:'Anticaídas, obra y resguardo industrial.' },
-  { slug:'soluciones-especiales', nombre:'Soluciones Especiales', descripcionCorta:'Proyectos a la medida que no entran en una categoría fija.' },
+  { slug:'redes-perimetrales', nombre:'Redes Perimetrales', descripcionCorta:'Red negra de nylon alquitranado para cerrar canchas y espacios.', foto:'red-perimetral-negra-cancha-futbol-pasto-sintetico.jpg' },
+  { slug:'porterias', nombre:'Porterías de Fútbol', descripcionCorta:'Porterías completas con red hexagonal tipo colmena.', foto:'porteria-futbol-forrada-azul-pasto-sintetico-jardin.jpg' },
+  { slug:'redes-para-porterias', nombre:'Redes para Porterías', descripcionCorta:'Red hexagonal de poliéster trenzado para tu portería.', foto:'red-porteria-hexagonal-nudos-azul-blanco-rojo.jpg' },
+  { slug:'redes-deportivas', nombre:'Redes de Voleibol y Básquetbol', descripcionCorta:'Redes de juego, personalizadas con letras y colores.', foto:'red-voleibol-escolar-personalizada-nombre-tejido.jpg' },
+  { slug:'baloneras', nombre:'Baloneras', descripcionCorta:'Bolsas de red trenzada para guardar y transportar balones.', foto:'balonera-cuerda-trenzada-verde-balon.jpg' },
+  { slug:'jaulas-bateo', nombre:'Jaulas de Bateo', descripcionCorta:'Jaula completa o solo la red de 1" para béisbol y sóftbol.', foto:'red-nylon-negra-detalle-malla-rombo.jpg' },
+  { slug:'redes-de-proteccion', nombre:'Redes de Protección', descripcionCorta:'Anticaídas, obra, techos de red y control de aves.', foto:'techo-de-red-cancha-futbol-pasto-sintetico.jpg' },
 ];
 
 // ---------------- DEPORTES (segunda forma de navegar, sin duplicar productos) ----------------
@@ -217,12 +217,12 @@ const CLIENTES = [
 const PORTADAS_BLOG = {"como-elegir-red-perimetral": "red-contencion-golf-alta-postes-negros.jpg", "como-instalar-red-perimetral": "instalacion-red-perimetral-postes-verdes-campo-golf.jpg", "errores-comprar-redes-deportivas": "porterias-futbol-red-hexagonal-blanca-cancha-techada.jpg", "preparar-instalacion-red-perimetral": "cimentacion-postes-red-perimetral-colado-concreto.jpg", "redes-1-2-3-4-pulgadas": "red-perimetral-negra-cancha-futbol-pasto-sintetico.jpg", "redes-deportivas-artesanales-yucatan": "tejido-artesanal-red-porteria-taller-yucatan.jpg"};
 // Artículos de Reinier Coral (PDF del 10 oct 2026). Cada uno vive en blog/<slug>.html (HTML estático, bueno para Google).
 const BLOG_POSTS = [
-  { slug:'como-elegir-red-perimetral', titulo:'Cómo elegir una red perimetral para una cancha deportiva', categoria:'Guía técnica', minutos:7, fecha:'2026-10-10', extracto:'Abertura, material, clima e instalación: cómo comparar la inversión completa al elegir una red perimetral.' },
-  { slug:'redes-1-2-3-4-pulgadas', titulo:'Redes de 1, 2, 3 y 4 pulgadas: diferencias y cómo elegir la adecuada', categoria:'Guía técnica', minutos:7, fecha:'2026-10-10', extracto:'Qué significan las pulgadas y los rombos de una red, y qué abertura conviene para golf, canchas o aves.' },
-  { slug:'preparar-instalacion-red-perimetral', titulo:'Qué preparar antes de instalar una red perimetral', categoria:'Instalación', minutos:9, fecha:'2026-10-10', extracto:'Medidas, postes, sujeciones, techo, acceso y seguridad: lo que conviene planear antes del día de instalación.' },
-  { slug:'redes-deportivas-artesanales-yucatan', titulo:'Redes deportivas artesanales de Yucatán: la historia de nuestro tejido tipo colmena', categoria:'Historia RC', minutos:7, fecha:'2026-10-10', extracto:'El origen familiar de nuestras redes hechas a mano, de poliéster y personalizadas a la medida.' },
-  { slug:'errores-comprar-redes-deportivas', titulo:'Errores frecuentes al comprar redes deportivas y cómo evitarlos', categoria:'Compras', minutos:6, fecha:'2026-10-10', extracto:'Material, medidas, abertura, instalación y garantía: qué comparar para aprovechar mejor tu inversión.' },
-  { slug:'como-instalar-red-perimetral', titulo:'Cómo instalar una red perimetral deportiva paso a paso', categoria:'Instalación', minutos:7, fecha:'2026-10-10', extracto:'El orden de montaje de nuestro manual: extender, fijar esquinas, distribuir la malla y subirla a los postes.' },
+  { slug:'como-elegir-red-perimetral', productos:['redes-perimetrales','redes-de-proteccion','jaulas-bateo'], titulo:'Cómo elegir una red perimetral para una cancha deportiva', categoria:'Guía técnica', minutos:7, fecha:'2026-10-10', extracto:'Abertura, material, clima e instalación: cómo comparar la inversión completa al elegir una red perimetral.' },
+  { slug:'redes-1-2-3-4-pulgadas', productos:['redes-perimetrales','redes-de-proteccion','jaulas-bateo'], titulo:'Redes de 1, 2, 3 y 4 pulgadas: diferencias y cómo elegir la adecuada', categoria:'Guía técnica', minutos:7, fecha:'2026-10-10', extracto:'Qué significan las pulgadas y los rombos de una red, y qué abertura conviene para golf, canchas o aves.' },
+  { slug:'preparar-instalacion-red-perimetral', productos:['redes-perimetrales','redes-de-proteccion','jaulas-bateo'], titulo:'Qué preparar antes de instalar una red perimetral', categoria:'Instalación', minutos:9, fecha:'2026-10-10', extracto:'Medidas, postes, sujeciones, techo, acceso y seguridad: lo que conviene planear antes del día de instalación.' },
+  { slug:'redes-deportivas-artesanales-yucatan', productos:'todos', titulo:'Redes deportivas artesanales de Yucatán: la historia de nuestro tejido tipo colmena', categoria:'Historia RC', minutos:7, fecha:'2026-10-10', extracto:'El origen familiar de nuestras redes hechas a mano, de poliéster y personalizadas a la medida.' },
+  { slug:'errores-comprar-redes-deportivas', productos:'todos', titulo:'Errores frecuentes al comprar redes deportivas y cómo evitarlos', categoria:'Compras', minutos:6, fecha:'2026-10-10', extracto:'Material, medidas, abertura, instalación y garantía: qué comparar para aprovechar mejor tu inversión.' },
+  { slug:'como-instalar-red-perimetral', productos:['redes-perimetrales','redes-de-proteccion','jaulas-bateo'], titulo:'Cómo instalar una red perimetral deportiva paso a paso', categoria:'Instalación', minutos:7, fecha:'2026-10-10', extracto:'El orden de montaje de nuestro manual: extender, fijar esquinas, distribuir la malla y subirla a los postes.' },
 ].map(b=>({ ...b, url:'blog/'+b.slug+'.html', imagen:'assets/img/trabajos/'+PORTADAS_BLOG[b.slug], contenido:'publicado' }));
 
 // ---------------- RECURSOS / DESCARGAS ----------------

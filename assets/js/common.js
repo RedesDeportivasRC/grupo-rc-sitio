@@ -159,11 +159,11 @@ const PAGINA_CATEGORIA = {
   'redes-perimetrales':'productos/redes-perimetrales.html',
   'redes-deportivas':'productos/redes-deportivas.html',
   'porterias':'productos/porterias.html',
-  'redes-para-porterias':'productos/porterias.html',
-  'redes-de-proteccion':'productos/redes-perimetrales.html',
-  'baloneras':'productos/producto.html?sku=RC-BALO-001',
+  'redes-para-porterias':'productos/redes-para-porterias.html',
+  'redes-de-proteccion':'productos/redes-de-proteccion.html',
+  'baloneras':'productos/baloneras.html',
+  'jaulas-bateo':'productos/jaulas-de-bateo.html',
   'soluciones-especiales':'contacto.html',
-  'jaulas-bateo':'contacto.html',
 };
 function urlCategoria(slug){ return rutaBase() + (PAGINA_CATEGORIA[slug] || 'productos.html'); }
 
@@ -571,4 +571,27 @@ function revelar(cont, aleatorio){
     orden.forEach((idx,k)=>{ const el = items[idx]; el.style.transitionDelay = Math.round(k*Math.min(aleatorio?110:140, 2200/items.length))+'ms'; requestAnimationFrame(()=> el.classList.add('rv-in')); });
   }, { threshold:0, rootMargin:'0px 0px -80px 0px' });
   obs.observe(cont);
+}
+
+// Página de producto: artículos del blog que hablan de ese producto (los marcados 'todos' salen en todas).
+function renderBlogProducto(contId, slugProducto){
+  const cont = document.getElementById(contId);
+  if(!cont) return;
+  const lista = BLOG_POSTS.filter(b=> b.productos==='todos' || (b.productos||[]).includes(slugProducto));
+  // primero los específicos del producto, luego los generales
+  lista.sort((a,b)=> (a.productos==='todos') - (b.productos==='todos'));
+  cont.innerHTML = lista.slice(0,6).map(renderBlogCard).join('');
+}
+
+// Página de producto: el resto de los productos, con la misma tarjeta del inicio.
+function renderMasProductos(contId, slugActual){
+  const cont = document.getElementById(contId);
+  if(!cont) return;
+  const base = rutaBase();
+  cont.innerHTML = CATEGORIAS.filter(c=>c.slug!==slugActual && PAGINA_CATEGORIA[c.slug] && !PAGINA_CATEGORIA[c.slug].startsWith('contacto')).map(c=>`
+    <a class="producto-foto" href="${urlCategoria(c.slug)}">
+      ${c.foto ? `<img src="${base}assets/img/trabajos/${c.foto}" alt="${c.nombre}" loading="lazy">` : '<div class="foto-ph"></div>'}
+      <div class="producto-foto-texto"><h3>${c.nombre}</h3><p>${c.descripcionCorta}</p></div>
+      <span class="circulo-flecha" aria-hidden="true">→</span>
+    </a>`).join('');
 }
