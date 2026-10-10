@@ -287,6 +287,13 @@ const ESTADOS_MEXICO = [
 
 // ---------------- FOTOS REALES DE TRABAJOS (assets/img/trabajos) ----------------
 const FOTOS_TRABAJOS = [
+  { archivo:'red-contencion-golf-hotel-chable-poste-verde-vista-dron.jpg', alt:'Poste verde con red de contención de golf en Hotel Chablé, vista desde dron', categoria:'perimetral' },
+  { archivo:'instalacion-red-contencion-golf-hotel-chable-vista-dron.jpg', alt:'Instalación de red de contención de golf en Hotel Chablé vista desde dron', categoria:'instalacion' },
+  { archivo:'red-contencion-golf-gran-altura-hotel-chable-desde-abajo.jpg', alt:'Red de contención de golf de gran altura en Hotel Chablé vista desde abajo', categoria:'perimetral' },
+  { archivo:'red-negra-nylon-alquitranado-contencion-golf-detalle.jpg', alt:'Detalle de red negra de nylon alquitranado para contención de golf', categoria:'perimetral' },
+  { archivo:'base-concreto-poste-red-contencion-golf-obra.jpg', alt:'Base de concreto con anclaje del poste de una red de contención de golf en obra', categoria:'instalacion' },
+  { archivo:'grua-colocacion-poste-red-contencion-golf-hotel-chable.jpg', alt:'Grúa colocando un poste para red de contención de golf en Hotel Chablé', categoria:'instalacion' },
+  { archivo:'colado-concreto-cimentacion-postes-red-perimetral-obra.jpg', alt:'Colado de concreto en la cimentación de postes para red perimetral en obra', categoria:'instalacion' },
   { archivo:'red-antipalomas-instalada-domo-cancha-multiusos.jpg', alt:'Red antipalomas negra instalada bajo el techo de un domo de cancha multiusos', categoria:'perimetral' },
   { archivo:'red-antipalomas-domo-cancha-vista-desde-canastilla.jpg', alt:'Red antipalomas bajo el techo de un domo deportivo vista desde una canastilla', categoria:'perimetral' },
   { archivo:'instalacion-red-antipalomas-andamio-domo-cancha.jpg', alt:'Instaladores colocando red antipalomas desde un andamio en un domo deportivo', categoria:'instalacion' },
