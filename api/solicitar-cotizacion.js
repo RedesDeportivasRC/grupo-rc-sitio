@@ -26,7 +26,8 @@ const FORMAS = {
 const ABERTURAS = { "1": '1"', "2": '2"', "3": '3"', "4": '4"', no_se: "por recomendar" };
 const PRODUCTO_CRM = { "1": "Red Perimetral 1 Pulg (Rombo)", "2": "Red Perimetral 2 Pulg (Rombo)", "3": "Red Perimetral 3 Pulg (Rombo)", "4": "Red Perimetral 4 Pulg (Rombo)" };
 
-const texto = (v, max) => String(v == null ? "" : v).trim().slice(0, max);
+// El CRM y la campana pintan notas y nombres como HTML: se quitan < y > de todo lo que escribe el cliente.
+const texto = (v, max) => String(v == null ? "" : v).replace(/[<>]/g, "").trim().slice(0, max);
 const numero = (v) => { const n = Number(v); return Number.isFinite(n) && n > 0 ? Math.round(n * 100) / 100 : 0; };
 const fmt = (n) => Number(n).toLocaleString("es-MX", { maximumFractionDigits: 2 });
 const escHtml = (t) => String(t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -124,14 +125,14 @@ export default async function handler(req, res) {
           type: "observacion",
           created_by_name: "Página web",
           notes: [
-            "📐 Solicitud de cotización desde la página: red perimetral",
-            resumen,
-            ...lineas,
-            estado ? `Estado: ${estado}` : null,
-            correo ? `Correo: ${correo}` : null,
-            comentario ? `Comentario: ${comentario}` : null,
-            `Abrir en el cotizador: ${ligaCotizador}`,
-          ].filter(Boolean).join("\n"),
+            "📐 <b>Solicitud de cotización desde la página: red perimetral</b>",
+            escHtml(resumen),
+            ...lineas.map(escHtml),
+            estado ? `Estado: ${escHtml(estado)}` : null,
+            correo ? `Correo: ${escHtml(correo)}` : null,
+            comentario ? `Comentario: ${escHtml(comentario)}` : null,
+            `<a href="${ligaCotizador}" target="_blank" rel="noopener">Abrir en el cotizador</a>`,
+          ].filter(Boolean).join("<br>"),
         }),
       });
     } catch (e) { console.error("activities", e); }

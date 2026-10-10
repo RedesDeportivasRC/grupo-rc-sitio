@@ -16,7 +16,13 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Método no permitido" });
   }
 
-  const { nombre, telefono, correo, estado, producto, mensaje, empresa, sitioWeb, recaptchaToken } = req.body || {};
+  const cuerpo = req.body || {};
+  const { sitioWeb, recaptchaToken } = cuerpo;
+  // El CRM pinta nombres y notas como HTML: se quitan < y > de lo que escribe el cliente
+  // (ahora que la nota sí se guarda, sin esto alguien podría meter código en el CRM).
+  const limpio = (v) => (v == null ? v : String(v).replace(/[<>]/g, "").trim());
+  const [nombre, telefono, correo, estado, producto, mensaje, empresa] =
+    ["nombre", "telefono", "correo", "estado", "producto", "mensaje", "empresa"].map((k) => limpio(cuerpo[k]));
 
   // "sitioWeb" es un campo trampa (honeypot): invisible para una persona, pero los
   // robots que llenan formularios automáticamente casi siempre lo rellenan igual.
