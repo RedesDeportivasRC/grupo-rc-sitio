@@ -16,7 +16,13 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Método no permitido" });
   }
 
-  const { nombre, telefono, correo, estado, producto, mensaje, empresa, sitioWeb, recaptchaToken } = req.body || {};
+  const cuerpo = req.body || {};
+  const { sitioWeb, recaptchaToken } = cuerpo;
+  // El CRM pinta nombres y notas como HTML: se quitan < y > de lo que escribe el cliente
+  // (ahora que la nota sí se guarda, sin esto alguien podría meter código en el CRM).
+  const limpio = (v) => (v == null ? v : String(v).replace(/[<>]/g, "").trim());
+  const [nombre, telefono, correo, estado, producto, mensaje, empresa] =
+    ["nombre", "telefono", "correo", "estado", "producto", "mensaje", "empresa"].map((k) => limpio(cuerpo[k]));
 
   // "sitioWeb" es un campo trampa (honeypot): invisible para una persona, pero los
   // robots que llenan formularios automáticamente casi siempre lo rellenan igual.
@@ -123,13 +129,27 @@ export default async function handler(req, res) {
       headers: headersSupabase,
       body: JSON.stringify({
         contact_id: contactId,
-        type: "nota",
+        type: "observacion", // "nota" no existe en activities_type_check: la base la rechazaba y el mensaje se perdía
         notes: partesNota,
         created_by_name: "Formulario web",
       }),
     });
 
-    // 3) Avisa por correo — si esto falla, no afecta que el lead ya se haya guardado bien.
+    // 3) Que también aparezca en Mensajes (app.redesdeportivasrc.com/mensajes.html) como correo,
+    //    ya ligado al contacto del CRM, para contestarle desde ahí como contacto@redesdeportivasrc.com.
+    //    Si algo falla aquí, el lead ya quedó guardado en el CRM y no se le muestra error al cliente.
+    if (correo) {
+      try {
+        await enviarAMensajes(headersSupabase, {
+          correo: String(correo).trim().toLowerCase(),
+          nombre, contactId, telefono: telefonoLimpio, producto, estado, empresa, mensaje,
+        });
+      } catch (e) {
+        console.error("mensajes", e);
+      }
+    }
+
+    // 4) Avisa por correo — si esto falla, no afecta que el lead ya se haya guardado bien.
     const resendKey = process.env.RESEND_API_KEY;
     const correoAviso = process.env.CORREO_AVISO_LEADS || "redesdeportivasrc@gmail.com";
     if (resendKey) {
@@ -163,4 +183,72 @@ export default async function handler(req, res) {
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }
+}
+
+// Crea (o reutiliza) la conversación de correo de ese cliente en Mensajes y le agrega el mensaje del formulario.
+async function enviarAMensajes(headers, d) {
+  const ahora = new Date().toISOString();
+  const texto = [
+    "📩 Formulario de la página web",
+    [
+      `Teléfono: ${d.telefono}`,
+      d.estado ? `Estado: ${d.estado}` : null,
+      d.producto ? `Necesita: ${d.producto}` : null,
+      d.empresa ? `Empresa: ${d.empresa}` : null,
+    ].filter(Boolean).join("\n"),
+    d.mensaje || null,
+  ].filter(Boolean).join("\n\n");
+
+  const busca = await fetch(
+    `${SUPABASE_URL}/rest/v1/conversaciones?canal=eq.correo&externo_id=eq.${encodeURIComponent(d.correo)}&select=id,no_leidos,datos,contact_id`,
+    { headers }
+  );
+  const lista = await busca.json();
+  let conv = Array.isArray(lista) ? lista[0] : null;
+  if (!conv) {
+    const crear = await fetch(`${SUPABASE_URL}/rest/v1/conversaciones`, {
+      method: "POST",
+      headers: { ...headers, Prefer: "return=representation" },
+      body: JSON.stringify({
+        canal: "correo",
+        externo_id: d.correo,
+        nombre: d.nombre,
+        contact_id: d.contactId,
+        telefono: d.telefono,
+        producto: d.producto || null,
+        datos: { asunto: "Tu solicitud en Redes Deportivas RC", origen: "web" },
+      }),
+    });
+    const creada = await crear.json();
+    if (!crear.ok) throw new Error(creada.message || "No se pudo crear la conversación");
+    conv = creada[0];
+  }
+
+  const msg = await fetch(`${SUPABASE_URL}/rest/v1/mensajes_canal`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify({
+      conversacion_id: conv.id,
+      direccion: "entrante",
+      tipo: "correo",
+      texto,
+      estado: "recibido",
+      datos: { origen: "web" },
+      created_at: ahora,
+    }),
+  });
+  if (!msg.ok) throw new Error("No se pudo guardar el mensaje: " + (await msg.text()));
+
+  await fetch(`${SUPABASE_URL}/rest/v1/conversaciones?id=eq.${conv.id}`, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify({
+      contact_id: conv.contact_id || d.contactId,
+      ultimo_texto: "📩 Formulario de la página web",
+      ultimo_en: ahora,
+      ultimo_entrante_en: ahora,
+      no_leidos: (conv.no_leidos || 0) + 1,
+      archivada: false,
+    }),
+  });
 }
