@@ -213,15 +213,16 @@ const CLIENTES = [
   { nombre:'[PLACEHOLDER — cliente 6]', logo:null, sector:'[PLACEHOLDER]', ubicacion:'[PLACEHOLDER]', proyectoRelacionado:null, testimonio:null, fotos:[] },
 ];
 
-// ---------------- BLOG (contenido de ejemplo, claramente marcado) ----------------
+// ---------------- BLOG ----------------
+// Artículos de Reinier Coral (PDF del 10 oct 2026). Cada uno vive en blog/<slug>.html (HTML estático, bueno para Google).
 const BLOG_POSTS = [
-  { slug:'como-elegir-red-perimetral', titulo:'Cómo elegir una red perimetral', imagen:'[PLACEHOLDER]', categoria:'Guías', autor:'Grupo RC', fecha:'[EJEMPLO — pendiente]', extracto:'[CONTENIDO DE EJEMPLO] Qué preguntarte antes de cotizar tu red perimetral.', contenido:'[CONTENIDO DE EJEMPLO — pendiente de redacción real]', galeria:[], video:null, productosRelacionados:['red-perimetral'], proyectosRelacionados:[], seoTitle:'Cómo elegir una red perimetral | Grupo RC', metaDescription:'[EJEMPLO]' },
-  { slug:'que-calibre-necesitas', titulo:'Qué calibre de red necesitas', imagen:'[PLACEHOLDER]', categoria:'Guías', autor:'Grupo RC', fecha:'[EJEMPLO — pendiente]', extracto:'[CONTENIDO DE EJEMPLO] Diferencias prácticas entre calibres.', contenido:'[CONTENIDO DE EJEMPLO]', galeria:[], video:null, productosRelacionados:['red-perimetral'], proyectosRelacionados:[], seoTitle:'Qué calibre de red necesitas | Grupo RC', metaDescription:'[EJEMPLO]' },
-  { slug:'nylon-vs-poliester', titulo:'Diferencias entre nylon y poliéster', imagen:'[PLACEHOLDER]', categoria:'Materiales', autor:'Grupo RC', fecha:'[EJEMPLO — pendiente]', extracto:'[CONTENIDO DE EJEMPLO] Cuándo conviene cada material.', contenido:'[CONTENIDO DE EJEMPLO]', galeria:[], video:null, productosRelacionados:[], proyectosRelacionados:[], seoTitle:'Nylon vs. poliéster | Grupo RC', metaDescription:'[EJEMPLO]' },
-  { slug:'como-instalar-red-perimetral', titulo:'Cómo instalar una red perimetral', imagen:'[PLACEHOLDER]', categoria:'Instalación', autor:'Grupo RC', fecha:'[EJEMPLO — pendiente]', extracto:'[CONTENIDO DE EJEMPLO] Paso a paso general de instalación.', contenido:'[CONTENIDO DE EJEMPLO]', galeria:[], video:null, productosRelacionados:['red-perimetral'], proyectosRelacionados:[], seoTitle:'Cómo instalar una red perimetral | Grupo RC', metaDescription:'[EJEMPLO]' },
-  { slug:'como-medir-tu-cancha', titulo:'Cómo medir tu cancha antes de cotizar', imagen:'[PLACEHOLDER]', categoria:'Guías', autor:'Grupo RC', fecha:'[EJEMPLO — pendiente]', extracto:'[CONTENIDO DE EJEMPLO] Herramientas y pasos para medir bien.', contenido:'[CONTENIDO DE EJEMPLO]', galeria:[], video:null, productosRelacionados:[], proyectosRelacionados:[], seoTitle:'Cómo medir tu cancha | Grupo RC', metaDescription:'[EJEMPLO]' },
-  { slug:'redes-proteccion-construccion', titulo:'Redes de protección para construcción', imagen:'[PLACEHOLDER]', categoria:'Seguridad', autor:'Grupo RC', fecha:'[EJEMPLO — pendiente]', extracto:'[CONTENIDO DE EJEMPLO] Qué considerar en obra.', contenido:'[CONTENIDO DE EJEMPLO]', galeria:[], video:null, productosRelacionados:['red-proteccion'], proyectosRelacionados:[], seoTitle:'Redes de protección para construcción | Grupo RC', metaDescription:'[EJEMPLO]' },
-];
+  { slug:'como-elegir-red-perimetral', titulo:'Cómo elegir una red perimetral para una cancha deportiva', categoria:'Guía técnica', minutos:9, fecha:'2026-10-10', extracto:'Deporte, abertura, material, clima e instalación: los criterios que usamos para asesorar a nuestros clientes.' },
+  { slug:'redes-1-2-3-4-pulgadas', titulo:'Redes de 1, 2, 3 y 4 pulgadas: diferencias y cómo elegir', categoria:'Guía técnica', minutos:9, fecha:'2026-10-10', extracto:'Qué significan las pulgadas y los rombos de una red, y qué abertura conviene para golf, canchas o aves.' },
+  { slug:'preparar-instalacion-red-perimetral', titulo:'Qué preparar antes de instalar una red perimetral', categoria:'Instalación', minutos:11, fecha:'2026-10-10', extracto:'Medidas, postes, sujeciones, techo, acceso y seguridad: lo que conviene planear antes del día de instalación.' },
+  { slug:'redes-deportivas-artesanales-yucatan', titulo:'Redes deportivas artesanales de Yucatán: la historia de nuestro tejido tipo colmena', categoria:'Historia RC', minutos:10, fecha:'2026-10-10', extracto:'El origen familiar de nuestras redes hechas a mano, de poliéster y personalizadas a la medida.' },
+  { slug:'errores-comprar-redes-deportivas', titulo:'Errores frecuentes al comprar redes deportivas y cómo evitarlos', categoria:'Compras', minutos:9, fecha:'2026-10-10', extracto:'Material, medidas, abertura, instalación y garantía: qué comparar para aprovechar mejor tu inversión.' },
+  { slug:'como-instalar-red-perimetral', titulo:'Cómo instalar una red perimetral deportiva paso a paso', categoria:'Instalación', minutos:9, fecha:'2026-10-10', extracto:'El orden de montaje de nuestro manual: extender, fijar esquinas, distribuir la malla y subirla a los postes.' },
+].map(b=>({ ...b, url:'blog/'+b.slug+'.html', imagen:'assets/img/blog/'+b.slug+'/'+b.slug+'-foto-1.jpg', contenido:'publicado' }));
 
 // ---------------- RECURSOS / DESCARGAS ----------------
 const RECURSOS = [
@@ -296,7 +297,7 @@ const FOTOS_TRABAJOS = [
 // ---------------- BANNER PRINCIPAL DEL INICIO ----------------
 // Cada diapositiva: foto (o null = fondo de marca), texto corto y botón.
 const HERO_SLIDES = [
-  { foto:'cancha-multiusos-perimetral.jpg', ojo:'Redes perimetrales a la medida', titulo:'Que el deporte no se detenga.', texto:'Fabricamos la red exacta para tu cancha, escuela u obra, con las medidas de tu espacio.', boton:{ texto:'Ver redes perimetrales', url:'productos/redes-perimetrales.html' } },
+  { foto:'cancha-multiusos-perimetral.jpg', ojo:'Redes deportivas a tu medida', titulo:'Protege tus espacios deportivos con redes fabricadas a la medida.', texto:'Soluciones en redes perimetrales, porterías y equipamiento deportivo para canchas, escuelas, clubes y espacios recreativos.', boton:{ texto:'🎧 Habla con un asesor', url:'tel:+529995538184' } },
   { foto:'cancha-futbol-perimetral.jpg', ojo:'Experiencia', titulo:'Más de 25 años en redes.', texto:'Más de 25 años comercializando redes y más de 20 instalándolas. Sabemos qué funciona en cada cancha.', boton:{ texto:'Conócenos', url:'nosotros.html' } },
   { foto:'red-perimetral-campo.jpg', ojo:'Envíos', titulo:'Enviamos a toda la República.', texto:'Tu cotización ya incluye el envío. Estándar a domicilio de 4 a 8 días hábiles, o urgente por aerolínea en 24 a 48 horas.', boton:{ texto:'Cotizar con envío', url:'contacto.html' } },
   { foto:'estructura-red-altura.jpg', ojo:'Asesoría', titulo:'Te asesoramos en la instalación.', texto:'Te decimos qué abertura, qué altura y qué fijación necesitas. En Yucatán la instalamos nosotros.', boton:{ texto:'Pedir asesoría', url:'contacto.html' } },
@@ -306,12 +307,38 @@ const HERO_SLIDES = [
 
 // ---------------- FORTALEZAS (franja bajo el banner) ----------------
 const FORTALEZAS = [
-  { ico:'🏆', titulo:'+25 años en redes', texto:'Y más de 20 instalando.' },
-  { ico:'🚚', titulo:'Envíos a toda la República', texto:'La cotización incluye el envío.' },
-  { ico:'🛠️', titulo:'Asesoría en instalación', texto:'Abertura, altura y fijación.' },
-  { ico:'📐', titulo:'Fabricación a la medida', texto:'Con las medidas de tu espacio.' },
-  { ico:'👷', titulo:'Capacitamos instaladores', texto:'En diferentes partes de México.' },
-  { ico:'🛒', titulo:'También en Mercado Libre', texto:'Ya estamos en Mercado Libre.' },
+  { ico:'trofeo', titulo:'+25 años de experiencia', texto:'Y más de 20 años instalando.' },
+  { ico:'camion', titulo:'Envíos a toda la República', texto:'La cotización incluye el envío.' },
+  { ico:'herramientas', titulo:'Asesoría en instalación', texto:'Te orientamos en cada paso.' },
+  { ico:'escuadra', titulo:'Fabricación a la medida', texto:'Según las necesidades de tu espacio.' },
+  { ico:'casco', titulo:'Capacitamos instaladores', texto:'En diferentes partes de México.' },
+  { ico:'carrito', titulo:'También en Mercado Libre', texto:'Encuentra algunos productos en nuestra tienda.' },
+];
+
+// ---------------- INICIO: productos con foto (maqueta 10 oct 2026) ----------------
+// foto: ruta dentro de assets/img/. null = recuadro de marca hasta tener foto real.
+const PRODUCTOS_INICIO = [
+  { slug:'redes-perimetrales', titulo:'Redes Perimetrales', texto:'Protección y delimitación de espacios.', foto:'trabajos/cancha-futbol-perimetral.jpg' },
+  { slug:'porterias', titulo:'Porterías de Fútbol', texto:'Modelos para fútbol 11, fútbol 7 y fútbol rápido.', foto:'blog/errores-comprar-redes-deportivas/errores-comprar-redes-deportivas-foto-1.jpg' },
+  { slug:'redes-para-porterias', titulo:'Redes para Porterías', texto:'Tejido hexagonal tipo colmena.', foto:'blog/redes-deportivas-artesanales-yucatan/redes-deportivas-artesanales-yucatan-foto-6.jpg' },
+  { slug:'redes-deportivas', titulo:'Redes Deportivas', texto:'Básquetbol, voleibol y usos especiales.', foto:'blog/errores-comprar-redes-deportivas/errores-comprar-redes-deportivas-foto-4.jpg' },
+];
+
+// ---------------- INICIO: asesoría (cada pregunta lleva a su artículo del blog) ----------------
+const ASESORIA = [
+  { ico:'escuadra', titulo:'¿Qué medidas necesito?', texto:'Te orientamos según tu espacio.', url:'blog/preparar-instalacion-red-perimetral.html' },
+  { ico:'red', titulo:'¿Qué tipo de red o portería?', texto:'Diferencias y recomendaciones.', url:'blog/redes-1-2-3-4-pulgadas.html' },
+  { ico:'herramientas', titulo:'¿Cómo se instala?', texto:'Pasos, accesorios y guía básica.', url:'blog/como-instalar-red-perimetral.html' },
+  { ico:'precio', titulo:'¿Cuánto puede costar?', texto:'Factores que influyen en el precio.', url:'blog/como-elegir-red-perimetral.html' },
+];
+
+// ---------------- INICIO: proyectos realizados (solo trabajos reales, sin inventar clientes) ----------------
+const PROYECTOS_INICIO = [
+  { foto:'blog/como-elegir-red-perimetral/como-elegir-red-perimetral-foto-1.jpg', etiqueta:'Redes de contención', titulo:'Hotel Chablé', texto:'Redes de contención para golf.' },
+  { foto:'trabajos/cancha-multiusos-perimetral.jpg', etiqueta:'Redes perimetrales', titulo:'Cancha multiusos', texto:'Red perimetral negra para cerrar una cancha multiusos.' },
+  { foto:'trabajos/cancha-futbol-perimetral.jpg', etiqueta:'Redes perimetrales', titulo:'Cancha de fútbol', texto:'Cerramiento con red perimetral en cancha de pasto sintético.' },
+  { foto:'trabajos/estructura-red-altura.jpg', etiqueta:'Redes de altura', titulo:'Red sobre muro', texto:'Red perimetral de altura instalada sobre muro.' },
+  { foto:'trabajos/red-perimetral-campo.jpg', etiqueta:'Redes perimetrales', titulo:'Campo abierto', texto:'Red perimetral para delimitar un campo deportivo.' },
 ];
 
 // ---------------- CLIENTES SATISFECHOS ----------------

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog | Grupo RC</title>
-<meta name="description" content="Guías y artículos sobre redes perimetrales, deportivas y de protección — Grupo RC.">
+<meta name="description" content="Guías de Redes Deportivas RC: cómo elegir una red perimetral, aberturas de 1 a 4 pulgadas, instalación paso a paso y errores al comprar redes deportivas.">
 <link rel="canonical" href="/blog.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
   <div class="envolvente">
     <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Blog</div>
     <h1>Blog.</h1>
-    <p>Guías prácticas para elegir, instalar y mantener tus redes. Estamos preparando las primeras; mientras tanto, pregúntanos lo que necesites por WhatsApp.</p>
+    <p>Guías prácticas de Reinier Coral para elegir, instalar y aprovechar tus redes deportivas.</p>
   </div>
 </section>
 
@@ -35,9 +35,7 @@
 <script>
   renderHeader('blog');
   renderFooter();
-  // Mientras los artículos no tengan texto real, se muestran como "Próximamente" y no llevan a ninguna parte.
-  document.getElementById('cont-blog').innerHTML = BLOG_POSTS.map(b=>esMarcador(b.contenido) ? `
-    <div class="tarjeta-blog">${fotoOMarcador(null, b.titulo)}<div class="tarjeta-blog-body"><span>${b.categoria} · Próximamente</span><h3>${b.titulo}</h3></div></div>` : renderBlogCard(b)).join('');
+  document.getElementById('cont-blog').innerHTML = BLOG_POSTS.map(renderBlogCard).join('');
 </script>
 </body>
 </html>

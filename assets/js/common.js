@@ -10,20 +10,41 @@ function rutaBase(){
   return document.body.dataset.nivel === 'sub' ? '../' : '';
 }
 
+// Íconos de línea en azul de marca (fortalezas, asesoría, botones).
+const _sv = (d)=>`<svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const ICONOS = {
+  trofeo: _sv('<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"/>'),
+  camion: _sv('<path d="M2 6h12v10H2zM14 9h4l4 4v3h-8z"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><path d="M1 9h5M1 12h4"/>'),
+  herramientas: _sv('<path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L3 17.7 6.3 21l6.3-6.3a4 4 0 0 0 5.1-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>'),
+  escuadra: _sv('<path d="M3 21V3l18 18z"/><path d="M7 17v-4l4 4zM3 8h2M3 12h2M8 21v-2M12 21v-2"/>'),
+  casco: _sv('<path d="M4 15a8 8 0 0 1 16 0"/><path d="M2 15h20v2H2zM10 7V4h4v3"/><path d="M8 17v1a4 4 0 0 0 8 0v-1"/>'),
+  carrito: _sv('<path d="M3 4h2l2.4 11h11.2L21 7H6.2"/><circle cx="9" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/><path d="M10 10h8M11 13h6"/>'),
+  red: _sv('<path d="M3 3h18v18H3z"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>'),
+  precio: _sv('<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M12.5 10.5c-.4-.6-1-.9-1.8-.9-1 0-1.7.6-1.7 1.4 0 1.9 3.6 1 3.6 3 0 .8-.8 1.5-1.9 1.5-.8 0-1.5-.4-1.9-1M10.8 8.6v1M10.8 15.5v1"/>'),
+  whatsapp: '<svg viewBox="0 0 32 32" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M16 2.7C8.6 2.7 2.7 8.6 2.7 16c0 2.4.6 4.6 1.8 6.7l-1.9 6.9 7.1-1.9c2 1.1 4.2 1.6 6.4 1.6 7.4 0 13.3-6 13.3-13.3S23.4 2.7 16 2.7zm0 24.3c-2 0-4-.5-5.7-1.6l-.4-.2-4.2 1.1 1.1-4.1-.3-.4A11 11 0 1 1 16 27z"/><path d="M22.1 18.8c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.3-.7.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6l-1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.4 3.7 5.9 5.2 2.2.9 3.1 1 4.2.8.7-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"/></svg>',
+};
+
 function renderHeader(activo){
   const base = rutaBase();
   document.getElementById('site-header').innerHTML = `
     <header class="site">
       <div class="envolvente">
-        <a href="${base}index.html" class="logo"><img src="${base}assets/img/logo-160.png" class="logo-marca"> ${EMPRESA.nombre}</a>
+        <a href="${base}index.html" class="logo"><img src="${base}assets/img/logo-160.png" class="logo-marca" alt="Grupo RC" width="58" height="58"> ${EMPRESA.nombre}</a>
         <nav class="principal">
-          <a href="${base}productos.html" class="${activo==='productos'?'activo':''}">Productos</a>
+          <div class="nav-menu">
+            <a href="${base}productos.html" class="${activo==='productos'?'activo':''}">Productos <span class="flechita">▾</span></a>
+            <div class="nav-sub">${CATEGORIAS.map(c=>`<a href="${urlCategoria(c.slug)}">${c.nombre}</a>`).join('')}<a href="${base}productos.html"><b>Ver todo el catálogo</b></a></div>
+          </div>
           <a href="${base}clientes.html" class="${activo==='clientes'?'activo':''}">Clientes</a>
           <a href="${base}galeria.html" class="${activo==='galeria'?'activo':''}">Galería</a>
           <a href="${base}blog.html" class="${activo==='blog'?'activo':''}">Blog</a>
-          <a href="${base}recursos.html" class="${activo==='recursos'?'activo':''}">Recursos</a>
+          <div class="nav-menu">
+            <a href="${base}recursos.html" class="${activo==='recursos'?'activo':''}">Recursos <span class="flechita">▾</span></a>
+            <div class="nav-sub"><a href="${base}recursos.html">Descargas</a><a href="${base}videos.html">Videos</a><a href="${base}proyectos.html">Proyectos</a><a href="${base}contacto.html">Contacto</a></div>
+          </div>
           <a href="${base}nosotros.html" class="${activo==='nosotros'?'activo':''}">Nosotros</a>
         </nav>
+        <a class="btn btn-asesor" href="https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent('Hola, vi su página y quiero hablar con un asesor.')}" target="_blank" rel="noopener">${ICONOS.whatsapp} <span>Habla con un asesor</span></a>
         <button class="menu-movil-btn" id="btn-menu-movil">☰</button>
       </div>
     </header>
@@ -191,15 +212,75 @@ function renderProjectCard(pr){
 }
 
 function renderBlogCard(b){
+  const base = rutaBase();
   return `
-    <a class="tarjeta-blog" href="${rutaBase()}blog.html#${b.slug}">
-      ${fotoOMarcador(b.imagen, b.titulo)}
+    <a class="tarjeta-blog" href="${base}${b.url || 'blog.html'}">
+      <div class="tarjeta-blog-foto">${b.imagen && esUrl(b.imagen) ? `<img src="${base}${b.imagen}" alt="${b.titulo}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'foto-ph'}))">` : fotoOMarcador(null, b.titulo)}
+        <span class="chip-cat">${b.categoria}</span></div>
       <div class="tarjeta-blog-body">
-        <span>${b.categoria}</span>
         <h3>${b.titulo}</h3>
         <p>${b.extracto}</p>
+        ${b.minutos ? `<small>📖 ${b.minutos} min de lectura</small>` : ''}
       </div>
     </a>`;
+}
+
+// "Sigue leyendo" al final de cada artículo: 3 artículos distintos al actual.
+function renderRelacionados(contId, slugActual){
+  const cont = document.getElementById(contId);
+  if(!cont) return;
+  const i = BLOG_POSTS.findIndex(b=>b.slug===slugActual);
+  const otros = BLOG_POSTS.filter(b=>b.slug!==slugActual);
+  const desde = Math.max(0, i) % Math.max(1, otros.length);
+  cont.innerHTML = [...otros.slice(desde), ...otros.slice(0, desde)].slice(0,3).map(renderBlogCard).join('');
+}
+
+// Inicio: tarjetas de producto con foto de fondo y título encima (maqueta).
+function renderProductosInicio(contId){
+  const cont = document.getElementById(contId);
+  if(!cont) return;
+  cont.innerHTML = PRODUCTOS_INICIO.map(p=>`
+    <a class="producto-foto" href="${urlCategoria(p.slug)}">
+      ${p.foto ? `<img src="assets/img/${p.foto}" alt="${p.titulo} · Grupo RC" loading="lazy">` : '<div class="foto-ph"></div>'}
+      <div class="producto-foto-texto"><h3>${p.titulo}</h3><p>${p.texto}</p></div>
+      <span class="circulo-flecha" aria-hidden="true">→</span>
+    </a>`).join('');
+}
+
+// Inicio: preguntas de asesoría que llevan a su artículo del blog.
+function renderAsesoria(contId){
+  const cont = document.getElementById(contId);
+  if(!cont) return;
+  cont.innerHTML = ASESORIA.map(a=>`
+    <a class="asesoria-item" href="${a.url}">
+      <div class="asesoria-ico">${ICONOS[a.ico]}</div>
+      <b>${a.titulo}</b><span>${a.texto}</span>
+    </a>`).join('');
+}
+
+// Inicio: carrusel de proyectos reales.
+function renderProyectosInicio(contId){
+  const cont = document.getElementById(contId);
+  if(!cont) return;
+  cont.innerHTML = PROYECTOS_INICIO.map(p=>`
+    <div class="proyecto-tarjeta">
+      <div class="proyecto-tarjeta-foto"><img src="assets/img/${p.foto}" alt="${p.titulo} · Grupo RC" loading="lazy"><span class="chip-cat">${p.etiqueta}</span></div>
+      <div class="proyecto-tarjeta-body"><h3>${p.titulo}</h3><p>${p.texto}</p></div>
+    </div>`).join('');
+  agregarFlechas(cont);
+}
+
+// Flechas ‹ › debajo de una fila deslizable (solo si no caben todas las tarjetas).
+function agregarFlechas(cont){
+  cont.parentNode.querySelector(':scope > .testimonios-nav[data-de="'+cont.id+'"]')?.remove();
+  if(cont.scrollWidth <= cont.clientWidth + 4) return;
+  const nav = document.createElement('div');
+  nav.className = 'testimonios-nav'; nav.dataset.de = cont.id;
+  nav.innerHTML = '<button type="button" aria-label="Anteriores">‹</button><button type="button" aria-label="Siguientes">›</button>';
+  const paso = ()=> (cont.firstElementChild?.offsetWidth || 300) + 16;
+  nav.children[0].onclick = ()=> cont.scrollBy({ left:-paso(), behavior:'smooth' });
+  nav.children[1].onclick = ()=> cont.scrollBy({ left: paso(), behavior:'smooth' });
+  cont.after(nav);
 }
 
 function renderClientCard(c){
@@ -374,7 +455,7 @@ function iniciarHeroSlider(contId, slides){
         <p>${s.texto}</p>
         <div class="hs-botones">
           <a href="https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent('Hola, vi su página y quiero cotizar.')}" target="_blank" rel="noopener" class="btn btn-wa">💬 Cotizar por WhatsApp</a>
-          <a href="${base}${s.boton.url}" class="btn btn-linea" style="color:#fff;">${s.boton.texto}</a>
+          <a href="${/^(tel:|https?:)/.test(s.boton.url) ? s.boton.url : base+s.boton.url}" class="btn btn-linea" style="color:#fff;">${s.boton.texto}</a>
         </div>
       </div>
     </div>`).join('') + `
@@ -406,7 +487,7 @@ function iniciarHeroSlider(contId, slides){
 
 function renderFortalezas(contId){
   const cont = document.getElementById(contId);
-  if(cont) cont.innerHTML = FORTALEZAS.map(f=>`<div class="fortaleza"><div class="ico">${f.ico}</div><b>${f.titulo}</b><span>${f.texto}</span></div>`).join('');
+  if(cont) cont.innerHTML = FORTALEZAS.map(f=>`<div class="fortaleza"><div class="ico">${ICONOS[f.ico] || f.ico}</div><b>${f.titulo}</b><span>${f.texto}</span></div>`).join('');
 }
 
 // Comentarios reales de clientes (TESTIMONIOS en data.js). En el sitio publicado, si no hay
@@ -451,17 +532,7 @@ function renderTestimonios(contId, seccionId, soloInicio){
     if(p.scrollHeight > p.clientHeight + 2) btn.hidden = false;
     btn.addEventListener('click', ()=>{ btn.textContent = card.classList.toggle('abierto') ? 'Ver menos' : 'Ver más'; });
   });
-  // Flechas para recorrer la fila (solo si hay más tarjetas de las que caben)
-  cont.parentNode.querySelector('.testimonios-nav')?.remove();
-  if(cont.scrollWidth > cont.clientWidth + 4){
-    const nav = document.createElement('div');
-    nav.className = 'testimonios-nav';
-    nav.innerHTML = '<button type="button" aria-label="Anteriores">‹</button><button type="button" aria-label="Siguientes">›</button>';
-    const paso = ()=> (cont.querySelector('.testimonio')?.offsetWidth || 300) + 16;
-    nav.children[0].onclick = ()=> cont.scrollBy({ left:-paso(), behavior:'smooth' });
-    nav.children[1].onclick = ()=> cont.scrollBy({ left: paso(), behavior:'smooth' });
-    cont.after(nav);
-  }
+  agregarFlechas(cont);
   const resumen = document.getElementById(contId+'-resumen');
   if(resumen && typeof RESUMEN_OPINIONES !== 'undefined'){
     resumen.innerHTML = `${iconoFb} <b>Recomendado por el ${RESUMEN_OPINIONES.facebookPct}%</b> en Facebook · ${RESUMEN_OPINIONES.facebookTotal} opiniones`;
