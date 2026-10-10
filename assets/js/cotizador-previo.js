@@ -165,6 +165,14 @@
   };
 
   // ---- Porterías completas ----
+  // Acabados que se ofrecen (Reinier 2026-10-10): galvanizada siempre; acojinada solo de Microbio para abajo.
+  // Pintada de blanco NO se ofrece: solo si el cliente la pide (lo escribe en comentarios).
+  const ACOJINABLES = ['Microbio', 'Juvenil', 'Infantil', 'Mini'];
+  const acabadosDe = (modelo)=> [
+    { v:'galvanizada', t:'Galvanizada' },
+    ...(ACOJINABLES.includes(modelo) ? [{ v:'acojinada', t:'Acojinada', s:'con tus colores' }] : []),
+    { v:'no_se', t:'No sé, recomiéndenme' },
+  ];
   PRODUCTOS.porterias = {
     nombre:'porterías',
     inicial: ()=>({ modelo:null, trav:'', poste:'', cantidad:'2', acabado:null }),
@@ -175,8 +183,12 @@
       if(st.modelo === 'Personalizada') h += `<div class="cp-campos cp-c2">${medida('trav','Ancho (de poste a poste)',st.trav)}${medida('poste','Alto',st.poste)}</div>`;
       h += `<div class="cp-campos cp-c2">${cantidad('cantidad','Piezas (2 = un par)',st.cantidad)}</div>
         <h4 class="cp-sub">Selecciona el acabado</h4>
-        ${chips('acabado', [{v:'galvanizada',t:'Galvanizada'},{v:'blanca',t:'Pintada de blanco'},{v:'acojinada',t:'Acojinada',s:'con tus colores'},{v:'no_se',t:'No sé'}], st.acabado)}`;
+        ${chips('acabado', acabadosDe(st.modelo), st.acabado)}`;
       return h;
+    },
+    // Si cambia a un modelo grande, "acojinada" ya no aplica.
+    alElegir(st, grupo){
+      if(grupo === 'modelo' && st.acabado && !acabadosDe(st.modelo).some(a=> a.v === st.acabado)) st.acabado = null;
     },
     calcular(st){
       const n = ent(st.cantidad);
@@ -186,7 +198,7 @@
       if(esp && !(num(st.trav) && num(st.poste))) return { listo:false };
       const item = { tipo:'porteria_completa', modelo:st.modelo, cantidad:n };
       if(esp){ item.trav = num(st.trav); item.poste = num(st.poste); }
-      const ACAB = { galvanizada:'galvanizada', blanca:'pintada de blanco', acojinada:'acojinada', no_se:'acabado por definir' };
+      const ACAB = { galvanizada:'galvanizada', acojinada:'acojinada', no_se:'acabado por definir' };
       return {
         listo:true, items:[item],
         lineas:[`${pz(n,'portería','porterías')} ${esp ? `de medida especial ${fmt(item.trav)} × ${fmt(item.poste)} m` : `${m.t} (${m.s})`}${st.acabado ? ' · ' + ACAB[st.acabado] : ''}`],
@@ -201,9 +213,12 @@
     inicial: ()=>({ modelo:null, cantidad:'2', trav:'', poste:'', psup:'', pinf:'', color:'' }),
     pintar(st){
       return `<h3 class="cp-titulo"><span class="cp-num">1</span>Ingresa las medidas de tu portería</h3>
-        <p class="cp-ayuda">Si tu portería es de una medida estándar, tócala y llenamos las medidas por ti. Si no, mídela.</p>
+        <p class="cp-ayuda">Si tu portería es de una medida estándar, tócala y llenamos las medidas por ti. Si no, mídela como en la imagen.</p>
         ${chips('modelo', [...MODELOS_PORTERIA, { v:'otra', t:'Otra medida' }], st.modelo)}
-        <div class="cp-campos cp-c4">${medida('trav','Travesaño (ancho)',st.trav)}${medida('poste','Poste (alto)',st.poste)}${medida('psup','Profundidad arriba',st.psup)}${medida('pinf','Profundidad abajo',st.pinf)}</div>
+        <div class="cp-medir">
+          <img src="${rutaBase()}assets/img/cotizar/medidas-red-porteria-travesano-poste-profundidad.webp" alt="Cómo medir una portería para cotizar su red: A travesaño (ancho), B poste (altura), C profundidad superior y D profundidad inferior" width="800" height="800" loading="lazy">
+          <div class="cp-campos cp-c2">${medida('trav','A · Travesaño (ancho)',st.trav)}${medida('poste','B · Poste (altura)',st.poste)}${medida('psup','C · Profundidad superior',st.psup)}${medida('pinf','D · Profundidad inferior',st.pinf)}</div>
+        </div>
         <div class="cp-campos cp-c2">${cantidad('cantidad','Redes (2 = un par)',st.cantidad)}<div><label>Color (opcional)</label><input type="text" maxlength="40" data-campo="color" value="${esc(st.color)}"></div></div>`;
     },
     alElegir(st, grupo, valor){
