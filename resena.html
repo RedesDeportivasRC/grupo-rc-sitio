@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Califica tu experiencia | Redes Deportivas RC</title>
+<meta name="description" content="Cuéntanos cómo te fue con tu red, portería o instalación de Redes Deportivas RC.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+<style>
+  .resena-caja{max-width:560px;margin:0 auto;background:#fff;border-radius:18px;box-shadow:0 14px 40px rgba(10,26,36,.12);padding:28px 24px;}
+  .estrellas{display:flex;justify-content:center;gap:6px;margin:16px 0 4px;}
+  .estrellas button{-webkit-tap-highlight-color:transparent;outline:none;background:none;border:none;cursor:pointer;font-size:2.6rem;line-height:1;color:#d5dde2;padding:2px;transition:transform .15s;}
+  .estrellas button.on{color:#f5b400;}
+  .estrellas button:active{transform:scale(.9);}
+  .estrellas-texto{text-align:center;color:var(--gris);font-size:.9rem;min-height:1.3em;}
+  #paso-datos{display:none;margin-top:18px;}
+  #paso-datos.visible{display:grid;}
+  .resena-gracias{text-align:center;display:none;}
+  .resena-gracias h2{font-size:1.6rem;margin-bottom:8px;}
+  .resena-gracias p{color:var(--gris);}
+  .resena-gracias .btn{margin-top:18px;justify-content:center;}
+  .btn-fb{background:#1877F2;color:#fff;}
+  .resena-error{color:#c0392b;font-size:.88rem;display:none;}
+  @media (max-width:720px){ .resena-caja{padding:22px 16px;} .estrellas button{font-size:2.3rem;} }
+</style>
+</head>
+<body data-nivel="raiz">
+<div id="site-header"></div>
+
+<section class="hero-interior">
+  <div class="envolvente">
+    <h1>¿Cómo te fue con nosotros?</h1>
+    <p>Tu opinión nos ayuda a mejorar y a que más gente conozca nuestro trabajo. Te toma un minuto.</p>
+  </div>
+</section>
+
+<section class="franja" style="background:var(--hueso);">
+  <div class="envolvente">
+    <div class="resena-caja">
+      <div id="paso-form">
+        <h2 style="font-size:1.35rem;text-align:center;">Califica tu experiencia</h2>
+        <div class="estrellas" id="estrellas" role="radiogroup" aria-label="Calificación de 1 a 5 estrellas">
+          <button type="button" data-v="1" aria-label="1 estrella">★</button>
+          <button type="button" data-v="2" aria-label="2 estrellas">★</button>
+          <button type="button" data-v="3" aria-label="3 estrellas">★</button>
+          <button type="button" data-v="4" aria-label="4 estrellas">★</button>
+          <button type="button" data-v="5" aria-label="5 estrellas">★</button>
+        </div>
+        <div class="estrellas-texto" id="estrellas-texto">Toca las estrellas</div>
+
+        <form class="form-contacto" id="paso-datos" autocomplete="on">
+          <input type="text" name="sitioWeb" id="r-honeypot" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;">
+          <div class="fila-2">
+            <div><label for="r-nombre">Tu nombre</label><input type="text" id="r-nombre" autocomplete="name" required></div>
+            <div><label for="r-ciudad">Ciudad (opcional)</label><input type="text" id="r-ciudad" autocomplete="address-level2"></div>
+          </div>
+          <div><label for="r-producto">¿Qué compraste? (opcional)</label>
+            <select id="r-producto"><option value="">Elige una opción</option></select></div>
+          <div><label for="r-comentario">Tu comentario</label>
+            <textarea id="r-comentario" placeholder="¿Qué te pareció la red, la atención, el envío o la instalación?"></textarea></div>
+          <div><label for="r-telefono">Teléfono (opcional, no se publica)</label><input type="tel" id="r-telefono" autocomplete="tel"></div>
+          <p class="resena-error" id="r-error"></p>
+          <button type="submit" class="btn btn-azul" id="r-enviar" style="justify-content:center;">Enviar mi opinión</button>
+          <p style="font-size:.78rem;color:var(--gris);text-align:center;">Podemos publicar tu nombre, ciudad y comentario en nuestra página.</p>
+        </form>
+      </div>
+
+      <div class="resena-gracias" id="gracias-5">
+        <div style="font-size:2.4rem;">🙌</div>
+        <h2>¡Muchas gracias!</h2>
+        <p>Nos alegra mucho que te haya gustado. ¿Nos ayudas a que más gente nos conozca dejando tu recomendación en nuestra página de Facebook?</p>
+        <button type="button" class="btn btn-linea" id="btn-copiar" style="width:100%;">📋 Copiar mi comentario</button>
+        <a class="btn btn-fb" id="btn-facebook" target="_blank" rel="noopener" style="width:100%;">Recomendar en Facebook</a>
+      </div>
+
+      <div class="resena-gracias" id="gracias">
+        <div style="font-size:2.4rem;">🤝</div>
+        <h2>¡Gracias por tu opinión!</h2>
+        <p>La leemos con atención. Si hay algo que podamos resolver, te buscaremos.</p>
+        <a class="btn btn-azul" href="clientes.html#opiniones" style="width:100%;">Ver opiniones de clientes</a>
+      </div>
+
+      <div class="resena-gracias" id="falla">
+        <h2>No se pudo enviar</h2>
+        <p>Algo falló de nuestro lado. Puedes mandarnos tu opinión por WhatsApp y nosotros la registramos.</p>
+        <a class="btn btn-wa" id="btn-wa-falla" target="_blank" rel="noopener" style="width:100%;">💬 Enviar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+renderHeader('clientes');
+renderFooter();
+
+const TEXTOS = ['', 'Muy mala', 'Mala', 'Regular', 'Buena', '¡Excelente!'];
+let calif = 0;
+const botones = [...document.querySelectorAll('#estrellas button')];
+const pintar = v => botones.forEach(b => b.classList.toggle('on', +b.dataset.v <= v));
+botones.forEach(b => {
+  b.addEventListener('click', () => {
+    calif = +b.dataset.v; pintar(calif);
+    document.getElementById('estrellas-texto').textContent = TEXTOS[calif];
+    document.getElementById('paso-datos').classList.add('visible');
+  });
+  b.addEventListener('mouseenter', () => pintar(+b.dataset.v));
+});
+document.getElementById('estrellas').addEventListener('mouseleave', () => pintar(calif));
+
+const sel = document.getElementById('r-producto');
+CATEGORIAS.forEach(c => sel.insertAdjacentHTML('beforeend', `<option>${c.nombre}</option>`));
+sel.insertAdjacentHTML('beforeend', '<option>Instalación</option><option>Otro</option>');
+
+const urlFacebook = EMPRESA.redes.facebook.replace(/\/$/, '') + '/reviews';
+const mostrar = id => { document.getElementById('paso-form').style.display = 'none'; const el = document.getElementById(id); el.style.display = 'block'; el.scrollIntoView({behavior:'smooth', block:'center'}); };
+
+document.getElementById('paso-datos').addEventListener('submit', async e => {
+  e.preventDefault();
+  const err = document.getElementById('r-error'); err.style.display = 'none';
+  const datos = {
+    nombre: document.getElementById('r-nombre').value.trim(),
+    ciudad: document.getElementById('r-ciudad').value.trim(),
+    producto: sel.value,
+    comentario: document.getElementById('r-comentario').value.trim(),
+    telefono: document.getElementById('r-telefono').value.trim(),
+    estrellas: calif,
+    sitioWeb: document.getElementById('r-honeypot').value,
+  };
+  if (!calif || !datos.nombre) { err.textContent = 'Elige las estrellas y escribe tu nombre.'; err.style.display = 'block'; return; }
+  const btn = document.getElementById('r-enviar'); btn.disabled = true; btn.textContent = 'Enviando…';
+  try {
+    const r = await fetch('/api/resena', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) });
+    if (!r.ok) throw new Error();
+    if (calif === 5) {
+      document.getElementById('btn-facebook').href = urlFacebook;
+      document.getElementById('btn-copiar').onclick = async ev => {
+        try { await navigator.clipboard.writeText(datos.comentario || '¡Excelente servicio, muy recomendados!'); ev.target.textContent = '✓ Comentario copiado, pégalo en Facebook'; } catch (_) {}
+      };
+      if (!datos.comentario) document.getElementById('btn-copiar').style.display = 'none';
+      mostrar('gracias-5');
+    } else {
+      mostrar('gracias');
+    }
+  } catch (_) {
+    const texto = `Hola, quiero dejar mi opinión: ${'★'.repeat(calif)}${'☆'.repeat(5 - calif)}\nNombre: ${datos.nombre}${datos.ciudad ? '\nCiudad: ' + datos.ciudad : ''}${datos.producto ? '\nCompré: ' + datos.producto : ''}${datos.comentario ? '\nComentario: ' + datos.comentario : ''}`;
+    document.getElementById('btn-wa-falla').href = `https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent(texto)}`;
+    mostrar('falla');
+  }
+});
+</script>
+</body>
+</html>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Opiniones de clientes de redes deportivas y perimetrales | Redes Deportivas RC</title>
-<meta name="description" content="Escuelas, hoteles, clubes y empresas que confían en Grupo RC para sus redes perimetrales y deportivas.">
+<title>Clientes y proyectos de redes deportivas en Yucatán | Redes Deportivas RC</title>
+<meta name="description" content="Universidad Modelo, Hotel Chablé, Domo Morelos, escuelas y colegios de Yucatán que confían en Redes Deportivas RC: redes perimetrales, porterías, redes antipalomas y opiniones de clientes.">
 <link rel="canonical" href="https://www.redesdeportivasrc.com/clientes.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,40 +17,58 @@
 
 <section class="hero-interior">
   <div class="envolvente">
-    <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Opiniones</div>
-    <h1>Opiniones de nuestros clientes.</h1>
-    <p>Comentarios reales de clientes de redes deportivas, redes perimetrales y porterías en Facebook y Google.</p>
-    <div class="testimonios-resumen" id="cont-testimonios-resumen" style="margin-top:14px;"></div>
+    <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Clientes</div>
+    <h1>Clientes y proyectos.</h1>
+    <p>Escuelas, universidades, hoteles y gobiernos municipales que confiaron en nosotros para sus redes, porterías y canchas.</p>
+    <a href="#opiniones" class="testimonios-resumen" id="cont-testimonios-resumen" style="margin-top:18px;"></a>
   </div>
 </section>
 
-<section class="franja" id="seccion-testimonios">
+<section class="franja">
   <div class="envolvente">
-    <div class="testimonios testimonios-rejilla" id="cont-testimonios"></div>
+    <div class="clientes-lista" id="cont-clientes-rc"></div>
   </div>
 </section>
 
-<section class="franja-chica" style="background:var(--hueso);" id="seccion-clientes" hidden>
+<section class="franja" style="background:var(--azul-osc);" id="opiniones">
   <div class="envolvente">
-    <span class="ojo">Confían en nosotros</span><h2>Algunos de nuestros clientes</h2>
-    <div class="grid-cards g4" id="cont-clientes" style="margin-top:20px;"></div>
+    <span class="ojo">Lo que dicen nuestros clientes</span>
+    <h2 style="color:#fff;">Opiniones</h2>
+    <p style="color:#9fc3d1;margin-top:10px;max-width:60ch;">Comentarios reales de clientes en Facebook y Google.</p>
+    <div class="testimonios testimonios-rejilla" id="cont-testimonios" style="margin-top:26px;"></div>
+    <div style="margin-top:28px;"><a href="resena.html" class="btn btn-azul">⭐ ¿Ya eres cliente? Déjanos tu opinión</a></div>
   </div>
 </section>
 
 <div id="site-footer"></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
 renderHeader('clientes');
 renderFooter();
-renderTestimonios('cont-testimonios', 'seccion-testimonios');
+document.getElementById('cont-clientes-rc').innerHTML = CLIENTES_RC.map((c,i)=>`
+  <article class="cliente-rc" id="${c.slug}">
+    <div class="cliente-rc-fotos">
+      <img src="assets/img/trabajos/${c.fotos[0][0]}" alt="${c.fotos[0][1]}" loading="${i<1?'eager':'lazy'}">
+      ${c.fotos.length>1 ? `<div class="cliente-rc-mini">${c.fotos.slice(1).map(f=>`<img src="assets/img/trabajos/${f[0]}" alt="${f[1]}" loading="lazy">`).join('')}</div>` : ''}
+    </div>
+    <div class="cliente-rc-texto">
+      <span class="cliente-rc-tipo">${c.tipo}</span>
+      <h2>${c.nombre}</h2>
+      <div class="cliente-rc-lugar">📍 ${c.lugar}</div>
+      <p>${c.texto}</p>
+      <div class="cliente-rc-prod">${c.productos.map(pr=>`<a href="productos/${pr[1]}.html">${pr[0]} →</a>`).join('')}</div>
+    </div>
+  </article>`).join('');
+// Tocar una miniatura la pone como foto principal
+document.querySelectorAll('.cliente-rc').forEach(a=>{
+  const grande = a.querySelector('.cliente-rc-fotos > img');
+  a.querySelectorAll('.cliente-rc-mini img').forEach(m=>m.addEventListener('click',()=>{
+    const s=grande.src, al=grande.alt; grande.src=m.src; grande.alt=m.alt; m.src=s; m.alt=al;
+  }));
+});
+renderTestimonios('cont-testimonios', 'opiniones');
 revelar('cont-testimonios');
-obtenerClientes().then(lista=>{
-  if(lista.length < 3) return; // con uno o dos logos se ve vacío; se muestra cuando haya más
-  document.getElementById('cont-clientes').innerHTML = lista.map(renderClientCard).join('');
-  document.getElementById('seccion-clientes').hidden = false;
-}).catch(()=>{});
 </script>
 </body>
 </html>
