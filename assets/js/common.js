@@ -68,20 +68,17 @@ function renderHeader(activo){
           <button id="btn-cerrar-menu-movil" aria-label="Cerrar menú">✕</button>
         </div>
         <a href="${base}index.html" class="mm-item">Inicio</a>
-        <details class="mm-grupo">
-          <summary class="mm-item">Productos</summary>
-          <a href="${base}productos.html" class="mm-sub"><b>Ver todos los productos</b></a>
-          ${CATEGORIAS.map(c=>`<a href="${urlCategoria(c.slug)}" class="mm-sub">${c.nombre}</a>`).join('')}
-        </details>
+        <div class="mm-grupo">
+          <div class="mm-fila"><a href="${base}productos.html" class="mm-item">Productos</a><button type="button" class="mm-flecha" aria-label="Ver productos" aria-expanded="false"></button></div>
+          <div class="mm-lista">${CATEGORIAS.map(c=>`<a href="${urlCategoria(c.slug)}" class="mm-sub">${c.nombre}</a>`).join('')}</div>
+        </div>
         <a href="${base}clientes.html" class="mm-item">Opiniones</a>
         <a href="${base}galeria.html" class="mm-item">Galería</a>
         <a href="${base}blog.html" class="mm-item">Blog</a>
-        <details class="mm-grupo">
-          <summary class="mm-item">Recursos</summary>
-          <a href="${base}recursos.html" class="mm-sub">Descargas</a>
-          <a href="${base}videos.html" class="mm-sub">Videos</a>
-          <a href="${base}proyectos.html" class="mm-sub">Proyectos</a>
-        </details>
+        <div class="mm-grupo">
+          <div class="mm-fila"><a href="${base}recursos.html" class="mm-item">Recursos</a><button type="button" class="mm-flecha" aria-label="Ver recursos" aria-expanded="false"></button></div>
+          <div class="mm-lista"><a href="${base}recursos.html" class="mm-sub">Descargas</a><a href="${base}videos.html" class="mm-sub">Videos</a><a href="${base}proyectos.html" class="mm-sub">Proyectos</a></div>
+        </div>
         <a href="${base}nosotros.html" class="mm-item">Nosotros</a>
         <a href="${base}contacto.html" class="btn btn-azul mm-cta">Cotiza / Contacto</a>
         <a href="tel:${EMPRESA.telefonoHref}" class="mm-tel">📞 ${EMPRESA.telefono}</a>
@@ -102,7 +99,12 @@ function renderHeader(activo){
   const btnMovil = document.getElementById('btn-menu-movil');
   const overlayMovil = document.getElementById('menu-movil-overlay');
   if(btnMovil && overlayMovil){
-    btnMovil.onclick = ()=>{ overlayMovil.style.display = 'block'; };
+    const cerrarGrupos = ()=> overlayMovil.querySelectorAll('.mm-grupo').forEach(g=>{ g.classList.remove('abierto'); g.querySelector('.mm-flecha').setAttribute('aria-expanded','false'); });
+    overlayMovil.querySelectorAll('.mm-flecha').forEach(f=> f.onclick = ()=>{
+      const g = f.closest('.mm-grupo'); const abrir = !g.classList.contains('abierto');
+      g.classList.toggle('abierto', abrir); f.setAttribute('aria-expanded', abrir);
+    });
+    btnMovil.onclick = ()=>{ cerrarGrupos(); overlayMovil.style.display = 'block'; };
     overlayMovil.onclick = (e)=>{ if(e.target === overlayMovil) overlayMovil.style.display = 'none'; };
     document.getElementById('btn-cerrar-menu-movil').onclick = ()=>{ overlayMovil.style.display = 'none'; };
   }
