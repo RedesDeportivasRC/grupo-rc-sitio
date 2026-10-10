@@ -40,7 +40,7 @@ const PRODUCTOS = [
     video:null,
     material:'[PLACEHOLDER — nylon / polietileno / polipropileno, confirmar]',
     calibre:'[PLACEHOLDER]',
-    color:['Blanco','Negro','[otros colores disponibles]'],
+    color:['Negro'],
     medidas:'A la medida — se cotiza por m²',
     usos:['Canchas de fútbol','Fútbol rápido','Fútbol 7','Fútbol 11','Básquetbol','Voleibol','Complejos deportivos','Escuelas','Hoteles','Clubes','Universidades','Construcción','Protección contra caídas','Pajareras','Jaulas','Ganado','Anaqueles','Separación de espacios','Protección industrial'],
     caracteristicas:['Resistente a intemperie','Instalación a la medida','Distintas aberturas de malla (1", 2", 3", 4")'],
@@ -302,7 +302,7 @@ const HERO_SLIDES = [
   { foto:'red-perimetral-campo.jpg', ojo:'Envíos', titulo:'Enviamos a toda la República.', texto:'Tu cotización ya incluye el envío. Estándar a domicilio de 4 a 8 días hábiles, o urgente por aerolínea en 24 a 48 horas.', boton:{ texto:'Cotizar con envío', url:'contacto.html' } },
   { foto:'estructura-red-altura.jpg', ojo:'Asesoría', titulo:'Te asesoramos en la instalación.', texto:'Te decimos qué abertura, qué altura y qué fijación necesitas. En Yucatán la instalamos nosotros.', boton:{ texto:'Pedir asesoría', url:'contacto.html' } },
   { foto:null, ojo:'Porterías', titulo:'Porterías oficiales, fútbol 7 y micro.', texto:'Fabricación artesanal con red hexagonal tipo colmena, el estilo de las porterías europeas.', boton:{ texto:'Ver porterías', url:'productos/porterias.html' } },
-  { foto:'detalle-malla-cancha.jpg', ojo:'Fabricación a la medida', titulo:'Hecha para tu espacio.', texto:'Aberturas de 1", 2", 3" y 4", en blanco o negro.', boton:{ texto:'Cotizar mi red', url:'contacto.html' } },
+  { foto:'detalle-malla-cancha.jpg', ojo:'Fabricación a la medida', titulo:'Hecha para tu espacio.', texto:'Redes perimetrales en color negro, con abertura de 1", 2", 3" o 4" según el uso.', boton:{ texto:'Cotizar mi red', url:'contacto.html' } },
 ];
 
 // ---------------- FORTALEZAS (franja bajo el banner) ----------------
