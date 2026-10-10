@@ -3,25 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clientes — Empresas que confían en nosotros | Grupo RC</title>
+<title>Opiniones de clientes de redes deportivas y perimetrales | Redes Deportivas RC</title>
 <meta name="description" content="Escuelas, hoteles, clubes y empresas que confían en Grupo RC para sus redes perimetrales y deportivas.">
-<link rel="canonical" href="/clientes.html">
+<link rel="canonical" href="https://www.redesdeportivasrc.com/clientes.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="assets/css/styles.css">
+<script src="assets/js/medicion.js"></script>
 </head>
 <body data-nivel="raiz">
 <div id="site-header"></div>
 
 <section class="hero-interior">
   <div class="envolvente">
-    <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Clientes</div>
-    <h1>Empresas que confían en nosotros.</h1>
-    <p>[PLACEHOLDER] Logos y testimonios pendientes de autorización para publicar.</p>
+    <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Opiniones</div>
+    <h1>Opiniones de nuestros clientes.</h1>
+    <p>Comentarios reales de clientes de redes deportivas, redes perimetrales y porterías en Facebook y Google.</p>
+    <div class="testimonios-resumen" id="cont-testimonios-resumen" style="margin-top:14px;"></div>
   </div>
 </section>
 
-<section class="franja">
+<section class="franja" id="seccion-testimonios">
   <div class="envolvente">
-    <div class="grid-cards g4" id="cont-clientes"></div>
+    <div class="testimonios testimonios-rejilla" id="cont-testimonios"></div>
+  </div>
+</section>
+
+<section class="franja-chica" style="background:var(--hueso);" id="seccion-clientes" hidden>
+  <div class="envolvente">
+    <span class="ojo">Confían en nosotros</span><h2>Algunos de nuestros clientes</h2>
+    <div class="grid-cards g4" id="cont-clientes" style="margin-top:20px;"></div>
   </div>
 </section>
 
@@ -30,11 +42,15 @@
 <script src="assets/js/data.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
-(async ()=>{
-  renderHeader('clientes');
-  renderFooter();
-  document.getElementById('cont-clientes').innerHTML = (await obtenerClientes()).map(renderClientCard).join('');
-})();
+renderHeader('clientes');
+renderFooter();
+renderTestimonios('cont-testimonios', 'seccion-testimonios');
+revelar('cont-testimonios');
+obtenerClientes().then(lista=>{
+  if(lista.length < 3) return; // con uno o dos logos se ve vacío; se muestra cuando haya más
+  document.getElementById('cont-clientes').innerHTML = lista.map(renderClientCard).join('');
+  document.getElementById('seccion-clientes').hidden = false;
+}).catch(()=>{});
 </script>
 </body>
 </html>

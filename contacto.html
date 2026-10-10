@@ -3,11 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contacto — Pide tu cotización | Grupo RC</title>
+<title>Cotiza redes deportivas y perimetrales en Mérida | Redes Deportivas RC</title>
 <meta name="description" content="Contáctanos para cotizar tu red perimetral, red deportiva o portería. Teléfono, WhatsApp y formulario de cotización.">
-<link rel="canonical" href="/contacto.html">
+<link rel="canonical" href="https://www.redesdeportivasrc.com/contacto.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="assets/css/styles.css">
-<script src="https://www.google.com/recaptcha/api.js?render=RECAPTCHA_SITE_KEY"></script>
+<script src="assets/js/medicion.js"></script>
 </head>
 <body data-nivel="raiz">
 <div id="site-header"></div>
@@ -42,6 +45,7 @@
           <div><b style="display:block;">Horario</b><span id="dato-horario" style="color:var(--gris);font-size:.88rem;"></span></div>
         </div>
       </div>
+      <div id="mapa-contacto"></div>
     </div>
     <form class="form-contacto" id="form-contacto" autocomplete="on">
       <input type="text" name="sitioWeb" id="c-honeypot" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;">
@@ -134,7 +138,7 @@
   });
 
   try{
-    renderHeader('contacto'); renderFooter();
+    renderHeader('contacto'); renderFooter(); renderMapa('mapa-contacto');
     document.getElementById('dato-telefono').textContent = EMPRESA.telefono;
     document.getElementById('dato-correo').textContent = EMPRESA.correo;
     document.getElementById('dato-direccion').textContent = EMPRESA.direccion + ' · envíos a todo México';

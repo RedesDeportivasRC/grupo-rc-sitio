@@ -3,10 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Videos destacados | Grupo RC</title>
+<title>Videos de instalación de redes deportivas | Redes Deportivas RC</title>
 <meta name="description" content="Videos de instalaciones, fabricación y proyectos de Grupo RC.">
-<link rel="canonical" href="/videos.html">
+<link rel="canonical" href="https://www.redesdeportivasrc.com/videos.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="assets/css/styles.css">
+<script src="assets/js/medicion.js"></script>
 </head>
 <body data-nivel="raiz">
 <div id="site-header"></div>
@@ -31,7 +35,18 @@
 <script>
   renderHeader('videos');
   renderFooter();
-  document.getElementById('cont-videos').innerHTML = VIDEOS.map(v=>`
+  // Mientras no haya videos con liga real, se manda a los canales donde ya están publicados.
+  const videosReales = VIDEOS.filter(v=>v.url);
+  if(!videosReales.length){
+    document.getElementById('cont-videos').outerHTML = `
+      <div class="banner-ancho">
+        <div><h2>Mira nuestros videos</h2><p>Instalaciones, fabricación y proyectos reales. Publicamos en YouTube y en Facebook.</p></div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="${EMPRESA.redes.youtube}" target="_blank" rel="noopener" class="btn btn-azul">Ver en YouTube</a>
+          <a href="${EMPRESA.redes.facebook}" target="_blank" rel="noopener" class="btn btn-blanco">Ver en Facebook</a>
+        </div>
+      </div>`;
+  }else document.getElementById('cont-videos').innerHTML = videosReales.map(v=>`
     <div>
       <div style="position:relative;border-radius:14px;overflow:hidden;">
         <div class="foto-ph oscuro" style="min-height:200px;"><span>${v.titulo}</span></div>

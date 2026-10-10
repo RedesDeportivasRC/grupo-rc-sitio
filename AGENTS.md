@@ -75,3 +75,19 @@ detente y repórtalo — no decidas por tu cuenta cuál versión es la correcta.
 `panel-directivo-rc/docs`: `RC-BRAIN.md`, `ai/AI-RULES.md`, `ai/DECISIONS.md`, `ai/AGENTS.md`,
 `brand/BRAND.md`, `business/BUSINESS.md`, `products/PRODUCTS.md`. Si no tienes acceso, este
 archivo ya cubre lo necesario para una tarea normal.
+
+## Anuncios y medición (agregado 2026-10-08)
+
+- `/lp/*.html` son páginas de aterrizaje para anuncios (Google Ads / Meta): sin menú, `noindex`,
+  WhatsApp y formulario arriba. Comparten `assets/js/landing.js`; cada página solo define su
+  producto, mensaje de WhatsApp y textos.
+- `assets/js/medicion.js` va en el `<head>` de todas las páginas. Cuenta como conversión los clics
+  a WhatsApp, a teléfono y los formularios enviados. Los identificadores (Google Ads y píxel de
+  Meta) se llenan en el objeto `MEDICION`; vacíos = no se carga nada externo.
+- Las tipografías se cargan con `<link>` en el `<head>` de cada página, no con `@import` en el CSS.
+- Textos "[PLACEHOLDER …]" / "[EJEMPLO …]" nunca se muestran: `esMarcador()` en common.js los oculta y
+  donde falta foto se pinta el recuadro de marca (`.foto-ph`). Al cargar datos reales desaparecen solos.
+- Banner del Inicio, fortalezas, fotos reales y comentarios de clientes viven en data.js
+  (`HERO_SLIDES`, `FORTALEZAS`, `FOTOS_TRABAJOS`, `TESTIMONIOS`). `TESTIMONIOS` solo lleva comentarios
+  reales copiados de Facebook o Google (nombre + inicial); `inicio:true` = sale en Inicio; vacío = la sección se oculta.
+- Mapa: `renderMapa(id)` usa `EMPRESA.mapaBusqueda` (iframe sin llave de API) y `EMPRESA.mapaUrl` (botón "Cómo llegar").

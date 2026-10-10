@@ -3,10 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nosotros | Grupo RC</title>
+<title>Nosotros: fabricantes de redes deportivas en Yucatán | Redes Deportivas RC</title>
 <meta name="description" content="Grupo RC — más de 25 años de experiencia en redes deportivas y soluciones de protección para espacios deportivos en México.">
-<link rel="canonical" href="/nosotros.html">
+<link rel="canonical" href="https://www.redesdeportivasrc.com/nosotros.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="assets/css/styles.css">
+<script src="assets/js/medicion.js"></script>
 </head>
 <body data-nivel="raiz">
 <div id="site-header"></div>
@@ -22,7 +26,7 @@
 <!-- Quiénes somos -->
 <section class="franja">
   <div class="envolvente grid-responsive-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;">
-    <div class="foto-ph" style="min-height:340px;"><span>Foto — equipo / taller / instalación</span></div>
+    <img src="assets/img/trabajos/red-perimetral-negra-cancha-multiusos-basquetbol.jpg" alt="Red perimetral negra con postes en una cancha multiusos de básquetbol" loading="lazy" style="width:100%;height:440px;object-fit:cover;border-radius:var(--radio);">
     <div>
       <span class="ojo">Quiénes somos</span>
       <h2>Más de 25 años de experiencia.</h2>
@@ -69,6 +73,19 @@
   </div>
 </section>
 
+<!-- Dónde estamos -->
+<section class="franja" id="ubicacion">
+  <div class="envolvente nosotros-ubicacion">
+    <div>
+      <span class="ojo">Dónde estamos</span>
+      <h2>Taller de redes deportivas en Mérida, Yucatán</h2>
+      <p class="kicker">Fabricamos en Mérida y enviamos a todo México. En Yucatán también instalamos.</p>
+      <ul class="datos-empresa" id="datos-empresa"></ul>
+    </div>
+    <div id="mapa-nosotros"></div>
+  </div>
+</section>
+
 <section class="franja-chica" style="background:var(--hueso);">
   <div class="envolvente centrado" style="max-width:600px;">
     <h2>¿Tienes un espacio que proteger?</h2>
@@ -82,6 +99,12 @@
 <script src="assets/js/common.js"></script>
 <script>
   renderHeader('nosotros'); renderFooter();
+  renderMapa('mapa-nosotros');
+  document.getElementById('datos-empresa').innerHTML = `
+    <li><b>Dirección</b><span>${EMPRESA.direccion}</span></li>
+    <li><b>Teléfono y WhatsApp</b><a href="tel:${EMPRESA.telefonoHref}">${EMPRESA.telefono}</a></li>
+    <li><b>Correo</b><a href="mailto:${EMPRESA.correo}">${EMPRESA.correo}</a></li>
+    <li><b>Horario</b><span>${EMPRESA.horarios}</span></li>`;
   document.getElementById('texto-quienes-somos').textContent = MARCA_RC.quienesSomos;
   document.getElementById('texto-mision-corta').textContent = MARCA_RC.mision;
   document.getElementById('texto-mision-larga').textContent = MARCA_RC.misionTexto;

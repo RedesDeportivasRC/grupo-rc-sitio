@@ -3,10 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Galería de fotos | Grupo RC</title>
+<title>Galería de redes perimetrales y deportivas instaladas | Redes Deportivas RC</title>
 <meta name="description" content="Galería de fotografías de Grupo RC: productos, proyectos y aplicaciones de nuestras redes.">
-<link rel="canonical" href="/galeria.html">
+<link rel="canonical" href="https://www.redesdeportivasrc.com/galeria.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="assets/css/styles.css">
+<script src="assets/js/medicion.js"></script>
 </head>
 <body data-nivel="raiz">
 <div id="site-header"></div>
@@ -14,18 +18,19 @@
 <section class="hero-interior">
   <div class="envolvente">
     <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Galería</div>
-    <h1>Galería.</h1>
-    <p>Fotografía estilo portafolio de nuestros productos, proyectos y aplicaciones.</p>
+    <h1>Galería de redes deportivas.</h1>
+    <p>Redes que ya están trabajando: canchas, escuelas, obras y más.</p>
   </div>
 </section>
 
 <section class="franja-chica">
   <div class="envolvente" style="display:flex;gap:10px;flex-wrap:wrap;">
     <button class="btn btn-negro btn-chico" data-filtro="todos">Todo</button>
-    <button class="btn btn-linea btn-chico" data-filtro="producto">Producto</button>
-    <button class="btn btn-linea btn-chico" data-filtro="proyecto">Proyecto</button>
-    <button class="btn btn-linea btn-chico" data-filtro="deporte">Deporte</button>
-    <button class="btn btn-linea btn-chico" data-filtro="aplicacion">Aplicación</button>
+    <button class="btn btn-linea btn-chico" data-filtro="perimetral">Redes perimetrales</button>
+    <button class="btn btn-linea btn-chico" data-filtro="porterias">Porterías</button>
+    <button class="btn btn-linea btn-chico" data-filtro="voleibol">Voleibol</button>
+    <button class="btn btn-linea btn-chico" data-filtro="basquetbol">Básquetbol y baloneras</button>
+    <button class="btn btn-linea btn-chico" data-filtro="instalacion">Instalación</button>
   </div>
 </section>
 
@@ -36,22 +41,20 @@
 </section>
 
 <div id="site-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
   renderHeader('galeria');
   renderFooter();
-  // [PLACEHOLDER] — hasta que subas fotos reales, esto es un set de ejemplo con la
-  // categorización lista (producto/proyecto/deporte/aplicación) para filtrar.
-  const FOTOS_GALERIA = Array.from({length:9}).map((_,i)=>({
-    categoria:['producto','proyecto','deporte','aplicacion'][i%4],
-    titulo:`[PLACEHOLDER foto ${i+1}]`,
-  }));
+  // Fotos reales: las de assets/img/trabajos (FOTOS_TRABAJOS) + las del banner que se suben en AndyControl.
+  let FOTOS_GALERIA = FOTOS_TRABAJOS.map(f=>({ categoria:f.categoria, src:'assets/img/trabajos/'+f.archivo, alt:f.alt }));
   function pintarGaleria(filtro){
     const lista = filtro==='todos' ? FOTOS_GALERIA : FOTOS_GALERIA.filter(f=>f.categoria===filtro);
-    document.getElementById('cont-galeria').innerHTML = lista.map(f=>`<div class="foto-ph"><span>${f.titulo}</span></div>`).join('');
+    document.getElementById('cont-galeria').innerHTML = lista.map(f=>`<img src="${f.src}" alt="${f.alt}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">`).join('') || '<p style="color:var(--gris);">Pronto subiremos fotos de esta categoría.</p>';
   }
   pintarGaleria('todos');
+  obtenerFotosBanner().then(fotos=>{ FOTOS_GALERIA = FOTOS_GALERIA.concat(fotos.map(u=>({ categoria:'proyecto', src:u, alt:'Trabajo de redes deportivas realizado por Redes Deportivas RC' }))); pintarGaleria('todos'); });
   document.querySelectorAll('[data-filtro]').forEach(btn=>{
     btn.onclick = ()=>{
       document.querySelectorAll('[data-filtro]').forEach(b=>b.className='btn btn-linea btn-chico');

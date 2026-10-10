@@ -8,13 +8,13 @@
 
 // ---------------- CATEGORÍAS (por tipo de producto) ----------------
 const CATEGORIAS = [
-  { slug:'redes-perimetrales', nombre:'Redes Perimetrales', descripcionCorta:'Una red, muchas soluciones: deporte, protección y contención.' },
-  { slug:'redes-deportivas', nombre:'Redes Deportivas', descripcionCorta:'Redes para jugar: básquetbol, voleibol y usos especiales.' },
-  { slug:'redes-para-porterias', nombre:'Redes para Porterías', descripcionCorta:'Tejido hexagonal de alta resistencia para arcos de fútbol.' },
-  { slug:'porterias', nombre:'Porterías', descripcionCorta:'Porterías completas, fabricadas artesanalmente, en distintas medidas.' },
-  { slug:'baloneras', nombre:'Baloneras', descripcionCorta:'Almacenamiento y transporte de balones para equipos e instalaciones.' },
-  { slug:'redes-de-proteccion', nombre:'Redes de Protección y Seguridad', descripcionCorta:'Anticaídas, obra y resguardo industrial.' },
-  { slug:'soluciones-especiales', nombre:'Soluciones Especiales', descripcionCorta:'Proyectos a la medida que no entran en una categoría fija.' },
+  { slug:'redes-perimetrales', nombre:'Redes Perimetrales', descripcionCorta:'Red negra de nylon alquitranado para cerrar canchas y espacios.', foto:'red-perimetral-negra-cancha-futbol-pasto-sintetico.jpg' },
+  { slug:'porterias', nombre:'Porterías de Fútbol', descripcionCorta:'Porterías completas con red hexagonal tipo colmena.', foto:'porteria-futbol-forrada-azul-pasto-sintetico-jardin.jpg' },
+  { slug:'redes-para-porterias', nombre:'Redes para Porterías', descripcionCorta:'Red hexagonal de poliéster trenzado para tu portería.', foto:'red-porteria-hexagonal-nudos-azul-blanco-rojo.jpg' },
+  { slug:'redes-deportivas', nombre:'Redes de Voleibol y Básquetbol', descripcionCorta:'Redes de juego, personalizadas con letras y colores.', foto:'red-voleibol-escolar-personalizada-nombre-tejido.jpg' },
+  { slug:'baloneras', nombre:'Baloneras', descripcionCorta:'Bolsas de red trenzada para guardar y transportar balones.', foto:'balonera-cuerda-trenzada-verde-balon.jpg' },
+  { slug:'jaulas-bateo', nombre:'Jaulas de Bateo', descripcionCorta:'Jaula completa o solo la red de 1" para béisbol y sóftbol.', foto:'jaula-de-bateo-estructura-azul-red-negra-parque.jpg' },
+  { slug:'redes-de-proteccion', nombre:'Redes de Protección', descripcionCorta:'Anticaídas, obra, techos de red y control de aves.', foto:'techo-de-red-cancha-futbol-pasto-sintetico.jpg' },
 ];
 
 // ---------------- DEPORTES (segunda forma de navegar, sin duplicar productos) ----------------
@@ -40,7 +40,7 @@ const PRODUCTOS = [
     video:null,
     material:'[PLACEHOLDER — nylon / polietileno / polipropileno, confirmar]',
     calibre:'[PLACEHOLDER]',
-    color:['Blanco','Negro','[otros colores disponibles]'],
+    color:['Negro'],
     medidas:'A la medida — se cotiza por m²',
     usos:['Canchas de fútbol','Fútbol rápido','Fútbol 7','Fútbol 11','Básquetbol','Voleibol','Complejos deportivos','Escuelas','Hoteles','Clubes','Universidades','Construcción','Protección contra caídas','Pajareras','Jaulas','Ganado','Anaqueles','Separación de espacios','Protección industrial'],
     caracteristicas:['Resistente a intemperie','Instalación a la medida','Distintas aberturas de malla (1", 2", 3", 4")'],
@@ -213,15 +213,17 @@ const CLIENTES = [
   { nombre:'[PLACEHOLDER — cliente 6]', logo:null, sector:'[PLACEHOLDER]', ubicacion:'[PLACEHOLDER]', proyectoRelacionado:null, testimonio:null, fotos:[] },
 ];
 
-// ---------------- BLOG (contenido de ejemplo, claramente marcado) ----------------
+// ---------------- BLOG ----------------
+const PORTADAS_BLOG = {"como-elegir-red-perimetral": "red-contencion-golf-alta-postes-negros.jpg", "como-instalar-red-perimetral": "instalacion-red-perimetral-postes-verdes-campo-golf.jpg", "errores-comprar-redes-deportivas": "porterias-futbol-red-hexagonal-blanca-cancha-techada.jpg", "preparar-instalacion-red-perimetral": "cimentacion-postes-red-perimetral-colado-concreto.jpg", "redes-1-2-3-4-pulgadas": "red-perimetral-negra-cancha-futbol-pasto-sintetico.jpg", "redes-deportivas-artesanales-yucatan": "tejido-artesanal-red-porteria-taller-yucatan.jpg"};
+// Artículos de Reinier Coral (PDF del 10 oct 2026). Cada uno vive en blog/<slug>.html (HTML estático, bueno para Google).
 const BLOG_POSTS = [
-  { slug:'como-elegir-red-perimetral', titulo:'Cómo elegir una red perimetral', imagen:'[PLACEHOLDER]', categoria:'Guías', autor:'Grupo RC', fecha:'[EJEMPLO — pendiente]', extracto:'[CONTENIDO DE EJEMPLO] Qué preguntarte antes de cotizar tu red perimetral.', contenido:'[CONTENIDO DE EJEMPLO — pendiente de redacción real]', galeria:[], video:null, productosRelacionados:['red-perimetral'], proyectosRelacionados:[], seoTitle:'Cómo elegir una red perimetral | Grupo RC', metaDescription:'[EJEMPLO]' },
-  { slug:'que-calibre-necesitas', titulo:'Qué calibre de red necesitas', imagen:'[PLACEHOLDER]', categoria:'Guías', autor:'Grupo RC', fecha:'[EJEMPLO — pendiente]', extracto:'[CONTENIDO DE EJEMPLO] Diferencias prácticas entre calibres.', contenido:'[CONTENIDO DE EJEMPLO]', galeria:[], video:null, productosRelacionados:['red-perimetral'], proyectosRelacionados:[], seoTitle:'Qué calibre de red necesitas | Grupo RC', metaDescription:'[EJEMPLO]' },
-  { slug:'nylon-vs-poliester', titulo:'Diferencias entre nylon y poliéster', imagen:'[PLACEHOLDER]', categoria:'Materiales', autor:'Grupo RC', fecha:'[EJEMPLO — pendiente]', extracto:'[CONTENIDO DE EJEMPLO] Cuándo conviene cada material.', contenido:'[CONTENIDO DE EJEMPLO]', galeria:[], video:null, productosRelacionados:[], proyectosRelacionados:[], seoTitle:'Nylon vs. poliéster | Grupo RC', metaDescription:'[EJEMPLO]' },
-  { slug:'como-instalar-red-perimetral', titulo:'Cómo instalar una red perimetral', imagen:'[PLACEHOLDER]', categoria:'Instalación', autor:'Grupo RC', fecha:'[EJEMPLO — pendiente]', extracto:'[CONTENIDO DE EJEMPLO] Paso a paso general de instalación.', contenido:'[CONTENIDO DE EJEMPLO]', galeria:[], video:null, productosRelacionados:['red-perimetral'], proyectosRelacionados:[], seoTitle:'Cómo instalar una red perimetral | Grupo RC', metaDescription:'[EJEMPLO]' },
-  { slug:'como-medir-tu-cancha', titulo:'Cómo medir tu cancha antes de cotizar', imagen:'[PLACEHOLDER]', categoria:'Guías', autor:'Grupo RC', fecha:'[EJEMPLO — pendiente]', extracto:'[CONTENIDO DE EJEMPLO] Herramientas y pasos para medir bien.', contenido:'[CONTENIDO DE EJEMPLO]', galeria:[], video:null, productosRelacionados:[], proyectosRelacionados:[], seoTitle:'Cómo medir tu cancha | Grupo RC', metaDescription:'[EJEMPLO]' },
-  { slug:'redes-proteccion-construccion', titulo:'Redes de protección para construcción', imagen:'[PLACEHOLDER]', categoria:'Seguridad', autor:'Grupo RC', fecha:'[EJEMPLO — pendiente]', extracto:'[CONTENIDO DE EJEMPLO] Qué considerar en obra.', contenido:'[CONTENIDO DE EJEMPLO]', galeria:[], video:null, productosRelacionados:['red-proteccion'], proyectosRelacionados:[], seoTitle:'Redes de protección para construcción | Grupo RC', metaDescription:'[EJEMPLO]' },
-];
+  { slug:'como-elegir-red-perimetral', productos:['redes-perimetrales','redes-de-proteccion','jaulas-bateo'], titulo:'Cómo elegir una red perimetral para una cancha deportiva', categoria:'Guía técnica', minutos:7, fecha:'2026-10-10', extracto:'Abertura, material, clima e instalación: cómo comparar la inversión completa al elegir una red perimetral.' },
+  { slug:'redes-1-2-3-4-pulgadas', productos:['redes-perimetrales','redes-de-proteccion','jaulas-bateo'], titulo:'Redes de 1, 2, 3 y 4 pulgadas: diferencias y cómo elegir la adecuada', categoria:'Guía técnica', minutos:7, fecha:'2026-10-10', extracto:'Qué significan las pulgadas y los rombos de una red, y qué abertura conviene para golf, canchas o aves.' },
+  { slug:'preparar-instalacion-red-perimetral', productos:['redes-perimetrales','redes-de-proteccion','jaulas-bateo'], titulo:'Qué preparar antes de instalar una red perimetral', categoria:'Instalación', minutos:9, fecha:'2026-10-10', extracto:'Medidas, postes, sujeciones, techo, acceso y seguridad: lo que conviene planear antes del día de instalación.' },
+  { slug:'redes-deportivas-artesanales-yucatan', productos:'todos', titulo:'Redes deportivas artesanales de Yucatán: la historia de nuestro tejido tipo colmena', categoria:'Historia RC', minutos:7, fecha:'2026-10-10', extracto:'El origen familiar de nuestras redes hechas a mano, de poliéster y personalizadas a la medida.' },
+  { slug:'errores-comprar-redes-deportivas', productos:'todos', titulo:'Errores frecuentes al comprar redes deportivas y cómo evitarlos', categoria:'Compras', minutos:6, fecha:'2026-10-10', extracto:'Material, medidas, abertura, instalación y garantía: qué comparar para aprovechar mejor tu inversión.' },
+  { slug:'como-instalar-red-perimetral', productos:['redes-perimetrales','redes-de-proteccion','jaulas-bateo'], titulo:'Cómo instalar una red perimetral deportiva paso a paso', categoria:'Instalación', minutos:7, fecha:'2026-10-10', extracto:'El orden de montaje de nuestro manual: extender, fijar esquinas, distribuir la malla y subirla a los postes.' },
+].map(b=>({ ...b, url:'blog/'+b.slug+'.html', imagen:'assets/img/trabajos/'+PORTADAS_BLOG[b.slug], contenido:'publicado' }));
 
 // ---------------- RECURSOS / DESCARGAS ----------------
 const RECURSOS = [
@@ -261,9 +263,11 @@ const EMPRESA = {
   telefono:'999 553 8184',
   telefonoHref:'+529995538184',
   whatsapp:'529995538184',
-  correo:'redesdeportivasrc@gmail.com',
+  correo:'contacto@redesdeportivasrc.com',
   direccion:'C. 114 #581-1 x 29 y 29A, Los Ángeles, Caucel, Mérida, Yucatán, México',
   horarios:'Lunes a viernes, 9:00 a.m. – 6:00 p.m.',
+  mapaUrl:'https://maps.app.goo.gl/9jCNwpsFQGWjsxzC6',  // liga de Google Maps que mandó Reinier (8 oct 2026)
+  mapaBusqueda:'Redes Deportivas RC, C. 114 581, Caucel, Mérida, Yucatán',
   estadosDondeVendemos:['Yucatán','[PLACEHOLDER — resto de estados donde venden]'],
   redes:{
     facebook:'https://facebook.com/redesdeportivasrc',
@@ -279,6 +283,154 @@ const ESTADOS_MEXICO = [
   'Estado de México','Michoacán','Morelos','Nayarit','Nuevo León','Oaxaca','Puebla','Querétaro',
   'Quintana Roo','San Luis Potosí','Sinaloa','Sonora','Tabasco','Tamaulipas','Tlaxcala',
   'Veracruz','Yucatán','Zacatecas','Fuera de México',
+];
+
+// ---------------- FOTOS REALES DE TRABAJOS (assets/img/trabajos) ----------------
+const FOTOS_TRABAJOS = [
+  { archivo:'red-antipalomas-instalada-domo-cancha-multiusos.jpg', alt:'Red antipalomas negra instalada bajo el techo de un domo de cancha multiusos', categoria:'perimetral' },
+  { archivo:'red-antipalomas-domo-cancha-vista-desde-canastilla.jpg', alt:'Red antipalomas bajo el techo de un domo deportivo vista desde una canastilla', categoria:'perimetral' },
+  { archivo:'instalacion-red-antipalomas-andamio-domo-cancha.jpg', alt:'Instaladores colocando red antipalomas desde un andamio en un domo deportivo', categoria:'instalacion' },
+  { archivo:'instalacion-red-antipalomas-arco-domo-canastilla.jpg', alt:'Instalación de red antipalomas en el arco de un domo con camión canastilla', categoria:'instalacion' },
+  { archivo:'instaladores-red-antipalomas-andamio-arnes.jpg', alt:'Instaladores con arnés fijando red antipalomas bajo el techo de un domo', categoria:'instalacion' },
+  { archivo:'instalacion-red-antipalomas-camion-canastilla-domo.jpg', alt:'Camión canastilla para instalar red antipalomas bajo el techo de un domo', categoria:'instalacion' },
+  { archivo:'red-antipalomas-bajo-techo-domo-deportivo.jpg', alt:'Red antipalomas negra bajo la lámina del techo de un domo deportivo', categoria:'perimetral' },
+  { archivo:'jaula-de-bateo-estructura-azul-red-negra-parque.jpg', alt:'Jaula de bateo con estructura de tubo azul y red negra en un parque', categoria:'perimetral' },
+  { archivo:'jaula-de-bateo-tubo-forrado-azul-techo-de-red.jpg', alt:'Jaula de bateo con postes forrados en azul y techo de red negra', categoria:'perimetral' },
+  { archivo:'jaula-de-bateo-red-negra-rombo-1-pulgada.jpg', alt:'Red negra de rombo de 1 pulgada en una jaula de bateo', categoria:'perimetral' },
+  { archivo:'brincolin-red-proteccion-negra-postes-forrados.jpg', alt:'Brincolín con red de protección negra y postes forrados de colores', categoria:'perimetral' },
+  { archivo:'techo-de-red-cancha-futbol-pasto-sintetico.jpg', alt:'Cancha de fútbol de pasto sintético con red perimetral y techo de red', categoria:'perimetral' },
+  { archivo:'porteria-futbol-forrada-roja-red-hexagonal-blanca.jpg', alt:'Portería de fútbol forrada en rojo con red hexagonal blanca tipo colmena', categoria:'porterias' },
+  { archivo:'red-voleibol-playa-hexagonal-colores-personalizada.jpg', alt:'Jugadoras rematando sobre una red de voleibol de playa hexagonal de colores', categoria:'voleibol' },
+  { archivo:'red-perimetral-negra-cancha-multiusos-basquetbol.jpg', alt:'Red perimetral negra con postes en una cancha multiusos de básquetbol', categoria:'perimetral' },
+  { archivo:'red-voleibol-escolar-personalizada-nombre-tejido.jpg', alt:'Red de voleibol escolar personalizada con el nombre de la escuela tejido en la malla', categoria:'voleibol' },
+  { archivo:'red-contencion-golf-alta-postes-negros.jpg', alt:'Red de contención para golf de gran altura con postes negros entre palmeras', categoria:'perimetral' },
+  { archivo:'porteria-futbol-forrada-azul-pasto-sintetico-jardin.jpg', alt:'Portería de fútbol forrada en azul con red blanca en cancha de pasto sintético de jardín', categoria:'porterias' },
+  { archivo:'red-basquetbol-tricolor-trenzada-aro.jpg', alt:'Red de básquetbol trenzada tricolor blanca, roja y azul colocada en el aro', categoria:'basquetbol' },
+  { archivo:'red-perimetral-alta-complejo-canchas-futbol.jpg', alt:'Red perimetral alta con postes y reflectores en un complejo de canchas de fútbol', categoria:'perimetral' },
+  { archivo:'red-perimetral-negra-cancha-futbol-pasto-sintetico.jpg', alt:'Red perimetral negra alrededor de una cancha de fútbol de pasto sintético', categoria:'perimetral' },
+  { archivo:'detalle-red-perimetral-negra-rombo-cancha.jpg', alt:'Detalle de la malla en rombo de una red perimetral negra frente a una cancha', categoria:'perimetral' },
+  { archivo:'red-perimetral-alta-sobre-barda-postes-curvos.jpg', alt:'Red perimetral de altura instalada sobre una barda con postes curvos', categoria:'perimetral' },
+  { archivo:'red-perimetral-postes-verdes-campo-deportivo.jpg', alt:'Red perimetral con postes verdes para delimitar un campo deportivo', categoria:'perimetral' },
+  { archivo:'red-perimetral-negra-gran-altura-vista-desde-abajo.jpg', alt:'Red perimetral negra de gran altura para cancha deportiva vista desde abajo', categoria:'perimetral' },
+  { archivo:'porterias-futbol-red-hexagonal-blanca-cancha-techada.jpg', alt:'Porterías de fútbol con red hexagonal blanca tipo colmena en una cancha techada', categoria:'porterias' },
+  { archivo:'base-concreto-anclaje-poste-red-contencion-golf.jpg', alt:'Base de concreto y anclajes de un poste para red de contención de golf en el Hotel Chablé', categoria:'instalacion' },
+  { archivo:'instalacion-red-antipalomas-domo-deportivo.jpg', alt:'Instalación de una red antipalomas en un domo deportivo', categoria:'instalacion' },
+  { archivo:'ajuste-red-hexagonal-porteria-pequena-alberca.jpg', alt:'Reinier Coral ajustando la red hexagonal de una portería pequeña junto a una alberca', categoria:'porterias' },
+  { archivo:'red-voleibol-playa-borde-rojo-instalacion-mar.jpg', alt:'Instalación de una red de voleibol de playa con borde rojo frente al mar', categoria:'voleibol' },
+  { archivo:'red-voleibol-playa-postes-rojos-arena.jpg', alt:'Red de voleibol de playa con postes forrados en rojo instalada en la arena', categoria:'voleibol' },
+  { archivo:'red-voleibol-blanca-letras-tejidas-cancha-multiusos.jpg', alt:'Red de voleibol blanca con letras tejidas en una cancha multiusos', categoria:'voleibol' },
+  { archivo:'red-contencion-golf-hotel-chable-vista-aerea.jpg', alt:'Vista aérea de la red de contención para golf con postes verdes en el Hotel Chablé', categoria:'perimetral' },
+  { archivo:'instalacion-red-contencion-golf-hotel-chable.jpg', alt:'Instalación de red de contención para golf con postes verdes en el Hotel Chablé', categoria:'instalacion' },
+  { archivo:'poste-verde-red-contencion-golf-hotel-chable.jpg', alt:'Poste verde y red de contención para golf del Hotel Chablé vistos desde el suelo', categoria:'perimetral' },
+  { archivo:'instalacion-red-perimetral-postes-verdes-campo-golf.jpg', alt:'Instalación de red perimetral con postes verdes junto a un campo de golf', categoria:'instalacion' },
+  { archivo:'red-voleibol-negra-banda-blanca-cancha-concreto.jpg', alt:'Red de voleibol negra con banda blanca en una cancha de concreto al aire libre', categoria:'voleibol' },
+  { archivo:'red-voleibol-personalizada-letras-tejidas-roja-verde.jpg', alt:'Red de voleibol personalizada roja con borde verde y letras tejidas', categoria:'voleibol' },
+  { archivo:'red-voleibol-hexagonal-roja-amarilla-negra.jpg', alt:'Bloqueo en una red de voleibol hexagonal roja, amarilla y negra', categoria:'voleibol' },
+  { archivo:'red-nylon-negra-detalle-malla-rombo.jpg', alt:'Mano detrás de una red de nylon negra que muestra el tamaño de la malla en rombo', categoria:'perimetral' },
+  { archivo:'instalacion-red-perimetral-canastilla-elevada-cancha-futbol.jpg', alt:'Instalador colocando red perimetral desde una canastilla elevada en una cancha de fútbol', categoria:'instalacion' },
+  { archivo:'instalacion-red-perimetral-escalera-sobre-barda.jpg', alt:'Instalador colocando una red perimetral sobre una barda desde una escalera', categoria:'instalacion' },
+  { archivo:'red-perimetral-sobre-barda-blanca-postes.jpg', alt:'Red perimetral sobre barda blanca con postes metálicos tipo escalera', categoria:'perimetral' },
+  { archivo:'instalacion-red-en-altura-estructura-metalica.jpg', alt:'Trabajadores instalando una red en altura sobre una estructura metálica', categoria:'instalacion' },
+  { archivo:'red-perimetral-negra-abertura-rombo-detalle.jpg', alt:'Detalle de la abertura en rombo de una red perimetral negra frente a una cancha', categoria:'perimetral' },
+  { archivo:'cimentacion-postes-red-perimetral-colado-concreto.jpg', alt:'Cuadrilla colando concreto para la cimentación de postes de red perimetral', categoria:'instalacion' },
+  { archivo:'techo-de-red-blanca-cable-soporte-poste.jpg', alt:'Techo de red blanca tensado con cables de soporte y poste visto desde abajo', categoria:'perimetral' },
+  { archivo:'grua-izado-postes-red-perimetral.jpg', alt:'Camión grúa izando un poste para la instalación de una red perimetral', categoria:'instalacion' },
+  { archivo:'postes-instalacion-red-perimetral-obra.jpg', alt:'Postes listos para izarse antes de instalar una red perimetral', categoria:'instalacion' },
+  { archivo:'red-negra-malla-pelota-golf-abertura.jpg', alt:'Pelota de golf sobre una red negra para comparar la abertura de la malla', categoria:'perimetral' },
+  { archivo:'instalacion-techo-de-red-cancha-futbol-andamio.jpg', alt:'Instalación nocturna de un techo de red sobre cancha de fútbol desde andamio', categoria:'instalacion' },
+  { archivo:'red-porteria-hexagonal-nudos-azul-blanco-rojo.jpg', alt:'Detalle de los nudos de una red para portería en azul, blanco y rojo', categoria:'porterias' },
+  { archivo:'porteria-futbol-azul-cancha-pasto-sintetico-quinta.jpg', alt:'Portería de fútbol azul con red blanca en cancha de pasto sintético de una quinta', categoria:'porterias' },
+  { archivo:'porteria-futbol-marco-negro-red-hexagonal-blanca.jpg', alt:'Portería de fútbol con marco negro y red hexagonal blanca en un jardín', categoria:'porterias' },
+  { archivo:'porteria-futbol-azul-red-hexagonal-blanca-pasto-sintetico.jpg', alt:'Portería de fútbol azul con red hexagonal blanca sobre pasto sintético', categoria:'porterias' },
+  { archivo:'porteria-futbol-tubo-forrado-azul-parque.jpg', alt:'Jugador pateando hacia una portería de tubo forrado azul con red hexagonal blanca', categoria:'porterias' },
+  { archivo:'porteria-futbol-forrada-azul-red-hexagonal-parque.jpg', alt:'Portería de fútbol forrada en azul con red hexagonal blanca en un parque', categoria:'porterias' },
+  { archivo:'armado-porteria-futbol-forrada-azul.jpg', alt:'Técnico armando una portería de fútbol con tubos forrados en azul', categoria:'porterias' },
+  { archivo:'porteria-futbol-marco-rojo-red-blanca-jardin.jpg', alt:'Portería de fútbol con marco rojo y red blanca en un jardín con palmeras', categoria:'porterias' },
+  { archivo:'porteria-futbol-galvanizada-red-hexagonal-blanca.jpg', alt:'Portería de fútbol galvanizada con red hexagonal blanca en un campo de juego', categoria:'porterias' },
+  { archivo:'porteria-futbol-blanca-red-hexagonal-entrega.jpg', alt:'Técnico de Grupo RC con una portería blanca de red hexagonal', categoria:'porterias' },
+  { archivo:'mini-porteria-futbol-forrada-roja-entrenamiento.jpg', alt:'Mini portería de fútbol forrada en rojo para entrenamiento', categoria:'porterias' },
+  { archivo:'mini-porteria-forrada-naranja-red-amarilla-escuela.jpg', alt:'Mini portería forrada en naranja con red amarilla en el patio de una escuela', categoria:'porterias' },
+  { archivo:'red-basquetbol-blanca-trenzada-aro.jpg', alt:'Red de básquetbol blanca trenzada colocada en un aro negro', categoria:'basquetbol' },
+  { archivo:'red-basquetbol-tricolor-escuela-tablero.jpg', alt:'Red de básquetbol tricolor en el tablero del patio de una escuela', categoria:'basquetbol' },
+  { archivo:'redes-basquetbol-trenzadas-colores.jpg', alt:'Redes de básquetbol trenzadas en blanco, azul y verde con etiqueta de Grupo RC', categoria:'basquetbol' },
+  { archivo:'balonera-cuerda-trenzada-verde-balon.jpg', alt:'Balonera de cuerda trenzada verde neón con argolla metálica y balón', categoria:'basquetbol' },
+  { archivo:'balonera-cuerda-trenzada-azul.jpg', alt:'Balonera de cuerda trenzada azul con argolla metálica', categoria:'basquetbol' },
+  { archivo:'red-proteccion-colores-patio-escuela.jpg', alt:'Redes de protección de colores alrededor del patio de una escuela', categoria:'perimetral' },
+  { archivo:'red-proteccion-negra-area-juegos.jpg', alt:'Red de protección negra con postes forrados en un área de juegos', categoria:'perimetral' },
+  { archivo:'cancha-futbol-rapido-pasto-sintetico-noche.jpg', alt:'Porterías de fútbol rápido en cancha de pasto sintético iluminada de noche', categoria:'porterias' },
+];
+
+// ---------------- BANNER PRINCIPAL DEL INICIO ----------------
+// Cada diapositiva: foto (o null = fondo de marca), texto corto y botón.
+const HERO_SLIDES = [
+  { foto:'techo-de-red-cancha-futbol-pasto-sintetico.jpg', alt:'Cancha de fútbol de pasto sintético con red perimetral y techo de red', ojo:'Fabricantes de redes deportivas en Mérida, Yucatán', titulo:'Protege tus espacios deportivos con redes perimetrales fabricadas a la medida.', texto:'Soluciones en redes perimetrales, porterías y equipamiento deportivo para canchas, escuelas, clubes y espacios recreativos.', boton:{ texto:'🎧 Habla con un asesor', url:'tel:+529995538184' } },
+  { foto:'red-perimetral-alta-complejo-canchas-futbol.jpg', alt:'Red perimetral alta con postes y reflectores en un complejo de canchas de fútbol', ojo:'Experiencia', titulo:'Más de 25 años en redes.', texto:'Más de 25 años comercializando redes y más de 20 instalándolas. Sabemos qué funciona en cada cancha.', boton:{ texto:'Conócenos', url:'nosotros.html' } },
+  { foto:'red-voleibol-playa-hexagonal-colores-personalizada.jpg', alt:'Jugadoras rematando sobre una red de voleibol de playa hexagonal de colores', ojo:'Envíos', titulo:'Enviamos a toda la República.', texto:'Tu cotización ya incluye el envío. Estándar a domicilio de 4 a 8 días hábiles, o urgente por aerolínea en 24 a 48 horas.', boton:{ texto:'Cotizar con envío', url:'contacto.html' } },
+  { foto:'instalacion-red-perimetral-canastilla-elevada-cancha-futbol.jpg', alt:'Instalador colocando red perimetral desde una canastilla elevada en una cancha de fútbol', ojo:'Asesoría', titulo:'Te asesoramos en la instalación.', texto:'Te decimos qué abertura, qué altura y qué fijación necesitas. En Yucatán la instalamos nosotros.', boton:{ texto:'Pedir asesoría', url:'contacto.html' } },
+  { foto:'porteria-futbol-forrada-roja-red-hexagonal-blanca.jpg', alt:'Portería de fútbol forrada en rojo con red hexagonal blanca tipo colmena', ojo:'Porterías', titulo:'Porterías oficiales, fútbol 7 y micro.', texto:'Fabricación artesanal con red hexagonal tipo colmena, el estilo de las porterías europeas.', boton:{ texto:'Ver porterías', url:'productos/porterias.html' } },
+  { foto:'red-perimetral-negra-cancha-multiusos-basquetbol.jpg', alt:'Red perimetral negra con postes en una cancha multiusos de básquetbol', ojo:'Fabricación a la medida', titulo:'Hecha para tu espacio.', texto:'Redes perimetrales en color negro, con abertura de 1", 2", 3" o 4" según el uso.', boton:{ texto:'Cotizar mi red', url:'contacto.html' } },
+];
+
+// ---------------- FORTALEZAS (franja bajo el banner) ----------------
+const FORTALEZAS = [
+  { ico:'trofeo', titulo:'+25 años de experiencia', texto:'Y más de 20 años instalando.' },
+  { ico:'camion', titulo:'Envíos a toda la República', texto:'La cotización incluye el envío.' },
+  { ico:'herramientas', titulo:'Asesoría en instalación', texto:'Te orientamos en cada paso.' },
+  { ico:'escuadra', titulo:'Fabricación a la medida', texto:'Según las necesidades de tu espacio.' },
+  { ico:'casco', titulo:'Capacitamos instaladores', texto:'En diferentes partes de México.' },
+  { ico:'carrito', titulo:'También en Mercado Libre', texto:'Encuentra algunos productos en nuestra tienda.' },
+];
+
+// ---------------- INICIO: productos con foto (maqueta 10 oct 2026) ----------------
+// foto: ruta dentro de assets/img/. null = recuadro de marca hasta tener foto real.
+const PRODUCTOS_INICIO = [
+  { slug:'redes-perimetrales', titulo:'Redes Perimetrales', texto:'Protección y delimitación de espacios.', foto:'trabajos/red-perimetral-negra-cancha-futbol-pasto-sintetico.jpg', alt:'Red perimetral negra alrededor de una cancha de fútbol de pasto sintético' },
+  { slug:'porterias', titulo:'Porterías de Fútbol', texto:'Modelos para fútbol 11, fútbol 7 y fútbol rápido.', foto:'trabajos/porteria-futbol-forrada-azul-pasto-sintetico-jardin.jpg', alt:'Portería de fútbol forrada en azul con red blanca en cancha de pasto sintético de jardín' },
+  { slug:'redes-para-porterias', titulo:'Redes para Porterías', texto:'Tejido hexagonal tipo colmena.', foto:'trabajos/red-porteria-hexagonal-nudos-azul-blanco-rojo.jpg', alt:'Detalle de los nudos de una red para portería en azul, blanco y rojo' },
+  { slug:'redes-deportivas', titulo:'Redes Deportivas', texto:'Básquetbol, voleibol y usos especiales.', foto:'trabajos/red-voleibol-escolar-personalizada-nombre-tejido.jpg', alt:'Red de voleibol escolar personalizada con el nombre de la escuela tejido en la malla' },  { slug:'jaulas-bateo', titulo:'Jaulas de Bateo', texto:'Redes para béisbol y sóftbol a la medida.', foto:'trabajos/jaula-de-bateo-estructura-azul-red-negra-parque.jpg', alt:'Jaula de bateo con estructura azul y red negra en un parque' },
+];
+
+// ---------------- INICIO: asesoría (cada pregunta lleva a su artículo del blog) ----------------
+const ASESORIA = [
+  { ico:'escuadra', titulo:'¿Qué medidas necesito?', texto:'Te orientamos según tu espacio.', url:'blog/preparar-instalacion-red-perimetral.html' },
+  { ico:'red', titulo:'¿Qué tipo de red o portería?', texto:'Diferencias y recomendaciones.', url:'blog/redes-1-2-3-4-pulgadas.html' },
+  { ico:'herramientas', titulo:'¿Cómo se instala?', texto:'Pasos, accesorios y guía básica.', url:'blog/como-instalar-red-perimetral.html' },
+  { ico:'precio', titulo:'¿Cuánto puede costar?', texto:'Factores que influyen en el precio.', url:'blog/como-elegir-red-perimetral.html' },
+];
+
+// ---------------- INICIO: proyectos realizados (solo trabajos reales, sin inventar clientes) ----------------
+const PROYECTOS_INICIO = [
+  { foto:'trabajos/red-contencion-golf-hotel-chable-vista-aerea.jpg', alt:'Vista aérea de la red de contención para golf con postes verdes en el Hotel Chablé', etiqueta:'Redes de contención', titulo:'Hotel Chablé', texto:'Redes de contención para el campo de golf.' },
+  { foto:'trabajos/techo-de-red-cancha-futbol-pasto-sintetico.jpg', alt:'Cancha de fútbol de pasto sintético con red perimetral y techo de red', etiqueta:'Perímetro y techo de red', titulo:'Cancha de fútbol techada', texto:'Red perimetral y techo de red sobre pasto sintético.' },
+  { foto:'trabajos/red-voleibol-escolar-personalizada-nombre-tejido.jpg', alt:'Red de voleibol escolar personalizada con el nombre de la escuela tejido en la malla', etiqueta:'Redes personalizadas', titulo:'Red de voleibol escolar', texto:'Nombre de la escuela tejido en la red.' },
+  { foto:'trabajos/red-perimetral-negra-cancha-multiusos-basquetbol.jpg', alt:'Red perimetral negra con postes en una cancha multiusos de básquetbol', etiqueta:'Redes perimetrales', titulo:'Cancha multiusos', texto:'Red perimetral negra para cerrar una cancha multiusos.' },
+  { foto:'trabajos/porteria-futbol-forrada-azul-pasto-sintetico-jardin.jpg', alt:'Portería de fútbol forrada en azul con red blanca en cancha de pasto sintético de jardín', etiqueta:'Porterías', titulo:'Portería para jardín', texto:'Portería forrada con red hexagonal en pasto sintético.' },
+  { foto:'trabajos/red-voleibol-playa-borde-rojo-instalacion-mar.jpg', alt:'Instalación de una red de voleibol de playa con borde rojo frente al mar', etiqueta:'Voleibol de playa', titulo:'Red de voleibol de playa', texto:'Red de voleibol con borde rojo frente al mar.' },
+  { foto:'trabajos/red-perimetral-alta-complejo-canchas-futbol.jpg', alt:'Red perimetral alta con postes y reflectores en un complejo de canchas de fútbol', etiqueta:'Redes de altura', titulo:'Complejo de canchas', texto:'Red perimetral alta alrededor de canchas de fútbol.' },
+  { foto:'trabajos/red-basquetbol-tricolor-escuela-tablero.jpg', alt:'Red de básquetbol tricolor en el tablero del patio de una escuela', etiqueta:'Redes de básquetbol', titulo:'Escuela primaria', texto:'Red de básquetbol trenzada tricolor.' },
+];
+
+// ---------------- CLIENTES SATISFECHOS ----------------
+// Comentarios REALES copiados tal cual de Facebook (Recomendaciones) y Google Maps.
+// Capturas que mandó Reinier el 8 oct 2026. Nunca inventar ni editar el sentido de un comentario.
+// Nombre + inicial del apellido. Si queda vacío, la sección no aparece en el sitio publicado.
+// inicio:true = aparece en la página de Inicio; todos aparecen en Clientes.
+const RESUMEN_OPINIONES = { facebookPct:100, facebookTotal:19 };
+const TESTIMONIOS = [
+  { nombre:'Carlos Lobo R.', fuente:'facebook', lugar:'Guadalajara', inicio:true, texto:'Recomiendo ampliamente a GRUPO RC. Me atendieron y ayudaron en todo momento con asesoría cuando fue requerida mientras instalaba una red. Estando yo en Guadalajara me hicieron llegar la red en tiempo y forma, además me ayudaron con asesoría vía telefónica para su instalación.' },
+  { nombre:'Rommel S.', fuente:'google', inicio:true, texto:'Súper recomendable, personas amables y comprometidas con su trabajo. Me asesoraron y ayudaron a instalar una red que les compré, son rápidos en la entrega y manejan buena calidad de sus materiales. Les he comprado redes perimetrales y porterías.' },
+  { nombre:'Arturo V.', fuente:'facebook', lugar:'Linares, N.L.', inicio:true, texto:'Muy buen producto, atención al cliente rápida y buena, envío rápido, recomendados.' },
+  { nombre:'Rogelio Axel S.', fuente:'facebook', inicio:true, texto:'Buena atención y rapidez en la compra. El producto era más que lo que esperaba, muy detallado y profesional. Recomendado al 100.' },
+  { nombre:'Raúl Medina C.', fuente:'facebook', inicio:true, texto:'Muy buena atención y la portería y la red de muy buena calidad, mi hijo está super feliz, lo recomiendo ampliamente.' },
+  { nombre:'Roger V.', fuente:'google', inicio:true, texto:'¡Los recomiendo mucho! Excelente compra, el personal fue muy amable y me asesoró en todo momento, ayudándome a elegir justo lo que necesitaba.' },
+  { nombre:'Emmanuel C.', fuente:'facebook', texto:'Muy buen material en las redes y las porterías muy resistente y muy práctico y las baloneras muy buenas.' },
+  { nombre:'Alexis V.', fuente:'facebook', texto:'¡Redes de excelente calidad! Quedé encantado con el material, calidad y precio. Muchas gracias.' },
+  { nombre:'Academia de Béisbol JV', fuente:'facebook', texto:'Recomendable ampliamente. Una atención muy buena. Seguimiento. Entrega en un tiempo muy aceptable.' },
+  { nombre:'José E. G.', fuente:'facebook', texto:'Excelente calidad en las redes y excelente atención. 100% recomendable.' },
+  { nombre:'Max H.', fuente:'facebook', texto:'Muy rápidos en enviar y a buen precio.' },
+  { nombre:'Pina V.', fuente:'facebook', texto:'El más feliz con su balonera. Son de muy buena calidad y la entrega rapidísima.' },
+  { nombre:'Juan E.', fuente:'facebook', texto:'Baloneras de muy buena calidad, resistentes y muy útiles, 100% recomendado.' },
+  { nombre:'Eduardo P.', fuente:'facebook', texto:'Los recomiendo, buena y pronta atención, ¡la mejor opción!' },
 ];
 
 // ---------------- Posicionamiento de marca (Misión / Visión / Valores / Quiénes somos) ----------------
