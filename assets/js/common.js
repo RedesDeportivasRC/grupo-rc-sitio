@@ -66,6 +66,7 @@ function renderHeader(activo){
         <button id="btn-cerrar-menu-movil" style="align-self:flex-end;background:none;border:none;font-size:1.6rem;cursor:pointer;margin-bottom:10px;">✕</button>
         <a href="${base}index.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Inicio</a>
         <a href="${base}productos.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Productos</a>
+        ${CATEGORIAS.map(c=>`<a href="${urlCategoria(c.slug)}" style="padding:9px 4px 9px 18px;font-size:.92rem;border-bottom:1px solid var(--linea);">${c.nombre}</a>`).join('')}
         <a href="${base}clientes.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Opiniones</a>
         <a href="${base}galeria.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Galería</a>
         <a href="${base}blog.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Blog</a>
@@ -76,6 +77,17 @@ function renderHeader(activo){
       </div>
     </div>
   `;
+  // En pantallas táctiles (tablet) el primer toque abre el desplegable y el segundo entra a la página
+  const menus = document.querySelectorAll('.nav-menu');
+  menus.forEach(m=>{
+    m.querySelector(':scope > a').addEventListener('click', e=>{
+      if(window.matchMedia('(hover: hover)').matches || m.classList.contains('abierto')) return;
+      e.preventDefault();
+      menus.forEach(o=>o.classList.remove('abierto'));
+      m.classList.add('abierto');
+    });
+  });
+  document.addEventListener('click', e=>{ if(!e.target.closest('.nav-menu')) menus.forEach(o=>o.classList.remove('abierto')); });
   const btnMovil = document.getElementById('btn-menu-movil');
   const overlayMovil = document.getElementById('menu-movil-overlay');
   if(btnMovil && overlayMovil){
