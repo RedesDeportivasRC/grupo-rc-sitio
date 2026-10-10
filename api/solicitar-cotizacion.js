@@ -1,13 +1,12 @@
 // /api/solicitar-cotizacion.js
-// Recibe el "cotizador previo" de la página (por ahora: redes perimetrales). El cliente arma sus
-// secciones (cantidad × largo × altura, igual que el cotizador interno) y deja nombre y WhatsApp.
-// Aquí:
+// Recibe el "cotizador previo" que va dentro de cada página de producto
+// (assets/js/cotizador-previo.js). El cliente arma lo que necesita, sin ver precios, y deja
+// nombre, WhatsApp, correo, ciudad y estado. Aquí:
 //   1) se busca o se crea el contacto en el CRM (tabla contacts, origen "Página web");
-//   2) se guarda la solicitud con sus secciones (tabla solicitudes_cotizacion) para que el
-//      cotizador la abra con todo cargado (cotizador.html?solicitud=ID);
+//   2) se guarda la solicitud (tabla solicitudes_cotizacion) con los productos en el formato
+//      del cotizador interno, para que se abra con todo cargado (cotizador.html?solicitud=ID);
 //   3) se deja una observación en el timeline del contacto;
 //   4) se avisa a los vendedores en la campana (tabla notificaciones) y, si hay llave, por correo.
-// El cliente nunca ve precios: el vendedor pone precio y envío en el cotizador.
 //
 // Usa las mismas variables de entorno que /api/nuevo-lead.js:
 //   SUPABASE_SERVICE_ROLE_KEY (obligatoria), RESEND_API_KEY y CORREO_AVISO_LEADS (opcionales).
@@ -17,20 +16,59 @@ const URL_COTIZADOR = "https://app.redesdeportivasrc.com/cotizador.html";
 // Mismos vendedores que reciben los avisos de Producción (produccion.html, EMAILS_VENDEDORES).
 const EMAILS_VENDEDORES = ["reiniercoral@gmail.com", "redesdeportivasrc@gmail.com", "raulmedina2109@gmail.com"];
 
-const FORMAS = {
-  seccion: "1 sección",
-  perimetro: "Perímetro (4 lados)",
-  jaula: "Jaula con techo",
-  personalizado: "Personalizado (varias secciones)",
+// Producto de la página → nombre en el aviso y "Producto" del contacto en el CRM.
+const PRODUCTOS = {
+  perimetral: { nombre: "red perimetral", crm: "Redes perimetrales" },
+  proteccion: { nombre: "red de protección", crm: "Red de protección" },
+  porterias: { nombre: "porterías", crm: "Porterías" },
+  redes_porteria: { nombre: "red para portería", crm: "Red de Portería Tipo Colmena" },
+  deportivas: { nombre: "redes deportivas", crm: "Redes deportivas" },
+  jaulas: { nombre: "jaula de bateo", crm: "Red Para Jaula De Bateo" },
+  baloneras: { nombre: "baloneras", crm: "Baloneras" },
 };
-const ABERTURAS = { "1": '1"', "2": '2"', "3": '3"', "4": '4"', no_se: "por recomendar" };
-const PRODUCTO_CRM = { "1": "Red Perimetral 1 Pulg (Rombo)", "2": "Red Perimetral 2 Pulg (Rombo)", "3": "Red Perimetral 3 Pulg (Rombo)", "4": "Red Perimetral 4 Pulg (Rombo)" };
+// Nombres exactos del catálogo del cotizador (CATALOGO_PM), para que el CRM agrupe igual.
+const PERIMETRAL_CRM = { "1": "Red Perimetral 1 Pulg (Rombo)", "2": "Red Perimetral 2 Pulg (Rombo)", "3": "Red Perimetral 3 Pulg (Rombo)", "4": "Red Perimetral 4 Pulg (Rombo)", anticaidas: "Red Anticaídas 1 Pulg (Rombo)" };
+const ABERTURAS = ["1", "2", "3", "4", "anticaidas", "no_se"];
+const FORMAS = ["seccion", "perimetro", "jaula", "personalizado"];
+const MODELOS_PORTERIA = ["Mini", "Infantil", "Juvenil", "Microbio", "Fut 7 (5m)", "Fut 7 (6m)", "Oficial", "Oficial Cabaña (1.5)", "Oficial Cabaña (2.5)", "Personalizada", "Waterpolo"];
 
 // El CRM y la campana pintan notas y nombres como HTML: se quitan < y > de todo lo que escribe el cliente.
 const texto = (v, max) => String(v == null ? "" : v).replace(/[<>]/g, "").trim().slice(0, max);
-const numero = (v) => { const n = Number(v); return Number.isFinite(n) && n > 0 ? Math.round(n * 100) / 100 : 0; };
+const numero = (v, max) => { const n = Number(v); return Number.isFinite(n) && n > 0 && n <= max ? Math.round(n * 100) / 100 : 0; };
+const entero = (v, max) => Math.round(numero(v, max));
 const fmt = (n) => Number(n).toLocaleString("es-MX", { maximumFractionDigits: 2 });
 const escHtml = (t) => String(t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+// Solo se aceptan los tipos y campos que el cotizador sabe cargar.
+function limpiarItem(it) {
+  if (!it || typeof it !== "object") return null;
+  if (it.tipo === "perimetral") {
+    const secciones = (Array.isArray(it.secciones) ? it.secciones : []).slice(0, 60)
+      .map((s) => ({ cant: entero(s && s.cant, 999), largo: numero(s && s.largo, 500), alto: numero(s && s.alto, 60) }))
+      .filter((s) => s.cant && s.largo && s.alto);
+    if (!secciones.length) return null;
+    return { tipo: "perimetral", abertura: ABERTURAS.includes(it.abertura) ? it.abertura : "no_se", secciones };
+  }
+  if (it.tipo === "porteria") {
+    const r = { tipo: "porteria", cantidad: entero(it.cantidad, 999), trav: numero(it.trav, 20), poste: numero(it.poste, 10), psup: numero(it.psup, 10), pinf: numero(it.pinf, 10) };
+    return r.cantidad && r.trav && r.poste ? r : null;
+  }
+  if (it.tipo === "porteria_completa") {
+    if (!MODELOS_PORTERIA.includes(it.modelo)) return null;
+    const r = { tipo: "porteria_completa", modelo: it.modelo, cantidad: entero(it.cantidad, 999) };
+    if (it.modelo === "Personalizada") { r.trav = numero(it.trav, 20); r.poste = numero(it.poste, 10); }
+    return r.cantidad ? r : null;
+  }
+  if (it.tipo === "voleibol" || it.tipo === "basquetbol") {
+    const n = entero(it.cantidad, 999);
+    return n ? { tipo: it.tipo, cantidad: n } : null;
+  }
+  if (it.tipo === "jaula") {
+    const r = { tipo: "jaula", cantidad: entero(it.cantidad, 99), largo: numero(it.largo, 100), ancho: numero(it.ancho, 50), altura: numero(it.altura, 20) };
+    return r.cantidad && r.largo && r.ancho && r.altura ? r : null;
+  }
+  return null;
+}
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Método no permitido" });
@@ -45,24 +83,21 @@ export default async function handler(req, res) {
   if (!nombre || telefono.length !== 10) {
     return res.status(400).json({ error: "Escribe tu nombre y tu WhatsApp a 10 dígitos." });
   }
-  const forma = FORMAS[b.forma] ? b.forma : null;
-  const abertura = ABERTURAS[b.abertura] ? b.abertura : "no_se";
-  const secciones = (Array.isArray(b.secciones) ? b.secciones : []).slice(0, 60).map((s, i) => ({
-    cant: Math.max(1, Math.min(999, Math.round(numero(s && s.cant)))),
-    largo: numero(s && s.largo),
-    alto: numero(s && s.alto),
-    nombre: texto(s && s.nombre, 40) || `Sección ${i + 1}`,
-  })).filter((s) => s.largo > 0 && s.alto > 0 && s.largo <= 500 && s.alto <= 60);
-  if (!forma || !secciones.length) {
-    return res.status(400).json({ error: "Faltan las medidas de la red." });
+  const producto = PRODUCTOS[b.producto] ? b.producto : null;
+  const items = (Array.isArray(b.items) ? b.items : []).slice(0, 10).map(limpiarItem).filter(Boolean);
+  const detalle = (Array.isArray(b.detalle) ? b.detalle : []).slice(0, 40).map((l) => texto(l, 240)).filter(Boolean);
+  if (!producto || (!items.length && !detalle.length)) {
+    return res.status(400).json({ error: "Falta lo que necesitas cotizar." });
   }
-  const m2 = Math.round(secciones.reduce((t, s) => t + s.cant * s.largo * s.alto, 0) * 100) / 100;
   const correo = texto(b.correo, 160);
+  const ciudad = texto(b.ciudad, 80);
   const estado = texto(b.estado, 60);
   const comentario = texto(b.comentario, 1000);
-  const medidas = b.medidas && typeof b.medidas === "object"
-    ? { largo: numero(b.medidas.largo), ancho: numero(b.medidas.ancho) || null, alto: numero(b.medidas.alto) }
-    : null;
+  const forma = FORMAS.includes(b.forma) ? b.forma : null;
+  const perimetral = items.find((i) => i.tipo === "perimetral");
+  const m2 = perimetral ? Math.round(perimetral.secciones.reduce((t, s) => t + s.cant * s.largo * s.alto, 0) * 100) / 100 : null;
+  const P = PRODUCTOS[producto];
+  const productoCRM = perimetral && PERIMETRAL_CRM[perimetral.abertura] ? PERIMETRAL_CRM[perimetral.abertura] : P.crm;
 
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!serviceKey) return res.status(500).json({ error: "No se pudo enviar. Escríbenos por WhatsApp, por favor." });
@@ -81,8 +116,7 @@ export default async function handler(req, res) {
         headers: { ...h, Prefer: "return=representation" },
         body: JSON.stringify({
           phone: telefono, name: nombre, stage: "nuevo", origen: "Página web",
-          product: PRODUCTO_CRM[abertura] || "Redes perimetrales",
-          estado: estado || null,
+          product: productoCRM, estado: estado || null,
         }),
       });
       const creado = await crear.json();
@@ -99,9 +133,12 @@ export default async function handler(req, res) {
         contact_id: contactId,
         nombre, telefono,
         correo: correo || null,
+        ciudad: ciudad || null,
         estado_mx: estado || null,
-        producto: "perimetral",
-        forma, abertura, medidas, secciones, m2,
+        producto, forma,
+        abertura: perimetral ? perimetral.abertura : null,
+        secciones: perimetral ? perimetral.secciones : null,
+        items, detalle, m2,
         comentario: comentario || null,
         pagina: texto(b.pagina, 200) || null,
         origen_visita: b.origenVisita && typeof b.origenVisita === "object" ? b.origenVisita : null,
@@ -111,9 +148,7 @@ export default async function handler(req, res) {
     if (!guardar.ok) throw new Error(guardada.message || "No se pudo guardar la solicitud");
     const solicitudId = guardada[0].id;
     const ligaCotizador = `${URL_COTIZADOR}?solicitud=${solicitudId}`;
-
-    const lineas = secciones.map((s) => `${s.cant} × ${fmt(s.largo)} × ${fmt(s.alto)} m${forma !== "personalizado" ? ` (${s.nombre.toLowerCase()})` : ""}`);
-    const resumen = `${FORMAS[forma]} · ${fmt(m2)} m² · abertura ${ABERTURAS[abertura]}`;
+    const lugar = [ciudad, estado].filter(Boolean).join(", ");
 
     // 3) Timeline del contacto (si falla, la solicitud ya quedó guardada).
     try {
@@ -125,10 +160,9 @@ export default async function handler(req, res) {
           type: "observacion",
           created_by_name: "Página web",
           notes: [
-            "📐 <b>Solicitud de cotización desde la página: red perimetral</b>",
-            escHtml(resumen),
-            ...lineas.map(escHtml),
-            estado ? `Estado: ${escHtml(estado)}` : null,
+            `📐 <b>Solicitud de cotización desde la página: ${escHtml(P.nombre)}</b>`,
+            ...detalle.map(escHtml),
+            lugar ? `Lugar: ${escHtml(lugar)}` : null,
             correo ? `Correo: ${escHtml(correo)}` : null,
             comentario ? `Comentario: ${escHtml(comentario)}` : null,
             `<a href="${ligaCotizador}" target="_blank" rel="noopener">Abrir en el cotizador</a>`,
@@ -138,12 +172,13 @@ export default async function handler(req, res) {
     } catch (e) { console.error("activities", e); }
 
     // 4) Campana de los vendedores: al tocarla abre el cotizador con la solicitud cargada.
+    const corto = m2 ? ` (${fmt(m2)} m²)` : "";
     try {
       const perfiles = await (await fetch(`${SUPABASE_URL}/rest/v1/profiles?select=id,email&email=in.(${EMAILS_VENDEDORES.map(encodeURIComponent).join(",")})`, { headers: h })).json();
       const filas = (Array.isArray(perfiles) ? perfiles : []).map((p) => ({
         user_id: p.id,
         tipo: "solicitud_cotizacion",
-        mensaje: `📐 ${contactoNuevo ? "Nuevo lead" : "Solicitud"} de la página: ${nombre} pide cotización de red perimetral (${fmt(m2)} m²). Toca para abrirla en el cotizador.`,
+        mensaje: `📐 ${contactoNuevo ? "Nuevo lead" : "Solicitud"} de la página: ${nombre}${lugar ? " (" + lugar + ")" : ""} pide cotización de ${P.nombre}${corto}. Toca para abrirla en el cotizador.`,
         contexto: { ir: "cotizador", solicitud_id: solicitudId, contact_id: contactId },
       }));
       if (filas.length) await fetch(`${SUPABASE_URL}/rest/v1/notificaciones`, { method: "POST", headers: h, body: JSON.stringify(filas) });
@@ -158,12 +193,11 @@ export default async function handler(req, res) {
           body: JSON.stringify({
             from: "Grupo RC — Página web <onboarding@resend.dev>",
             to: [process.env.CORREO_AVISO_LEADS || "redesdeportivasrc@gmail.com"],
-            subject: `📐 Solicitud de cotización: ${nombre} (${fmt(m2)} m²)`,
+            subject: `📐 Solicitud de cotización: ${nombre} — ${P.nombre}${corto}`,
             html: `
-              <h2>Solicitud de cotización — red perimetral</h2>
-              <p><b>${escHtml(nombre)}</b> · ${telefono}${estado ? " · " + escHtml(estado) : ""}${correo ? " · " + escHtml(correo) : ""}</p>
-              <p>${escHtml(resumen)}</p>
-              <ul>${lineas.map((l) => `<li>${escHtml(l)}</li>`).join("")}</ul>
+              <h2>Solicitud de cotización — ${escHtml(P.nombre)}</h2>
+              <p><b>${escHtml(nombre)}</b> · ${telefono}${lugar ? " · " + escHtml(lugar) : ""}${correo ? " · " + escHtml(correo) : ""}</p>
+              <ul>${detalle.map((l) => `<li>${escHtml(l)}</li>`).join("")}</ul>
               ${comentario ? `<p><b>Comentario:</b> ${escHtml(comentario)}</p>` : ""}
               <p><a href="${ligaCotizador}">Abrir en el cotizador</a></p>
             `,

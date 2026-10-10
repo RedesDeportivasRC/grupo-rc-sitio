@@ -17,6 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="stylesheet" href="../assets/css/cotizador-previo.css">
 <script src="../assets/js/medicion.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Cuántos balones caben en una balonera?", "acceptedAnswer": {"@type": "Answer", "text": "Depende de la medida y del tamaño del balón. Dinos cuántos necesitas guardar y te confirmamos la medida al cotizar."}}, {"@type": "Question", "name": "¿Las hacen en colores?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, según el cordón que tengamos disponible."}}, {"@type": "Question", "name": "¿Las envían fuera de Yucatán?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, enviamos a todo México."}}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.redesdeportivasrc.com/"}, {"@type": "ListItem", "position": 2, "name": "Productos", "item": "https://www.redesdeportivasrc.com/productos.html"}, {"@type": "ListItem", "position": 3, "name": "Baloneras", "item": "https://www.redesdeportivasrc.com/productos/baloneras.html"}]}</script>
@@ -32,6 +33,7 @@
       <p>Bolsas de red de cuerda trenzada, tejidas a mano, para llevar los balones al entrenamiento y tenerlos en orden.</p>
       <div class="pi-datos"><div><b>Cuerda trenzada</b><span>Tejida a mano</span></div><div><b>Colores</b><span>Según disponibilidad</span></div><div><b>Para equipos</b><span>Escuelas y clubes</span></div></div>
       <div class="pi-hero-botones">
+        <a class="btn btn-azul" href="#cotizar">📐 Cotizar en línea</a>
         <a class="btn btn-wa" href="https://wa.me/529995538184?text=Hola%2C%20quiero%20cotizar%20baloneras." target="_blank" rel="noopener">💬 Cotizar por WhatsApp</a>
         <a class="btn btn-linea" href="#cotizar" style="color:#fff;">¿Qué datos necesito?</a>
       </div>
@@ -70,6 +72,7 @@
     
     <div class="pi-pasos"><div class="pi-paso"><h3>Cuántos balones</h3><p>Y de qué deporte: fútbol, voleibol o básquetbol.</p></div><div class="pi-paso"><h3>Cuántas baloneras</h3><p>Para un equipo o para toda la escuela.</p></div><div class="pi-paso"><h3>El color</h3><p>Te decimos qué colores tenemos disponibles.</p></div><div class="pi-paso"><h3>Tu ciudad</h3><p>Para cotizar el envío.</p></div></div>
     
+    <div data-cotizador-previo="baloneras"></div>
   </div>
 </section>
 <section class="franja pi-seccion" id="preguntas">
@@ -107,6 +110,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="../assets/js/data.js"></script>
 <script src="../assets/js/common.js"></script>
+<script src="../assets/js/cotizador-previo.js"></script>
 <script>
   renderHeader('productos');
   renderFooter();
