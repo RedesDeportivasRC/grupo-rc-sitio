@@ -100,17 +100,18 @@
     inicial: ()=>({ forma:null, largo:'', ancho:'', alto:'', filas:[{ cant:'1', largo:'', alto:'' }], abertura:null }),
     pintar(st){
       const img = rutaBase() + 'assets/img/cotizar/';
-      let h = `<h3 class="cp-titulo"><span class="cp-num">1</span>¿Qué necesitas cubrir?</h3>
+      let h = `<h3 class="cp-titulo"><span class="cp-num">1</span>Selecciona qué necesitas cubrir</h3>
+        <p class="cp-ayuda">Toca la opción que más se parezca a tu proyecto.</p>
         <div class="cp-opciones" role="group">${Object.entries(FORMAS).map(([k,f])=>`
           <button type="button" class="cp-opcion" data-grupo="forma" data-valor="${k}" aria-pressed="${st.forma === k}">
             <img src="${img}${f.img}.webp" alt="Dibujo de red perimetral: ${esc(f.s.toLowerCase())}" width="705" height="330" loading="lazy">
             <div class="cp-opcion-txt"><b>${f.t}</b><span>${f.s}</span></div>
           </button>`).join('')}</div>`;
       if(!st.forma) return h;
-      h += `<h4 class="cp-sub">Medidas</h4><p class="cp-ayuda">${FORMAS[st.forma].ayuda}</p>`;
+      h += `<h4 class="cp-sub">Ingresa las medidas de tu red</h4><p class="cp-ayuda">En metros. ${FORMAS[st.forma].ayuda}</p>`;
       h += st.forma === 'personalizado' ? tablaSecciones(st.filas, 'Altura')
         : `<div class="cp-campos">${medida('largo','Largo',st.largo)}${st.forma === 'seccion' ? '' : medida('ancho','Ancho',st.ancho)}${medida('alto','Altura',st.alto)}</div>`;
-      h += `<h4 class="cp-sub">Abertura de la malla</h4><p class="cp-ayuda">Se elige según la pelota más pequeña que debe detener la red.</p>${chips('abertura', ABERTURAS, st.abertura)}`;
+      h += `<h4 class="cp-sub">Selecciona la abertura de la malla</h4><p class="cp-ayuda">Se elige según la pelota más pequeña que debe detener la red. Si no sabes, elige "No sé" y te recomendamos la adecuada.</p>${chips('abertura', ABERTURAS, st.abertura)}`;
       return h;
     },
     conectar(cont, st, refrescar, repintar){ if(st.forma === 'personalizado') conectarSecciones(cont, st.filas, refrescar, repintar); },
@@ -140,12 +141,12 @@
     nombre:'red de protección',
     inicial: ()=>({ filas:[{ cant:'1', largo:'', alto:'' }], detener:null, abertura:null }),
     pintar(st){
-      return `<h3 class="cp-titulo"><span class="cp-num">1</span>Medidas de cada área</h3>
+      return `<h3 class="cp-titulo"><span class="cp-num">1</span>Ingresa las medidas de cada área</h3>
         <p class="cp-ayuda">Largo y ancho (o alto) de cada área que quieres cubrir. Si hay varias iguales, pon la cantidad.</p>
         ${tablaSecciones(st.filas, 'Ancho o alto')}
-        <h4 class="cp-sub">¿Qué debe detener la red?</h4>
+        <h4 class="cp-sub">Selecciona qué debe detener la red</h4>
         ${chips('detener', [{v:'balones',t:'Balones'},{v:'aves',t:'Aves'},{v:'objetos',t:'Objetos'},{v:'personas',t:'Personas'},{v:'otro',t:'Otro'}], st.detener)}
-        <h4 class="cp-sub">Abertura</h4><p class="cp-ayuda">Si no sabes, déjalo en "No sé" y te recomendamos la adecuada.</p>
+        <h4 class="cp-sub">Selecciona la abertura de la malla</h4><p class="cp-ayuda">Si no sabes, déjalo en "No sé" y te recomendamos la adecuada.</p>
         ${chips('abertura', [...ABERTURAS.slice(0,2), { v:'anticaidas', t:'Anticaídas', s:'1" para personas' }, ABERTURAS[2]], st.abertura)}`;
     },
     conectar(cont, st, refrescar, repintar){ conectarSecciones(cont, st.filas, refrescar, repintar); },
@@ -168,12 +169,12 @@
     nombre:'porterías',
     inicial: ()=>({ modelo:null, trav:'', poste:'', cantidad:'2', acabado:null }),
     pintar(st){
-      let h = `<h3 class="cp-titulo"><span class="cp-num">1</span>¿Qué portería necesitas?</h3>
+      let h = `<h3 class="cp-titulo"><span class="cp-num">1</span>Selecciona la portería que necesitas</h3>
         ${chips('modelo', [...MODELOS_PORTERIA, { v:'Personalizada', t:'Medida especial' }], st.modelo)}`;
       if(!st.modelo) return h;
       if(st.modelo === 'Personalizada') h += `<div class="cp-campos cp-c2">${medida('trav','Ancho (de poste a poste)',st.trav)}${medida('poste','Alto',st.poste)}</div>`;
       h += `<div class="cp-campos cp-c2">${cantidad('cantidad','Piezas (2 = un par)',st.cantidad)}</div>
-        <h4 class="cp-sub">Acabado</h4>
+        <h4 class="cp-sub">Selecciona el acabado</h4>
         ${chips('acabado', [{v:'galvanizada',t:'Galvanizada'},{v:'blanca',t:'Pintada de blanco'},{v:'acojinada',t:'Acojinada',s:'con tus colores'},{v:'no_se',t:'No sé'}], st.acabado)}`;
       return h;
     },
@@ -199,7 +200,7 @@
     nombre:'red para portería',
     inicial: ()=>({ modelo:null, cantidad:'2', trav:'', poste:'', psup:'', pinf:'', color:'' }),
     pintar(st){
-      return `<h3 class="cp-titulo"><span class="cp-num">1</span>Medidas de tu portería</h3>
+      return `<h3 class="cp-titulo"><span class="cp-num">1</span>Ingresa las medidas de tu portería</h3>
         <p class="cp-ayuda">Si tu portería es de una medida estándar, tócala y llenamos las medidas por ti. Si no, mídela.</p>
         ${chips('modelo', [...MODELOS_PORTERIA, { v:'otra', t:'Otra medida' }], st.modelo)}
         <div class="cp-campos cp-c4">${medida('trav','Travesaño (ancho)',st.trav)}${medida('poste','Poste (alto)',st.poste)}${medida('psup','Profundidad arriba',st.psup)}${medida('pinf','Profundidad abajo',st.pinf)}</div>
@@ -232,7 +233,7 @@
     nombre:'redes deportivas',
     inicial: ()=>({ voleibol:'', basquetbol:'', canasta:'', colores:'' }),
     pintar(st){
-      return `<h3 class="cp-titulo"><span class="cp-num">1</span>¿Qué necesitas y cuántas?</h3>
+      return `<h3 class="cp-titulo"><span class="cp-num">1</span>Selecciona qué necesitas y cuántas piezas</h3>
         <div class="cp-lineas">${DEPORTIVAS.map(d=>`
           <label class="cp-linea ${ent(st[d.k]) ? 'activa' : ''}"><div><b>${d.t}</b><span>${d.s}</span></div>
             <input type="number" inputmode="numeric" min="0" step="1" placeholder="0" data-campo="${d.k}" value="${esc(st[d.k])}"></label>`).join('')}
@@ -256,12 +257,12 @@
     nombre:'jaula de bateo',
     inicial: ()=>({ tipo:null, largo:'', ancho:'', alto:'', cantidad:'1', proteccion:null }),
     pintar(st){
-      return `<h3 class="cp-titulo"><span class="cp-num">1</span>¿Qué necesitas?</h3>
+      return `<h3 class="cp-titulo"><span class="cp-num">1</span>Selecciona qué necesitas</h3>
         ${chips('tipo', [{v:'completa',t:'Jaula completa',s:'estructura y red'},{v:'red',t:'Solo la red',s:'ya tengo estructura'}], st.tipo)}
-        <h4 class="cp-sub">Medidas</h4><p class="cp-ayuda">Profundidad (largo), ancho y alto. Las profundidades más comunes son 10, 15, 20 y 25 m.</p>
+        <h4 class="cp-sub">Ingresa las medidas</h4><p class="cp-ayuda">En metros. Profundidad (largo), ancho y alto. Las profundidades más comunes son 10, 15, 20 y 25 m.</p>
         <div class="cp-campos">${medida('largo','Profundidad',st.largo)}${medida('ancho','Ancho',st.ancho)}${medida('alto','Alto',st.alto)}</div>
         <div class="cp-campos cp-c2">${cantidad('cantidad','Cuántas jaulas',st.cantidad)}</div>
-        <h4 class="cp-sub">¿La quieres con protección?</h4>
+        <h4 class="cp-sub">Selecciona si la quieres con protección</h4>
         ${chips('proteccion', [{v:'si',t:'Sí'},{v:'no',t:'No'},{v:'no_se',t:'No sé'}], st.proteccion)}`;
     },
     calcular(st){
@@ -282,7 +283,7 @@
     nombre:'baloneras',
     inicial: ()=>({ deporte:null, balones:'', cantidad:'1', color:'' }),
     pintar(st){
-      return `<h3 class="cp-titulo"><span class="cp-num">1</span>¿Qué balonera necesitas?</h3>
+      return `<h3 class="cp-titulo"><span class="cp-num">1</span>Selecciona la balonera y cuántas necesitas</h3>
         ${chips('deporte', [{v:'futbol',t:'Fútbol'},{v:'voleibol',t:'Voleibol'},{v:'basquetbol',t:'Básquetbol'},{v:'varios',t:'Varios deportes'}], st.deporte)}
         <div class="cp-campos">${cantidad('balones','Balones que debe guardar',st.balones)}${cantidad('cantidad','Cuántas baloneras',st.cantidad)}<div><label>Color (opcional)</label><input type="text" maxlength="40" data-campo="color" value="${esc(st.color)}"></div></div>`;
     },
@@ -337,10 +338,11 @@
     let st = P.inicial();
     raiz.classList.add('cp');
     raiz.innerHTML = `
-      <div data-flujo>
-        <div class="cp-paso" data-producto></div>
-        <div class="cp-paso" data-datos hidden>
-          <h3 class="cp-titulo"><span class="cp-num">2</span>¿A dónde te mandamos la cotización?</h3>
+      <div class="cp-paso cp-flujo" data-flujo>
+        <div data-producto></div>
+        <div class="cp-bloque-datos" data-datos hidden>
+          <h3 class="cp-sub"><span class="cp-num" data-num-datos>2</span>Déjanos tus datos y te mandamos la cotización</h3>
+          <p class="cp-ayuda">Te la enviamos por WhatsApp con el envío incluido. Solo tu nombre y tu WhatsApp son obligatorios.</p>
           <div class="cp-resumen" data-resumen aria-live="polite"></div>
           <form class="cp-form" autocomplete="on" novalidate>
             <input type="text" name="sitioWeb" data-trampa tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;">
@@ -357,7 +359,7 @@
             <div><label>Correo (opcional)</label><input type="email" name="correo" autocomplete="email"></div>
             <div><label>Comentarios (opcional)</label><textarea name="comentario" rows="3" placeholder="Ej. para qué la usarás, dónde va o si tienes fecha límite"></textarea></div>
             <div class="cp-error" data-error role="alert"></div>
-            <button type="submit" class="btn cp-enviar">Solicitar cotización</button>
+            <button type="submit" class="btn cp-enviar">Solicitar mi cotización</button>
             <p class="cp-tip" style="font-size:.88rem;">¿No sabes qué poner? <a data-wa href="https://wa.me/${WA}" target="_blank" rel="noopener" style="color:#1a9e4b;font-weight:700;">Escríbenos directo por WhatsApp</a> y te ayudamos.</p>
           </form>
         </div>
@@ -390,15 +392,30 @@
       raiz.querySelectorAll('[data-wa]').forEach(a=> a.href = `https://wa.me/${WA}?text=${encodeURIComponent(txt)}`);
       return r;
     }
+    // Cada título de la tarjeta es un paso numerado (1, 2, 3…) y el de los datos es el último:
+    // así el cliente ve un solo recorrido, de arriba abajo.
+    function numerarPasos(){
+      let n = 0;
+      caja.querySelectorAll('.cp-titulo, .cp-sub').forEach(h=>{
+        let s = h.querySelector('.cp-num');
+        if(!s){ s = document.createElement('span'); s.className = 'cp-num'; h.prepend(s); }
+        s.textContent = ++n;
+      });
+      q('[data-num-datos]').textContent = n + 1;
+    }
     function repintar(){
       caja.innerHTML = P.pintar(st);
+      numerarPasos();
       caja.querySelectorAll('[data-grupo]').forEach(b=> b.addEventListener('click', ()=>{
         const g = b.dataset.grupo, v = b.dataset.valor;
         st[g] = v;
         if(P.alElegir) P.alElegir(st, g, v);
         repintar();
         if(g === 'forma'){
+          // Lo lleva de la mano al siguiente paso: las medidas.
           const primero = caja.querySelector('[data-campo], [data-col="largo"]');
+          const sig = caja.querySelectorAll('.cp-sub')[0];
+          if(sig) sig.scrollIntoView({ behavior:'smooth', block:'start' });
           if(primero) primero.focus({ preventScroll:true });
         }
       }));
@@ -449,7 +466,7 @@
       }catch(ex){
         err.textContent = ex.message;
       }finally{
-        btn.disabled = false; btn.textContent = 'Solicitar cotización';
+        btn.disabled = false; btn.textContent = 'Solicitar mi cotización';
       }
     });
 
