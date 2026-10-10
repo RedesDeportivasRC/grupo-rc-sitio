@@ -65,9 +65,9 @@
   const m2De = (secs)=> secs.reduce((t,s)=> t + s.cant*s.largo*s.alto, 0);
   const lineasSecciones = (secs, etq)=> secs.map(s=> `${pz(s.cant,'sección','secciones')} de ${fmt(s.largo)} × ${fmt(s.alto)} m${s.nombre ? ' (' + s.nombre + ')' : ''}`);
 
+  // Reinier 2026-10-10: en la página solo se ofrecen 1" y 4"; 2" y 3" los ofrece el vendedor después.
   const ABERTURAS = [
-    { v:'4', t:'4"', s:'fútbol' }, { v:'3', t:'3"', s:'balones grandes' }, { v:'2', t:'2"', s:'más cerrada' },
-    { v:'1', t:'1"', s:'golf, béisbol, aves' }, { v:'no_se', t:'No sé, recomiéndenme' },
+    { v:'4', t:'4"', s:'fútbol y balones grandes' }, { v:'1', t:'1"', s:'golf, béisbol, aves' }, { v:'no_se', t:'No sé, recomiéndenme' },
   ];
   const txtAbertura = (a)=> a === 'anticaidas' ? 'red anticaídas' : (a && a !== 'no_se' ? `abertura ${a}"` : 'abertura por recomendar');
 
@@ -146,7 +146,7 @@
         <h4 class="cp-sub">¿Qué debe detener la red?</h4>
         ${chips('detener', [{v:'balones',t:'Balones'},{v:'aves',t:'Aves'},{v:'objetos',t:'Objetos'},{v:'personas',t:'Personas'},{v:'otro',t:'Otro'}], st.detener)}
         <h4 class="cp-sub">Abertura</h4><p class="cp-ayuda">Si no sabes, déjalo en "No sé" y te recomendamos la adecuada.</p>
-        ${chips('abertura', [...ABERTURAS.slice(0,4), { v:'anticaidas', t:'Anticaídas', s:'1" para personas' }, ABERTURAS[4]], st.abertura)}`;
+        ${chips('abertura', [...ABERTURAS.slice(0,2), { v:'anticaidas', t:'Anticaídas', s:'1" para personas' }, ABERTURAS[2]], st.abertura)}`;
     },
     conectar(cont, st, refrescar, repintar){ conectarSecciones(cont, st.filas, refrescar, repintar); },
     calcular(st){
