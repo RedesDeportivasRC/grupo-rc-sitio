@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cotiza tu red perimetral en línea | Redes Deportivas RC</title>
+<meta name="description" content="Elige la forma de tu red perimetral (una sección, perímetro, jaula con techo o varias secciones), escribe las medidas y recibe tu cotización con envío incluido por WhatsApp.">
+<link rel="canonical" href="https://www.redesdeportivasrc.com/cotizar/redes-perimetrales.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:site_name" content="Redes Deportivas RC">
+<meta property="og:url" content="https://www.redesdeportivasrc.com/cotizar/redes-perimetrales.html">
+<meta property="og:title" content="Cotiza tu red perimetral a la medida">
+<meta property="og:description" content="Elige la forma, escribe las medidas y te mandamos la cotización con envío incluido.">
+<meta property="og:image" content="https://www.redesdeportivasrc.com/assets/img/cotizar/red-perimetral-perimetro-4-lados.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<script src="../assets/js/medicion.js"></script>
+<style>
+  /* Cotizador previo de redes perimetrales: estilos solo de esta página. */
+  .cp-paso{background:#fff;border:1px solid var(--linea);border-radius:var(--radio);padding:26px;margin-top:22px;}
+  .cp-paso h2{font-size:clamp(1.6rem,3.4vw,2.1rem);display:flex;align-items:center;gap:12px;}
+  .cp-num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--azul);color:var(--negro);font-family:'Manrope',sans-serif;font-weight:800;font-size:1rem;flex-shrink:0;}
+  .cp-ayuda{color:var(--gris);font-size:.92rem;margin-top:8px;}
+  .cp-opciones{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px;}
+  .cp-opcion{background:#fff;border:2px solid var(--linea);border-radius:12px;padding:0;cursor:pointer;text-align:left;font-family:inherit;color:inherit;overflow:hidden;display:flex;flex-direction:column;transition:border-color .15s, box-shadow .15s;}
+  .cp-opcion:hover{border-color:#9fdcf5;}
+  .cp-opcion[aria-pressed="true"]{border-color:var(--azul);box-shadow:0 0 0 3px rgba(43,189,243,.22);}
+  .cp-opcion img{width:100%;height:auto;aspect-ratio:705/330;object-fit:contain;background:#fff;padding:6px;}
+  .cp-opcion-txt{padding:12px 14px 14px;border-top:1px solid var(--linea);background:var(--hueso);flex:1;}
+  .cp-opcion-txt b{display:block;font-size:1rem;}
+  .cp-opcion-txt span{display:block;color:var(--gris);font-size:.82rem;margin-top:2px;}
+  .cp-opcion[aria-pressed="true"] .cp-opcion-txt{background:#e7f7fe;}
+  .cp-campos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px;max-width:640px;}
+  .cp-unidad{position:relative;}
+  .cp-unidad input{padding-right:34px;}
+  .cp-unidad::after{content:'m';position:absolute;right:13px;bottom:14px;color:var(--gris);font-size:.85rem;pointer-events:none;}
+  .cp-tabla{width:100%;max-width:640px;border-collapse:collapse;margin-top:18px;}
+  .cp-tabla th{font-size:.74rem;text-transform:uppercase;letter-spacing:.6px;color:var(--gris);text-align:left;padding:0 6px 6px;}
+  .cp-tabla td{padding:4px 6px;vertical-align:middle;}
+  .cp-tabla td.cp-m2{font-weight:700;white-space:nowrap;font-size:.9rem;}
+  .cp-tabla input{padding:11px 10px;}
+  .cp-quitar{background:none;border:none;color:var(--gris);font-size:1.4rem;cursor:pointer;line-height:1;padding:4px 8px;}
+  .cp-quitar:hover{color:#d9534f;}
+  .cp-agregar{margin-top:12px;background:none;border:1.5px dashed var(--azul);color:#0b7fae;border-radius:10px;padding:11px 18px;font-weight:700;font-family:inherit;cursor:pointer;}
+  .cp-tip{color:var(--gris);font-size:.8rem;margin-top:8px;}
+  .cp-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
+  .cp-chip{border:1.5px solid var(--linea);background:#fff;border-radius:100px;padding:10px 16px;font-family:inherit;font-weight:700;font-size:.88rem;cursor:pointer;color:inherit;}
+  .cp-chip small{font-weight:500;color:var(--gris);margin-left:4px;}
+  .cp-chip[aria-pressed="true"]{border-color:var(--azul);background:#e7f7fe;}
+  .cp-resumen{margin-top:22px;background:var(--azul-osc);color:#fff;border-radius:12px;padding:18px 20px;max-width:640px;}
+  .cp-resumen h3{font-size:1.3rem;color:#fff;}
+  .cp-resumen ul{margin:10px 0 0;padding-left:18px;color:#cfe6ef;font-size:.92rem;}
+  .cp-resumen .cp-total{margin-top:10px;font-weight:800;font-size:1.05rem;}
+  .cp-resumen .cp-total span{color:var(--azul);}
+  .cp-vacio{color:#9fc3d1;font-size:.9rem;margin-top:6px;}
+  .cp-form{display:grid;gap:14px;margin-top:18px;max-width:640px;}
+  .cp-error{color:#d9534f;font-size:.88rem;font-weight:600;min-height:1.2em;}
+  .cp-enviar{background:var(--azul);color:var(--negro);font-size:1rem;justify-self:start;}
+  .cp-enviar[disabled]{opacity:.6;cursor:wait;}
+  .cp-listo{display:none;text-align:center;padding:30px 10px;}
+  .cp-listo h2{justify-content:center;}
+  .cp-listo p{color:var(--gris);margin:12px auto 20px;max-width:52ch;}
+  .cp-ayuda-wa{margin-top:22px;background:var(--hueso);border-radius:var(--radio);padding:24px 26px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+  .cp-ayuda-wa h2{font-size:clamp(1.5rem,3vw,1.9rem);}
+  .cp-ayuda-wa p{color:var(--gris);margin-top:6px;max-width:58ch;}
+  .cp-ayuda-wa .btn{white-space:normal;}
+  @media (max-width:980px){ .cp-opciones{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){
+    .cp-paso{padding:18px 14px;}
+    .cp-opciones{gap:10px;}
+    .cp-opcion-txt{padding:10px;}
+    .cp-opcion-txt span{display:none;}
+    .cp-campos{grid-template-columns:1fr 1fr;}
+    .cp-tabla th:nth-child(4), .cp-tabla td.cp-m2{display:none;}
+    .cp-tabla td{padding:3px 3px;}
+    .cp-enviar{justify-self:stretch;justify-content:center;}
+  }
+</style>
+</head>
+<body data-nivel="sub">
+<div id="site-header"></div>
+
+<section class="hero-interior">
+  <div class="envolvente">
+    <div class="migas" style="color:#9fc3d1;"><a href="../index.html" style="color:#9fc3d1;">Inicio</a> / <a href="../productos/redes-perimetrales.html" style="color:#9fc3d1;">Redes perimetrales</a> / Cotizar</div>
+    <h1>Cotiza tu red perimetral</h1>
+    <p>Elige la forma, escribe las medidas en metros y te mandamos la cotización por WhatsApp con el envío incluido.</p>
+  </div>
+</section>
+
+<section class="franja-chica" style="background:var(--hueso);">
+  <div class="envolvente">
+
+    <div id="cp-flujo">
+      <!-- Paso 1: forma -->
+      <div class="cp-paso">
+        <h2><span class="cp-num">1</span>¿Qué necesitas cubrir?</h2>
+        <div class="cp-opciones" role="group" aria-label="Forma de la red">
+          <button type="button" class="cp-opcion" data-tipo="seccion" aria-pressed="false">
+            <img src="../assets/img/cotizar/red-perimetral-una-seccion.webp" alt="Ilustración de una sola sección de red perimetral entre dos postes" width="705" height="322">
+            <div class="cp-opcion-txt"><b>1 sección</b><span>Una sola sección de red.</span></div>
+          </button>
+          <button type="button" class="cp-opcion" data-tipo="perimetro" aria-pressed="false">
+            <img src="../assets/img/cotizar/red-perimetral-perimetro-4-lados.webp" alt="Ilustración de red perimetral en los cuatro lados de un área" width="705" height="322">
+            <div class="cp-opcion-txt"><b>Perímetro (4 lados)</b><span>Red en todo el perímetro.</span></div>
+          </button>
+          <button type="button" class="cp-opcion" data-tipo="jaula" aria-pressed="false">
+            <img src="../assets/img/cotizar/red-perimetral-jaula-con-techo.webp" alt="Ilustración de jaula de red con cuatro lados y techo" width="705" height="322">
+            <div class="cp-opcion-txt"><b>Jaula (con techo)</b><span>Red en los 4 lados y techo.</span></div>
+          </button>
+          <button type="button" class="cp-opcion" data-tipo="personalizado" aria-pressed="false">
+            <img src="../assets/img/cotizar/red-perimetral-personalizada-varias-secciones.webp" alt="Ilustración de red perimetral con varias secciones de diferentes medidas" width="705" height="344">
+            <div class="cp-opcion-txt"><b>Personalizado</b><span>Varias secciones a tu medida.</span></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Paso 2: medidas -->
+      <div class="cp-paso" id="cp-paso-medidas" hidden>
+        <h2><span class="cp-num">2</span>Escribe las medidas</h2>
+        <p class="cp-ayuda" id="cp-ayuda-medidas"></p>
+        <div id="cp-medidas"></div>
+
+        <h3 style="margin-top:26px;">Abertura de la malla</h3>
+        <p class="cp-ayuda">Se elige según la pelota más pequeña que debe detener la red.</p>
+        <div class="cp-chips" role="group" aria-label="Abertura de la malla" id="cp-aberturas">
+          <button type="button" class="cp-chip" data-abertura="4" aria-pressed="false">4"<small>fútbol</small></button>
+          <button type="button" class="cp-chip" data-abertura="3" aria-pressed="false">3"<small>balones grandes</small></button>
+          <button type="button" class="cp-chip" data-abertura="2" aria-pressed="false">2"<small>más cerrada</small></button>
+          <button type="button" class="cp-chip" data-abertura="1" aria-pressed="false">1"<small>golf, béisbol, aves</small></button>
+          <button type="button" class="cp-chip" data-abertura="no_se" aria-pressed="false">No sé, recomiéndenme</button>
+        </div>
+
+        <div class="cp-resumen" id="cp-resumen" aria-live="polite"></div>
+      </div>
+
+      <!-- Paso 3: datos de contacto -->
+      <div class="cp-paso" id="cp-paso-datos" hidden>
+        <h2><span class="cp-num">3</span>¿A dónde te mandamos la cotización?</h2>
+        <form class="cp-form" id="cp-form" autocomplete="on" novalidate>
+          <input type="text" name="sitioWeb" id="cp-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;">
+          <div class="fila-2">
+            <div><label for="cp-nombre">Nombre</label><input type="text" id="cp-nombre" autocomplete="name" required></div>
+            <div><label for="cp-telefono">WhatsApp (10 dígitos)</label><input type="tel" id="cp-telefono" autocomplete="tel-national" inputmode="numeric" maxlength="14" placeholder="999 123 4567" required></div>
+          </div>
+          <div class="fila-2">
+            <div><label for="cp-estado">Estado</label><select id="cp-estado" autocomplete="address-level1"><option value="">Selecciona tu estado</option></select></div>
+            <div><label for="cp-correo">Correo (opcional)</label><input type="email" id="cp-correo" autocomplete="email"></div>
+          </div>
+          <div><label for="cp-uso">¿Para qué es la red? (opcional)</label><textarea id="cp-uso" rows="3" placeholder="Ej. cancha de fútbol 7 en una escuela, la quiero sobre una barda de 2 m"></textarea></div>
+          <div class="cp-error" id="cp-error" role="alert"></div>
+          <button type="submit" class="btn cp-enviar" id="cp-enviar">Solicitar cotización</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Confirmación -->
+    <div class="cp-paso cp-listo" id="cp-listo">
+      <h2>✅ ¡Recibimos tu solicitud!</h2>
+      <p id="cp-listo-txt">Un asesor revisa tus medidas y te manda la cotización por WhatsApp.</p>
+      <button type="button" class="btn btn-linea" id="cp-otra">Cotizar otra red</button>
+    </div>
+
+    <!-- Siempre visible -->
+    <div class="cp-ayuda-wa">
+      <div>
+        <h2>¿Quieres que te ayudemos con tu proyecto?</h2>
+        <p>Si no tienes claras las medidas o qué red te conviene, escríbenos y te asesoramos sin compromiso.</p>
+      </div>
+      <a class="btn btn-wa" id="cp-wa" href="https://wa.me/529995538184?text=Hola%2C%20quiero%20ayuda%20con%20mi%20proyecto%20de%20red%20perimetral." target="_blank" rel="noopener">💬 Escríbenos por WhatsApp</a>
+    </div>
+
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/common.js"></script>
+<script>
+  renderHeader('productos');
+  renderFooter();
+
+  /* ==========================================================================
+     Cotizador previo de redes perimetrales.
+     El cliente NO ve precios: solo arma sus secciones (cantidad × largo × altura, igual
+     que el cotizador interno) y manda la solicitud. El vendedor la abre en el cotizador
+     con todo cargado y pone precio y envío.
+     ========================================================================== */
+  const TEXTO_FORMA = {
+    seccion: { nombre:'1 sección', ayuda:'Largo de la red y altura, en metros.' },
+    perimetro: { nombre:'Perímetro (4 lados)', ayuda:'Con el largo, el ancho y la altura del área calculamos los 4 lados.' },
+    jaula: { nombre:'Jaula con techo', ayuda:'Con el largo, el ancho y la altura calculamos los 4 lados y el techo.' },
+    personalizado: { nombre:'Personalizado', ayuda:'Agrega cada sección con su cantidad, largo y altura. Si hay varias iguales, pon la cantidad.' },
+  };
+  const estado = { tipo:null, medidas:{ largo:'', ancho:'', alto:'' }, filas:[{ cant:'1', largo:'', alto:'' }], abertura:null };
+
+  const $ = (id)=> document.getElementById(id);
+  const num = (v)=>{ const n = parseFloat(String(v).replace(',', '.')); return isFinite(n) && n > 0 ? n : 0; };
+  const fmt = (n)=> (Math.round(n*100)/100).toLocaleString('es-MX', { maximumFractionDigits:2 });
+  const esc = (t)=> String(t).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  // Convierte lo que escribió el cliente en secciones { cant, largo, alto, nombre }.
+  function secciones(){
+    const m = estado.medidas, L = num(m.largo), A = num(m.ancho), H = num(m.alto);
+    if(estado.tipo === 'seccion') return (L && H) ? [{ cant:1, largo:L, alto:H, nombre:'Sección' }] : [];
+    if(estado.tipo === 'perimetro' || estado.tipo === 'jaula'){
+      if(!L || !A || !H) return [];
+      const s = L === A
+        ? [{ cant:4, largo:L, alto:H, nombre:'Lados' }]
+        : [{ cant:2, largo:L, alto:H, nombre:'Lados largos' }, { cant:2, largo:A, alto:H, nombre:'Lados cortos' }];
+      if(estado.tipo === 'jaula') s.push({ cant:1, largo:L, alto:A, nombre:'Techo' });
+      return s;
+    }
+    if(estado.tipo === 'personalizado'){
+      return estado.filas
+        .map((f,i)=>({ cant:Math.round(num(f.cant)), largo:num(f.largo), alto:num(f.alto), nombre:'Sección ' + (i+1) }))
+        .filter(s=> s.cant && s.largo && s.alto);
+    }
+    return [];
+  }
+  const m2De = (lista)=> lista.reduce((t,s)=> t + s.cant*s.largo*s.alto, 0);
+
+  function campoMedida(clave, etiqueta){
+    return `<div><label for="cp-${clave}">${etiqueta}</label><div class="cp-unidad"><input type="number" inputmode="decimal" step="0.01" min="0" id="cp-${clave}" data-medida="${clave}" value="${esc(estado.medidas[clave])}"></div></div>`;
+  }
+
+  function pintarMedidas(){
+    const cont = $('cp-medidas');
+    $('cp-ayuda-medidas').textContent = TEXTO_FORMA[estado.tipo].ayuda;
+    if(estado.tipo === 'personalizado'){
+      cont.innerHTML = `
+        <table class="cp-tabla">
+          <thead><tr><th style="width:70px;">Cant.</th><th>Largo (m)</th><th>Altura (m)</th><th>m²</th><th></th></tr></thead>
+          <tbody>${estado.filas.map((f,i)=>`
+            <tr data-i="${i}">
+              <td><input type="number" inputmode="numeric" min="1" step="1" data-campo="cant" value="${esc(f.cant)}" aria-label="Cantidad de la sección ${i+1}"></td>
+              <td><input type="number" inputmode="decimal" min="0" step="0.01" data-campo="largo" value="${esc(f.largo)}" aria-label="Largo de la sección ${i+1}"></td>
+              <td><input type="number" inputmode="decimal" min="0" step="0.01" data-campo="alto" value="${esc(f.alto)}" aria-label="Altura de la sección ${i+1}"></td>
+              <td class="cp-m2">${fmt(num(f.cant)*num(f.largo)*num(f.alto))}</td>
+              <td>${estado.filas.length > 1 ? `<button type="button" class="cp-quitar" data-quitar="${i}" aria-label="Quitar sección ${i+1}">×</button>` : ''}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+        <button type="button" class="cp-agregar" id="cp-agregar">+ Agregar sección</button>
+        <p class="cp-tip">Tip: en computadora, al terminar la altura de la última sección presiona <b>Tab</b> y se agrega otra.</p>`;
+      cont.querySelectorAll('tr[data-i] input').forEach(inp=>{
+        inp.addEventListener('input', ()=>{
+          const i = +inp.closest('tr').dataset.i;
+          estado.filas[i][inp.dataset.campo] = inp.value;
+          inp.closest('tr').querySelector('.cp-m2').textContent = fmt(num(estado.filas[i].cant)*num(estado.filas[i].largo)*num(estado.filas[i].alto));
+          pintarResumen();
+        });
+        // Igual que el cotizador: Tab en la altura de la última sección (ya llena) agrega otra.
+        if(inp.dataset.campo === 'alto') inp.addEventListener('keydown', e=>{
+          const i = +inp.closest('tr').dataset.i;
+          const f = estado.filas[i];
+          if(e.key === 'Tab' && !e.shiftKey && i === estado.filas.length-1 && num(f.largo) && num(f.alto)){
+            e.preventDefault(); agregarFila();
+          }
+        });
+      });
+      cont.querySelectorAll('[data-quitar]').forEach(b=> b.onclick = ()=>{
+        estado.filas.splice(+b.dataset.quitar, 1); pintarMedidas(); pintarResumen();
+      });
+      $('cp-agregar').onclick = agregarFila;
+    } else {
+      const campos = estado.tipo === 'seccion'
+        ? campoMedida('largo','Largo') + campoMedida('alto','Altura')
+        : campoMedida('largo','Largo') + campoMedida('ancho','Ancho') + campoMedida('alto','Altura');
+      cont.innerHTML = `<div class="cp-campos">${campos}</div>`;
+      cont.querySelectorAll('[data-medida]').forEach(inp=> inp.addEventListener('input', ()=>{
+        estado.medidas[inp.dataset.medida] = inp.value; pintarResumen();
+      }));
+    }
+  }
+
+  function agregarFila(){
+    estado.filas.push({ cant:'1', largo:'', alto:'' });
+    pintarMedidas(); pintarResumen();
+    const filas = document.querySelectorAll('#cp-medidas tr[data-i]');
+    const ultima = filas[filas.length-1];
+    if(ultima) ultima.querySelector('[data-campo="largo"]').focus();
+  }
+
+  function pintarResumen(){
+    const lista = secciones();
+    const caja = $('cp-resumen');
+    if(!lista.length){
+      caja.innerHTML = `<h3>Tu red</h3><p class="cp-vacio">Escribe las medidas para ver el resumen.</p>`;
+    } else {
+      caja.innerHTML = `<h3>Tu red: ${esc(TEXTO_FORMA[estado.tipo].nombre)}</h3>
+        <ul>${lista.map(s=>`<li>${s.cant} ${s.cant === 1 ? 'sección' : 'secciones'} de ${fmt(s.largo)} × ${fmt(s.alto)} m${estado.tipo !== 'personalizado' ? ' (' + esc(s.nombre.toLowerCase()) + ')' : ''}</li>`).join('')}</ul>
+        <div class="cp-total">Total: <span>${fmt(m2De(lista))} m²</span> de red${estado.abertura && estado.abertura !== 'no_se' ? ' de ' + estado.abertura + '"' : ''}</div>`;
+    }
+    $('cp-paso-datos').hidden = !lista.length;
+    actualizarWhatsApp(lista);
+  }
+
+  // El botón de ayuda por WhatsApp lleva lo que el cliente ya escribió, para no empezar de cero.
+  function actualizarWhatsApp(lista){
+    let txt = 'Hola, quiero ayuda con mi proyecto de red perimetral.';
+    if(lista && lista.length){
+      txt += ' Tengo pensado: ' + TEXTO_FORMA[estado.tipo].nombre + ', ' +
+        lista.map(s=> `${s.cant} de ${fmt(s.largo)} x ${fmt(s.alto)} m`).join('; ') + '.';
+    }
+    $('cp-wa').href = 'https://wa.me/529995538184?text=' + encodeURIComponent(txt);
+  }
+
+  document.querySelectorAll('.cp-opcion').forEach(b=> b.addEventListener('click', ()=>{
+    estado.tipo = b.dataset.tipo;
+    document.querySelectorAll('.cp-opcion').forEach(x=> x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+    $('cp-paso-medidas').hidden = false;
+    pintarMedidas(); pintarResumen();
+    $('cp-paso-medidas').scrollIntoView({ behavior:'smooth', block:'start' });
+    const primero = document.querySelector('#cp-medidas input[data-medida], #cp-medidas [data-campo="largo"]');
+    if(primero) setTimeout(()=> primero.focus({ preventScroll:true }), 350);
+  }));
+
+  document.querySelectorAll('.cp-chip').forEach(b=> b.addEventListener('click', ()=>{
+    estado.abertura = b.dataset.abertura;
+    document.querySelectorAll('.cp-chip').forEach(x=> x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+    pintarResumen();
+  }));
+
+  $('cp-estado').insertAdjacentHTML('beforeend', ESTADOS_MEXICO.map(e=>`<option>${e}</option>`).join(''));
+
+  $('cp-form').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const error = $('cp-error'), boton = $('cp-enviar');
+    const lista = secciones();
+    const nombre = $('cp-nombre').value.trim();
+    let tel = $('cp-telefono').value.replace(/\D/g, '');
+    if(tel.length === 12 && tel.startsWith('52')) tel = tel.slice(2);
+    if(tel.length === 13 && tel.startsWith('521')) tel = tel.slice(3);
+    error.textContent = '';
+    if(!lista.length){ error.textContent = 'Escribe las medidas de tu red.'; return; }
+    if(lista.some(s=> s.largo > 500 || s.alto > 60)){ error.textContent = 'Revisa las medidas: parecen demasiado grandes (están en metros).'; return; }
+    if(!nombre){ error.textContent = 'Escribe tu nombre.'; $('cp-nombre').focus(); return; }
+    if(tel.length !== 10){ error.textContent = 'Escribe tu WhatsApp a 10 dígitos.'; $('cp-telefono').focus(); return; }
+
+    boton.disabled = true; boton.textContent = 'Enviando…';
+    try{
+      const resp = await fetch('/api/solicitar-cotizacion', {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json' },
+        body: JSON.stringify({
+          producto: 'perimetral',
+          forma: estado.tipo,
+          medidas: estado.tipo === 'personalizado' ? null : { largo:num(estado.medidas.largo), ancho:num(estado.medidas.ancho) || null, alto:num(estado.medidas.alto) },
+          secciones: lista,
+          abertura: estado.abertura || 'no_se',
+          nombre, telefono: tel,
+          correo: $('cp-correo').value.trim(),
+          estado: $('cp-estado').value,
+          comentario: $('cp-uso').value.trim(),
+          pagina: location.pathname,
+          origenVisita: window.origenVisita ? window.origenVisita() : null,
+          sitioWeb: $('cp-honeypot').value,
+        }),
+      });
+      const r = await resp.json().catch(()=> ({}));
+      if(!resp.ok) throw new Error(r.error || 'No se pudo enviar. Intenta de nuevo o escríbenos por WhatsApp.');
+      if(window.registrarConversion) registrarConversion('formulario');
+      $('cp-flujo').style.display = 'none';
+      $('cp-listo-txt').textContent = `Gracias, ${nombre.split(' ')[0]}. Un asesor revisa tus medidas (${fmt(m2De(lista))} m²) y te manda la cotización por WhatsApp al ${tel.replace(/(\d{3})(\d{3})(\d{4})/, '$1 $2 $3')}.`;
+      $('cp-listo').style.display = 'block';
+      $('cp-listo').scrollIntoView({ behavior:'smooth', block:'center' });
+    }catch(err){
+      error.textContent = err.message;
+    }finally{
+      boton.disabled = false; boton.textContent = 'Solicitar cotización';
+    }
+  });
+
+  $('cp-otra').onclick = ()=>{
+    estado.tipo = null; estado.medidas = { largo:'', ancho:'', alto:'' }; estado.filas = [{ cant:'1', largo:'', alto:'' }]; estado.abertura = null;
+    document.querySelectorAll('.cp-opcion, .cp-chip').forEach(x=> x.setAttribute('aria-pressed','false'));
+    $('cp-paso-medidas').hidden = true; $('cp-paso-datos').hidden = true;
+    $('cp-listo').style.display = 'none'; $('cp-flujo').style.display = '';
+    actualizarWhatsApp(null);
+    window.scrollTo({ top:0, behavior:'smooth' });
+  };
+</script>
+</body>
+</html>
