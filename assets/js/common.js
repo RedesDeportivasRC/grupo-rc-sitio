@@ -569,6 +569,6 @@ function revelar(cont, aleatorio){
     if(!entradas.some(e=>e.isIntersecting)) return;
     obs.disconnect();
     orden.forEach((idx,k)=>{ const el = items[idx]; el.style.transitionDelay = Math.round(k*Math.min(aleatorio?110:140, 2200/items.length))+'ms'; requestAnimationFrame(()=> el.classList.add('rv-in')); });
-  }, { threshold:0.15 });
+  }, { threshold:0, rootMargin:'0px 0px -80px 0px' });
   obs.observe(cont);
 }

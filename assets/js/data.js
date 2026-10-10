@@ -304,9 +304,6 @@ const FOTOS_TRABAJOS = [
   { archivo:'porterias-futbol-red-hexagonal-blanca-cancha-techada.jpg', alt:'Porterías de fútbol con red hexagonal blanca tipo colmena en una cancha techada', categoria:'porterias' },
   { archivo:'base-concreto-anclaje-poste-red-contencion-golf.jpg', alt:'Base de concreto y anclajes de un poste para red de contención de golf en el Hotel Chablé', categoria:'instalacion' },
   { archivo:'instalacion-red-antipalomas-domo-deportivo.jpg', alt:'Instalación de una red antipalomas en un domo deportivo', categoria:'instalacion' },
-  { archivo:'tejido-artesanal-red-porteria-taller-yucatan.jpg', alt:'Reinier Coral tejiendo a mano la red de una portería pequeña en el taller', categoria:'taller' },
-  { archivo:'taller-redes-deportivas-tejido-a-mano-yucatan.jpg', alt:'Taller familiar tejiendo a mano redes deportivas sobre porterías de colores', categoria:'taller' },
-  { archivo:'fabricacion-cordon-redes-deportivas-maquina.jpg', alt:'Máquina de fabricación de cordón para redes deportivas con bobinas de hilo blanco', categoria:'taller' },
   { archivo:'ajuste-red-hexagonal-porteria-pequena-alberca.jpg', alt:'Reinier Coral ajustando la red hexagonal de una portería pequeña junto a una alberca', categoria:'porterias' },
   { archivo:'red-voleibol-playa-borde-rojo-instalacion-mar.jpg', alt:'Instalación de una red de voleibol de playa con borde rojo frente al mar', categoria:'voleibol' },
   { archivo:'red-voleibol-playa-postes-rojos-arena.jpg', alt:'Red de voleibol de playa con postes forrados en rojo instalada en la arena', categoria:'voleibol' },
@@ -349,8 +346,7 @@ const FOTOS_TRABAJOS = [
   { archivo:'balonera-cuerda-trenzada-azul.jpg', alt:'Balonera de cuerda trenzada azul con argolla metálica', categoria:'basquetbol' },
   { archivo:'red-proteccion-colores-patio-escuela.jpg', alt:'Redes de protección de colores alrededor del patio de una escuela', categoria:'perimetral' },
   { archivo:'red-proteccion-negra-area-juegos.jpg', alt:'Red de protección negra con postes forrados en un área de juegos', categoria:'perimetral' },
-  { archivo:'cancha-futbol-rapido-pasto-sintetico-noche.jpg', alt:'Cancha de fútbol rápido de pasto sintético iluminada de noche', categoria:'perimetral' },
-  { archivo:'taller-tejido-manual-redes-porterias-colores.jpg', alt:'Personal tejiendo redes deportivas a mano sobre marcos forrados de colores', categoria:'taller' },
+  { archivo:'cancha-futbol-rapido-pasto-sintetico-noche.jpg', alt:'Porterías de fútbol rápido en cancha de pasto sintético iluminada de noche', categoria:'porterias' },
 ];
 
 // ---------------- BANNER PRINCIPAL DEL INICIO ----------------
