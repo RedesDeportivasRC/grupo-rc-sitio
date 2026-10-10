@@ -484,3 +484,16 @@ nav.principal{align-items:center;}
 #mapa-inicio .mapa-rc{margin-top:34px;}
 #mapa-inicio .mapa-rc iframe{height:240px;}
 .articulo-cabeza h1, .articulo-cuerpo h2, .articulo-cuerpo h3{font-family:'Manrope',sans-serif;font-weight:800;letter-spacing:-.4px;}
+
+/* Fotos de artículos: la portada se recorta a formato horizontal; las verticales van a un lado del texto en PC */
+.articulo-cuerpo .articulo-portada img{width:100%;max-width:100%;max-height:none;height:clamp(220px,42vw,440px);object-fit:cover;}
+.articulo-cuerpo figure:not(.articulo-portada) img{max-height:520px;}
+.articulo-cuerpo figure.fig-vertical img{max-height:70vh;}
+@media (min-width:860px){
+  .envolvente-texto.articulo-cuerpo{max-width:880px;}
+  .articulo-cuerpo figure.fig-vertical{float:right;width:min(42%,340px);margin:.3em 0 1.2em 28px;}
+  .articulo-cuerpo figure.fig-vertical:nth-of-type(odd){float:left;margin:.3em 28px 1.2em 0;}
+  .articulo-cuerpo figure.fig-vertical img{width:100%;max-height:none;aspect-ratio:3/4;object-fit:cover;}
+  .articulo-cuerpo figure.fig-vertical figcaption{text-align:left;}
+  .articulo-cuerpo .articulo-cta, .articulo-cuerpo .tabla-articulo, .articulo-cuerpo figure:not(.fig-vertical){clear:both;}
+}
