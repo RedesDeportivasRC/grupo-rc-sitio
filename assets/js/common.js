@@ -61,19 +61,30 @@ function renderHeader(activo){
       <textarea id="whatsapp-popup-texto" placeholder="Escribe tu mensaje..." rows="3">Hola, me interesa cotizar...</textarea>
       <button id="whatsapp-popup-enviar" class="btn btn-azul" style="width:100%;background:#25D366;">Enviar por WhatsApp</button>
     </div>
-    <div id="menu-movil-overlay" style="display:none;position:fixed;inset:0;background:rgba(10,26,36,.6);z-index:200;">
-      <div style="background:#fff;max-width:320px;margin-left:auto;height:100%;padding:20px;display:flex;flex-direction:column;gap:4px;overflow-y:auto;">
-        <button id="btn-cerrar-menu-movil" style="align-self:flex-end;background:none;border:none;font-size:1.6rem;cursor:pointer;margin-bottom:10px;">✕</button>
-        <a href="${base}index.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Inicio</a>
-        <a href="${base}productos.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Productos</a>
-        ${CATEGORIAS.map(c=>`<a href="${urlCategoria(c.slug)}" style="padding:9px 4px 9px 18px;font-size:.92rem;border-bottom:1px solid var(--linea);">${c.nombre}</a>`).join('')}
-        <a href="${base}clientes.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Opiniones</a>
-        <a href="${base}galeria.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Galería</a>
-        <a href="${base}blog.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Blog</a>
-        <a href="${base}recursos.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Recursos</a>
-        <a href="${base}nosotros.html" style="padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);">Nosotros</a>
-        <a href="${base}contacto.html" class="btn btn-azul" style="margin-top:16px;text-align:center;">Cotiza / Contacto</a>
-        <a href="tel:${EMPRESA.telefonoHref}" style="padding:12px 4px;margin-top:6px;">📞 ${EMPRESA.telefono}</a>
+    <div id="menu-movil-overlay" style="display:none;">
+      <div class="mm-panel">
+        <div class="mm-cabeza">
+          <a href="${base}index.html" class="mm-logo"><img src="${base}assets/img/logo-160.png" alt="Grupo RC" width="44" height="44"> ${EMPRESA.nombre}</a>
+          <button id="btn-cerrar-menu-movil" aria-label="Cerrar menú">✕</button>
+        </div>
+        <a href="${base}index.html" class="mm-item">Inicio</a>
+        <details class="mm-grupo">
+          <summary class="mm-item">Productos</summary>
+          <a href="${base}productos.html" class="mm-sub"><b>Ver todos los productos</b></a>
+          ${CATEGORIAS.map(c=>`<a href="${urlCategoria(c.slug)}" class="mm-sub">${c.nombre}</a>`).join('')}
+        </details>
+        <a href="${base}clientes.html" class="mm-item">Opiniones</a>
+        <a href="${base}galeria.html" class="mm-item">Galería</a>
+        <a href="${base}blog.html" class="mm-item">Blog</a>
+        <details class="mm-grupo">
+          <summary class="mm-item">Recursos</summary>
+          <a href="${base}recursos.html" class="mm-sub">Descargas</a>
+          <a href="${base}videos.html" class="mm-sub">Videos</a>
+          <a href="${base}proyectos.html" class="mm-sub">Proyectos</a>
+        </details>
+        <a href="${base}nosotros.html" class="mm-item">Nosotros</a>
+        <a href="${base}contacto.html" class="btn btn-azul mm-cta">Cotiza / Contacto</a>
+        <a href="tel:${EMPRESA.telefonoHref}" class="mm-tel">📞 ${EMPRESA.telefono}</a>
       </div>
     </div>
   `;

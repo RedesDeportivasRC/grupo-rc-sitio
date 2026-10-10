@@ -583,3 +583,64 @@ nav.principal{align-items:center;}
 @media (max-width:760px){ .productos-foto.mas{grid-template-columns:1fr 1fr;} }
 @media (max-width:560px){ .productos-foto.mas{grid-template-columns:1fr;} }
 .pi-tabla tr.pi-subtabla th{background:var(--azul-osc);color:#fff;text-align:left;padding:10px 14px;font-size:.9rem;letter-spacing:.02em;}
+
+/* ===== Menú del celular: logo arriba, Productos y Recursos desplegables ===== */
+#menu-movil-overlay{position:fixed;inset:0;background:rgba(10,26,36,.6);z-index:200;}
+.mm-panel{background:#fff;width:min(86vw,340px);margin-left:auto;height:100%;padding:12px 18px 24px;display:flex;flex-direction:column;overflow-y:auto;}
+.mm-cabeza{display:flex;align-items:center;justify-content:space-between;padding-bottom:10px;margin-bottom:4px;border-bottom:3px solid var(--azul);}
+.mm-logo{display:flex;align-items:center;gap:10px;font-family:'Bebas Neue',sans-serif;font-size:1.45rem;letter-spacing:.5px;}
+.mm-logo img{width:44px;height:44px;border-radius:50%;object-fit:cover;}
+#btn-cerrar-menu-movil{background:none;border:none;font-size:1.5rem;cursor:pointer;padding:6px;}
+.mm-item{display:flex;justify-content:space-between;align-items:center;padding:12px 4px;font-weight:700;border-bottom:1px solid var(--linea);cursor:pointer;list-style:none;}
+.mm-item::-webkit-details-marker{display:none;}
+.mm-grupo summary.mm-item::after{content:'▾';color:var(--azul);transition:transform .2s;}
+.mm-grupo[open] summary.mm-item::after{transform:rotate(180deg);}
+.mm-grupo[open]{background:#f5fbfe;border-radius:8px;}
+.mm-sub{display:block;padding:9px 4px 9px 18px;font-size:.92rem;border-bottom:1px solid var(--linea);}
+.mm-cta{margin-top:16px;text-align:center;justify-content:center;}
+.mm-tel{padding:12px 4px;margin-top:4px;}
+
+/* ===== Celular: menos scroll (Reinier, 2026-10-10) ===== */
+@media (max-width:720px){
+  .franja{padding:44px 0;}
+  .franja-chica{padding:36px 0;}
+  .s2{padding:44px 0;}
+  .hero-interior{padding:36px 0 34px;}
+  .pi-hero{padding:24px 0 30px;}
+  .pi-hero .envolvente{gap:20px;}
+  .pi-hero-foto{aspect-ratio:16/9;}
+  .pi-2col img{max-height:240px;}
+  /* Tarjetas de productos: dos por fila */
+  .productos-foto, .productos-foto.mas{grid-template-columns:1fr 1fr !important;gap:10px;}
+  .producto-foto, .producto-foto:nth-child(n+4){grid-column:auto !important;height:150px !important;}
+  .producto-foto:last-child:nth-child(odd){grid-column:span 2 !important;}
+  .producto-foto h3{font-size:.98rem;}
+  .producto-foto p{display:none;}
+  /* Usos: carrusel de lado */
+  .pi-usos{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin-right:-24px;padding:0 24px 8px 0;scrollbar-width:none;}
+  .pi-uso{flex:0 0 72%;scroll-snap-align:start;}
+  .pi-uso img{height:140px;}
+  /* Pasos para cotizar: dos por fila */
+  .pi-pasos{grid-template-columns:1fr 1fr !important;gap:10px;}
+  .pi-paso{padding:14px;}
+  .pi-paso p{font-size:.82rem;}
+  /* Galerías: tres por fila */
+  .pi-galeria{grid-template-columns:repeat(3,1fr) !important;grid-auto-rows:105px !important;gap:6px;}
+  #cont-galeria{grid-template-columns:repeat(3,1fr) !important;grid-auto-rows:110px !important;gap:6px;}
+  .galeria-inicio{grid-template-columns:repeat(3,1fr);grid-auto-rows:105px;gap:6px;}
+  /* Artículos del blog: foto a un lado, texto al otro */
+  .tarjeta-blog{flex-direction:row;}
+  .tarjeta-blog-foto{flex:0 0 112px;height:auto;min-height:112px;}
+  .tarjeta-blog-foto .chip-cat{display:none;}
+  .tarjeta-blog-body{padding:12px;}
+  .tarjeta-blog-body h3{font-size:.92rem;}
+  .tarjeta-blog-body p{display:none;}
+  .tarjeta-blog-body small{margin-top:6px;}
+  .grid-cards{gap:12px;}
+  .tarjeta-proyecto img, .tarjeta-proyecto .foto-ph.oscuro{height:220px;min-height:220px;}
+  .asesoria-foto{min-height:240px;}
+  /* Pie de página en dos columnas */
+  .footer-grid{grid-template-columns:1fr 1fr !important;gap:22px 16px;}
+  .footer-grid > :first-child{grid-column:span 2;}
+  footer.site{padding:40px 0 20px;}
+}
