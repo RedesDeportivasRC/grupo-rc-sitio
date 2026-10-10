@@ -348,7 +348,8 @@ details.ficha td:first-child{color:var(--gris);width:40%;}
 .articulo-cuerpo li{margin-bottom:.4em;}
 .articulo-cuerpo a:not(.btn){color:#0b87b8;font-weight:600;text-decoration:underline;text-underline-offset:3px;}
 .articulo-cuerpo figure{margin:1.8em 0;}
-.articulo-cuerpo figure img{width:100%;height:auto;max-height:620px;object-fit:cover;border-radius:var(--radio);display:block;background:var(--hueso);}
+.articulo-cuerpo figure img{width:auto;max-width:100%;height:auto;max-height:640px;margin:0 auto;border-radius:var(--radio);display:block;background:var(--hueso);}
+.articulo-cuerpo figcaption{text-align:center;}
 .articulo-cuerpo figcaption{font-size:.84rem;color:var(--gris);margin-top:8px;line-height:1.5;}
 .articulo-portada{margin-top:0 !important;}
 .articulo-cuerpo blockquote{border-left:4px solid var(--azul);padding:4px 0 4px 18px;margin:1.4em 0;font-style:italic;color:#38434b;}
@@ -481,3 +482,4 @@ nav.principal{align-items:center;}
 @media (max-width:560px){ .form-inicio-wa{border-left:none;padding-left:0;} }
 #mapa-inicio .mapa-rc{margin-top:34px;}
 #mapa-inicio .mapa-rc iframe{height:240px;}
+.articulo-cabeza h1, .articulo-cuerpo h2, .articulo-cuerpo h3{font-family:'Manrope',sans-serif;font-weight:800;letter-spacing:-.4px;}
