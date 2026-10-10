@@ -13,7 +13,7 @@ const CATEGORIAS = [
   { slug:'redes-para-porterias', nombre:'Redes para Porterías', descripcionCorta:'Red hexagonal de poliéster trenzado para tu portería.', foto:'red-porteria-hexagonal-nudos-azul-blanco-rojo.jpg' },
   { slug:'redes-deportivas', nombre:'Redes de Voleibol y Básquetbol', descripcionCorta:'Redes de juego, personalizadas con letras y colores.', foto:'red-voleibol-escolar-personalizada-nombre-tejido.jpg' },
   { slug:'baloneras', nombre:'Baloneras', descripcionCorta:'Bolsas de red trenzada para guardar y transportar balones.', foto:'balonera-cuerda-trenzada-verde-balon.jpg' },
-  { slug:'jaulas-bateo', nombre:'Jaulas de Bateo', descripcionCorta:'Jaula completa o solo la red de 1" para béisbol y sóftbol.', foto:'red-nylon-negra-detalle-malla-rombo.jpg' },
+  { slug:'jaulas-bateo', nombre:'Jaulas de Bateo', descripcionCorta:'Jaula completa o solo la red de 1" para béisbol y sóftbol.', foto:'jaula-de-bateo-estructura-azul-red-negra-parque.jpg' },
   { slug:'redes-de-proteccion', nombre:'Redes de Protección', descripcionCorta:'Anticaídas, obra, techos de red y control de aves.', foto:'techo-de-red-cancha-futbol-pasto-sintetico.jpg' },
 ];
 
@@ -287,6 +287,10 @@ const ESTADOS_MEXICO = [
 
 // ---------------- FOTOS REALES DE TRABAJOS (assets/img/trabajos) ----------------
 const FOTOS_TRABAJOS = [
+  { archivo:'jaula-de-bateo-estructura-azul-red-negra-parque.jpg', alt:'Jaula de bateo con estructura de tubo azul y red negra en un parque', categoria:'perimetral' },
+  { archivo:'jaula-de-bateo-tubo-forrado-azul-techo-de-red.jpg', alt:'Jaula de bateo con postes forrados en azul y techo de red negra', categoria:'perimetral' },
+  { archivo:'jaula-de-bateo-red-negra-rombo-1-pulgada.jpg', alt:'Red negra de rombo de 1 pulgada en una jaula de bateo', categoria:'perimetral' },
+  { archivo:'brincolin-red-proteccion-negra-postes-forrados.jpg', alt:'Brincolín con red de protección negra y postes forrados de colores', categoria:'perimetral' },
   { archivo:'techo-de-red-cancha-futbol-pasto-sintetico.jpg', alt:'Cancha de fútbol de pasto sintético con red perimetral y techo de red', categoria:'perimetral' },
   { archivo:'porteria-futbol-forrada-roja-red-hexagonal-blanca.jpg', alt:'Portería de fútbol forrada en rojo con red hexagonal blanca tipo colmena', categoria:'porterias' },
   { archivo:'red-voleibol-playa-hexagonal-colores-personalizada.jpg', alt:'Jugadoras rematando sobre una red de voleibol de playa hexagonal de colores', categoria:'voleibol' },
@@ -376,7 +380,7 @@ const PRODUCTOS_INICIO = [
   { slug:'redes-perimetrales', titulo:'Redes Perimetrales', texto:'Protección y delimitación de espacios.', foto:'trabajos/red-perimetral-negra-cancha-futbol-pasto-sintetico.jpg', alt:'Red perimetral negra alrededor de una cancha de fútbol de pasto sintético' },
   { slug:'porterias', titulo:'Porterías de Fútbol', texto:'Modelos para fútbol 11, fútbol 7 y fútbol rápido.', foto:'trabajos/porteria-futbol-forrada-azul-pasto-sintetico-jardin.jpg', alt:'Portería de fútbol forrada en azul con red blanca en cancha de pasto sintético de jardín' },
   { slug:'redes-para-porterias', titulo:'Redes para Porterías', texto:'Tejido hexagonal tipo colmena.', foto:'trabajos/red-porteria-hexagonal-nudos-azul-blanco-rojo.jpg', alt:'Detalle de los nudos de una red para portería en azul, blanco y rojo' },
-  { slug:'redes-deportivas', titulo:'Redes Deportivas', texto:'Básquetbol, voleibol y usos especiales.', foto:'trabajos/red-voleibol-escolar-personalizada-nombre-tejido.jpg', alt:'Red de voleibol escolar personalizada con el nombre de la escuela tejido en la malla' },  { slug:'jaulas-bateo', titulo:'Jaulas de Bateo', texto:'Redes para béisbol y sóftbol a la medida.', foto:null },
+  { slug:'redes-deportivas', titulo:'Redes Deportivas', texto:'Básquetbol, voleibol y usos especiales.', foto:'trabajos/red-voleibol-escolar-personalizada-nombre-tejido.jpg', alt:'Red de voleibol escolar personalizada con el nombre de la escuela tejido en la malla' },  { slug:'jaulas-bateo', titulo:'Jaulas de Bateo', texto:'Redes para béisbol y sóftbol a la medida.', foto:'trabajos/jaula-de-bateo-estructura-azul-red-negra-parque.jpg', alt:'Jaula de bateo con estructura azul y red negra en un parque' },
 ];
 
 // ---------------- INICIO: asesoría (cada pregunta lleva a su artículo del blog) ----------------
