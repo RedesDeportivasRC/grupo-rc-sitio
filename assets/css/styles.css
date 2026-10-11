@@ -690,3 +690,34 @@ a.testimonios-resumen{text-decoration:none;}
   .cliente-rc:nth-child(even) .cliente-rc-fotos{order:0;}
   .clientes-lista{gap:40px;}
 }
+
+/* ===== Bloque de marca: logo + GRUPO RC + eslogan (Reinier 2026-10-11) =====
+   --m = tamaño del nombre. Eslogan = 35% de --m. Logo = alto del nombre + eslogan.
+   .dos = eslogan en dos líneas, partido solo por frase. .osc = sobre fondo oscuro. */
+.marca-rc{--m:2.2rem;display:inline-flex;align-items:center;gap:calc(var(--m)*.3);color:var(--negro);text-decoration:none;white-space:nowrap;}
+.marca-rc img{width:calc(var(--m)*1.3);height:calc(var(--m)*1.3);border-radius:50%;flex-shrink:0;object-fit:cover;}
+.marca-rc.dos img{width:calc(var(--m)*1.7);height:calc(var(--m)*1.7);}
+.marca-txt{display:flex;flex-direction:column;align-items:flex-start;}
+.marca-nombre{font-family:'Bebas Neue',sans-serif;font-size:var(--m);line-height:.86;letter-spacing:.02em;}
+.marca-nombre b{font-weight:400;color:#2bbdf3;}
+.marca-esl{font-family:'Permanent Marker','Comic Sans MS',cursive;font-size:calc(var(--m)*.35);line-height:1.15;margin-top:calc(var(--m)*.035);color:#1591c2;letter-spacing:.01em;}
+.marca-rc.osc{color:#fff;}
+.marca-rc.osc .marca-esl{color:#2bbdf3;}
+.marca-esl .esl-2{display:none;}
+.marca-rc.dos .marca-esl > span{display:block;}
+.marca-rc.dos .marca-esl .esl-1{display:none;}
+.marca-rc.dos .marca-esl .esl-2{display:block;}
+.marca-cabeza{--m:2.6rem;}
+.marca-mm{--m:1.7rem;}
+.marca-pie{--m:2.4rem;margin-bottom:14px;}
+.lp-header .marca-cabeza{--m:1.9rem;}
+/* Encabezado en pantallas medianas y celular: eslogan en dos líneas */
+@media (max-width:1240px){
+  .marca-cabeza{--m:2.3rem;}
+  .marca-cabeza.marca-rc img{width:calc(var(--m)*1.7);height:calc(var(--m)*1.7);}
+  .marca-cabeza .marca-esl > span{display:block;}
+  .marca-cabeza .marca-esl .esl-1{display:none;}
+  .marca-cabeza .marca-esl .esl-2{display:block;}
+}
+@media (max-width:420px){ .lp-header .marca-cabeza{--m:1.8rem;} }
+@media (max-width:720px){ .marca-pie{--m:2.1rem;} }
