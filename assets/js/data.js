@@ -278,6 +278,7 @@ const EMPRESA = {
     facebook:'https://facebook.com/redesdeportivasrc',
     instagram:'https://instagram.com/redesdeportivasrc',
     youtube:'https://www.youtube.com/@RedesDeportivasRC',
+    tiktok:'https://www.tiktok.com/@redesdeportivasrc',
   },
 };
 
