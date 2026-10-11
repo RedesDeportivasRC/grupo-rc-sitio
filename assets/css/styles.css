@@ -748,4 +748,4 @@ a.testimonios-resumen{text-decoration:none;}
 .lp-hero.lp-hero-foto{position:relative;background:var(--azul-osc) var(--lp-foto) center/cover no-repeat;}
 .lp-hero.lp-hero-foto::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,22,30,.88) 0%,rgba(6,22,30,.62) 50%,rgba(6,22,30,.25) 100%);}
 .lp-hero.lp-hero-foto > .envolvente{position:relative;}
-@media (max-width:860px){ .lp-hero.lp-hero-foto::before{background:linear-gradient(180deg,rgba(6,22,30,.55) 0%,rgba(6,22,30,.9) 45%,rgba(6,22,30,.95) 100%);} .lp-hero.lp-hero-foto{background-size:100% auto;background-position:top center;padding-top:200px;} }
+@media (max-width:860px){ .lp-hero.lp-hero-foto::before{background:linear-gradient(180deg,rgba(6,22,30,0) 0,rgba(6,22,30,0) 52vw,rgba(6,22,30,.96) calc(52vw + 40px),rgba(6,22,30,.96) 100%);} .lp-hero.lp-hero-foto{background-size:100% auto;background-position:top center;padding-top:calc(52vw + 24px);} }
