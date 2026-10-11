@@ -12,6 +12,15 @@ function iniciarLanding(cfg){
   document.querySelectorAll('[data-direccion]').forEach(el=>{ el.textContent = EMPRESA.direccion; });
   document.querySelectorAll('[data-horario]').forEach(el=>{ el.textContent = EMPRESA.horarios; });
 
+  // Mismo mensaje que el anuncio: ?t=<clave> cambia el título por el de cfg.titulos[clave].
+  // Ej. /lp/red-perimetral.html?t=futbol-rapido. Clave desconocida = título original.
+  const clave = new URLSearchParams(location.search).get('t');
+  const h1 = document.querySelector('.lp-hero h1');
+  if(h1 && clave && cfg.titulos && cfg.titulos[clave]) h1.textContent = cfg.titulos[clave];
+
+  // Comentarios reales de clientes (TESTIMONIOS en data.js).
+  if(document.getElementById('lp-testimonios')) renderTestimonios('lp-testimonios', 'lp-testimonios-seccion', true);
+
   const selEstado = document.getElementById('lp-estado');
   if(selEstado) selEstado.insertAdjacentHTML('beforeend', ESTADOS_MEXICO.map(e=>`<option>${e}</option>`).join(''));
 

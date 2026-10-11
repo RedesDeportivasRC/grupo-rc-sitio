@@ -733,3 +733,13 @@ a.testimonios-resumen{text-decoration:none;}
   .marca-cabeza .marca-esl .esl-2{display:none;}
   .menu-movil-btn{margin-left:auto;}
 }
+
+/* Landing: franja de confianza bajo el hero */
+.lp-confianza{background:#fff;border-bottom:1px solid var(--linea);}
+.lp-confianza .envolvente{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:20px 24px;}
+.lp-confianza div{display:flex;flex-direction:column;gap:2px;}
+.lp-confianza b{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;line-height:1;color:var(--azul-osc);}
+.lp-confianza span{font-size:.84rem;color:var(--gris);font-weight:600;}
+.lp-clientes{margin-top:18px;color:var(--gris);font-size:.95rem;}
+.lp-clientes b{color:var(--negro);}
+@media (max-width:760px){ .lp-confianza .envolvente{grid-template-columns:repeat(2,1fr);padding:16px;} .lp-confianza b{font-size:1.45rem;} }

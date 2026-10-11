@@ -255,7 +255,7 @@ const EMPRESA = {
   frase:'Déjate atrapar por nuestras redes.',
   proposito:'Que el deporte no se detenga.',
   frasesSecundarias:[
-    'No vendemos solamente redes, resolvemos necesidades.',
+    'Más que vender redes, resolvemos necesidades.',
     'Cada proyecto tiene una solución.',
     'Redes para deporte, protección y mucho más.',
     'Soluciones a la medida.',
