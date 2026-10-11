@@ -484,6 +484,7 @@ const TESTIMONIOS = [
   { nombre:'Arturo V.', fuente:'facebook', lugar:'Linares, N.L.', inicio:true, texto:'Muy buen producto, atención al cliente rápida y buena, envío rápido, recomendados.' },
   { nombre:'Rogelio Axel S.', fuente:'facebook', inicio:true, texto:'Buena atención y rapidez en la compra. El producto era más que lo que esperaba, muy detallado y profesional. Recomendado al 100.' },
   { nombre:'Raúl Medina C.', fuente:'facebook', inicio:true, texto:'Muy buena atención y la portería y la red de muy buena calidad, mi hijo está super feliz, lo recomiendo ampliamente.' },
+  { nombre:'Rosa R.', fuente:'google', texto:'Balonera diseñada al tamaño y color de tu preferencia. Gracias Redes Deportivas RC por esta creación totalmente handmade, me encantó su practicidad. ¡Pide la tuya!' },
   { nombre:'Roger V.', fuente:'google', inicio:true, texto:'¡Los recomiendo mucho! Excelente compra, el personal fue muy amable y me asesoró en todo momento, ayudándome a elegir justo lo que necesitaba.' },
   { nombre:'Emmanuel C.', fuente:'facebook', texto:'Muy buen material en las redes y las porterías muy resistente y muy práctico y las baloneras muy buenas.' },
   { nombre:'Alexis V.', fuente:'facebook', texto:'¡Redes de excelente calidad! Quedé encantado con el material, calidad y precio. Muchas gracias.' },
