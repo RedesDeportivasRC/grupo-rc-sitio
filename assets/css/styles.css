@@ -743,3 +743,9 @@ a.testimonios-resumen{text-decoration:none;}
 .lp-clientes{margin-top:18px;color:var(--gris);font-size:.95rem;}
 .lp-clientes b{color:var(--negro);}
 @media (max-width:760px){ .lp-confianza .envolvente{grid-template-columns:repeat(2,1fr);padding:16px;} .lp-confianza b{font-size:1.45rem;} }
+
+/* Landing: foto real del producto detrás del título (se ve de qué trata al abrir) */
+.lp-hero.lp-hero-foto{position:relative;background:var(--azul-osc) var(--lp-foto) center/cover no-repeat;}
+.lp-hero.lp-hero-foto::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,22,30,.88) 0%,rgba(6,22,30,.62) 50%,rgba(6,22,30,.25) 100%);}
+.lp-hero.lp-hero-foto > .envolvente{position:relative;}
+@media (max-width:860px){ .lp-hero.lp-hero-foto::before{background:linear-gradient(180deg,rgba(6,22,30,.55) 0%,rgba(6,22,30,.9) 45%,rgba(6,22,30,.95) 100%);} .lp-hero.lp-hero-foto{background-size:100% auto;background-position:top center;padding-top:200px;} }
