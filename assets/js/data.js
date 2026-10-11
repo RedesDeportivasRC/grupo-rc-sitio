@@ -268,7 +268,11 @@ const EMPRESA = {
   horarios:'Lunes a viernes, 9:00 a.m. – 6:00 p.m.',
   mapaUrl:'https://maps.app.goo.gl/9jCNwpsFQGWjsxzC6',  // liga de Google Maps que mandó Reinier (8 oct 2026)
   mapaBusqueda:'Redes Deportivas RC, Los Ángeles, Caucel, Mérida, Yuc.',  // buscar por nombre del negocio: con el número de calle Google ponía el pin en C. 37-39
-  mapaCoords:'',  // si Reinier manda lat,lng de su chincheta, ponerlas aquí y el mapa las usa
+  mapaCoords:'',
+  // Reseñas en Google: resenaGoogle = liga directa a "Escribir opinión" (https://search.google.com/local/writereview?placeid=ChIJ…);
+  // mientras no exista se usa fichaGoogle (abre la ficha en Maps; el cliente toca Opiniones → Escribir una opinión).
+  resenaGoogle:'',
+  fichaGoogle:'https://maps.app.goo.gl/kS5ybggx6H8nL3wDA',  // liga que Andy manda a clientes (11 oct 2026)  // si Reinier manda lat,lng de su chincheta, ponerlas aquí y el mapa las usa
   estadosDondeVendemos:['Yucatán','[PLACEHOLDER — resto de estados donde venden]'],
   redes:{
     facebook:'https://facebook.com/redesdeportivasrc',

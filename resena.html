@@ -27,7 +27,8 @@
   .resena-gracias h2{font-size:1.6rem;margin-bottom:8px;}
   .resena-gracias p{color:var(--gris);}
   .resena-gracias .btn{margin-top:18px;justify-content:center;}
-  .btn-fb{background:#1877F2;color:#fff;}
+  .btn-google{background:#fff;color:#1f1f1f;border:1.5px solid #dadce0;}
+  .resena-pasos{text-align:left;margin:16px 0 0;padding-left:20px;color:#3d4a53;font-size:.92rem;display:grid;gap:6px;}
   .resena-error{color:#c0392b;font-size:.88rem;display:none;}
   @media (max-width:720px){ .resena-caja{padding:22px 16px;} .estrellas button{font-size:2.3rem;} }
 </style>
@@ -76,9 +77,13 @@
       <div class="resena-gracias" id="gracias-5">
         <div style="font-size:2.4rem;">🙌</div>
         <h2>¡Muchas gracias!</h2>
-        <p>Nos alegra mucho que te haya gustado. ¿Nos ayudas a que más gente nos conozca dejando tu recomendación en nuestra página de Facebook?</p>
-        <button type="button" class="btn btn-linea" id="btn-copiar" style="width:100%;">📋 Copiar mi comentario</button>
-        <a class="btn btn-fb" id="btn-facebook" target="_blank" rel="noopener" style="width:100%;">Recomendar en Facebook</a>
+        <p>¿Nos ayudas a que más gente nos encuentre? Deja tus 5 estrellas también en Google; te toma 30 segundos.</p>
+        <ol class="resena-pasos">
+          <li id="paso-copiar"><b>Copia tu comentario</b> con el botón de abajo.</li>
+          <li id="paso-google">Toca <b>Calificar en Google</b>, elige 5 estrellas y <b>pega</b> tu comentario.</li>
+        </ol>
+        <button type="button" class="btn btn-linea" id="btn-copiar" style="width:100%;margin-top:14px;">📋 Copiar mi comentario</button>
+        <a class="btn btn-azul" id="btn-google" target="_blank" rel="noopener" style="width:100%;">⭐ Calificar en Google</a>
       </div>
 
       <div class="resena-gracias" id="gracias">
@@ -122,7 +127,7 @@ const sel = document.getElementById('r-producto');
 CATEGORIAS.forEach(c => sel.insertAdjacentHTML('beforeend', `<option>${c.nombre}</option>`));
 sel.insertAdjacentHTML('beforeend', '<option>Instalación</option><option>Otro</option>');
 
-const urlFacebook = EMPRESA.redes.facebook.replace(/\/$/, '') + '/reviews';
+const urlGoogle = EMPRESA.resenaGoogle || EMPRESA.fichaGoogle;
 const mostrar = id => { document.getElementById('paso-form').style.display = 'none'; const el = document.getElementById(id); el.style.display = 'block'; el.scrollIntoView({behavior:'smooth', block:'center'}); };
 
 document.getElementById('paso-datos').addEventListener('submit', async e => {
@@ -143,11 +148,12 @@ document.getElementById('paso-datos').addEventListener('submit', async e => {
     const r = await fetch('/api/resena', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) });
     if (!r.ok) throw new Error();
     if (calif === 5) {
-      document.getElementById('btn-facebook').href = urlFacebook;
+      document.getElementById('btn-google').href = urlGoogle;
+      if (!EMPRESA.resenaGoogle) document.getElementById('paso-google').innerHTML = 'Toca <b>Calificar en Google</b>, entra a <b>Opiniones → Escribir una opinión</b>, elige 5 estrellas y <b>pega</b> tu comentario.';
       document.getElementById('btn-copiar').onclick = async ev => {
         try { await navigator.clipboard.writeText(datos.comentario || '¡Excelente servicio, muy recomendados!'); ev.target.textContent = '✓ Comentario copiado, pégalo en Facebook'; } catch (_) {}
       };
-      if (!datos.comentario) document.getElementById('btn-copiar').style.display = 'none';
+      if (!datos.comentario) { document.getElementById('btn-copiar').style.display = 'none'; document.getElementById('paso-copiar').style.display = 'none'; }
       mostrar('gracias-5');
     } else {
       mostrar('gracias');
