@@ -24,12 +24,18 @@ const ICONOS = {
   whatsapp: '<svg viewBox="0 0 32 32" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M16 2.7C8.6 2.7 2.7 8.6 2.7 16c0 2.4.6 4.6 1.8 6.7l-1.9 6.9 7.1-1.9c2 1.1 4.2 1.6 6.4 1.6 7.4 0 13.3-6 13.3-13.3S23.4 2.7 16 2.7zm0 24.3c-2 0-4-.5-5.7-1.6l-.4-.2-4.2 1.1 1.1-4.1-.3-.4A11 11 0 1 1 16 27z"/><path d="M22.1 18.8c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.3-.7.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6l-1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.4 3.7 5.9 5.2 2.2.9 3.1 1 4.2.8.7-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"/></svg>',
 };
 
+// Bloque de marca (Reinier 2026-10-11): logo + GRUPO RC + eslogan, siempre juntos.
+// Eslogan = 35% del tamaño del nombre; en dos líneas solo se parte por frase.
+function marcaRC(base, clase=''){
+  return `<img src="${base}assets/img/logo-160.png" alt="Grupo RC" width="74" height="74"><span class="marca-txt"><span class="marca-nombre">GRUPO <b>RC</b></span><span class="marca-esl"><span>Déjate atrapar</span> <span class="esl-1">por nuestras redes</span><span class="esl-2">Por nuestras redes</span></span></span>`;
+}
+
 function renderHeader(activo){
   const base = rutaBase();
   document.getElementById('site-header').innerHTML = `
     <header class="site">
       <div class="envolvente">
-        <a href="${base}index.html" class="logo"><img src="${base}assets/img/logo-160.png" class="logo-marca" alt="Grupo RC" width="58" height="58"> ${EMPRESA.nombre}</a>
+        <a href="${base}index.html" class="marca-rc marca-cabeza" aria-label="Grupo RC, inicio">${marcaRC(base)}</a>
         <nav class="principal">
           <div class="nav-menu">
             <a href="${base}productos.html" class="${activo==='productos'?'activo':''}">Productos <span class="flechita">▾</span></a>
@@ -64,7 +70,7 @@ function renderHeader(activo){
     <div id="menu-movil-overlay" style="display:none;">
       <div class="mm-panel">
         <div class="mm-cabeza">
-          <a href="${base}index.html" class="mm-logo"><img src="${base}assets/img/logo-160.png" alt="Grupo RC" width="44" height="44"> ${EMPRESA.nombre}</a>
+          <a href="${base}index.html" class="marca-rc dos marca-mm" aria-label="Grupo RC, inicio">${marcaRC(base)}</a>
           <button id="btn-cerrar-menu-movil" aria-label="Cerrar menú">✕</button>
         </div>
         <a href="${base}index.html" class="mm-item">Inicio</a>
@@ -128,9 +134,8 @@ function renderFooter(){
       <div class="envolvente">
         <div class="footer-grid">
           <div class="f-marca">
-            <div class="logo" style="color:#fff;margin-bottom:12px;"><img src="${base}assets/img/logo-160.png" class="logo-marca"> ${EMPRESA.nombre}</div>
+            <div class="marca-rc osc marca-pie">${marcaRC(base)}</div>
             <p style="max-width:30ch;opacity:.8;">${EMPRESA.nombreLargo} — fabricación e instalación de redes perimetrales, deportivas y porterías.</p>
-            <p style="margin-top:8px;font-style:italic;opacity:.65;font-size:.82rem;">"${EMPRESA.frase}"</p>
           </div>
           <div class="f-prod">
             <h4>Productos</h4>
