@@ -49,6 +49,11 @@
           <div><b style="display:block;">Horario</b><span id="dato-horario" style="color:var(--gris);font-size:.88rem;"></span></div>
         </div>
       </div>
+      <div class="contacto-redes">
+        <b>Síguenos en redes</b>
+        <p>Mira trabajos recientes, instalaciones y videos.</p>
+        <div id="redes-contacto"></div>
+      </div>
       <div id="mapa-contacto"></div>
     </div>
     <form class="form-contacto" id="form-contacto" autocomplete="on">
@@ -143,6 +148,7 @@
 
   try{
     renderHeader('contacto'); renderFooter(); renderMapa('mapa-contacto');
+    const rc = document.getElementById('redes-contacto'); if(rc) rc.innerHTML = htmlRedesSociales(true);
     document.getElementById('dato-telefono').textContent = EMPRESA.telefono;
     document.getElementById('dato-correo').textContent = EMPRESA.correo;
     document.getElementById('dato-direccion').textContent = EMPRESA.direccion + ' · envíos a todo México';
