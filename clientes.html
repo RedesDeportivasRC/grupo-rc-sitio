@@ -72,6 +72,23 @@ document.querySelectorAll('.cliente-rc').forEach(a=>{
   }));
 });
 renderTestimonios('cont-testimonios', 'opiniones');
+// Reseñas que llegan por resena.html: solo se muestran las que ya aprobamos en el sistema
+fetch('/api/resena').then(r => r.ok ? r.json() : []).then(lista => {
+  if (!Array.isArray(lista) || !lista.length) return;
+  const esc = t => String(t || '').replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+  const cont = document.getElementById('cont-testimonios');
+  cont.insertAdjacentHTML('afterbegin', lista.filter(r => r.comentario).map(r => `
+    <div class="testimonio">
+      <div class="testimonio-cuerpo">
+        <div class="testimonio-estrellas" aria-label="${r.estrellas} estrellas">${'★'.repeat(r.estrellas)}</div>
+        <p>${esc(r.comentario)}</p>
+      </div>
+      <div class="testimonio-pie">
+        <div class="testimonio-avatar">${esc(r.nombre).split(' ').map(x => x[0] || '').slice(0, 2).join('')}</div>
+        <div><b>${esc(r.nombre.split(' ').slice(0, 2).join(' ').replace(/ (\S)\S*$/, ' $1.'))}</b><small>Cliente de Redes Deportivas RC${r.ciudad ? ' · ' + esc(r.ciudad) : ''}</small></div>
+      </div>
+    </div>`).join(''));
+}).catch(() => {});
 revelar('cont-testimonios');
 </script>
 </body>
