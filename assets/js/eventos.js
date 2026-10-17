@@ -28,7 +28,9 @@
   });
 
   document.querySelectorAll('.ev-mosaico[data-grupo]').forEach(cont => {
-    cont.innerHTML = FOTOS.map((p, i) => p.g !== cont.dataset.grupo ? '' :
+    // data-saltar = cuántas fotos del grupo omitir (por ejemplo la foto principal que ya se ve arriba).
+    let n = 0; const saltar = +cont.dataset.saltar || 0;
+    cont.innerHTML = FOTOS.map((p, i) => p.g !== cont.dataset.grupo || n++ < saltar ? '' :
       `<figure data-i="${i}"><img src="${ruta(p.f)}-t.jpg" alt="${p.alt}" loading="lazy"><figcaption>${p.alt}</figcaption></figure>`).join('');
   });
 
