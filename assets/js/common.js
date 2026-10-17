@@ -640,3 +640,82 @@ function renderMasProductos(contId, slugActual){
       <span class="circulo-flecha" aria-hidden="true">→</span>
     </a>`).join('');
 }
+
+/* ---------------- BLOG: me gusta, compartir y suscripción (Reinier 2026-10-17) ----------------
+   Se agrega solo en las páginas de artículo (blog/<slug>.html), antes del recuadro "¿Tienes un proyecto?".
+   Me gusta: contador en Supabase (blog_me_gusta); cada navegador cuenta una vez (localStorage).
+   Suscripción: blog_suscriptores vía blog_suscribir (correo o WhatsApp); el aviso de artículo nuevo
+   se manda cuando esté la llave de correo (Resend). */
+function sitioRpc(nombre, cuerpo){
+  return fetch(`${SITIO_SUPABASE_URL}/rest/v1/rpc/${nombre}`, {
+    method:'POST',
+    headers:{ 'Content-Type':'application/json', apikey:SITIO_SUPABASE_ANON_KEY, Authorization:'Bearer ' + SITIO_SUPABASE_ANON_KEY },
+    body: JSON.stringify(cuerpo)
+  }).then(async r=>{ const d = await r.json().catch(()=>null); if(!r.ok) throw new Error((d && d.message) || 'No se pudo'); return d; });
+}
+function cajaSuscripcionBlog(articulo){
+  return `<div class="blog-susc">
+    <div><h3>📬 Recibe los artículos nuevos</h3><p>Una vez por semana publicamos guías sobre redes, medidas e instalación. Te avisamos cuando salga uno.</p></div>
+    <form class="blog-susc-form" data-articulo="${articulo||''}">
+      <input type="text" name="nombre" placeholder="Tu nombre" autocomplete="name">
+      <input type="email" name="correo" placeholder="Correo" autocomplete="email">
+      <input type="tel" name="whatsapp" placeholder="o tu WhatsApp" inputmode="tel" autocomplete="tel">
+      <button class="btn btn-azul" type="submit">Suscribirme</button>
+      <small class="blog-susc-msg" role="status"></small>
+    </form>
+  </div>`;
+}
+function conectarSuscripcionBlog(raiz){
+  (raiz||document).querySelectorAll('.blog-susc-form').forEach(f=>{
+    f.addEventListener('submit', async e=>{
+      e.preventDefault();
+      const msg = f.querySelector('.blog-susc-msg'), btn = f.querySelector('button');
+      const v = n => f.querySelector(`[name="${n}"]`).value.trim();
+      if(!v('correo') && !v('whatsapp')){ msg.textContent = 'Escribe tu correo o tu WhatsApp.'; return; }
+      btn.disabled = true; msg.textContent = 'Guardando…';
+      try{
+        const r = await sitioRpc('blog_suscribir', { p_nombre:v('nombre'), p_correo:v('correo'), p_whatsapp:v('whatsapp'), p_articulo:f.dataset.articulo||'' });
+        msg.textContent = r && r.ya ? '¡Ya estabas suscrito! Te seguiremos avisando.' : '¡Listo! Te avisaremos cuando salga un artículo nuevo.';
+        f.querySelectorAll('input').forEach(i=> i.value = '');
+      }catch(err){ msg.textContent = err.message; }
+      btn.disabled = false;
+    });
+  });
+}
+function renderExtrasArticulo(){
+  const cta = document.querySelector('.articulo-cuerpo .articulo-cta');
+  if(!cta || document.querySelector('.blog-extras')) return;
+  const slug = (location.pathname.split('/').pop() || '').replace(/\.html$/,'');
+  const url = location.origin + location.pathname;
+  const titulo = (document.querySelector('meta[property="og:title"]')||{}).content || document.title;
+  const u = encodeURIComponent(url), t = encodeURIComponent(titulo);
+  const clave = 'rc_blog_gusta_' + slug;
+  let leGusta = false; try{ leGusta = localStorage.getItem(clave) === '1'; }catch(_){}
+  const caja = document.createElement('div');
+  caja.className = 'blog-extras';
+  caja.innerHTML = `<div class="blog-acciones">
+      <button type="button" class="blog-gusta${leGusta?' activo':''}" aria-pressed="${leGusta}"><span class="corazon">${leGusta?'❤️':'🤍'}</span> Me gusta <b class="blog-gusta-n"></b></button>
+      <span class="blog-compartir-tit">Compartir:</span>
+      <a class="blog-red fb" href="https://www.facebook.com/sharer/sharer.php?u=${u}" target="_blank" rel="noopener" aria-label="Compartir en Facebook">Facebook</a>
+      <a class="blog-red wa" href="https://wa.me/?text=${t}%20${u}" target="_blank" rel="noopener" aria-label="Compartir por WhatsApp">WhatsApp</a>
+      <a class="blog-red x" href="https://twitter.com/intent/tweet?text=${t}&url=${u}" target="_blank" rel="noopener" aria-label="Compartir en X">X</a>
+      <button type="button" class="blog-red copiar">Copiar liga</button>
+    </div>` + cajaSuscripcionBlog(slug);
+  cta.parentNode.insertBefore(caja, cta);
+  const n = caja.querySelector('.blog-gusta-n'), b = caja.querySelector('.blog-gusta');
+  fetch(`${SITIO_SUPABASE_URL}/rest/v1/blog_me_gusta?slug=eq.${slug}&select=conteo`, { headers:{ apikey:SITIO_SUPABASE_ANON_KEY, Authorization:'Bearer ' + SITIO_SUPABASE_ANON_KEY } })
+    .then(r=> r.ok ? r.json() : []).then(d=>{ if(d && d[0] && d[0].conteo) n.textContent = d[0].conteo; }).catch(()=>{});
+  b.onclick = async ()=>{
+    leGusta = !leGusta;
+    b.classList.toggle('activo', leGusta); b.setAttribute('aria-pressed', leGusta);
+    b.querySelector('.corazon').textContent = leGusta ? '❤️' : '🤍';
+    try{ localStorage.setItem(clave, leGusta ? '1' : '0'); }catch(_){}
+    try{ const c = await sitioRpc('blog_dar_me_gusta', { p_slug:slug, p_suma: leGusta ? 1 : -1 }); n.textContent = c || ''; }catch(_){}
+  };
+  caja.querySelector('.copiar').onclick = async e=>{
+    if(navigator.share){ try{ await navigator.share({ title:titulo, url }); return; }catch(_){ } }
+    try{ await navigator.clipboard.writeText(url); e.target.textContent = '✓ Copiada'; }catch(_){ prompt('Copia la liga:', url); }
+  };
+  conectarSuscripcionBlog(caja);
+}
+if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderExtrasArticulo); else renderExtrasArticulo();

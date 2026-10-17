@@ -43,6 +43,7 @@
 <section class="franja">
   <div class="envolvente">
     <div class="grid-cards g3" id="cont-blog"></div>
+    <div id="cont-susc-blog"></div>
   </div>
 </section>
 
@@ -53,6 +54,7 @@
   renderHeader('blog');
   renderFooter();
   document.getElementById('cont-blog').innerHTML = BLOG_POSTS.map(renderBlogCard).join('');
+  document.getElementById('cont-susc-blog').innerHTML = cajaSuscripcionBlog('blog'); conectarSuscripcionBlog();
 </script>
 </body>
 </html>

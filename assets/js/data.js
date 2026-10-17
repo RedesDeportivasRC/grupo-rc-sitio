@@ -223,7 +223,9 @@ const BLOG_POSTS = [
   { slug:'redes-deportivas-artesanales-yucatan', productos:'todos', titulo:'Redes deportivas artesanales de Yucatán: la historia de nuestro tejido tipo colmena', categoria:'Historia RC', minutos:7, fecha:'2026-10-10', extracto:'El origen familiar de nuestras redes hechas a mano, de poliéster y personalizadas a la medida.' },
   { slug:'errores-comprar-redes-deportivas', productos:'todos', titulo:'Errores frecuentes al comprar redes deportivas y cómo evitarlos', categoria:'Compras', minutos:6, fecha:'2026-10-10', extracto:'Material, medidas, abertura, instalación y garantía: qué comparar para aprovechar mejor tu inversión.' },
   { slug:'como-instalar-red-perimetral', productos:['redes-perimetrales','redes-de-proteccion','jaulas-bateo'], titulo:'Cómo instalar una red perimetral deportiva paso a paso', categoria:'Instalación', minutos:7, fecha:'2026-10-10', extracto:'El orden de montaje de nuestro manual: extender, fijar esquinas, distribuir la malla y subirla a los postes.' },
-].map(b=>({ ...b, url:'blog/'+b.slug+'.html', imagen:'assets/img/trabajos/'+PORTADAS_BLOG[b.slug], contenido:'publicado' }));
+].map(b=>({ ...b, url:'blog/'+b.slug+'.html', imagen:'assets/img/trabajos/'+PORTADAS_BLOG[b.slug], contenido:'publicado' }))
+  // Programados (Reinier 2026-10-17): un artículo con publicar:'2026-10-21T19:00' no aparece en listas antes de esa hora (hora de Mérida).
+  .filter(b=> !b.publicar || new Date(b.publicar + '-06:00') <= new Date());
 
 // ---------------- RECURSOS / DESCARGAS ----------------
 const RECURSOS = [
