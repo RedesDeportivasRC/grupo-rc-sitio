@@ -129,6 +129,7 @@
         <iframe src="https://www.youtube-nocookie.com/embed/j3AjvWU1GcI" title="Parada de Dulces RC 2024 en YouTube" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
+    <div class="ev-mosaico" data-evento="dulces" style="margin-top:36px;"></div>
   </div>
 </section>
 
@@ -162,6 +163,10 @@
     { f:'siuu-masivo-2026-merida-03', ev:'Siuu Masivo 2026', alt:'Gorra del Siuu Masivo Yucatán 2026 con la explanada del evento al fondo' },
     { f:'siuu-masivo-2026-merida-05', ev:'Siuu Masivo 2026', alt:'Organizadores y asistentes posan juntos de noche en el Siuu Masivo 2026' },
     { f:'siuu-masivo-2026-merida-02', ev:'Siuu Masivo 2026', alt:'Gorra bordada oficial del Siuu Masivo Yucatán 2026 sostenida en mano' },
+    { f:'siuu-masivo-2026-merida-06', ev:'Siuu Masivo 2026', alt:'Joven muestra su premio junto a la portería y el banner de Redes Deportivas RC' },
+    { f:'siuu-masivo-2026-merida-07', ev:'Siuu Masivo 2026', alt:'Niño con playera CR7 y balón en red junto a mini portería de Grupo RC' },
+    { f:'siuu-masivo-2026-merida-08', ev:'Siuu Masivo 2026', alt:'Niño con red portabalones como premio frente al banner de Grupo RC' },
+    { f:'siuu-masivo-2026-merida-09', ev:'Siuu Masivo 2026', alt:'Organizadores, botarga de venado y un niño posan en la explanada del evento' },
     { f:'siuu-masivo-2025-merida-03', ev:'Siuu Masivo 2025', alt:'Aficionado de espaldas con jersey de Ronaldo firmado frente al photocall de Grupo RC' },
     { f:'siuu-masivo-2025-merida-07', ev:'Siuu Masivo 2025', alt:'Asistentes con camisetas de fútbol frente al escenario del Siuu Masivo en Mérida' },
     { f:'siuu-masivo-2025-merida-04', ev:'Siuu Masivo 2025', alt:'Participante salta para golpear un balón colgado durante el Siuu Masivo en Mérida' },
@@ -172,11 +177,25 @@
     { f:'siuu-masivo-2025-merida-10', ev:'Siuu Masivo 2025', alt:'Asistente posa en el photocall de Grupo RC con figura de Cristiano Ronaldo' },
     { f:'siuu-masivo-2025-merida-09', ev:'Siuu Masivo 2025', alt:'Explanada al atardecer con estructuras y juegos de fútbol previos al evento' },
     { f:'siuu-masivo-2025-merida-11', ev:'Siuu Masivo 2025', alt:'Aficionada con jersey amarillo posa en el photocall de Grupo RC del Siuu Masivo' },
+    { f:'siuu-masivo-2025-merida-12', ev:'Siuu Masivo 2025', alt:'Multitud nocturna de aficionados con camisetas de fútbol reunidos en el Siuu Masivo' },
+    { f:'siuu-masivo-2025-merida-13', ev:'Siuu Masivo 2025', alt:'Cientos de aficionados con jerseys de fútbol celebran juntos en el Siuu Masivo' },
+    { f:'siuu-masivo-2025-merida-14', ev:'Siuu Masivo 2025', alt:'Freestyler hace dominadas con balón frente al público en el Siuu Masivo' },
+    { f:'siuu-masivo-2025-merida-15', ev:'Siuu Masivo 2025', alt:'Niño con red deportiva junto a mini portería roja y banner de Grupo RC' },
+    { f:'siuu-masivo-2025-merida-16', ev:'Siuu Masivo 2025', alt:'Entrega de balón y red como premio a una participante del Siuu Masivo' },
     { f:'parada-de-dulces-halloween-grupo-rc-2024-01', ev:'dulces', alt:'Anfitrión disfrazado se toma una selfie con personaje de impermeable amarillo en Halloween' },
+    { f:'parada-de-dulces-halloween-grupo-rc-2024-02', ev:'dulces', alt:'Niños disfrazados frente al portón con lona de redes perimetrales de Grupo RC' },
+    { f:'parada-de-dulces-halloween-grupo-rc-2024-03', ev:'dulces', alt:'Personaje de impermeable amarillo asusta a niños en la Parada de Dulces RC' },
+    { f:'parada-de-dulces-halloween-grupo-rc-2024-04', ev:'dulces', alt:'Familias disfrazadas piden dulces en la entrada decorada para Halloween' },
+    { f:'parada-de-dulces-halloween-grupo-rc-2024-05', ev:'dulces', alt:'Grupo de niños disfrazados posa en la calle durante la noche de Halloween' },
+    { f:'parada-de-dulces-halloween-grupo-rc-2024-06', ev:'dulces', alt:'Familia con maquillaje de zombi posa en un jardín decorado para Halloween' },
+    { f:'parada-de-dulces-halloween-grupo-rc-2025-01', ev:'dulces', alt:'Anfitriones disfrazados de payaso y enmascarado bajo una canasta de básquet con red' },
+    { f:'parada-de-dulces-halloween-grupo-rc-2025-02', ev:'dulces', alt:'Payaso posa con niños disfrazados frente a canasta y red perimetral' },
+    { f:'parada-de-dulces-halloween-grupo-rc-2025-03', ev:'dulces', alt:'Payaso acompaña a niños disfrazados con cubetas de calabaza para pedir dulces' },
+    { f:'parada-de-dulces-halloween-grupo-rc-2025-04', ev:'dulces', alt:'Selfie de payaso con personaje enmascarado y un niño en noche de Halloween' },
   ];
   const ruta = f => 'assets/img/eventos/' + f;
   document.querySelectorAll('.ev-mosaico').forEach(cont => {
-    cont.innerHTML = FOTOS_EVENTOS.map((p, i) => p.ev !== cont.dataset.evento ? '' :
+    cont.innerHTML = FOTOS_EVENTOS.map((p, i) => p.ev !== cont.dataset.evento || p.f === 'parada-de-dulces-halloween-grupo-rc-2024-01' ? '' :
       `<figure data-i="${i}"><img src="${ruta(p.f)}-t.jpg" alt="${p.alt}" loading="lazy"><figcaption>${p.alt}</figcaption></figure>`).join('');
   });
   document.querySelector('.ev-foto').dataset.i = FOTOS_EVENTOS.findIndex(p => p.ev === 'dulces');
