@@ -772,7 +772,7 @@ a.testimonios-resumen{text-decoration:none;}
 .blog-gusta{display:inline-flex;align-items:center;gap:6px;border:1.5px solid #e3e9ee;background:#fff;border-radius:999px;padding:8px 14px;font:inherit;font-weight:700;cursor:pointer;color:var(--negro);}
 .blog-gusta.activo{border-color:#e0433d;color:#e0433d;background:#fff5f5;}
 .blog-compartir-tit{margin-left:auto;font-size:.85rem;color:#5b6b75;font-weight:600;}
-.blog-red,.articulo-cuerpo a.blog-red{display:inline-flex;align-items:center;border-radius:999px;padding:8px 13px;font-size:.85rem;font-weight:700;text-decoration:none !important;border:none;cursor:pointer;font-family:inherit;color:#fff !important;}
+.blog-red,.articulo-cuerpo a.blog-red{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:8px 13px;font-size:.85rem;font-weight:700;text-decoration:none !important;border:none;cursor:pointer;font-family:inherit;color:#fff !important;}
 .articulo-cuerpo .blog-red.copiar{color:var(--negro) !important;}
 .blog-red.fb{background:#1877f2;} .blog-red.wa{background:#25d366;} .blog-red.x{background:#111;} .blog-red.copiar{background:#eef3f6;color:var(--negro);}
 .blog-susc{display:grid;grid-template-columns:1fr 1.2fr;gap:18px;align-items:center;background:#eaf8fe;border:1px solid #bfe9fb;border-radius:var(--radio);padding:20px 22px;margin:1.6em 0 0;}
