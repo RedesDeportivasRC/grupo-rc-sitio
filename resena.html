@@ -154,8 +154,20 @@ document.getElementById('paso-datos').addEventListener('submit', async e => {
   if (!calif || (!idCliente && !datos.nombre)) { err.textContent = 'Elige las estrellas y escribe tu nombre.'; err.style.display = 'block'; return; }
   const btn = document.getElementById('r-enviar'); btn.disabled = true; btn.textContent = 'Enviando…';
   try {
-    const r = await fetch('/api/resena', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) });
-    if (!r.ok) throw new Error();
+    // Primero la función del sitio; si falla, se guarda directo en Supabase con la llave pública
+    // (función guardar_resena_web). Así una falla del servidor del sitio ya no pierde la opinión.
+    let ok = false;
+    try { const r = await fetch('/api/resena', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) }); ok = r.ok; } catch (_) {}
+    if (!ok && !datos.sitioWeb) {
+      const r2 = await fetch(SITIO_SUPABASE_URL + '/rest/v1/rpc/guardar_resena_web', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: SITIO_SUPABASE_ANON_KEY, Authorization: 'Bearer ' + SITIO_SUPABASE_ANON_KEY },
+        body: JSON.stringify({ p_nombre: datos.nombre, p_estrellas: calif, p_comentario: datos.comentario, p_c: idCliente }),
+      });
+      ok = r2.ok;
+    }
+    if (!ok) throw new Error();
+    try {
     if (calif === 5) {
       document.getElementById('btn-google').href = urlGoogle;
       if (!EMPRESA.resenaGoogle) document.getElementById('paso-google').innerHTML = 'Toca <b>Calificar en Google</b>, entra a <b>Opiniones → Escribir una opinión</b>, elige 5 estrellas y <b>pega</b> tu comentario.';
@@ -167,6 +179,7 @@ document.getElementById('paso-datos').addEventListener('submit', async e => {
     } else {
       mostrar('gracias');
     }
+    } catch (_) { mostrar(calif === 5 ? 'gracias-5' : 'gracias'); } // ya se guardó: nunca mostrar "no se pudo"
   } catch (_) {
     const texto = `Hola, quiero dejar mi opinión: ${'★'.repeat(calif)}${'☆'.repeat(5 - calif)}\n${datos.nombre ? "Nombre: " + datos.nombre : ""}${datos.comentario ? '\nComentario: ' + datos.comentario : ''}`;
     document.getElementById('btn-wa-falla').href = `https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent(texto)}`;

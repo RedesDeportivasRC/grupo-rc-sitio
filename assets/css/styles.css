@@ -701,7 +701,7 @@ a.testimonios-resumen{text-decoration:none;}
 .marca-rc.dos img{width:calc(var(--m)*1.7);height:calc(var(--m)*1.7);}
 .marca-txt{display:flex;flex-direction:column;align-items:flex-start;}
 .marca-nombre{font-family:'Bebas Neue',sans-serif;font-size:var(--m);line-height:.86;letter-spacing:.02em;}
-.marca-nombre b{font-weight:400;color:#2bbdf3;}
+.marca-nombre b{font-weight:400;color:inherit;}
 .marca-esl{font-family:'Permanent Marker','Comic Sans MS',cursive;font-size:calc(var(--m)*.35);line-height:1.15;margin-top:calc(var(--m)*.035);color:#1591c2;letter-spacing:.01em;}
 .marca-rc.osc{color:#fff;}
 .marca-rc.osc .marca-esl{color:#2bbdf3;}
