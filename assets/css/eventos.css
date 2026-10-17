@@ -184,3 +184,5 @@
   .ev-famosos-mini{grid-template-columns:repeat(2,1fr);gap:10px;}
   .ev-famosos-mini b{font-size:1.4rem;}
 }
+.ev-tabs a.ev-volver{background:var(--azul,#2bbdf3);color:#fff;position:sticky;left:0;z-index:1;box-shadow:6px 0 10px #fff;}
+.ev-tabs a.ev-volver:hover{background:var(--negro);color:#fff;}
