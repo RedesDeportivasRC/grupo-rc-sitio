@@ -43,6 +43,7 @@ function renderHeader(activo){
           </div>
           <a href="${base}clientes.html" class="${activo==='clientes'?'activo':''}">Clientes</a>
           <a href="${base}galeria.html" class="${activo==='galeria'?'activo':''}">Galería</a>
+          <a href="${base}eventos.html" class="${activo==='eventos'?'activo':''}">Eventos</a>
           <a href="${base}blog.html" class="${activo==='blog'?'activo':''}">Blog</a>
           <div class="nav-menu">
             <a href="${base}recursos.html" class="${activo==='recursos'?'activo':''}">Recursos <span class="flechita">▾</span></a>
@@ -80,6 +81,7 @@ function renderHeader(activo){
         </div>
         <a href="${base}clientes.html" class="mm-item">Clientes</a>
         <a href="${base}galeria.html" class="mm-item">Galería</a>
+        <a href="${base}eventos.html" class="mm-item">Eventos</a>
         <a href="${base}blog.html" class="mm-item">Blog</a>
         <div class="mm-grupo">
           <div class="mm-fila"><a href="${base}recursos.html" class="mm-item">Recursos</a><button type="button" class="mm-flecha" aria-label="Ver recursos" aria-expanded="false"></button></div>
@@ -164,6 +166,7 @@ function renderFooter(){
             <a href="${base}nosotros.html">Nosotros</a>
             <a href="${base}clientes.html">Clientes</a>
             <a href="${base}blog.html">Blog</a>
+            <a href="${base}eventos.html">Eventos</a>
           </div>
           <div class="f-rec">
             <h4>Recursos</h4>
