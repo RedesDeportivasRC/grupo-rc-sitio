@@ -8,15 +8,15 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/icono-192.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Eventos de fútbol y comunidad en Mérida | Redes Deportivas RC</title>
-<meta name="description" content="Grupo RC en eventos de Mérida, Yucatán: Siuu Masivo Yucatán 2025 y 2026, premiación con porterías y redes, y la Parada de Dulces RC en Halloween.">
+<meta name="description" content="Siuu Masivo Yucatán, el homenaje a Cristiano Ronaldo que organiza Reinier Coral, fundador de Grupo RC, en el Parque de las Américas de Mérida. Ediciones 2025 y 2026, prensa y la Parada de Dulces RC.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_MX">
 <meta property="og:site_name" content="Redes Deportivas RC">
 <meta property="og:url" content="https://www.redesdeportivasrc.com/eventos.html">
 <meta property="og:title" content="Eventos de fútbol y comunidad en Mérida | Redes Deportivas RC">
 <meta property="og:description" content="Siuu Masivo Yucatán, premiaciones con porterías y redes, y la Parada de Dulces RC.">
-<meta property="og:image" content="https://www.redesdeportivasrc.com/assets/img/eventos/siuu-masivo-2025-merida-01.jpg">
-<meta property="og:image:alt" content="Vista nocturna del Siuu Masivo en Mérida con escenario, porterías aéreas y público">
+<meta property="og:image" content="https://www.redesdeportivasrc.com/assets/img/eventos/siuu-masivo-2025-merida-00.jpg">
+<meta property="og:image:alt" content="Cientos de aficionados con jerseys de Cristiano Ronaldo celebran el Siuu Masivo 2025 en el Parque de las Américas de Mérida">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://www.redesdeportivasrc.com/eventos.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,8 +66,26 @@
 .visor .vcerrar{top:16px;right:16px;}
 .visor .vant{left:14px;top:50%;transform:translateY(-50%);}
 .visor .vsig{right:14px;top:50%;transform:translateY(-50%);}
+.ev-hist{display:grid;grid-template-columns:1.15fr 1fr;gap:48px;align-items:start;}
+.ev-hist p{color:#3d5560;line-height:1.7;margin:14px 0 0;}
+.ev-hist h2 small{display:block;font-family:'Permanent Marker',cursive;font-size:1.05rem;color:var(--azul);margin-bottom:6px;}
+.ev-cifras{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px;}
+.ev-cifras div{background:#f1f6f8;border-radius:14px;padding:14px 12px;text-align:center;}
+.ev-cifras b{display:block;font-family:'Bebas Neue',sans-serif;font-size:2.6rem;line-height:1;color:var(--azul);}
+.ev-cifras span{font-size:.82rem;font-weight:700;color:#3d5560;}
+.ev-retos{background:var(--azul-osc);color:#fff;border-radius:18px;padding:28px 26px;}
+.ev-retos h3,.ev-prensa h3{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.5px;margin:0 0 10px;}
+.ev-retos h3{color:var(--azul);}
+.ev-retos ul{list-style:none;margin:0;padding:0;}
+.ev-retos li{padding:10px 0;border-top:1px solid rgba(255,255,255,.12);color:#d6ebf3;line-height:1.5;font-size:.95rem;}
+.ev-retos li b{color:#fff;}
+.ev-prensa{margin-top:44px;}
+.ev-medios{display:flex;flex-wrap:wrap;gap:10px;}
+.ev-medios a{text-decoration:none;font-weight:800;font-size:.9rem;color:var(--negro);border:1.5px solid #d5e3ea;border-radius:999px;padding:8px 16px;transition:all .2s;}
+.ev-medios a:hover{background:var(--azul);border-color:var(--azul);color:#fff;}
 @media (max-width:820px){
-  .ev-cab,.ev-dulces{grid-template-columns:1fr;gap:16px;}
+  .ev-cab,.ev-dulces,.ev-hist{grid-template-columns:1fr;gap:16px;}
+  .ev-retos{padding:22px 18px;}
   .ev-sec{padding:52px 0;}
   .ev-mosaico{columns:2 150px;column-gap:8px;}
   .ev-mosaico figure{margin-bottom:8px;border-radius:10px;}
@@ -80,44 +98,94 @@
 <div id="site-header"></div>
 
 <section class="ev-hero">
-  <img src="assets/img/eventos/siuu-masivo-2025-merida-01.jpg" alt="Vista nocturna del Siuu Masivo en Mérida con escenario, porterías aéreas y público" fetchpriority="high">
+  <img src="assets/img/eventos/siuu-masivo-2025-merida-00.jpg" alt="Cientos de aficionados con jerseys de Cristiano Ronaldo celebran el Siuu Masivo 2025 en el Parque de las Américas de Mérida" fetchpriority="high">
   <div class="envolvente">
     <div class="migas"><a href="index.html">Inicio</a> / Eventos</div>
     <h1>Donde está el fútbol,<br><span>ahí estamos.</span></h1>
-    <p>Más que vender redes: nos gusta estar en la cancha con la gente. Porterías, redes y premios de Grupo RC en los eventos que mueven a Mérida.</p>
+    <p>Más que vender redes: nos gusta estar en la cancha con la gente. Organizamos el Siuu Masivo Yucatán y llevamos porterías, redes y premios de Grupo RC a los eventos que mueven a Mérida.</p>
     <div class="ev-datos"><span>⚽ Siuu Masivo Yucatán 2025 y 2026</span><span>🎃 Parada de Dulces RC</span><span>📍 Mérida, Yucatán</span></div>
   </div>
 </section>
 
 <nav class="ev-nav" aria-label="Eventos">
   <div class="envolvente">
+    <a href="#historia">La historia</a>
     <a href="#siuu-2026">Siuu Masivo 2026</a>
     <a href="#siuu-2025">Siuu Masivo 2025</a>
     <a href="#parada-de-dulces">Parada de Dulces RC</a>
   </div>
 </nav>
 
-<section class="ev-sec" id="siuu-2026">
+<section class="ev-sec" id="historia">
+  <div class="envolvente">
+    <div class="ev-hist">
+      <div>
+        <h2><small>Cómo nació</small>De una publicación en Facebook al Siuu más grande de Yucatán</h2>
+        <p>En Estados Unidos buscaban un récord Guinness con la mayor cantidad de gente haciendo el festejo de Cristiano Ronaldo. Reinier Coral, fundador de Grupo RC, publicó que estaría padre hacer algo así en Yucatán. Un amigo le contestó que él podía organizarlo, y lo hizo.</p>
+        <p>En lugar de buscar el récord, lo convirtió en un homenaje por el cumpleaños de CR7: actividades, premios, patrocinadores y un grito masivo de "Siuuu" en el Parque de las Américas de Mérida, con el apoyo del Ayuntamiento de Mérida.</p>
+        <div class="ev-cifras">
+          <div><b>+500</b><span>aficionados en 2025</span></div>
+          <div><b>2</b><span>ediciones</span></div>
+          <div><b>+15</b><span>medios lo publicaron</span></div>
+        </div>
+      </div>
+      <div class="ev-retos">
+        <h3>Los retos</h3>
+        <ul>
+          <li><b>El Salto del Bicho.</b> Un balón dentro de una bolsa balonera de Grupo RC, colgado a 2.93 m, la altura del cabezazo récord de CR7. ¿Quién lo alcanza?</li>
+          <li><b>Camino a los mil goles.</b> Tiros a una portería de entrenamiento, cada vez desde más lejos.</li>
+          <li><b>Siuu Extremo.</b> Gana el grito más largo.</li>
+          <li><b>CR7 Freestyle.</b> Más dominadas en un espacio reducido.</li>
+          <li><b>Premios.</b> Balones con redes portabalones y una portería de entrenamiento para el video con más likes.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ev-prensa">
+      <h3>Lo publicaron</h3>
+      <div class="ev-medios">
+        <a href="https://www.marca.com/mx/futbol/2025/01/17/678abdba22601dea0b8b4598.html" target="_blank" rel="noopener">MARCA</a>
+        <a href="https://www.record.com.mx/empelotados/un-siiiuuu-historico-yucatan-se-prepara-para-hacer-homenaje-cristiano-ronaldo" target="_blank" rel="noopener">RÉCORD</a>
+        <a href="https://www.tudn.com/futbol/cristiano-ronaldo-tendra-festejo-especial-cumpleanos-mexico-siuuu-mas-grande-historia" target="_blank" rel="noopener">TUDN</a>
+        <a href="https://www.foxsports.com.mx/2025/01/18/gente-yucatan-convoca-siuuu-masivo-cumpleanos-cristiano-ronaldo-horario/" target="_blank" rel="noopener">FOX Sports</a>
+        <a href="https://latinus.us/deportes/futbol-internacional/2025/1/18/siuu-masivo-merida-convocan-celebracion-cumpleanos-40-cristiano-ronaldo-132910.html" target="_blank" rel="noopener">Latinus</a>
+        <a href="https://www.infobae.com/mexico/deportes/2025/01/18/asi-festejaran-los-fans-de-cristiano-ronaldo-por-su-cumpleanos-en-mexico-cuando-y-donde-sera/" target="_blank" rel="noopener">Infobae</a>
+        <a href="https://www.mediotiempo.com/futbol/fans-cristiano-ronaldo-convocan-siuuu-masivo-yucatan-cumpleanos-40" target="_blank" rel="noopener">Mediotiempo</a>
+        <a href="https://www.publimetro.com.mx/deportes/2025/01/21/siuuu-masivo-en-honor-a-cristiano-ronaldo-retumbara-en-merida/" target="_blank" rel="noopener">Publimetro</a>
+        <a href="https://www.estadiodeportes.mx/extracancha/Yucatecos-convocan-a-realizar-el-Siuuu-masivo-20250120-0082.html" target="_blank" rel="noopener">Estadio Deportes</a>
+        <a href="https://www.poresto.net/yucatan/2025/1/18/fanaticos-de-cristiano-ronaldo-convocan-a-un-siu-masivo-en-merida-.html" target="_blank" rel="noopener">Por Esto!</a>
+        <a href="https://www.zocalo.com.mx/seguidores-de-cristiano-ronaldo-convocan-a-un-siuu-masivo-en-su-cumpleanos/" target="_blank" rel="noopener">Zócalo</a>
+        <a href="https://juanfutbol.com/futbol-internacional/el-mas-grande-de-la-historia-cristiano-ronaldo-tendra-un-impresionante-festejo-de-cumpleanos-en-mexico" target="_blank" rel="noopener">Juan Fútbol</a>
+        <a href="https://quintafuerza.mx/mexico/convocan-a-festejo-masivo-por-el-cumpleanos-de-cristiano-ronaldo-en-merida-yucatan/" target="_blank" rel="noopener">Quinta Fuerza</a>
+        <a href="https://californiamedios.com/siuuu-masivo-en-honor-a-cristiano-ronaldo-retumbara-en-merida/" target="_blank" rel="noopener">California Medios</a>
+        <a href="https://yodeportivo.com/merida-celebra-cristiano-ronaldo/" target="_blank" rel="noopener">Yo Deportivo</a>
+        <a href="https://netnoticias.mx/viral/homenaje-a-cristiano-ronaldo-convocan-al-siuu-masivo" target="_blank" rel="noopener">NetNoticias</a>
+        <a href="https://x.com/mexico_alminuto/status/1881399626390994961" target="_blank" rel="noopener">México al Minuto</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ev-sec gris" id="siuu-2026">
   <div class="envolvente">
     <div class="ev-cab">
       <h2><small>5 de febrero de 2026</small>Siuu Masivo Yucatán 2026</h2>
-      <p>La segunda edición del festejo de los aficionados de Cristiano Ronaldo en Mérida. Grupo RC estuvo en la premiación con su portería y redes portabalones con balón para los ganadores.</p>
+      <p>La segunda edición, por los 41 años de CR7. Como en 2025, los ganadores se llevaron balones con redes portabalones y la portería de Grupo RC.</p>
     </div>
     <div class="ev-mosaico" data-evento="Siuu Masivo 2026"></div>
   </div>
 </section>
 
-<section class="ev-sec gris" id="siuu-2025">
+<section class="ev-sec" id="siuu-2025">
   <div class="envolvente">
     <div class="ev-cab">
       <h2><small>5 de febrero de 2025</small>Siuu Masivo Yucatán 2025</h2>
-      <p>Una noche de fútbol, música y retos frente a la concha acústica: porterías aéreas, balones colgados, mini porterías con red de Grupo RC y el photocall de Grupo RC para la foto del recuerdo.</p>
+      <p>La primera edición, por los 40 años de CR7. Más de 500 aficionados, retos frente a la concha acústica, mini porterías con red de Grupo RC, el photocall con la figura de Cristiano y, a las 7:30 de la noche, el "Siuuu" que retumbó en todo el parque.</p>
     </div>
     <div class="ev-mosaico" data-evento="Siuu Masivo 2025"></div>
   </div>
 </section>
 
-<section class="ev-sec" id="parada-de-dulces">
+<section class="ev-sec gris" id="parada-de-dulces">
   <div class="envolvente">
     <div class="ev-dulces">
       <div>
@@ -136,7 +204,7 @@
 <section class="ev-cta">
   <div class="envolvente">
     <h2>¿Organizas un torneo o un evento?</h2>
-    <p>Porterías, redes portabalones y redes para premiación, hechas por nosotros en Mérida y con envío a todo México.</p>
+    <p>Porterías, redes portabalones y redes para premiación, fabricadas a la medida y con envío desde Mérida a todo México.</p>
     <a href="contacto.html" class="btn btn-azul">Cotiza con nosotros</a>
   </div>
 </section>
@@ -156,7 +224,7 @@
 <script>
   renderHeader('eventos');
   renderFooter();
-  // Fotos elegidas de la carpeta "Galerías" (Drive Siuu Masivo). Regla de Reinier: sin menores identificables en el sitio.
+  // Fotos de la carpeta "Galerías" (Drive Siuu Masivo). Reinier autorizó publicar las fotos con asistentes menores tal cual (2026-10-17).
   const FOTOS_EVENTOS = [
     { f:'siuu-masivo-2026-merida-01', ev:'Siuu Masivo 2026', alt:'Ganador recibe una red portabalones frente a la portería con banner de Grupo RC' },
     { f:'siuu-masivo-2026-merida-04', ev:'Siuu Masivo 2026', alt:'Equipo organizador con gorras del Siuu Masivo Yucatán 2026 durante el evento' },
@@ -167,9 +235,10 @@
     { f:'siuu-masivo-2026-merida-07', ev:'Siuu Masivo 2026', alt:'Niño con playera CR7 y balón en red junto a mini portería de Grupo RC' },
     { f:'siuu-masivo-2026-merida-08', ev:'Siuu Masivo 2026', alt:'Niño con red portabalones como premio frente al banner de Grupo RC' },
     { f:'siuu-masivo-2026-merida-09', ev:'Siuu Masivo 2026', alt:'Organizadores, botarga de venado y un niño posan en la explanada del evento' },
+    { f:'siuu-masivo-2025-merida-00', ev:'Siuu Masivo 2025', alt:'Cientos de aficionados con jerseys de Cristiano Ronaldo celebran el Siuu Masivo 2025 en el Parque de las Américas de Mérida' },
     { f:'siuu-masivo-2025-merida-03', ev:'Siuu Masivo 2025', alt:'Aficionado de espaldas con jersey de Ronaldo firmado frente al photocall de Grupo RC' },
     { f:'siuu-masivo-2025-merida-07', ev:'Siuu Masivo 2025', alt:'Asistentes con camisetas de fútbol frente al escenario del Siuu Masivo en Mérida' },
-    { f:'siuu-masivo-2025-merida-04', ev:'Siuu Masivo 2025', alt:'Participante salta para golpear un balón colgado durante el Siuu Masivo en Mérida' },
+    { f:'siuu-masivo-2025-merida-04', ev:'Siuu Masivo 2025', alt:'El Salto del Bicho: un participante salta para cabecear el balón colgado en una bolsa balonera de Grupo RC' },
     { f:'siuu-masivo-2025-merida-05', ev:'Siuu Masivo 2025', alt:'Dos aficionados con balones frente a una mini portería con red de Grupo RC' },
     { f:'siuu-masivo-2025-merida-06', ev:'Siuu Masivo 2025', alt:'Público reunido alrededor de una mini portería durante la dinámica del Siuu Masivo' },
     { f:'siuu-masivo-2025-merida-02', ev:'Siuu Masivo 2025', alt:'Joven aficionado muestra una red deportiva junto al banner de Grupo RC' },
