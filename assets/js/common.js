@@ -257,12 +257,20 @@ function renderProjectCard(pr){
     </a>`;
 }
 
+// Señales en las tarjetas (Reinier 2026-10-17): "🔥 Más leído" lo marca Reinier/Claude con masLeido:true en BLOG_POSTS
+// (mientras no haya historial de visitas se elige el que más vende); "Nuevo" sale solo los primeros 5 días.
+function etiquetaBlog(b){
+  if(b.masLeido) return '<span class="chip-estado leido">🔥 Más leído</span>';
+  const f = b.publicar || b.fecha;
+  if(f && (Date.now() - new Date(f.length > 10 ? f + '-06:00' : f + 'T12:00:00-06:00')) < 5 * 864e5) return '<span class="chip-estado nuevo">✨ Nuevo</span>';
+  return '';
+}
 function renderBlogCard(b){
   const base = rutaBase();
   return `
     <a class="tarjeta-blog" href="${base}${b.url || 'blog.html'}">
       <div class="tarjeta-blog-foto">${b.imagen && esUrl(b.imagen) ? `<img src="${base}${b.imagen}" alt="${b.titulo}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'foto-ph'}))">` : fotoOMarcador(null, b.titulo)}
-        <span class="chip-cat">${b.categoria}</span></div>
+        <span class="chip-cat">${b.categoria}</span>${etiquetaBlog(b)}</div>
       <div class="tarjeta-blog-body">
         <h3>${b.titulo}</h3>
         <p>${b.extracto}</p>
