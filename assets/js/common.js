@@ -491,7 +491,7 @@ async function enviarLeadFormulario(datos, elementosStatus){
   status.style.color = 'var(--gris)';
   status.textContent = 'Enviando…';
   try{
-    const resp = await fetch('/api/nuevo-lead', {
+    const resp = await fetch('https://jofotwgbbdysrywgxkwi.supabase.co/functions/v1/sitio-api/nuevo-lead', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(datos),

@@ -133,7 +133,7 @@ document.getElementById('estrellas').addEventListener('mouseleave', () => pintar
 const idCliente = new URLSearchParams(location.search).get('c') || '';
 if (idCliente) {
   document.getElementById('campo-nombre').style.display = 'none';
-  fetch('/api/resena?c=' + encodeURIComponent(idCliente)).then(r => r.ok ? r.json() : null).then(d => {
+  fetch('https://jofotwgbbdysrywgxkwi.supabase.co/functions/v1/sitio-api/resena?c=' + encodeURIComponent(idCliente)).then(r => r.ok ? r.json() : null).then(d => {
     if (d && d.nombre) document.getElementById('r-saludo').textContent = `${d.nombre}, ¿cómo te fue con nosotros?`;
   }).catch(() => {});
 }
@@ -157,7 +157,7 @@ document.getElementById('paso-datos').addEventListener('submit', async e => {
     // Primero la función del sitio; si falla, se guarda directo en Supabase con la llave pública
     // (función guardar_resena_web). Así una falla del servidor del sitio ya no pierde la opinión.
     let ok = false;
-    try { const r = await fetch('/api/resena', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) }); ok = r.ok; } catch (_) {}
+    try { const r = await fetch('https://jofotwgbbdysrywgxkwi.supabase.co/functions/v1/sitio-api/resena', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) }); ok = r.ok; } catch (_) {}
     if (!ok && !datos.sitioWeb) {
       const r2 = await fetch(SITIO_SUPABASE_URL + '/rest/v1/rpc/guardar_resena_web', {
         method: 'POST',

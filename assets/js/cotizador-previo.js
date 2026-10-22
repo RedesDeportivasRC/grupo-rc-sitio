@@ -427,7 +427,7 @@
       if(v('correo') && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('correo'))) return falta('Revisa tu correo (o déjalo vacío).', 'correo');
       btn.disabled = true; btn.textContent = 'Enviando…';
       try{
-        const resp = await fetch('/api/solicitar-cotizacion', {
+        const resp = await fetch('https://jofotwgbbdysrywgxkwi.supabase.co/functions/v1/sitio-api/solicitar-cotizacion', {
           method:'POST', headers:{ 'Content-Type':'application/json' },
           body: JSON.stringify({
             producto:clave, forma:r.forma || null, items:r.items, detalle:r.lineas, m2:r.m2 || null,
