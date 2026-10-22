@@ -87,7 +87,7 @@ document.querySelectorAll('.cliente-rc').forEach(a=>{
 });
 renderTestimonios('cont-testimonios', 'opiniones');
 // Reseñas que llegan por resena.html: solo se muestran las que ya aprobamos en el sistema
-fetch('/api/resena').then(r => r.ok ? r.json() : []).then(lista => {
+fetch('https://jofotwgbbdysrywgxkwi.supabase.co/functions/v1/sitio-api/resena').then(r => r.ok ? r.json() : []).then(lista => {
   if (!Array.isArray(lista) || !lista.length) return;
   const esc = t => String(t || '').replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
   const cont = document.getElementById('cont-testimonios');
