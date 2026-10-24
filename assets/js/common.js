@@ -502,6 +502,7 @@ async function enviarLeadFormulario(datos, elementosStatus){
     status.textContent = '✅ ¡Listo! Te contactamos pronto.';
     botón.disabled = false;
     if(window.registrarConversion) registrarConversion('formulario');
+    mostrarFormularioEnviado(botón.closest('form'), datos.nombre);
     return true;
   }catch(e){
     status.style.color = '#d9534f';
@@ -509,6 +510,29 @@ async function enviarLeadFormulario(datos, elementosStatus){
     botón.disabled = false;
     return false;
   }
+}
+
+// Al enviar, el formulario se cambia por una tarjeta grande de confirmación (Reinier 2026-10-24:
+// el "Listo" chiquito abajo no se notaba y parecía que no se había mandado).
+function mostrarFormularioEnviado(form, nombre){
+  if(!form) return;
+  const previo = form.parentNode.querySelector('.form-enviado');
+  if(previo) previo.remove();
+  const primerNombre = String(nombre || '').trim().split(/\s+/)[0].replace(/[<>&"']/g, '');
+  const card = document.createElement('div');
+  card.className = 'form-enviado';
+  card.setAttribute('role', 'status');
+  card.innerHTML = `<div class="form-enviado-ico" aria-hidden="true">✓</div>
+    <h3>¡Mensaje enviado${primerNombre ? ', ' + primerNombre : ''}!</h3>
+    <p>Recibimos tus datos. Un asesor te escribe por WhatsApp muy pronto.</p>
+    <div class="form-enviado-botones">
+      <a class="btn btn-wa" href="https://wa.me/529995538184?text=Hola%2C%20acabo%20de%20mandar%20el%20formulario%20de%20la%20p%C3%A1gina." target="_blank" rel="noopener">💬 Escribir ahora por WhatsApp</a>
+      <button type="button" class="btn btn-linea form-enviado-otro">Enviar otro mensaje</button>
+    </div>`;
+  form.style.display = 'none';
+  form.parentNode.insertBefore(card, form.nextSibling);
+  card.querySelector('.form-enviado-otro').onclick = ()=>{ card.remove(); form.style.display = ''; };
+  card.scrollIntoView({ behavior:'smooth', block:'center' });
 }
 
 // ---------------- Banner principal a todo lo ancho ----------------
