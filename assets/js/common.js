@@ -257,6 +257,31 @@ function renderBarraPagos(){
       <p class="bp-solo-lector">Mensualidades fijas, hasta 18 meses. Aparta con 50% y liquida antes del envío. Aceptamos tarjetas de crédito Visa, Mastercard y American Express. Paga en efectivo en OXXO. Pago seguro con Mercado Pago.</p>
       <div class="bp-pista" aria-hidden="true"><div class="bp-fila">${fila}</div><div class="bp-fila">${fila}</div></div>
     </div>`);
+  moverBarraPagos(ancla.nextElementSibling);
+}
+// Movimiento de la barra (Reinier 2026-10-27): gira sola; con el dedo o el mouse se detiene y se arrastra,
+// y al soltar sigue su recorrido. Con "reducir movimiento" queda fija (CSS).
+function moverBarraPagos(barra){
+  if(!barra || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const pista = barra.querySelector('.bp-pista'), fila = pista.querySelector('.bp-fila');
+  const VELOCIDAD = 140; // px por segundo
+  let x = 0, ancho = fila.offsetWidth, arrastrando = false, encima = false, ultimoX = 0, antes = performance.now();
+  addEventListener('resize', ()=>{ ancho = fila.offsetWidth; });
+  barra.querySelectorAll('img').forEach(i=>i.draggable = false);
+  function paso(t){
+    const dt = Math.min((t - antes) / 1000, 0.1); antes = t;
+    if(!arrastrando && !encima && !document.hidden) x -= VELOCIDAD * dt;
+    ancho = fila.offsetWidth || ancho;
+    if(ancho){ x %= ancho; if(x > 0) x -= ancho; }
+    pista.style.transform = `translateX(${x}px)`;
+    requestAnimationFrame(paso);
+  }
+  requestAnimationFrame(paso);
+  barra.addEventListener('pointerdown', e=>{ arrastrando = true; ultimoX = e.clientX; barra.classList.add('bp-agarrada'); try{ barra.setPointerCapture(e.pointerId); }catch(_){} });
+  barra.addEventListener('pointermove', e=>{ if(!arrastrando) return; x += e.clientX - ultimoX; ultimoX = e.clientX; });
+  const soltar = ()=>{ arrastrando = false; barra.classList.remove('bp-agarrada'); };
+  barra.addEventListener('pointerup', soltar); barra.addEventListener('pointercancel', soltar);
+  barra.addEventListener('mouseenter', ()=>{ encima = true; }); barra.addEventListener('mouseleave', ()=>{ encima = false; });
 }
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderBarraPagos); else renderBarraPagos();
 
