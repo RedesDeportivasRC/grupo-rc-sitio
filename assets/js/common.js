@@ -186,7 +186,9 @@ function renderFooter(){
           </div>
         </div>
         <div class="footer-pagos" aria-label="Formas de pago">
-          <span>Aceptamos</span>${FORMAS_PAGO.map(f=>`<span class="fpp">${f.ico}${f.t}</span>`).join('')}<span class="fp-logos">${LOGOS_TARJETAS()}${logoPago('oxxo','OXXO')}${logoPago('mercadopago','Mercado Pago')}</span>
+          <h4>Aceptamos</h4>
+          <div class="fpp-lista">${FORMAS_PAGO.map(f=>`<span class="fpp">${f.ico}${f.t}</span>`).join('')}</div>
+          <div class="fp-logos">${LOGOS_TARJETAS()}${logoPago('oxxo','OXXO')}${logoPago('mercadopago','Mercado Pago')}</div>
         </div>
         <div class="footer-abajo">
           <span>© 2026 ${EMPRESA.nombre}. Todos los derechos reservados.</span>
