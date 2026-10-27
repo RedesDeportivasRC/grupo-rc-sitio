@@ -823,13 +823,19 @@ a.testimonios-resumen{text-decoration:none;}
 
 /* Barra de pagos que gira (2026-10-27): después del banner de cada página */
 .barra-pagos{background:var(--azul-osc);color:#fff;border-bottom:3px solid var(--azul);overflow:hidden;position:relative;}
-.bp-pista{display:flex;width:max-content;animation:bpGira 38s linear infinite;}
+.bp-pista{display:flex;width:max-content;animation:bpGira 20s linear infinite;}
 .barra-pagos:hover .bp-pista{animation-play-state:paused;}
 .bp-fila{display:flex;flex-shrink:0;}
-.bp-fila span{white-space:nowrap;padding:12px 28px;font-weight:700;font-size:.95rem;border-right:1px solid rgba(43,189,243,.35);}
+.bp-fila span{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;padding:12px 28px;font-weight:700;font-size:.95rem;border-right:1px solid rgba(43,189,243,.35);}
 .bp-solo-lector{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0;}
 @keyframes bpGira{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-@media (max-width:560px){ .bp-fila span{padding:10px 20px;font-size:.85rem;} .bp-pista{animation-duration:30s;} }
+@media (max-width:560px){ .bp-fila span{padding:10px 20px;font-size:.85rem;} .bp-pista{animation-duration:16s;} }
 @media (prefers-reduced-motion:reduce){ .bp-pista{animation:none;flex-wrap:wrap;width:auto;} .bp-fila + .bp-fila{display:none;} .bp-fila{flex-wrap:wrap;justify-content:center;width:100%;} }
 /* Protección básica de fotos (ver common.js) */
 img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
+.logo-pago{height:24px;width:auto;border-radius:4px;display:inline-block;vertical-align:middle;}
+.bp-fila .logo-pago{height:22px;}
+.fp-logos{display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.fp-logos .logo-pago{height:30px;}
+.footer-pagos .fp-logos .logo-pago{height:24px;}
+.fortaleza .ico img{height:30px;width:auto;border-radius:4px;}

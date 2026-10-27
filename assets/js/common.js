@@ -186,7 +186,7 @@ function renderFooter(){
           </div>
         </div>
         <div class="footer-pagos" aria-label="Formas de pago">
-          <span>Aceptamos</span>${FORMAS_PAGO.map(f=>`<span class="fpp">${f.ico}${f.t}</span>`).join('')}
+          <span>Aceptamos</span>${FORMAS_PAGO.map(f=>`<span class="fpp">${f.ico}${f.t}</span>`).join('')}<span class="fp-logos">${LOGOS_TARJETAS()}${logoPago('oxxo','OXXO')}${logoPago('mercadopago','Mercado Pago')}</span>
         </div>
         <div class="footer-abajo">
           <span>© 2026 ${EMPRESA.nombre}. Todos los derechos reservados.</span>
@@ -217,7 +217,7 @@ function renderFormasPago(){
         <div class="envolvente fp-banda">
           <span class="fp-ico">${FORMAS_PAGO[0].ico}</span>
           <p class="fp-texto"><b>Aceptamos tarjetas de crédito</b> <span>Paga a mensualidades fijas hasta en 18 meses, en pago diferido o en efectivo en OXXO.</span></p>
-          <span class="fp-sello">🔒 Pago seguro con Mercado Pago</span>
+          <span class="fp-logos">${LOGOS_TARJETAS()}${logoPago('oxxo','OXXO')}${logoPago('mercadopago','Mercado Pago')}</span>
         </div>
       </section>`;
   });
@@ -226,22 +226,25 @@ if(document.readyState === 'loading') document.addEventListener('DOMContentLoade
 
 // Barra de pagos que gira (Reinier 2026-10-27): va después del banner de cada página, no hasta arriba.
 // Sin "sin intereses": las mensualidades llevan recargo (Profeco).
+// Logotipos de pago (assets/img/pagos): Visa, Mastercard y AmEx son las que acepta Mercado Pago en México.
+function logoPago(n, alt){ return `<img class="logo-pago" src="${rutaBase()}assets/img/pagos/${n}.svg" alt="${alt}" width="48" height="30" loading="lazy">`; }
+const LOGOS_TARJETAS = ()=> logoPago('visa','Visa') + logoPago('mastercard','Mastercard') + logoPago('amex','American Express');
 const AVISOS_PAGO = [
-  '💳 Aceptamos tarjeta de crédito',
-  '📅 Paga a mensualidades fijas, hasta 18 meses',
-  '⏳ Pago diferido: apartas con 50% y liquidas antes del envío',
-  '🏪 También puedes pagar en efectivo en OXXO',
-  '🔒 Pago seguro con Mercado Pago',
+  { t:'Aceptamos tarjeta de crédito', logos:()=>LOGOS_TARJETAS() },
+  { t:'📅 Paga a mensualidades fijas, hasta 18 meses' },
+  { t:'⏳ Pago diferido: apartas con 50% y liquidas antes del envío' },
+  { t:'Paga en efectivo en', logos:()=>logoPago('oxxo','OXXO') },
+  { t:'🔒 Pago seguro con', logos:()=>logoPago('mercadopago','Mercado Pago') },
 ];
 function renderBarraPagos(){
   if(document.querySelector('.barra-pagos')) return;
   const banners = document.querySelectorAll('.hero-slider, .hero-interior, .pi-hero, .ev-hero, .lp-hero, .articulo-portada');
   const ancla = banners.length ? banners[banners.length-1] : document.getElementById('site-header');
   if(!ancla) return;
-  const fila = AVISOS_PAGO.map(t=>`<span>${t}</span>`).join('');
+  const fila = AVISOS_PAGO.map(a=>`<span>${a.t}${a.logos ? a.logos() : ''}</span>`).join('');
   ancla.insertAdjacentHTML('afterend', `
     <div class="barra-pagos" role="region" aria-label="Formas de pago">
-      <p class="bp-solo-lector">${AVISOS_PAGO.join('. ')}.</p>
+      <p class="bp-solo-lector">Aceptamos tarjeta de crédito Visa, Mastercard y American Express. Paga a mensualidades fijas, hasta 18 meses. Pago diferido: apartas con 50% y liquidas antes del envío. Paga en efectivo en OXXO. Pago seguro con Mercado Pago.</p>
       <div class="bp-pista" aria-hidden="true"><div class="bp-fila">${fila}</div><div class="bp-fila">${fila}</div></div>
     </div>`);
 }
