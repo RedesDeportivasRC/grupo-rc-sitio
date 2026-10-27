@@ -227,24 +227,34 @@ if(document.readyState === 'loading') document.addEventListener('DOMContentLoade
 // Barra de pagos que gira (Reinier 2026-10-27): va después del banner de cada página, no hasta arriba.
 // Sin "sin intereses": las mensualidades llevan recargo (Profeco).
 // Logotipos de pago (assets/img/pagos): Visa, Mastercard y AmEx son las que acepta Mercado Pago en México.
-function logoPago(n, alt){ return `<img class="logo-pago" src="${rutaBase()}assets/img/pagos/${n}.svg" alt="${alt}" width="48" height="30" loading="lazy">`; }
+// OXXO es el logotipo original que mandó Reinier (PNG).
+function logoPago(n, alt){ const ext = n==='oxxo' ? 'png' : 'svg'; return `<img class="logo-pago${n==='oxxo'?' logo-oxxo':''}" src="${rutaBase()}assets/img/pagos/${n}.${ext}" alt="${alt}" height="30" loading="lazy">`; }
 const LOGOS_TARJETAS = ()=> logoPago('visa','Visa') + logoPago('mastercard','Mastercard') + logoPago('amex','American Express');
+// Íconos de la barra (propuesta de Reinier 2026-10-27): línea blanca con detalle en azul de marca.
+const _bp = (d)=>`<svg viewBox="0 0 32 32" width="30" height="30" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const ICONOS_BARRA = {
+  calendario: _bp('<rect x="4" y="6" width="24" height="22" rx="3"/><path d="M10 3v6M22 3v6M4 12h24"/><g fill="#2bbdf3" stroke="none"><rect x="8" y="15" width="4" height="3.5" rx=".8"/><rect x="14" y="15" width="4" height="3.5" rx=".8"/><rect x="20" y="15" width="4" height="3.5" rx=".8"/><rect x="8" y="21" width="4" height="3.5" rx=".8"/><rect x="14" y="21" width="4" height="3.5" rx=".8"/></g>'),
+  apartado: `<svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="#0a1a24" stroke="#fff" stroke-width="2"/><path d="M16 3a13 13 0 0 1 0 26z" fill="#2bbdf3"/><text x="16" y="19.6" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="800" fill="#fff" stroke="#0a1a24" stroke-width="2.2" paint-order="stroke" text-anchor="middle">50%</text></svg>`,
+  tarjeta: _bp('<rect x="3" y="7" width="26" height="18" rx="3"/><path d="M8 19h8" stroke="#2bbdf3" stroke-width="2.6"/>'),
+  tienda: _bp('<path d="M5 13v14h22V13"/><path d="M13 27v-7h6v7"/><path d="M4 8l2-4h20l2 4z"/><path d="M4 8v2a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0V8" stroke="#2bbdf3"/>'),
+  candado: _bp('<rect x="6" y="14" width="20" height="14" rx="3"/><path d="M10 14v-4a6 6 0 0 1 12 0v4"/><circle cx="16" cy="20" r="2" fill="#2bbdf3" stroke="none"/><path d="M16 21.5v3" stroke="#2bbdf3"/>'),
+};
 const AVISOS_PAGO = [
-  { t:'Aceptamos tarjeta de crédito', logos:()=>LOGOS_TARJETAS() },
-  { t:'📅 Paga a mensualidades fijas, hasta 18 meses' },
-  { t:'⏳ Pago diferido: apartas con 50% y liquidas antes del envío' },
-  { t:'Paga en efectivo en', logos:()=>logoPago('oxxo','OXXO') },
-  { t:'🔒 Pago seguro con', logos:()=>logoPago('mercadopago','Mercado Pago') },
+  { ico:'calendario', t:'Mensualidades fijas', hl:'hasta 18 meses' },
+  { ico:'apartado', t:'Aparta con 50%', hl:'liquida antes del envío' },
+  { ico:'tarjeta', t:'Aceptamos tarjetas de crédito', logos:()=>LOGOS_TARJETAS() },
+  { ico:'tienda', t:'Paga en efectivo en', logos:()=>logoPago('oxxo','OXXO') },
+  { ico:'candado', t:'Pago seguro con', logos:()=>logoPago('mercadopago','Mercado Pago') },
 ];
 function renderBarraPagos(){
   if(document.querySelector('.barra-pagos')) return;
   const banners = document.querySelectorAll('.hero-slider, .hero-interior, .pi-hero, .ev-hero, .lp-hero, .articulo-portada');
   const ancla = banners.length ? banners[banners.length-1] : document.getElementById('site-header');
   if(!ancla) return;
-  const fila = AVISOS_PAGO.map(a=>`<span>${a.t}${a.logos ? a.logos() : ''}</span>`).join('');
+  const fila = AVISOS_PAGO.map(a=>`<span class="bp-item"><span class="bp-ico">${ICONOS_BARRA[a.ico]}</span><span class="bp-txt">${a.t}${a.hl ? ` · <em>${a.hl}</em>` : ''}</span>${a.logos ? `<span class="bp-logos">${a.logos()}</span>` : ''}</span>`).join('');
   ancla.insertAdjacentHTML('afterend', `
     <div class="barra-pagos" role="region" aria-label="Formas de pago">
-      <p class="bp-solo-lector">Aceptamos tarjeta de crédito Visa, Mastercard y American Express. Paga a mensualidades fijas, hasta 18 meses. Pago diferido: apartas con 50% y liquidas antes del envío. Paga en efectivo en OXXO. Pago seguro con Mercado Pago.</p>
+      <p class="bp-solo-lector">Mensualidades fijas, hasta 18 meses. Aparta con 50% y liquida antes del envío. Aceptamos tarjetas de crédito Visa, Mastercard y American Express. Paga en efectivo en OXXO. Pago seguro con Mercado Pago.</p>
       <div class="bp-pista" aria-hidden="true"><div class="bp-fila">${fila}</div><div class="bp-fila">${fila}</div></div>
     </div>`);
 }
