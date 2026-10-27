@@ -260,7 +260,7 @@ const AVISOS_PAGO = [ // orden de Reinier 2026-10-27: casi solo se ven los dos p
 ];
 function renderBarraPagos(){
   if(document.querySelector('.barra-pagos')) return;
-  const banners = document.querySelectorAll('.hero-slider, .hero-interior, .pi-hero, .ev-hero, .lp-hero, .articulo-portada');
+  const banners = document.querySelectorAll('.hero-slider, .hero-interior, .pi-hero, .ev-hero, .lp-hero, .articulo-cabeza');
   const ancla = banners.length ? banners[banners.length-1] : document.getElementById('site-header');
   if(!ancla) return;
   const fila = AVISOS_PAGO.map(a=>`<span class="bp-item"><span class="bp-ico">${ICONOS_BARRA[a.ico]}</span><span class="bp-txt">${a.t}${a.hl ? ` · <em>${a.hl}</em>` : ''}</span>${a.logos ? `<span class="bp-logos">${a.logos()}</span>` : ''}</span>`).join('');
