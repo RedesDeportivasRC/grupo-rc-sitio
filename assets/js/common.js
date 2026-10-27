@@ -33,6 +33,7 @@ function marcaRC(base, clase=''){
 function renderHeader(activo){
   const base = rutaBase();
   document.getElementById('site-header').innerHTML = `
+    <div class="franja-pago"><div class="envolvente"><span class="fpg-txt">💳 <b>Aceptamos tarjetas de crédito.</b> Paga hasta en 18 meses.</span><span class="fpg-sello">🔒 Pago seguro · Mercado Pago</span></div></div>
     <header class="site">
       <div class="envolvente">
         <a href="${base}index.html" class="marca-rc marca-cabeza" aria-label="Grupo RC, inicio">${marcaRC(base)}</a>
@@ -207,22 +208,17 @@ const FORMAS_PAGO = [
   { ico: _pg('<path d="M3 10l9-6 9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/>'), t: 'Transferencia SPEI', s: 'Sin comisión, desde tu banco' },
   { ico: _pg('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'), t: 'Pago diferido', s: 'Apartas con 50% y liquidas antes del envío' },
 ];
+// Versión corta (Reinier 2026-10-27: "mensaje corto", estilo franja de tienda): una línea con las formas de pago.
 function renderFormasPago(){
   const wa = `https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent('Hola, quiero hacer un pedido. ¿Me mandan mi liga de pago?')}`;
   document.querySelectorAll('[data-formas-pago]').forEach(el=>{
     el.innerHTML = `
-      <section class="formas-pago" aria-labelledby="fp-titulo">
-        <div class="envolvente">
-          <div class="fp-cabeza">
-            <span class="ojo">Formas de pago</span>
-            <h2 id="fp-titulo">Paga como más te convenga</h2>
-            <p>Te mandamos una liga de pago segura por WhatsApp y tú eliges cómo pagar: con tarjeta, a meses, en efectivo o por transferencia.</p>
-          </div>
-          <ul class="fp-lista">${FORMAS_PAGO.map(f=>`<li><span class="fp-ico">${f.ico}</span><b>${f.t}</b><small>${f.s}</small></li>`).join('')}</ul>
-          <div class="fp-pie">
-            <a class="btn btn-wa" href="${wa}" target="_blank" rel="noopener">${ICONOS.whatsapp} Pedir mi liga de pago</a>
-            <p>🔒 Los pagos con tarjeta, a meses y en OXXO se procesan con Mercado Pago e incluyen su comisión, que ves desglosada antes de pagar. La transferencia no tiene comisión.</p>
-          </div>
+      <section class="formas-pago" aria-label="Formas de pago">
+        <div class="envolvente fp-banda">
+          <span class="fp-ico">${FORMAS_PAGO[0].ico}</span>
+          <p class="fp-texto"><b>Aceptamos tarjetas de crédito</b> <span>Paga hasta en 18 meses, o con débito, OXXO o transferencia.</span></p>
+          <span class="fp-sello">🔒 Pago seguro con Mercado Pago</span>
+          <a class="btn btn-wa" href="${wa}" target="_blank" rel="noopener">${ICONOS.whatsapp} Pedir mi liga de pago</a>
         </div>
       </section>`;
   });
