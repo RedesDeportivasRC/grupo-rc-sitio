@@ -826,7 +826,8 @@ a.testimonios-resumen{text-decoration:none;}
 .barra-pagos.bp-agarrada{cursor:grabbing;}
 .bp-pista{display:flex;width:max-content;will-change:transform;}
 .bp-fila{display:flex;flex-shrink:0;}
-.bp-item{display:inline-flex;align-items:center;gap:14px;white-space:nowrap;padding:12px 34px;font-weight:700;font-size:1rem;border-right:1px solid rgba(43,189,243,.45);}
+.bp-item{display:inline-flex;align-items:center;gap:14px;white-space:nowrap;padding:12px 34px;font-weight:700;font-size:1rem;position:relative;}
+.bp-item::after{content:'';position:absolute;right:0;top:30%;bottom:30%;width:1px;background:rgba(43,189,243,.3);}
 .bp-ico{display:inline-flex;}
 .bp-txt em{font-style:normal;color:var(--azul);}
 .bp-logos{display:inline-flex;gap:8px;align-items:center;}
@@ -845,3 +846,9 @@ img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webkit-tou
 /* 6 fortalezas (2026-10-27, sin pago diferido ni Mercado Libre): 3 por fila en PC y tableta, 2 en celular */
 @media (min-width:561px){ .fortalezas .envolvente{grid-template-columns:repeat(3,1fr);} .fortaleza{border-right:1px solid var(--linea);border-bottom:none;} .fortaleza:nth-child(3n){border-right:none;} .fortaleza:nth-child(-n+3){border-bottom:1px solid var(--linea);} }
 @media (max-width:560px){ .fortaleza:nth-last-child(-n+2){border-bottom:none;} }
+/* Productos del pie con el mismo estilo que "Aceptamos" (2026-10-27) */
+footer.site a.fpp{display:inline-flex;margin:0;opacity:1;}
+footer.site a.fpp:hover{border-color:var(--azul);color:#fff;}
+@media (max-width:720px){ footer.site .f-prod a.fpp{display:inline-flex;margin:0;padding:5px 12px 5px 8px;border-color:rgba(255,255,255,.16);font-size:.82rem;} }
+footer.site .fpp{font-size:.82rem;}
+.fpp svg{flex-shrink:0;}
