@@ -673,8 +673,15 @@ nav.principal{align-items:center;}
 
 /* ===== Página Clientes y proyectos ===== */
 .clientes-lista{display:grid;gap:56px;}
+.clientes-filtros{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:34px;}
+.clientes-filtros button{font:inherit;font-weight:700;font-size:.88rem;border:1.5px solid var(--linea);background:#fff;color:var(--negro);border-radius:999px;padding:9px 16px;cursor:pointer;}
+.clientes-filtros button small{color:var(--gris);font-weight:600;margin-left:2px;}
+.clientes-filtros button[aria-selected="true"]{background:var(--azul);border-color:var(--azul);}
+.clientes-filtros button[aria-selected="true"] small{color:var(--negro);}
+.cliente-rc[hidden]{display:none;}
+@media (max-width:640px){.clientes-filtros{flex-wrap:nowrap;overflow-x:auto;margin:0 -16px 24px;padding:0 16px 6px;}.clientes-filtros button{flex:0 0 auto;}}
 .cliente-rc{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;scroll-margin-top:90px;}
-.cliente-rc:nth-child(even) .cliente-rc-fotos{order:2;}
+.cliente-rc.alt .cliente-rc-fotos{order:2;}
 .cliente-rc-fotos > img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:var(--radio);display:block;background:#0e1a22;}
 .cliente-rc-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;}
 .cliente-rc-mini img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;cursor:pointer;opacity:.85;transition:opacity .2s;}
@@ -689,7 +696,7 @@ nav.principal{align-items:center;}
 a.testimonios-resumen{text-decoration:none;}
 @media (max-width:860px){
   .cliente-rc{grid-template-columns:1fr;gap:16px;}
-  .cliente-rc:nth-child(even) .cliente-rc-fotos{order:0;}
+  .cliente-rc.alt .cliente-rc-fotos{order:0;}
   .clientes-lista{gap:40px;}
 }
 
@@ -816,3 +823,5 @@ a.testimonios-resumen{text-decoration:none;}
 .footer-pagos > span:first-child{font-family:'Bebas Neue',sans-serif;color:#fff;font-size:1rem;letter-spacing:.5px;margin-right:4px;}
 .fpp{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:5px 12px 5px 8px;color:#dfe6ea;}
 .fpp svg{width:18px;height:18px;color:var(--azul);}
+/* Protección básica de fotos (ver common.js) */
+img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
