@@ -240,7 +240,7 @@ if(document.readyState === 'loading') document.addEventListener('DOMContentLoade
 // Sin "sin intereses": las mensualidades llevan recargo (Profeco).
 // Logotipos de pago (assets/img/pagos): Visa, Mastercard y AmEx son las que acepta Mercado Pago en México.
 // OXXO es el logotipo original que mandó Reinier (PNG).
-function logoPago(n, alt){ const ext = (n==='oxxo' || n==='amex') ? 'png' : 'svg'; return `<img class="logo-pago${n==='oxxo'?' logo-oxxo':''}" src="${rutaBase()}assets/img/pagos/${n}.${ext}?v=3" alt="${alt}" height="30" loading="lazy">`; }
+function logoPago(n, alt){ const ext = n==='oxxo' ? 'png' : 'svg'; return `<img class="logo-pago${n==='oxxo'?' logo-oxxo':''}" src="${rutaBase()}assets/img/pagos/${n}.${ext}?v=4" alt="${alt}" height="30" loading="lazy">`; }
 const LOGOS_TARJETAS = ()=> logoPago('visa','Visa') + logoPago('mastercard','Mastercard') + logoPago('amex','American Express');
 // Íconos de la barra (propuesta de Reinier 2026-10-27): línea blanca con detalle en azul de marca.
 const _bp = (d)=>`<svg viewBox="0 0 32 32" width="30" height="30" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
