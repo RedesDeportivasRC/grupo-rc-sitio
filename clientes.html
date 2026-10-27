@@ -44,6 +44,7 @@
 
 <section class="franja">
   <div class="envolvente">
+    <div class="clientes-filtros" id="filtros-clientes" role="tablist" aria-label="Filtrar clientes por producto"></div>
     <div class="clientes-lista" id="cont-clientes-rc"></div>
   </div>
 </section>
@@ -65,7 +66,7 @@
 renderHeader('clientes');
 renderFooter();
 document.getElementById('cont-clientes-rc').innerHTML = CLIENTES_RC.map((c,i)=>`
-  <article class="cliente-rc" id="${c.slug}">
+  <article class="cliente-rc" id="${c.slug}" data-cat="${c.cat}"${c.destacado?' data-destacado':''}>
     <div class="cliente-rc-fotos">
       <img src="assets/img/trabajos/${c.fotos[0][0]}" alt="${c.fotos[0][1]}" loading="${i<1?'eager':'lazy'}">
       ${c.fotos.length>1 ? `<div class="cliente-rc-mini">${c.fotos.slice(1).map(f=>`<img src="assets/img/trabajos/${f[0]}" alt="${f[1]}" loading="lazy">`).join('')}</div>` : ''}
@@ -85,6 +86,23 @@ document.querySelectorAll('.cliente-rc').forEach(a=>{
     const s=grande.src, al=grande.alt; grande.src=m.src; grande.alt=m.alt; m.src=s; m.alt=al;
   }));
 });
+// Filtros por producto: por defecto solo los destacados, para que la página no sea tan larga
+const FILTROS_CLIENTES = [['destacados','Destacados'],['todos','Todos'],['perimetrales','Redes perimetrales'],['porterias','Porterías y redes'],['juegos','Juegos infantiles'],['beisbol','Béisbol'],['proteccion','Protección y especiales']];
+function filtrarClientes(f){
+  document.querySelectorAll('.cliente-rc').forEach(a=>{
+    a.hidden = !(f==='todos' || (f==='destacados' ? a.hasAttribute('data-destacado') : a.dataset.cat===f));
+  });
+  [...document.querySelectorAll('.cliente-rc:not([hidden])')].forEach((a,i)=>a.classList.toggle('alt', i%2===1));
+  document.querySelectorAll('#filtros-clientes button').forEach(b=>b.setAttribute('aria-selected', b.dataset.f===f));
+}
+document.getElementById('filtros-clientes').innerHTML = FILTROS_CLIENTES.map(([f,t])=>{
+  const n = f==='todos' ? CLIENTES_RC.length : CLIENTES_RC.filter(c=>f==='destacados'?c.destacado:c.cat===f).length;
+  return `<button type="button" role="tab" data-f="${f}">${t} <small>${n}</small></button>`;
+}).join('');
+document.querySelectorAll('#filtros-clientes button').forEach(b=>b.addEventListener('click',()=>filtrarClientes(b.dataset.f)));
+// Si llegan con #slug de un cliente que no es destacado, se muestran todos
+const destinoCliente = CLIENTES_RC.find(c=>'#'+c.slug===location.hash);
+filtrarClientes(destinoCliente && !destinoCliente.destacado ? 'todos' : 'destacados');
 renderTestimonios('cont-testimonios', 'opiniones');
 // Reseñas que llegan por resena.html: solo se muestran las que ya aprobamos en el sistema
 fetch('https://jofotwgbbdysrywgxkwi.supabase.co/functions/v1/sitio-api/resena').then(r => r.ok ? r.json() : []).then(lista => {
