@@ -243,8 +243,8 @@ const AVISOS_PAGO = [
   { ico:'calendario', t:'Mensualidades fijas', hl:'hasta 18 meses' },
   { ico:'apartado', t:'Aparta con 50%', hl:'liquida antes del envío' },
   { ico:'tarjeta', t:'Aceptamos tarjetas de crédito', logos:()=>LOGOS_TARJETAS() },
-  { ico:'tienda', t:'Paga en efectivo en', logos:()=>logoPago('oxxo','OXXO') },
-  { ico:'candado', t:'Pago seguro con', logos:()=>logoPago('mercadopago','Mercado Pago') },
+  { ico:'tienda', t:'Paga en efectivo en OXXO', logos:()=>logoPago('oxxo','OXXO') },
+  { ico:'candado', t:'Pago seguro con Mercado Pago', logos:()=>logoPago('mercadopago','Mercado Pago') },
 ];
 function renderBarraPagos(){
   if(document.querySelector('.barra-pagos')) return;
