@@ -252,9 +252,9 @@ const ICONOS_BARRA = {
   candado: _bp('<rect x="6" y="14" width="20" height="14" rx="3"/><path d="M10 14v-4a6 6 0 0 1 12 0v4"/><circle cx="16" cy="20" r="2" fill="#2bbdf3" stroke="none"/><path d="M16 21.5v3" stroke="#2bbdf3"/>'),
 };
 const AVISOS_PAGO = [ // orden de Reinier 2026-10-27: casi solo se ven los dos primeros
-  { ico:'candado', t:'Pago seguro con Mercado Pago', logos:()=>logoPago('mercadopago','Mercado Pago') },
-  { ico:'tarjeta', t:'Aceptamos tarjetas de crédito', logos:()=>LOGOS_TARJETAS() },
-  { ico:'tienda', t:'Paga en efectivo en OXXO', logos:()=>logoPago('oxxo','OXXO') },
+  { ico:'candado', t:'Pago seguro con <em>Mercado Pago</em>', logos:()=>logoPago('mercadopago','Mercado Pago') },
+  { ico:'tarjeta', t:'Aceptamos <em>tarjetas de crédito</em>', logos:()=>LOGOS_TARJETAS() },
+  { ico:'tienda', t:'Paga en efectivo en <em>OXXO</em>', logos:()=>logoPago('oxxo','OXXO') },
   { ico:'calendario', t:'Mensualidades fijas', hl:'hasta 18 meses' },
   { ico:'apartado', t:'Aparta con 50%', hl:'liquida antes del envío' },
 ];
