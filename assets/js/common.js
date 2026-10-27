@@ -810,3 +810,8 @@ function renderExtrasArticulo(){
   conectarSuscripcionBlog(caja);
 }
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderExtrasArticulo); else renderExtrasArticulo();
+
+// Protección básica de fotos: sin clic derecho, sin arrastrar y sin "guardar imagen" al mantener presionado.
+// No impide capturas de pantalla; solo quita la descarga fácil.
+document.addEventListener('contextmenu', e => { if (e.target.closest('img, picture, video')) e.preventDefault(); });
+document.addEventListener('dragstart', e => { if (e.target.closest('img')) e.preventDefault(); });

@@ -8,14 +8,14 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/icono-192.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <title>Clientes y proyectos de redes deportivas en Yucatán | Redes Deportivas RC</title>
-<meta name="description" content="Universidad Modelo, Hotel Chablé, Domo Morelos, escuelas y colegios de Yucatán que confían en Redes Deportivas RC: redes perimetrales, porterías, redes antipalomas y opiniones de clientes."
+<meta name="description" content="Hotel Chablé, Universidad Modelo, Hotel Country Valladolid, Privada Navita, colegios y parques de Yucatán que confían en Redes Deportivas RC: redes perimetrales, porterías, juegos infantiles, béisbol y más."
 <meta property="og:type" content="website">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta property="og:locale" content="es_MX">
 <meta property="og:site_name" content="Redes Deportivas RC">
 <meta property="og:url" content="https://www.redesdeportivasrc.com/clientes.html">
 <meta property="og:title" content="Clientes y proyectos de redes deportivas en Yucatán | Redes Deportivas RC">
-<meta property="og:description" content="Universidad Modelo, Hotel Chablé, Domo Morelos, escuelas y colegios de Yucatán que confían en Redes Deportivas RC: redes perimetrales, porterías, redes antipalomas y opiniones de clientes.">
+<meta property="og:description" content="Hotel Chablé, Universidad Modelo, Hotel Country Valladolid, Privada Navita, colegios y parques de Yucatán que confían en Redes Deportivas RC: redes perimetrales, porterías, juegos infantiles, béisbol y más.">
 <meta property="og:image" content="https://www.redesdeportivasrc.com/assets/img/compartir/general.jpg">
 <meta property="og:image:secure_url" content="https://www.redesdeportivasrc.com/assets/img/compartir/general.jpg">
 <meta property="og:image:type" content="image/jpeg">
@@ -37,13 +37,14 @@
   <div class="envolvente">
     <div class="migas" style="color:#9fc3d1;"><a href="index.html" style="color:#9fc3d1;">Inicio</a> / Clientes</div>
     <h1>Clientes y proyectos.</h1>
-    <p>Escuelas, universidades, hoteles y gobiernos municipales que confiaron en nosotros para sus redes, porterías y canchas.</p>
+    <p>Escuelas, universidades, hoteles, residenciales, parques y gobiernos municipales que confiaron en nosotros para sus redes, porterías y canchas.</p>
     <a href="#opiniones" class="testimonios-resumen" id="cont-testimonios-resumen" style="margin-top:18px;"></a>
   </div>
 </section>
 
 <section class="franja">
   <div class="envolvente">
+    <div class="clientes-filtros" id="filtros-clientes" role="tablist" aria-label="Filtrar clientes por producto"></div>
     <div class="clientes-lista" id="cont-clientes-rc"></div>
   </div>
 </section>
@@ -65,7 +66,7 @@
 renderHeader('clientes');
 renderFooter();
 document.getElementById('cont-clientes-rc').innerHTML = CLIENTES_RC.map((c,i)=>`
-  <article class="cliente-rc" id="${c.slug}">
+  <article class="cliente-rc" id="${c.slug}" data-cat="${c.cat}"${c.destacado?' data-destacado':''}>
     <div class="cliente-rc-fotos">
       <img src="assets/img/trabajos/${c.fotos[0][0]}" alt="${c.fotos[0][1]}" loading="${i<1?'eager':'lazy'}">
       ${c.fotos.length>1 ? `<div class="cliente-rc-mini">${c.fotos.slice(1).map(f=>`<img src="assets/img/trabajos/${f[0]}" alt="${f[1]}" loading="lazy">`).join('')}</div>` : ''}
@@ -85,6 +86,23 @@ document.querySelectorAll('.cliente-rc').forEach(a=>{
     const s=grande.src, al=grande.alt; grande.src=m.src; grande.alt=m.alt; m.src=s; m.alt=al;
   }));
 });
+// Filtros por producto: por defecto solo los destacados, para que la página no sea tan larga
+const FILTROS_CLIENTES = [['destacados','Destacados'],['todos','Todos'],['perimetrales','Redes perimetrales'],['porterias','Porterías y redes'],['juegos','Juegos infantiles'],['beisbol','Béisbol'],['proteccion','Protección y especiales']];
+function filtrarClientes(f){
+  document.querySelectorAll('.cliente-rc').forEach(a=>{
+    a.hidden = !(f==='todos' || (f==='destacados' ? a.hasAttribute('data-destacado') : a.dataset.cat===f));
+  });
+  [...document.querySelectorAll('.cliente-rc:not([hidden])')].forEach((a,i)=>a.classList.toggle('alt', i%2===1));
+  document.querySelectorAll('#filtros-clientes button').forEach(b=>b.setAttribute('aria-selected', b.dataset.f===f));
+}
+document.getElementById('filtros-clientes').innerHTML = FILTROS_CLIENTES.map(([f,t])=>{
+  const n = f==='todos' ? CLIENTES_RC.length : CLIENTES_RC.filter(c=>f==='destacados'?c.destacado:c.cat===f).length;
+  return `<button type="button" role="tab" data-f="${f}">${t} <small>${n}</small></button>`;
+}).join('');
+document.querySelectorAll('#filtros-clientes button').forEach(b=>b.addEventListener('click',()=>filtrarClientes(b.dataset.f)));
+// Si llegan con #slug de un cliente que no es destacado, se muestran todos
+const destinoCliente = CLIENTES_RC.find(c=>'#'+c.slug===location.hash);
+filtrarClientes(destinoCliente && !destinoCliente.destacado ? 'todos' : 'destacados');
 renderTestimonios('cont-testimonios', 'opiniones');
 // Reseñas que llegan por resena.html: solo se muestran las que ya aprobamos en el sistema
 fetch('https://jofotwgbbdysrywgxkwi.supabase.co/functions/v1/sitio-api/resena').then(r => r.ok ? r.json() : []).then(lista => {
