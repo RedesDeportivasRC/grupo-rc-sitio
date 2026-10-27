@@ -161,7 +161,7 @@ function renderFooter(){
           </div>
           <div class="f-prod">
             <h4>Productos</h4>
-            ${CATEGORIAS.map(c=>`<a href="${base}productos/${c.slug}.html">${c.nombre}</a>`).join('')}
+            <div class="fpp-lista">${CATEGORIAS.map(c=>`<a class="fpp" href="${base}productos/${c.slug}.html">${ICONOS_PRODUCTO[c.slug]||''}${c.nombre}</a>`).join('')}</div>
           </div>
           <div class="f-emp">
             <h4>Empresa</h4>
@@ -203,6 +203,16 @@ function renderFooter(){
 // Se dibuja en cada [data-formas-pago] y como franja en el pie de todas las páginas.
 // PROFECO: nunca decir "sin intereses"; la comisión de Mercado Pago se ve desglosada antes de pagar.
 const _pg = (d)=>`<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+// Íconos de productos para el pie (mismo estilo que "Aceptamos")
+const ICONOS_PRODUCTO = {
+  'redes-perimetrales': _pg('<path d="M4 3v18M20 3v18M4 7l16 10M4 17l16-10M4 12h16"/>'),
+  'porterias': _pg('<path d="M3 20V6h18v14M3 6l3 4h12l3-4M6 10v10M18 10v10"/>'),
+  'redes-para-porterias': _pg('<path d="M8 3.5l4-2 4 2v4l-4 2-4-2zM4 11.5l4-2 4 2v4l-4 2-4-2zM12 11.5l4-2 4 2v4l-4 2-4-2z"/>'),
+  'redes-deportivas': _pg('<circle cx="12" cy="12" r="8.5"/><path d="M12 3.5c-2.5 3-2.5 14 0 17M3.8 10c4-1 12.4-1 16.4 0M5 16.5c4.5-2 9.5-2 14 0"/>'),
+  'baloneras': _pg('<path d="M7 7h10l2 13H5zM9 7a3 3 0 016 0M7.5 12h9M8 16h8"/>'),
+  'jaulas-bateo': _pg('<path d="M5 19L17 7c1.5-1.5 3-1 3-1s.5 1.5-1 3L7 21zM4 20l2 2"/><circle cx="7" cy="6" r="2.5"/>'),
+  'redes-de-proteccion': _pg('<path d="M12 3l8 3v6c0 4.5-3.5 7.5-8 9-4.5-1.5-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-4.5"/>'),
+};
 const FORMAS_PAGO = [
   { ico: _pg('<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 9.5h19M6 15h4"/>'), t: 'Tarjeta de crédito', s: 'Visa, Mastercard y más' },
   { ico: _pg('<rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4M7.5 14h2M11 14h2M14.5 14h2M7.5 17.5h2"/>'), t: 'Pagos a meses', s: 'Con tarjeta de crédito participante' },
@@ -230,7 +240,7 @@ if(document.readyState === 'loading') document.addEventListener('DOMContentLoade
 // Sin "sin intereses": las mensualidades llevan recargo (Profeco).
 // Logotipos de pago (assets/img/pagos): Visa, Mastercard y AmEx son las que acepta Mercado Pago en México.
 // OXXO es el logotipo original que mandó Reinier (PNG).
-function logoPago(n, alt){ const ext = n==='oxxo' ? 'png' : 'svg'; return `<img class="logo-pago${n==='oxxo'?' logo-oxxo':''}" src="${rutaBase()}assets/img/pagos/${n}.${ext}" alt="${alt}" height="30" loading="lazy">`; }
+function logoPago(n, alt){ const ext = n==='oxxo' ? 'png' : 'svg'; return `<img class="logo-pago${n==='oxxo'?' logo-oxxo':''}" src="${rutaBase()}assets/img/pagos/${n}.${ext}?v=2" alt="${alt}" height="30" loading="lazy">`; }
 const LOGOS_TARJETAS = ()=> logoPago('visa','Visa') + logoPago('mastercard','Mastercard') + logoPago('amex','American Express');
 // Íconos de la barra (propuesta de Reinier 2026-10-27): línea blanca con detalle en azul de marca.
 const _bp = (d)=>`<svg viewBox="0 0 32 32" width="30" height="30" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
@@ -241,12 +251,12 @@ const ICONOS_BARRA = {
   tienda: _bp('<path d="M5 13v14h22V13"/><path d="M13 27v-7h6v7"/><path d="M4 8l2-4h20l2 4z"/><path d="M4 8v2a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0V8" stroke="#2bbdf3"/>'),
   candado: _bp('<rect x="6" y="14" width="20" height="14" rx="3"/><path d="M10 14v-4a6 6 0 0 1 12 0v4"/><circle cx="16" cy="20" r="2" fill="#2bbdf3" stroke="none"/><path d="M16 21.5v3" stroke="#2bbdf3"/>'),
 };
-const AVISOS_PAGO = [
-  { ico:'calendario', t:'Mensualidades fijas', hl:'hasta 18 meses' },
-  { ico:'apartado', t:'Aparta con 50%', hl:'liquida antes del envío' },
+const AVISOS_PAGO = [ // orden de Reinier 2026-10-27: casi solo se ven los dos primeros
+  { ico:'candado', t:'Pago seguro con Mercado Pago', logos:()=>logoPago('mercadopago','Mercado Pago') },
   { ico:'tarjeta', t:'Aceptamos tarjetas de crédito', logos:()=>LOGOS_TARJETAS() },
   { ico:'tienda', t:'Paga en efectivo en OXXO', logos:()=>logoPago('oxxo','OXXO') },
-  { ico:'candado', t:'Pago seguro con Mercado Pago', logos:()=>logoPago('mercadopago','Mercado Pago') },
+  { ico:'calendario', t:'Mensualidades fijas', hl:'hasta 18 meses' },
+  { ico:'apartado', t:'Aparta con 50%', hl:'liquida antes del envío' },
 ];
 function renderBarraPagos(){
   if(document.querySelector('.barra-pagos')) return;
