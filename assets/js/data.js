@@ -418,6 +418,8 @@ const FORTALEZAS = [
   { ico:'herramientas', titulo:'Asesoría en instalación', texto:'Te orientamos en cada paso.' },
   { ico:'escuadra', titulo:'Fabricación a la medida', texto:'Según las necesidades de tu espacio.' },
   { ico:'casco', titulo:'Capacitamos instaladores', texto:'En diferentes partes de México.' },
+  { ico:'tarjeta', titulo:'Paga a mensualidades', texto:'Con tarjeta de crédito, hasta 18 meses.' },
+  { ico:'reloj', titulo:'Pago diferido', texto:'Apartas con 50% y liquidas antes del envío.' },
   { ico:'carrito', titulo:'También en Mercado Libre', texto:'Encuentra algunos productos en nuestra tienda.' },
 ];
 

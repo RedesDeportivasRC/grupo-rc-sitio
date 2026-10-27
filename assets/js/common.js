@@ -18,6 +18,8 @@ const ICONOS = {
   herramientas: _sv('<path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L3 17.7 6.3 21l6.3-6.3a4 4 0 0 0 5.1-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>'),
   escuadra: _sv('<path d="M3 21V3l18 18z"/><path d="M7 17v-4l4 4zM3 8h2M3 12h2M8 21v-2M12 21v-2"/>'),
   casco: _sv('<path d="M4 15a8 8 0 0 1 16 0"/><path d="M2 15h20v2H2zM10 7V4h4v3"/><path d="M8 17v1a4 4 0 0 0 8 0v-1"/>'),
+  tarjeta: _sv('<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 9.5h19M6 15h4"/>'),
+  reloj: _sv('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'),
   carrito: _sv('<path d="M3 4h2l2.4 11h11.2L21 7H6.2"/><circle cx="9" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/><path d="M10 10h8M11 13h6"/>'),
   red: _sv('<path d="M3 3h18v18H3z"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>'),
   precio: _sv('<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M12.5 10.5c-.4-.6-1-.9-1.8-.9-1 0-1.7.6-1.7 1.4 0 1.9 3.6 1 3.6 3 0 .8-.8 1.5-1.9 1.5-.8 0-1.5-.4-1.9-1M10.8 8.6v1M10.8 15.5v1"/>'),
@@ -33,7 +35,6 @@ function marcaRC(base, clase=''){
 function renderHeader(activo){
   const base = rutaBase();
   document.getElementById('site-header').innerHTML = `
-    <div class="franja-pago"><div class="envolvente"><span class="fpg-txt">💳 <b>Aceptamos tarjetas de crédito.</b> Paga hasta en 18 meses.</span><span class="fpg-sello">🔒 Pago seguro · Mercado Pago</span></div></div>
     <header class="site">
       <div class="envolvente">
         <a href="${base}index.html" class="marca-rc marca-cabeza" aria-label="Grupo RC, inicio">${marcaRC(base)}</a>
@@ -202,7 +203,6 @@ function renderFooter(){
 const _pg = (d)=>`<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
 const FORMAS_PAGO = [
   { ico: _pg('<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 9.5h19M6 15h4"/>'), t: 'Tarjeta de crédito', s: 'Visa, Mastercard y más' },
-  { ico: _pg('<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 9.5h19M6 15h2M10 15h2"/>'), t: 'Tarjeta de débito', s: 'En un solo pago' },
   { ico: _pg('<rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4M7.5 14h2M11 14h2M14.5 14h2M7.5 17.5h2"/>'), t: 'Pagos a meses', s: 'Con tarjeta de crédito participante' },
   { ico: _pg('<rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/>'), t: 'Efectivo en OXXO', s: 'Con una referencia de pago' },
   { ico: _pg('<path d="M3 10l9-6 9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/>'), t: 'Transferencia SPEI', s: 'Sin comisión, desde tu banco' },
@@ -216,7 +216,7 @@ function renderFormasPago(){
       <section class="formas-pago" aria-label="Formas de pago">
         <div class="envolvente fp-banda">
           <span class="fp-ico">${FORMAS_PAGO[0].ico}</span>
-          <p class="fp-texto"><b>Aceptamos tarjetas de crédito</b> <span>Paga hasta en 18 meses, o con débito, OXXO o transferencia.</span></p>
+          <p class="fp-texto"><b>Aceptamos tarjetas de crédito</b> <span>Paga a mensualidades fijas hasta en 18 meses, en pago diferido o en efectivo en OXXO.</span></p>
           <span class="fp-sello">🔒 Pago seguro con Mercado Pago</span>
           <a class="btn btn-wa" href="${wa}" target="_blank" rel="noopener">${ICONOS.whatsapp} Pedir mi liga de pago</a>
         </div>
@@ -224,6 +224,29 @@ function renderFormasPago(){
   });
 }
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderFormasPago); else renderFormasPago();
+
+// Barra de pagos que gira (Reinier 2026-10-27): va después del banner de cada página, no hasta arriba.
+// Sin "sin intereses": las mensualidades llevan recargo (Profeco).
+const AVISOS_PAGO = [
+  '💳 Aceptamos tarjeta de crédito',
+  '📅 Paga a mensualidades fijas, hasta 18 meses',
+  '⏳ Pago diferido: apartas con 50% y liquidas antes del envío',
+  '🏪 También puedes pagar en efectivo en OXXO',
+  '🔒 Pago seguro con Mercado Pago',
+];
+function renderBarraPagos(){
+  if(document.querySelector('.barra-pagos')) return;
+  const banners = document.querySelectorAll('.hero-slider, .hero-interior, .pi-hero, .ev-hero, .lp-hero, .articulo-portada');
+  const ancla = banners.length ? banners[banners.length-1] : document.getElementById('site-header');
+  if(!ancla) return;
+  const fila = AVISOS_PAGO.map(t=>`<span>${t}</span>`).join('');
+  ancla.insertAdjacentHTML('afterend', `
+    <div class="barra-pagos" role="region" aria-label="Formas de pago">
+      <p class="bp-solo-lector">${AVISOS_PAGO.join('. ')}.</p>
+      <div class="bp-pista" aria-hidden="true"><div class="bp-fila">${fila}</div><div class="bp-fila">${fila}</div></div>
+    </div>`);
+}
+if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderBarraPagos); else renderBarraPagos();
 
 // ---------------- Limpieza de contenido pendiente ----------------
 // Mientras falten datos reales, los textos tipo "[PLACEHOLDER ...]" o "[EJEMPLO ...]" nunca se
