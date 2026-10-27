@@ -183,6 +183,9 @@ function renderFooter(){
             ${htmlRedesSociales()}
           </div>
         </div>
+        <div class="footer-pagos" aria-label="Formas de pago">
+          <span>Aceptamos</span>${FORMAS_PAGO.map(f=>`<span class="fpp">${f.ico}${f.t}</span>`).join('')}
+        </div>
         <div class="footer-abajo">
           <span>© 2026 ${EMPRESA.nombre}. Todos los derechos reservados.</span>
           <span>${EMPRESA.estadosDondeVendemos[0]}, México</span>
@@ -191,6 +194,40 @@ function renderFooter(){
     </footer>
   `;
 }
+
+// Formas de pago (Reinier 2026-10-27): que el cliente sepa que hay muchas formas de pagar.
+// Se dibuja en cada [data-formas-pago] y como franja en el pie de todas las páginas.
+// PROFECO: nunca decir "sin intereses"; la comisión de Mercado Pago se ve desglosada antes de pagar.
+const _pg = (d)=>`<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const FORMAS_PAGO = [
+  { ico: _pg('<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 9.5h19M6 15h4"/>'), t: 'Tarjeta de crédito', s: 'Visa, Mastercard y más' },
+  { ico: _pg('<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 9.5h19M6 15h2M10 15h2"/>'), t: 'Tarjeta de débito', s: 'En un solo pago' },
+  { ico: _pg('<rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4M7.5 14h2M11 14h2M14.5 14h2M7.5 17.5h2"/>'), t: 'Pagos a meses', s: 'Con tarjeta de crédito participante' },
+  { ico: _pg('<rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/>'), t: 'Efectivo en OXXO', s: 'Con una referencia de pago' },
+  { ico: _pg('<path d="M3 10l9-6 9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/>'), t: 'Transferencia SPEI', s: 'Sin comisión, desde tu banco' },
+  { ico: _pg('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'), t: 'Pago diferido', s: 'Apartas con 50% y liquidas antes del envío' },
+];
+function renderFormasPago(){
+  const wa = `https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent('Hola, quiero hacer un pedido. ¿Me mandan mi liga de pago?')}`;
+  document.querySelectorAll('[data-formas-pago]').forEach(el=>{
+    el.innerHTML = `
+      <section class="formas-pago" aria-labelledby="fp-titulo">
+        <div class="envolvente">
+          <div class="fp-cabeza">
+            <span class="ojo">Formas de pago</span>
+            <h2 id="fp-titulo">Paga como más te convenga</h2>
+            <p>Te mandamos una liga de pago segura por WhatsApp y tú eliges cómo pagar: con tarjeta, a meses, en efectivo o por transferencia.</p>
+          </div>
+          <ul class="fp-lista">${FORMAS_PAGO.map(f=>`<li><span class="fp-ico">${f.ico}</span><b>${f.t}</b><small>${f.s}</small></li>`).join('')}</ul>
+          <div class="fp-pie">
+            <a class="btn btn-wa" href="${wa}" target="_blank" rel="noopener">${ICONOS.whatsapp} Pedir mi liga de pago</a>
+            <p>🔒 Los pagos con tarjeta, a meses y en OXXO se procesan con Mercado Pago e incluyen su comisión, que ves desglosada antes de pagar. La transferencia no tiene comisión.</p>
+          </div>
+        </div>
+      </section>`;
+  });
+}
+if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderFormasPago); else renderFormasPago();
 
 // ---------------- Limpieza de contenido pendiente ----------------
 // Mientras falten datos reales, los textos tipo "[PLACEHOLDER ...]" o "[EJEMPLO ...]" nunca se
