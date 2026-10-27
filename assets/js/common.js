@@ -209,8 +209,8 @@ const FORMAS_PAGO = [
   { ico: _pg('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'), t: 'Pago diferido', s: 'Apartas con 50% y liquidas antes del envío' },
 ];
 // Versión corta (Reinier 2026-10-27: "mensaje corto", estilo franja de tienda): una línea con las formas de pago.
+// Solo informativa, sin botón: quita miedos, no presiona (Reinier 2026-10-27).
 function renderFormasPago(){
-  const wa = `https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent('Hola, quiero hacer un pedido. ¿Me mandan mi liga de pago?')}`;
   document.querySelectorAll('[data-formas-pago]').forEach(el=>{
     el.innerHTML = `
       <section class="formas-pago" aria-label="Formas de pago">
@@ -218,7 +218,6 @@ function renderFormasPago(){
           <span class="fp-ico">${FORMAS_PAGO[0].ico}</span>
           <p class="fp-texto"><b>Aceptamos tarjetas de crédito</b> <span>Paga a mensualidades fijas hasta en 18 meses, en pago diferido o en efectivo en OXXO.</span></p>
           <span class="fp-sello">🔒 Pago seguro con Mercado Pago</span>
-          <a class="btn btn-wa" href="${wa}" target="_blank" rel="noopener">${ICONOS.whatsapp} Pedir mi liga de pago</a>
         </div>
       </section>`;
   });
