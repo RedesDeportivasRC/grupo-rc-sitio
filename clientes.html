@@ -60,7 +60,7 @@
 </section>
 
 <div id="site-footer"></div>
-<script src="assets/js/data.js?v=20261027e"></script>
+<script src="assets/js/data.js?v=20261027f"></script>
 <script src="assets/js/common.js?v=20261027e"></script>
 <script>
 renderHeader('clientes');
@@ -87,16 +87,16 @@ document.querySelectorAll('.cliente-rc').forEach(a=>{
   }));
 });
 // Filtros por producto: por defecto solo los destacados, para que la página no sea tan larga
-const FILTROS_CLIENTES = [['destacados','Destacados'],['todos','Todos'],['perimetrales','Redes perimetrales'],['porterias','Porterías y redes'],['juegos','Juegos infantiles'],['beisbol','Béisbol'],['proteccion','Protección y especiales']];
+const FILTROS_CLIENTES = [['destacados','Destacados'],['todos','Todos'],['perimetrales','Redes perimetrales'],['redes-porteria','Redes para porterías'],['porterias','Porterías'],['basquetbol','Básquetbol'],['voleibol','Voleibol'],['juegos','Juegos infantiles'],['beisbol','Béisbol'],['proteccion','Antipalomas y protección'],['especiales','Proyectos especiales']];
 function filtrarClientes(f){
   document.querySelectorAll('.cliente-rc').forEach(a=>{
-    a.hidden = !(f==='todos' || (f==='destacados' ? a.hasAttribute('data-destacado') : a.dataset.cat===f));
+    a.hidden = !(f==='todos' || (f==='destacados' ? a.hasAttribute('data-destacado') : a.dataset.cat.split(' ').includes(f)));
   });
   [...document.querySelectorAll('.cliente-rc:not([hidden])')].forEach((a,i)=>a.classList.toggle('alt', i%2===1));
   document.querySelectorAll('#filtros-clientes button').forEach(b=>b.setAttribute('aria-selected', b.dataset.f===f));
 }
 document.getElementById('filtros-clientes').innerHTML = FILTROS_CLIENTES.map(([f,t])=>{
-  const n = f==='todos' ? CLIENTES_RC.length : CLIENTES_RC.filter(c=>f==='destacados'?c.destacado:c.cat===f).length;
+  const n = f==='todos' ? CLIENTES_RC.length : CLIENTES_RC.filter(c=>f==='destacados'?c.destacado:c.cat.split(' ').includes(f)).length;
   return `<button type="button" role="tab" data-f="${f}">${t} <small>${n}</small></button>`;
 }).join('');
 document.querySelectorAll('#filtros-clientes button').forEach(b=>b.addEventListener('click',()=>filtrarClientes(b.dataset.f)));
