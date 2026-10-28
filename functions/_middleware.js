@@ -3,6 +3,11 @@
 // las direcciones sin .html redirigen a la versión .html y el dominio sin www redirige a www.
 const DOMINIO = 'www.redesdeportivasrc.com';
 
+// Ligas cortas para perfiles de redes: se ven limpias y conservan el origen de la visita (utm).
+const CORTAS = {
+  '/ig': '/?utm_source=instagram&utm_medium=social&utm_campaign=bio',
+};
+
 export async function onRequest({ request, next, env }) {
   const url = new URL(request.url);
 
@@ -12,6 +17,9 @@ export async function onRequest({ request, next, env }) {
   }
 
   const ruta = url.pathname;
+
+  const corta = CORTAS[ruta.toLowerCase().replace(/\/+$/, '')];
+  if (corta) return Response.redirect(new URL(corta, `https://${DOMINIO}`).toString(), 302);
 
   if (ruta.endsWith('.html')) {
     const limpia = new URL(url);
