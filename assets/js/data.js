@@ -288,7 +288,7 @@ const EMPRESA = {
   mapaCoords:'',
   // Reseñas en Google: resenaGoogle = liga directa a "Escribir opinión" (https://search.google.com/local/writereview?placeid=ChIJ…);
   // mientras no exista se usa fichaGoogle (abre la ficha en Maps; el cliente toca Opiniones → Escribir una opinión).
-  resenaGoogle:'',
+  resenaGoogle:'https://g.page/r/CejGdWE5HPaGEAE/review',
   fichaGoogle:'https://maps.app.goo.gl/kS5ybggx6H8nL3wDA',  // liga que Andy manda a clientes (11 oct 2026)  // si Reinier manda lat,lng de su chincheta, ponerlas aquí y el mapa las usa
   estadosDondeVendemos:['Yucatán','[PLACEHOLDER — resto de estados donde venden]'],
   redes:{
