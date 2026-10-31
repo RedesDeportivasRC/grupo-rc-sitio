@@ -211,3 +211,12 @@
   .ev-precios{gap:8px;}
   .ev-precios b{font-size:2.2rem;}
 }
+.ev-cuenta{display:flex;align-items:center;gap:10px;margin-top:20px;flex-wrap:wrap;}
+.ev-cuenta[hidden]{display:none;}
+.ev-cuenta small{font-family:'Permanent Marker',cursive;color:var(--azul);font-size:1.1rem;margin-right:4px;}
+.ev-cuenta div{background:rgba(10,26,36,.72);border:1px solid rgba(43,189,243,.5);border-radius:14px;min-width:70px;padding:8px 10px;text-align:center;}
+.ev-cuenta b{display:block;font-family:'Bebas Neue',sans-serif;font-size:2.4rem;line-height:1;color:#fff;font-variant-numeric:tabular-nums;}
+.ev-cuenta span{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:#9fc3d1;}
+.ev-cartel{max-width:520px;margin:0 auto 34px !important;}
+@media (max-width:820px){.ev-cuenta div{min-width:58px;padding:6px 8px;}.ev-cuenta b{font-size:1.9rem;}}
+.ev-cartel img{height:auto;}
