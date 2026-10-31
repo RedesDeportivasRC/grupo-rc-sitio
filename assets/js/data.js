@@ -514,7 +514,7 @@ const CLIENTES_RC = [
            ['red-voleibol-personalizada-nombre-colegio-charbel.jpg','Red de voleibol personalizada con el nombre Charbel tejido'],
            ['red-basquetbol-roja-azul-colegio-charbel.jpg','Red de básquetbol roja y azul en el aro del Colegio Charbel'],
            ['porteria-infantil-naranja-cancha-colegio-charbel.jpg','Portería infantil naranja en la cancha de usos múltiples del Colegio Charbel']] },
-  { slug:'instituto-alianz', cat:'redes-porteria', nombre:'Instituto Alianz', lugar:'Yucatán', tipo:'Colegio',
+  { slug:'instituto-alianz', cat:'redes-porteria', nombre:'Instituto Alianz', lugar:'Mérida, Yucatán', tipo:'Colegio',
     texto:'Fabricamos 4 redes para porterías, de tejido hexagonal blanco, para sus dos canchas de fútbol rápido.',
     productos:[['Redes para porterías','redes-para-porterias']],
     fotos:[['redes-porterias-futbol-rapido-instituto-alianz.jpg','Redes hexagonales blancas en las porterías de fútbol rápido del Instituto Alianz'],
