@@ -1,0 +1,4 @@
+# El editor de imágenes de Marketing (mando.redesdeportivasrc.com) dibuja las portadas del blog en un canvas:
+# sin este permiso el navegador no deja descargar la imagen terminada.
+/assets/img/*
+  Access-Control-Allow-Origin: *
