@@ -221,3 +221,10 @@
 @media (max-width:820px){.ev-cuenta div{min-width:58px;padding:6px 8px;}.ev-cuenta b{font-size:1.9rem;}}
 .ev-cartel img{height:auto;}
 .ev-video-cronica video{width:100%;aspect-ratio:1546/720;border-radius:16px;background:#000;display:block;}
+/* Portada con foto de grupo: en celular la foto va completa arriba y el texto debajo, para que se vea todo el equipo */
+@media (max-width:820px){
+  .ev-hero.ev-hero-foto{display:block;min-height:0;}
+  .ev-hero.ev-hero-foto > img{position:relative;inset:auto;height:auto;display:block;}
+  .ev-hero.ev-hero-foto::after{display:none;}
+  .ev-hero.ev-hero-foto .envolvente{padding-top:22px;}
+}
