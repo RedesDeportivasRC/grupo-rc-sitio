@@ -59,3 +59,9 @@
   visor.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
   visor.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) mover(dx < 0 ? 1 : -1); x0 = null; });
 })();
+
+// Un solo video a la vez: al reproducir uno se pausan los demás de la página.
+document.addEventListener('play', e => {
+  if (e.target.tagName !== 'VIDEO') return;
+  document.querySelectorAll('video').forEach(v => { if (v !== e.target && !v.paused) v.pause(); });
+}, true);
