@@ -232,3 +232,7 @@
 }
 .ev-video-vertical video{aspect-ratio:720/1546;max-width:360px;margin:0 auto;}
 .ev-video-vertical figcaption{text-align:center;}
+/* Celular: nada se sale de lo ancho (la publicación de Facebook mide 500 px y movía la página de lado) */
+html,body{overflow-x:clip;}
+.ev-posts{overflow:hidden;max-width:100%;}
+.ev-posts .fb-post,.ev-posts .fb-post > span,.ev-posts iframe{max-width:100% !important;}
