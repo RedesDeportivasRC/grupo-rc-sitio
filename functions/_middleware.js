@@ -6,7 +6,11 @@ const DOMINIO = 'www.redesdeportivasrc.com';
 // Ligas cortas para perfiles de redes: se ven limpias y conservan el origen de la visita (utm).
 const CORTAS = {
   '/ig': '/?utm_source=instagram&utm_medium=social&utm_campaign=bio',
+  '/fb': '/?utm_source=facebook&utm_medium=social&utm_campaign=bio',
+  '/wa': '/?utm_source=whatsapp&utm_medium=mensaje&utm_campaign=whatsapp',
 };
+// Para una liga de una publicación o anuncio, cualquier dirección con ?utm_source=…&utm_campaign=…
+// se cuenta sola en AndyControl (Marketing › Visitas de la página › Ligas). Ahí hay un armador de ligas.
 
 export async function onRequest({ request, next, env }) {
   const url = new URL(request.url);
