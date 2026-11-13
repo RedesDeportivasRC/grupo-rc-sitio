@@ -614,10 +614,12 @@ const TESTIMONIOS = [
 // Lo que cambia se edita SOLO aquí. Si un dato fiscal está vacío, su renglón no se muestra.
 const RESPALDO = {
   fiscal:{
-    titular:'',                 // nombre como aparece en el SAT (pendiente de Reinier)
-    rfc:'',                     // RFC (pendiente de Reinier)
-    regimen:'Persona física con actividad empresarial',  // régimen 612 (dato de facturación)
-    opinionFecha:'',            // fecha de la última opinión de cumplimiento POSITIVA, ej. '10 de noviembre de 2026'
+    titular:'Reinier Alejandro Coral López',   // como aparece en la Constancia de Situación Fiscal
+    rfc:'COLR9006214F4',
+    regimen:'Persona física con actividades empresariales',
+    alta:'2012',                               // inicio de operaciones ante el SAT (CSF, fabricación de redes)
+    opinionFecha:'21 de septiembre de 2026',   // última opinión de cumplimiento POSITIVA (actualizar al sacar una nueva)
+    opinionFolio:'26NK9931146',
   },
   // Momentos que se muestran en "Dónde nos has visto" (foto en assets/img/eventos/, sin extensión).
   presencia:[

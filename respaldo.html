@@ -11,15 +11,15 @@
 <title>Nuestro respaldo | Redes Deportivas RC</title>
 <!-- Página para mandar por WhatsApp a clientes con dudas. No se indexa ni sale en el menú. -->
 <meta name="robots" content="noindex, follow">
-<meta name="description" content="Quiénes somos, negocio registrado ante el SAT, opiniones reales de clientes, dónde nos has visto y cómo pagar seguro. Compruébalo antes de comprar.">
+<meta name="description" content="Quiénes somos, negocio registrado ante el SAT desde 2012, opiniones reales de clientes, dónde nos has visto y cómo pagar seguro. Compruébalo antes de comprar.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_MX">
 <meta property="og:site_name" content="Redes Deportivas RC">
 <meta property="og:url" content="https://www.redesdeportivasrc.com/respaldo.html">
 <meta property="og:title" content="Nuestro respaldo · Grupo RC">
 <meta property="og:description" content="Quiénes somos, negocio formal ante el SAT, opiniones reales y pago seguro. Compruébalo antes de comprar.">
-<meta property="og:image" content="https://www.redesdeportivasrc.com/assets/img/compartir/respaldo.jpg?v=1">
-<meta property="og:image:secure_url" content="https://www.redesdeportivasrc.com/assets/img/compartir/respaldo.jpg?v=1">
+<meta property="og:image" content="https://www.redesdeportivasrc.com/assets/img/compartir/respaldo.jpg?v=2">
+<meta property="og:image:secure_url" content="https://www.redesdeportivasrc.com/assets/img/compartir/respaldo.jpg?v=2">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -47,7 +47,7 @@
   .rs-sec h2{font-family:'Manrope',sans-serif;font-weight:800;letter-spacing:-.5px;font-size:clamp(1.5rem,3vw,2.1rem);display:flex;align-items:center;}
   .rs-sub{color:#4d5a63;margin-top:8px;max-width:62ch;}
   .rs-dos{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:32px;align-items:center;margin-top:22px;}
-  .rs-dos img{border-radius:var(--radio);aspect-ratio:4/5;object-fit:cover;width:100%;box-shadow:0 12px 30px rgba(10,26,36,.18);}
+  .rs-dos img{border-radius:var(--radio);aspect-ratio:4/3;object-fit:cover;width:100%;box-shadow:0 12px 30px rgba(10,26,36,.18);}
   .rs-cita{font-size:1.12rem;line-height:1.6;}
   .rs-cita b{color:var(--azul-btn,#1591c2);}
   .rs-lista{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:10px;}
@@ -80,6 +80,9 @@
   .rs-pago > div{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:16px;}
   .rs-pago h3{font-family:'Manrope';font-weight:800;font-size:1.02rem;margin-bottom:6px;}
   .rs-pago p{color:#4d5a63;font-size:.93rem;}
+.rs-mp{margin:8px 0 0;padding-left:18px;color:#4d5a63;font-size:.92rem;display:grid;gap:6px;}
+  .rs-mp b{color:var(--negro);}
+  .rs-pago{grid-template-columns:1.6fr 1fr 1fr !important;}
   .rs-logos{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px;}
   .rs-logos img{height:26px;width:auto;}
   .rs-cta{background:var(--azul-osc);color:#fff;padding:44px 0;text-align:center;}
@@ -88,9 +91,9 @@
   .rs-cta .btn{display:inline-flex;gap:8px;align-items:center;}
   @media (max-width:900px){
     .rs-dos{grid-template-columns:1fr;}
-    .rs-dos{gap:16px;} .rs-dos img{max-width:170px;aspect-ratio:1/1;border-radius:50%;border:4px solid var(--azul);}
+    .rs-dos{gap:16px;} .rs-dos img{aspect-ratio:16/10;}
     .rs-pres{grid-template-columns:repeat(2,1fr);}
-    .rs-pago{grid-template-columns:1fr;}
+    .rs-pago{grid-template-columns:1fr !important;}
     .rs-sec{padding:36px 0;}
   }
   @media (max-width:520px){ .rs-pres{grid-template-columns:1fr 1fr;gap:10px;} .rs-pres div{padding:10px;} .rs-pres small{font-size:.78rem;} }
@@ -115,7 +118,7 @@
   <div class="envolvente">
     <h2><span class="rs-num">1</span>¿Quién está detrás?</h2>
     <div class="rs-dos">
-      <img src="assets/img/eventos/henry-martin-grupo-rc-02.jpg" alt="Reinier Coral, fundador de Grupo RC, junto a una portería con red instalada" loading="lazy">
+      <img src="assets/img/trabajos/instalacion-red-contencion-golf-hotel-chable-vista-dron.jpg" alt="Red de contención instalada por Grupo RC en el campo de golf del Hotel Chablé, vista desde dron" loading="lazy">
       <div>
         <p class="rs-cita">Soy <b>Reinier Coral</b>. Aprendí a tejer redes en la primaria y en la secundaria ya me subía a los postes a instalarlas. Hoy llevo <b>más de 25 años vendiendo redes y más de 20 instalándolas</b>. En 2024 fundé Grupo RC para llevar esa experiencia a todo México.</p>
         <ul class="rs-lista" id="rs-hechos"></ul>
@@ -127,7 +130,7 @@
 <section class="rs-sec" id="formal">
   <div class="envolvente">
     <h2><span class="rs-num">2</span>Negocio formal, al corriente con el SAT</h2>
-    <p class="rs-sub">Estamos dados de alta ante el SAT y emitimos factura. Estos son los datos que puedes comprobar:</p>
+    <p class="rs-sub" id="rs-fiscal-sub">Estamos dados de alta ante el SAT y emitimos factura. Estos son los datos que puedes comprobar:</p>
     <div class="rs-fiscal" id="rs-fiscal"></div>
     <p class="rs-nota">Por seguridad no publicamos la Constancia de Situación Fiscal ni la Opinión de Cumplimiento completas, porque traen datos privados. <b>Si quieres verlas, pídenoslas por WhatsApp y te las mandamos.</b></p>
   </div>
@@ -155,8 +158,15 @@
     <h2><span class="rs-num">5</span>Paga seguro</h2>
     <div class="rs-pago">
       <div>
-        <h3>💳 Tarjeta, OXXO o mensualidades</h3>
-        <p>Te mandamos una liga oficial de pago y el cobro lo procesa Mercado Pago: nosotros nunca vemos los datos de tu tarjeta. Si pagas con tu cuenta de Mercado Pago, puedes abrir un reclamo con ellos si no recibes tu pedido, según las condiciones de su programa de Compra Protegida.</p>
+        <h3>🛡️ Protegido por Mercado Pago</h3>
+        <p>Te mandamos una liga oficial de pago y el cobro lo hace Mercado Pago, no nosotros. Eso te da:</p>
+        <ul class="rs-mp">
+          <li><b>Tus datos seguros:</b> nunca vemos ni guardamos los datos de tu tarjeta.</li>
+          <li><b>Derecho a reclamar:</b> si pagas con tu cuenta de Mercado Pago y tu pedido no llega o no es lo acordado, abres un reclamo con ellos y, si procede, te regresan tu dinero (Compra Protegida, según sus condiciones).</li>
+          <li><b>Con tarjeta, doble respaldo:</b> además puedes aclarar el cargo con tu banco.</li>
+          <li><b>Comprobante al instante</b> en tu correo y en tu app.</li>
+        </ul>
+        <p style="margin-top:8px">Paga con tarjeta, en efectivo en OXXO o en mensualidades.</p>
         <div class="rs-logos" id="rs-logos"></div>
       </div>
       <div>
@@ -199,7 +209,8 @@
     F.titular && ['Titular', F.titular],
     F.rfc && ['RFC', F.rfc],
     F.regimen && ['Régimen fiscal', F.regimen],
-    ['Opinión de cumplimiento', 'Positiva ✔' + (F.opinionFecha ? `<small style="text-transform:none;letter-spacing:0;font-weight:600">Consultada el ${esc(F.opinionFecha)}</small>` : ''), 'ok'],
+    F.alta && ['Registrado en el SAT', 'Desde ' + esc(F.alta)],
+    ['Opinión de cumplimiento', 'Positiva ✔' + (F.opinionFecha ? `<small style="text-transform:none;letter-spacing:0;font-weight:600">Emitida el ${esc(F.opinionFecha)}${F.opinionFolio ? ' · folio ' + esc(F.opinionFolio) : ''}</small>` : ''), 'ok'],
     ['Facturación', 'Emitimos factura electrónica (CFDI)'],
   ].filter(Boolean).map(([k, v, c]) => `<div class="rs-dato ${c || ''}"><small>${k}</small><b>${v}</b></div>`).join('');
 
