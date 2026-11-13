@@ -67,10 +67,9 @@
   .rs-op .testimonio{scroll-snap-align:start;margin:0;}
   .rs-op .testimonio p{display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden;max-height:none;}
   .rs-pres{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px;}
-  .rs-pres a{background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--linea);display:flex;flex-direction:column;transition:transform .15s;}
-  .rs-pres a:hover{transform:translateY(-3px);}
+  .rs-pcard{background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--linea);display:flex;flex-direction:column;transition:transform .15s;}
   .rs-pres img{aspect-ratio:4/3;object-fit:cover;width:100%;}
-  .rs-pres div{padding:12px 14px;}
+  .rs-pres .rs-pcard > div{padding:12px 14px;}
   .rs-pres b{display:block;line-height:1.25;}
   .rs-pres small{display:block;color:var(--gris);margin-top:4px;line-height:1.35;}
   .rs-clientes{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;align-items:center;}
@@ -85,6 +84,19 @@
   .rs-pago{grid-template-columns:1.6fr 1fr 1fr !important;}
   .rs-logos{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px;}
   .rs-logos img{height:26px;width:auto;}
+  .rs-docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:14px;}
+  .rs-doc{display:flex;gap:12px;align-items:center;background:var(--azul-osc);color:#fff;border-radius:12px;padding:14px 16px;transition:transform .15s;}
+  .rs-doc:hover{transform:translateY(-2px);}
+  .rs-doc .i{font-size:1.6rem;}
+  .rs-doc small{display:block;color:#9fc3d1;}
+  .rs-pie{background:#0b0e10;color:#7d8a93;font-size:.82rem;text-align:center;padding:18px 0;}
+  .rs-barra{display:none;}
+  .rs-cta .btn{font-size:1.05rem;padding:14px 22px;max-width:100%;white-space:normal;justify-content:center;}
+  @media (max-width:900px){
+    .rs-barra{display:flex;gap:8px;align-items:center;justify-content:center;position:fixed;left:0;right:0;bottom:0;z-index:150;background:#25D366;color:#fff;font-weight:800;padding:15px 10px calc(15px + env(safe-area-inset-bottom));box-shadow:0 -6px 18px rgba(0,0,0,.18);}
+    body{padding-bottom:64px;}
+    .lp-header .btn{display:none;}
+  }
   .rs-cta{background:var(--azul-osc);color:#fff;padding:44px 0;text-align:center;}
   .rs-cta h2{font-size:clamp(2rem,5vw,3rem);}
   .rs-cta p{color:#c9dbe4;margin:8px auto 20px;max-width:46ch;}
@@ -95,13 +107,19 @@
     .rs-pres{grid-template-columns:repeat(2,1fr);}
     .rs-pago{grid-template-columns:1fr !important;}
     .rs-sec{padding:36px 0;}
+    .rs-dato{padding:12px;} .rs-dato b{font-size:.95rem;word-break:normal;overflow-wrap:anywhere;}
   }
-  @media (max-width:520px){ .rs-pres{grid-template-columns:1fr 1fr;gap:10px;} .rs-pres div{padding:10px;} .rs-pres small{font-size:.78rem;} }
+  @media (max-width:520px){ .rs-pres{grid-template-columns:1fr 1fr;gap:10px;} .rs-pres .rs-pcard > div{padding:10px;} .rs-pres small{font-size:.78rem;} }
 </style>
 <script src="assets/js/medicion.js"></script>
 </head>
 <body data-nivel="raiz">
-<div id="site-header"></div>
+<header class="lp-header">
+  <div class="envolvente">
+    <div class="marca-rc marca-cabeza" aria-label="Grupo RC"><img src="assets/img/logo-160.png" alt="Grupo RC" width="74" height="74"><span class="marca-txt"><span class="marca-nombre">GRUPO <b>RC</b></span><span class="marca-esl"><span>Déjate atrapar</span> <span class="esl-1">por nuestras redes</span><span class="esl-2">Por nuestras redes</span></span></span></div>
+    <div class="lp-header-acciones"><a data-pedido class="btn btn-wa btn-chico" target="_blank" rel="noopener">Continuar mi pedido</a></div>
+  </div>
+</header>
 
 <section class="rs-hero">
   <div class="envolvente">
@@ -120,7 +138,7 @@
     <div class="rs-dos">
       <img src="assets/img/trabajos/instalacion-red-contencion-golf-hotel-chable-vista-dron.jpg" alt="Red de contención instalada por Grupo RC en el campo de golf del Hotel Chablé, vista desde dron" loading="lazy">
       <div>
-        <p class="rs-cita">Soy <b>Reinier Coral</b>. Aprendí a tejer redes en la primaria y en la secundaria ya me subía a los postes a instalarlas. Hoy llevo <b>más de 25 años vendiendo redes y más de 20 instalándolas</b>. En 2024 fundé Grupo RC para llevar esa experiencia a todo México.</p>
+        <p class="rs-cita">Soy <b>Reinier Coral</b>. Aprendí a tejer redes en la primaria y en la secundaria ya me subía a los postes a instalarlas. Hoy llevo <b>más de 25 años vendiendo redes y más de 20 instalándolas</b>. Fundé Grupo RC para llevar esa experiencia a todo México.</p>
         <ul class="rs-lista" id="rs-hechos"></ul>
       </div>
     </div>
@@ -132,7 +150,11 @@
     <h2><span class="rs-num">2</span>Negocio formal, al corriente con el SAT</h2>
     <p class="rs-sub" id="rs-fiscal-sub">Estamos dados de alta ante el SAT y emitimos factura. Estos son los datos que puedes comprobar:</p>
     <div class="rs-fiscal" id="rs-fiscal"></div>
-    <p class="rs-nota">Por seguridad no publicamos la Constancia de Situación Fiscal ni la Opinión de Cumplimiento completas, porque traen datos privados. <b>Si quieres verlas, pídenoslas por WhatsApp y te las mandamos.</b></p>
+    <div class="rs-docs">
+      <a class="rs-doc" href="assets/docs/opinion-cumplimiento-sat-grupo-rc.pdf?v=20260921" target="_blank" rel="noopener"><span class="i">📄</span><span><b>Descargar Opinión de Cumplimiento del SAT</b><small>PDF oficial · sentido positivo</small></span></a>
+      <a class="rs-doc" data-csf target="_blank" rel="noopener"><span class="i">💬</span><span><b>Pedir Constancia de Situación Fiscal</b><small>Te la mandamos al momento por WhatsApp</small></span></a>
+    </div>
+    <p class="rs-nota">La Constancia trae datos personales como la CURP; por eso te la mandamos directo por WhatsApp en cuanto la pidas.</p>
   </div>
 </section>
 
@@ -183,18 +205,21 @@
 
 <section class="rs-cta">
   <div class="envolvente">
-    <h2>¿Te queda alguna duda?</h2>
-    <p>Pregúntanos lo que quieras antes de pagar. Preferimos que compres tranquilo.</p>
-    <a class="btn btn-azul" id="rs-wa" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+    <h2>¿Listo? Sigamos con tu pedido</h2>
+    <p>Y si te queda alguna duda, pregúntanos antes de pagar. Preferimos que compres tranquilo.</p>
+    <a class="btn btn-wa" data-pedido target="_blank" rel="noopener">Continuar mi pedido por WhatsApp</a>
   </div>
 </section>
 
-<div id="site-footer"></div>
+<footer class="rs-pie"><div class="envolvente">© Grupo RC · Redes Deportivas RC · Mérida, Yucatán</div></footer>
+<a class="rs-barra" data-pedido target="_blank" rel="noopener">Continuar mi pedido por WhatsApp</a>
 <script src="assets/js/data.js?v=20261113a"></script>
 <script src="assets/js/common.js?v=20261027o"></script>
 <script>
-  renderHeader('');
-  renderFooter();
+  const wa = t => `https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent(t)}`;
+  document.querySelectorAll('[data-pedido]').forEach(a => { a.href = wa('Hola, ya revisé su respaldo y quiero continuar con mi pedido.'); });
+  document.querySelectorAll('.rs-barra').forEach(a => a.insertAdjacentHTML('afterbegin', ICONOS.whatsapp));
+  document.querySelector('[data-csf]').href = wa('Hola, ¿me pueden mandar su Constancia de Situación Fiscal, por favor?');
   const esc = t => String(t || '').replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
 
   // 1. Quién soy
@@ -229,7 +254,7 @@
     document.getElementById('rs-op').innerHTML = todas.slice(0, 6).map(tarjeta).join('');
     document.getElementById('rs-resumen').innerHTML = `<span>${iconoFb} Recomendado por el ${RESUMEN_OPINIONES.facebookPct}% en Facebook (${RESUMEN_OPINIONES.facebookTotal} opiniones)</span>
       <a href="${EMPRESA.fichaGoogle}" target="_blank" rel="noopener">${iconoG} Ver en Google →</a>
-      <a href="clientes.html#opiniones">Leer las ${total} opiniones →</a>`;
+      <span>${total} opiniones reales de clientes</span>`;
   }
   pintarOpiniones([]);
   fetch('https://jofotwgbbdysrywgxkwi.supabase.co/functions/v1/sitio-api/resena').then(r => r.ok ? r.json() : []).then(lista => {
@@ -240,14 +265,13 @@
 
   // 4. Presencia
   document.getElementById('rs-pres').innerHTML = RESPALDO.presencia.map(p => `
-    <a href="${p.url}"><img src="assets/img/eventos/${p.foto}-t.jpg" onerror="this.onerror=null;this.src='assets/img/eventos/${p.foto}.jpg'" alt="${esc(p.t)}" loading="lazy"><div><b>${esc(p.t)}</b><small>${esc(p.d)}</small></div></a>`).join('');
+    <div class="rs-pcard"><img src="assets/img/eventos/${p.foto}-t.jpg" onerror="this.onerror=null;this.src='assets/img/eventos/${p.foto}.jpg'" alt="${esc(p.t)}" loading="lazy"><div><b>${esc(p.t)}</b><small>${esc(p.d)}</small></div></div>`).join('');
   document.getElementById('rs-clientes').innerHTML = '<em>Han confiado en nosotros:</em>' + RESPALDO.clientes.map(c => `<span>${esc(c)}</span>`).join('');
 
   // 5. Logos de pago originales
   document.getElementById('rs-logos').innerHTML = logoPago('mercadopago', 'Mercado Pago') + LOGOS_TARJETAS() + logoPago('oxxo', 'OXXO');
 
-  document.getElementById('rs-wa').href = `https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent('Hola, vi su página de respaldo y tengo una duda.')}`;
-  document.getElementById('rs-wa').insertAdjacentHTML('afterbegin', ICONOS.whatsapp);
+  document.querySelectorAll('.rs-cta [data-pedido]').forEach(a => a.insertAdjacentHTML('afterbegin', ICONOS.whatsapp));
 </script>
 </body>
 </html>
