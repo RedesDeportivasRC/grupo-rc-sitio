@@ -610,6 +610,26 @@ const TESTIMONIOS = [
   { nombre:'Rosario S.', fuente:'facebook', lugar:'Mexicali', texto:'Muchas gracias Redes Deportivas RC. Súper recomendados, de muy buena calidad y nos llegó sin contratiempos.' },
 ];
 
+// ---------------- Página "Nuestro respaldo" (respaldo.html, liga para mandar por WhatsApp) ----------------
+// Lo que cambia se edita SOLO aquí. Si un dato fiscal está vacío, su renglón no se muestra.
+const RESPALDO = {
+  fiscal:{
+    titular:'',                 // nombre como aparece en el SAT (pendiente de Reinier)
+    rfc:'',                     // RFC (pendiente de Reinier)
+    regimen:'Persona física con actividad empresarial',  // régimen 612 (dato de facturación)
+    opinionFecha:'',            // fecha de la última opinión de cumplimiento POSITIVA, ej. '10 de noviembre de 2026'
+  },
+  // Momentos que se muestran en "Dónde nos has visto" (foto en assets/img/eventos/, sin extensión).
+  presencia:[
+    { foto:'partido-leyendas-dzidzantun-2026-portada', t:'Patrocinadores del Partido de Leyendas', d:'Leyendas del América en Dzidzantún · nov 2026', url:'eventos/partido-leyendas-dzidzantun-2026.html' },
+    { foto:'siuu-masivo-2025-merida-00', t:'Organizamos el Siuu Masivo Yucatán', d:'Homenaje a Cristiano Ronaldo en Mérida: más de 500 aficionados y cerca de 100 notas de prensa (2025)', url:'eventos/siuu-masivo-2025.html' },
+    { foto:'henry-martin-grupo-rc-03', t:'Redes en la Unidad Deportiva Henry Martín', d:'Porterías con red instalada en Mérida', url:'eventos/famosos.html#henry-martin' },
+    { foto:'chiquimarco-rodriguez-grupo-rc-01', t:'Con figuras del fútbol', d:'Henry Martín, Hugo Sánchez, Chiquimarco y más', url:'eventos/famosos.html' },
+  ],
+  // Clientes que se nombran en la franja (deben existir en Clientes y proyectos).
+  clientes:['Hotel Chablé','Universidad Modelo','Domo Morelos','Colegio Charbel','Hotel Country Valladolid','Privada Navita'],
+};
+
 // ---------------- Posicionamiento de marca (Misión / Visión / Valores / Quiénes somos) ----------------
 const MARCA_RC = {
   mision:'Crear soluciones que protejan, conecten y hagan posible el deporte.',
