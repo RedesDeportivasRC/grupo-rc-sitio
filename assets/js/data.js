@@ -621,6 +621,14 @@ const RESPALDO = {
     opinionFecha:'21 de septiembre de 2026',   // última opinión de cumplimiento POSITIVA (actualizar al sacar una nueva)
     opinionFolio:'26NK9931146',
   },
+  // Fotos que giran en el banner (ruta desde assets/img/). recuerdo:true = efecto de foto antigua.
+  banner:[
+    { foto:'trabajos/tejido-artesanal-red-porteria-taller-yucatan.jpg', t:'Tejiendo redes a mano desde 1998', recuerdo:true, pos:'60% 40%' },
+    { foto:'trabajos/instalacion-red-en-altura-estructura-metalica.jpg', t:'Instalaciones en altura' },
+    { foto:'eventos/siuu-masivo-2025-merida-00.jpg', t:'Siuu Masivo Yucatán · más de 500 aficionados' },
+    { foto:'eventos/partido-leyendas-dzidzantun-2026-portada.jpg', t:'Patrocinadores del Partido de Leyendas', pos:'50% 40%' },
+    { foto:'trabajos/instalacion-red-contencion-golf-hotel-chable-vista-dron.jpg', t:'Red de contención en el Hotel Chablé', pos:'50% 60%' },
+  ],
   // Momentos que se muestran en "Dónde nos has visto" (foto en assets/img/eventos/, sin extensión).
   presencia:[
     { foto:'partido-leyendas-dzidzantun-2026-portada', t:'Patrocinadores del Partido de Leyendas', d:'Leyendas del América en Dzidzantún · nov 2026', url:'eventos/partido-leyendas-dzidzantun-2026.html' },

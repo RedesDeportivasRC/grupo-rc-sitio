@@ -34,6 +34,25 @@
   .rs-hero{background:var(--azul-osc);color:#fff;padding:44px 0 36px;position:relative;overflow:hidden;}
   .rs-hero::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(43,189,243,.07) 0 2px,transparent 2px 22px),repeating-linear-gradient(-45deg,rgba(43,189,243,.07) 0 2px,transparent 2px 22px);pointer-events:none;}
   .rs-hero .envolvente{position:relative;z-index:1;}
+  .rs-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+  .rs-galeria{position:relative;aspect-ratio:4/3;border-radius:16px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.45);border:3px solid rgba(43,189,243,.6);background:#06121a;}
+  .rs-galeria figure{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1s ease;}
+  .rs-galeria figure.on{opacity:1;}
+  .rs-galeria img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);}
+  .rs-galeria figure.on img{animation:rsZoom 6s ease-out forwards;}
+  @keyframes rsZoom{from{transform:scale(1.02);}to{transform:scale(1.12);}}
+  .rs-galeria figcaption{position:absolute;left:12px;bottom:12px;right:12px;display:flex;}
+  .rs-galeria figcaption span{background:rgba(10,26,36,.82);color:#fff;font-weight:800;font-size:.92rem;padding:7px 12px;border-radius:8px;border-left:4px solid var(--azul);}
+  /* Foto del recuerdo: tono cálido desvanecido, viñeta, grano y marco blanco tipo foto impresa */
+  .rs-galeria figure.recuerdo{background:#f4ecd8;padding:14px 14px 46px;}
+  .rs-galeria figure.recuerdo .marco{position:relative;width:100%;height:100%;overflow:hidden;}
+  .rs-galeria figure.recuerdo img{filter:sepia(.45) saturate(.75) contrast(.92) brightness(1.04);}
+  .rs-galeria figure.recuerdo .marco::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(60,35,10,.45) 100%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");mix-blend-mode:multiply;pointer-events:none;}
+  .rs-galeria figure.recuerdo figcaption{left:0;right:0;bottom:8px;justify-content:center;}
+  .rs-galeria figure.recuerdo figcaption span{background:none;border:0;color:#3a2a18;font-family:'Permanent Marker',cursive;font-weight:400;font-size:1.15rem;padding:0;}
+  .rs-puntos{position:absolute;top:10px;right:12px;display:flex;gap:6px;z-index:2;}
+  .rs-puntos i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.45);}
+  .rs-puntos i.on{background:var(--azul);}
   .rs-hero .ojo{color:var(--azul);}
   .rs-hero h1{font-size:clamp(3rem,8vw,5.2rem);}
   .rs-hero h1 span{color:var(--azul);}
@@ -102,6 +121,11 @@
   .rs-cta p{color:#c9dbe4;margin:8px auto 20px;max-width:46ch;}
   .rs-cta .btn{display:inline-flex;gap:8px;align-items:center;}
   @media (max-width:900px){
+    .rs-hero-grid{grid-template-columns:1fr;gap:0;}
+    .rs-hero-grid > div:first-child{display:contents;}
+    .rs-hero-grid .ojo,.rs-hero-grid h1,.rs-hero-grid > div > p{order:1;}
+    .rs-galeria{order:2;margin-top:18px;aspect-ratio:16/11;}
+    .rs-saltos{order:3;}
     .rs-dos{grid-template-columns:1fr;}
     .rs-dos{gap:16px;} .rs-dos img{aspect-ratio:16/10;}
     .rs-pres{grid-template-columns:repeat(2,1fr);}
@@ -122,13 +146,16 @@
 </header>
 
 <section class="rs-hero">
-  <div class="envolvente">
+  <div class="envolvente rs-hero-grid">
+   <div>
     <span class="ojo">Antes de comprar, compruébalo</span>
     <h1>Nuestro <span>respaldo</span></h1>
     <p>Sabemos que comprar a distancia da desconfianza. Aquí puedes revisar en un minuto quién está detrás, qué tan formales somos, qué dicen nuestros clientes y cómo pagar seguro.</p>
     <nav class="rs-saltos" aria-label="Ir a">
       <a href="#quien">👤 Quién soy</a><a href="#formal">🧾 Negocio formal</a><a href="#opiniones">⭐ Opiniones</a><a href="#presencia">🏟️ Dónde nos has visto</a><a href="#pago">🔒 Pago seguro</a>
     </nav>
+   </div>
+   <div class="rs-galeria" id="rs-galeria" aria-label="Momentos de Grupo RC"></div>
   </div>
 </section>
 
@@ -136,7 +163,7 @@
   <div class="envolvente">
     <h2><span class="rs-num">1</span>¿Quién está detrás?</h2>
     <div class="rs-dos">
-      <img src="assets/img/trabajos/instalacion-red-contencion-golf-hotel-chable-vista-dron.jpg" alt="Red de contención instalada por Grupo RC en el campo de golf del Hotel Chablé, vista desde dron" loading="lazy">
+      <img src="assets/img/trabajos/red-perimetral-negra-cancha-futbol-pasto-sintetico.jpg" alt="Red perimetral negra instalada por Grupo RC en una cancha de fútbol de pasto sintético" loading="lazy">
       <div>
         <p class="rs-cita">Soy <b>Reinier Coral</b>. Desde <b>1998</b> trabajo en el tejido de redes y desde <b>2005</b> las instalo, a ras de cancha y en alturas. Hoy llevo <b>más de 25 años vendiendo redes y más de 20 instalándolas</b>. Fundé Grupo RC para llevar esa experiencia a todo México.</p>
         <ul class="rs-lista" id="rs-hechos"></ul>
@@ -213,7 +240,7 @@
 
 <footer class="rs-pie"><div class="envolvente">© Grupo RC · Redes Deportivas RC · Mérida, Yucatán</div></footer>
 <a class="rs-barra" data-pedido target="_blank" rel="noopener">Continuar mi pedido por WhatsApp</a>
-<script src="assets/js/data.js?v=20261113b"></script>
+<script src="assets/js/data.js?v=20261113c"></script>
 <script src="assets/js/common.js?v=20261027o"></script>
 <script>
   const wa = t => `https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent(t)}`;
@@ -221,6 +248,18 @@
   document.querySelectorAll('.rs-barra').forEach(a => a.insertAdjacentHTML('afterbegin', ICONOS.whatsapp));
   document.querySelector('[data-csf]').href = wa('Hola, ¿me pueden mandar su Constancia de Situación Fiscal, por favor?');
   const esc = t => String(t || '').replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+
+  // Banner: fotos que giran (RESPALDO.banner en data.js)
+  (function(){
+    const g = document.getElementById('rs-galeria'), L = RESPALDO.banner || [];
+    if (!L.length) { g.remove(); return; }
+    g.innerHTML = L.map((b, i) => `<figure class="${b.recuerdo ? 'recuerdo' : ''}${i ? '' : ' on'}"><div class="marco" style="height:100%"><img src="assets/img/${b.foto}" alt="${esc(b.t)}" ${i ? 'loading="lazy"' : 'fetchpriority="high"'} style="object-position:${b.pos || '50% 50%'}"></div><figcaption><span>${esc(b.t)}</span></figcaption></figure>`).join('')
+      + `<div class="rs-puntos">${L.map((_, i) => `<i class="${i ? '' : 'on'}"></i>`).join('')}</div>`;
+    const fs = [...g.querySelectorAll('figure')], ps = [...g.querySelectorAll('.rs-puntos i')];
+    let k = 0;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    setInterval(() => { fs[k].classList.remove('on'); ps[k].classList.remove('on'); k = (k + 1) % fs.length; fs[k].classList.add('on'); ps[k].classList.add('on'); }, 4500);
+  })();
 
   // 1. Quién soy
   document.getElementById('rs-hechos').innerHTML = `
