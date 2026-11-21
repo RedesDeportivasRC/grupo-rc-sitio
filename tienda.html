@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico?v=3" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/assets/img/icono-48.png?v=3">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/img/icono-96.png?v=3">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/img/icono-192.png?v=3">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
+<title>Tienda en línea | Redes Deportivas RC</title>
+<!-- BORRADOR: no se indexa, no está en el menú ni en el sitemap hasta que Reinier la apruebe. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Redes perimetrales, de portería y de voleibol listas para enviar desde Mérida o fabricadas a tu medida. Paga con tarjeta, OXXO o transferencia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Permanent+Marker&family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css?v=20261029a">
+<link rel="stylesheet" href="assets/css/tienda.css?v=20261121a">
+</head>
+<body data-nivel="raiz" class="td">
+<div id="site-header"></div>
+<div class="td-aviso">Borrador sin publicar · fotos provisionales · precios con las reglas del Cotizador, por confirmar</div>
+<main>
+  <section class="td-intro">
+    <span class="ojo">Tienda en línea</span>
+    <h1>Compra tu red en línea</h1>
+    <p>Redes listas para enviar desde Mérida y redes que tejemos a tu medida. Elige tu medida, paga seguro y te avisamos cuando sale tu pedido.</p>
+    <div class="td-confianza"><span>Envío a todo México</span><span>Tarjeta, OXXO o transferencia</span><span>Hasta 18 meses con tarjeta participante</span><span>Aparta con 50%</span></div>
+    <div class="td-origen" id="td-origen"></div>
+  </section>
+  <section class="td-cats" aria-label="Categorías" id="td-cats"></section>
+  <section class="td-filtros" aria-label="Buscar">
+    <label for="td-q" class="td-lbl">Busca por medida, modelo o color</label>
+    <input id="td-q" type="search" placeholder="Ej. 8x10, Fut 7, naranja…">
+    <div class="td-chips" role="group" aria-label="Disponibilidad" id="td-fdisp"></div>
+    <div class="td-chips" role="group" aria-label="Color" id="td-fcolor"></div>
+  </section>
+  <div class="td-res" id="td-res" aria-live="polite"></div>
+  <section class="td-grid" id="td-grid"></section>
+  <section id="td-extra"></section>
+</main>
+<div id="site-footer"></div>
+<div class="td-velo" id="td-velo" role="dialog" aria-modal="true" aria-labelledby="td-ftitulo"><article class="td-ficha" id="td-ficha"></article></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/data.js?v=20261113c"></script>
+<script src="assets/js/common.js?v=20261027o"></script>
+<script>renderHeader('tienda'); renderFooter();</script>
+<script src="assets/js/tienda-muestra.js?v=20261121a"></script>
+<script src="assets/js/tienda.js?v=20261121a"></script>
+</body>
+</html>
