@@ -197,7 +197,7 @@
   function abrir(id, sinHistorial){
     const p = PRODUCTOS.find(x=>x.id===id); if(!p) return;
     const conStock = p.opciones.findIndex(o=>o.stock>0);
-    f = {p, op:Math.max(0,conStock), cant:1, foto:0, paso:1, pago:'tarjeta'};
+    f = {p, op:Math.max(0,conStock), cant:1, foto:0, paso:1, pago:'spei', plazo:12};
     pintarFicha(); velo.classList.add('ab'); document.body.style.overflow='hidden';
     if(!sinHistorial){ history.pushState({tienda:id}, '', '#'+id); empujado = true; } else empujado = false;
     setTimeout(()=>{ const c=ficha.querySelector('.td-cerrar'); if(c) c.focus(); },0);
@@ -221,16 +221,27 @@
     else { env=envioDep(p.sub*cant)*IVA; envTxt=$(env); }
     return {o,cant,enStock,dias,prod,env,envTxt,total:prod+env};
   }
+  /* Pagos (Reinier 23-nov): contado = transferencia SPEI (sin comisión); meses = Mercado Pago.
+     Tarjeta de contado queda pendiente hasta tener Zona de cobro BBVA.
+     Recargos = cobros_config de Supabase (misma fórmula que la liga de pago):
+     total con meses = (precio + $4.64) × (1 + recargo%), centavos hacia arriba. */
+  const RECARGOS = {3:10.48, 6:14.9, 9:20.52, 12:23.46, 18:36.13};
+  const PLAZOS = [3,6,9,12,18];
+  const totalMeses = (base, n) => Math.ceil((base + 4*1.16) * (1 + RECARGOS[n]/100) * 100) / 100;
+  const $c = n => '$' + n.toLocaleString('es-MX',{minimumFractionDigits:2, maximumFractionDigits:2});
   const PAGOS = [
-    ['tarjeta','Tarjeta de crédito o débito','Hasta 18 meses con tarjeta participante. Te mandamos tu liga de pago segura.'],
-    ['transferencia','Transferencia SPEI','Te damos la cuenta; tu pedido se aparta al recibir el comprobante.'],
-    ['oxxo','Efectivo en OXXO','Pagas con la referencia de tu liga de pago.'],
-    ['apartado','Apartar con 50%','Liquidas el resto antes del envío.'],
+    ['spei','Transferencia SPEI · precio de contado','Te damos la CLABE por WhatsApp; tu pedido se aparta al recibir el comprobante.'],
+    ['meses','Meses con tarjeta de crédito','Pago seguro con Mercado Pago. Elige el plazo:'],
+    ['apartado','Apartar con 50% por transferencia','Liquidas el resto antes del envío.'],
   ];
   function mensajeWA(c){
-    const p=f.p, pago=PAGOS.find(x=>x[0]===f.pago);
+    const p=f.p;
     const linea = p.unico ? `${p.n}, medida ${c.o.et}` : `${c.cant} × ${p.n}, ${c.o.et}`;
-    return `Hola, vi la tienda en línea y quiero comprar: ${linea}. Total ${$(c.total)} con envío. Quiero pagar con: ${pago[1]}${f.pago==='apartado'?` (${$(c.total/2)})`:''}.`;
+    let pago;
+    if(f.pago==='spei') pago = `transferencia SPEI, total ${$(c.total)}`;
+    else if(f.pago==='apartado') pago = `apartar con 50% por transferencia (${$(c.total/2)}) de ${$(c.total)}`;
+    else { const t=totalMeses(c.total,f.plazo); pago = `${f.plazo} meses con tarjeta: ${f.plazo} pagos de ${$c(Math.ceil(t/f.plazo*100)/100)} (total ${$c(t)})`; }
+    return `Hola, vi la tienda en línea y quiero comprar: ${linea}. Precio de contado ${$(c.total)} con envío. Quiero pagar con ${pago}.`;
   }
   function pintarFicha(){
     const p=f.p;
@@ -249,15 +260,16 @@
         ${c.enStock ? `<span class="td-estado ok">Lista para enviar · sale en ${c.dias[0]}–${c.dias[1]} días hábiles${p.cat==='volei'?' (incluye la lona)':''}</span>`
                     : `<span class="td-estado ped">Sobre pedido · se fabrica en ${c.dias[0]}–${c.dias[1]} días hábiles${p.cat==='volei'?' + lona':''}</span>`}
         <div class="td-desglose"><div><span>${p.unico?'Red':`${c.cant} red${c.cant>1?'es':''}`}</span><span>${$(c.prod)}</span></div><div><span>Envío</span><span>${c.envTxt}</span></div>
-          <div class="tot"><span>Total</span><span>${$(c.total)}</span></div><span class="td-nota">Precios con IVA incluido.</span></div>
+          <div class="tot"><span>Total de contado</span><span>${$(c.total)}</span></div><span class="td-nota">Precio con IVA, pagando por transferencia. O hasta 18 meses de ${$c(Math.ceil(totalMeses(c.total,18)/18*100)/100)} con tarjeta de crédito.</span></div>
         <div class="td-btns"><button class="td-btn pri" data-ir="2">Comprar</button><a class="td-btn sec" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${encodeURIComponent('Hola, tengo una pregunta sobre '+p.n+' ('+c.o.et+') de su tienda en línea.')}">Preguntar</a></div>
         <p class="td-nota">Se vende la red. El marco o los postes de las fotos no están incluidos.</p>`
       : `
         <div class="td-desglose" style="border:0;padding:0"><div><span>${esc(p.n)}</span></div><div><span>${esc(c.o.et)}${p.unico?'':' × '+c.cant}</span><span>${$(c.total)}</span></div></div>
         <div class="td-lbl">¿Cómo quieres pagar?</div>
-        <div class="td-pago" role="radiogroup">${PAGOS.map(([v,t,s])=>`<label><input type="radio" name="pago" value="${v}" ${f.pago===v?'checked':''}><div><b>${t}${v==='apartado'?` (${$(c.total/2)})`:''}</b><span>${s}</span></div></label>`).join('')}</div>
+        <div class="td-pago" role="radiogroup">${PAGOS.map(([v,t,s])=>`<label><input type="radio" name="pago" value="${v}" ${f.pago===v?'checked':''}><div><b>${t}${v==='spei'?` (${$(c.total)})`:v==='apartado'?` (${$(c.total/2)})`:''}</b><span>${s}</span>
+          ${v==='meses'&&f.pago==='meses'?`<div class="td-plazos">${PLAZOS.map(n=>{const t=totalMeses(c.total,n);return `<button type="button" data-plazo="${n}" aria-pressed="${f.plazo===n}"><b>${n} meses</b> de ${$c(Math.ceil(t/n*100)/100)}<small>Total ${$c(t)}</small></button>`;}).join('')}</div>`:''}</div></label>`).join('')}</div>
         <div class="td-btns"><button class="td-btn sec" data-ir="1">Regresar</button><a class="td-btn pri" data-wa target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${encodeURIComponent(mensajeWA(c))}">Continuar por WhatsApp</a></div>
-        <p class="td-nota">Te confirmamos existencia y te mandamos tu liga de pago segura en minutos.</p>`;
+        <p class="td-nota">Te confirmamos existencia por WhatsApp${f.pago==='meses'?' y te mandamos tu liga de pago de Mercado Pago':' y la cuenta para tu transferencia'}. ¿Primera vez con nosotros? <a href="respaldo.html" target="_blank" rel="noopener" style="text-decoration:underline">Conoce nuestro respaldo</a>.</p>`;
     }
     ficha.innerHTML = `<button class="td-cerrar" aria-label="Cerrar">×</button>
       <div class="galeria">${p.foto?`<div class="gp"><img src="${p.foto[f.foto]}" alt="${esc(p.n)}"></div>
@@ -271,7 +283,8 @@
     else if(t.dataset.c) f.cant=Math.max(1,Math.min(10,f.cant + +t.dataset.c));
     else if(t.dataset.foto) f.foto=+t.dataset.foto;
     else if(t.dataset.ir) f.paso=+t.dataset.ir;
-    else if(t.name==='pago'){ f.pago=t.value; const a=ficha.querySelector('[data-wa]'); if(a) a.href=`https://wa.me/${WA}?text=${encodeURIComponent(mensajeWA(calc()))}`; return; }
+    else if(t.dataset.plazo){ e.preventDefault(); f.plazo=+t.dataset.plazo; }
+    else if(t.name==='pago'){ if(f.pago===t.value) return; f.pago=t.value; }
     else return;
     pintarFicha();
   };
