@@ -2,8 +2,6 @@
 .td{--td-fondo:#eef3f6;--td-linea:#d9e3ea;--td-gris:#5b6872;--td-ok:#1f9d55;--td-ped:#b06d07;--td-osc:#0d86b5;background:var(--td-fondo);}
 .td-aviso{background:#fff7e0;color:#6b4d00;font-size:13px;text-align:center;padding:6px 16px;border-bottom:1px solid #f0dfa8;}
 .td main{max-width:var(--maxw,1240px);margin:0 auto;padding:24px 16px 64px;display:grid;gap:22px;}
-.td-intro h1{font-size:clamp(2.4rem,6vw,3.6rem);}
-.td-intro p{margin:6px 0 0;color:var(--td-gris);max-width:62ch;}
 .td-confianza{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
 .td-confianza span{background:#fff;border:1px solid var(--td-linea);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:700;}
 .td-origen{font-size:12px;color:var(--td-gris);margin-top:8px;}
@@ -98,3 +96,89 @@
 .td-plazos button b{display:block;font-size:13px;}
 .td-plazos button small{display:block;color:#5b6872;font-size:11.5px;font-weight:500;}
 .td-plazos button[aria-pressed="true"]{border-color:#0d86b5;background:#e6f7fe;box-shadow:inset 0 0 0 1px #0d86b5;}
+/* ===== 24-nov: tienda más atractiva, carrito y recomendados ===== */
+.td-hero{position:relative;min-height:clamp(340px,52vh,520px);display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:#0a1a24;}
+.td-hero-foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;}
+.td-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,18,26,.88) 0%,rgba(6,18,26,.55) 55%,rgba(6,18,26,.1) 100%);}
+.td-hero-txt{position:relative;z-index:1;max-width:var(--maxw,1240px);margin:0 auto;width:100%;padding:48px 24px 40px;}
+.td-hero h1{font-size:clamp(2.8rem,7vw,5rem);max-width:12ch;}
+.td-hero p{color:#d8e6ee;font-size:1.05rem;max-width:52ch;margin-top:10px;}
+.td-hero .ojo{color:var(--azul);}
+.td-hero-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+.td-hero-btns .td-btn{display:inline-block;padding:14px 22px;}
+.td-btn.claro{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.7);}
+.td-origen{font-size:12px;color:#9fb6c3;margin-top:14px;}
+.td-ventajas{background:#0f1a22;color:#fff;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;}
+.td-ventajas div{padding:14px 18px;border-left:3px solid var(--azul);background:#0f1a22;}
+.td-ventajas b{display:block;font-size:14px;}
+.td-ventajas span{font-size:12.5px;color:#a9bcc8;}
+@media (max-width:760px){.td-ventajas{grid-template-columns:repeat(2,1fr);}.td-hero-txt{padding:32px 16px 26px;}.td-hero::after{background:linear-gradient(0deg,rgba(6,18,26,.92) 10%,rgba(6,18,26,.45) 100%);}}
+.td main{scroll-margin-top:12px;}
+.td-secciones{display:grid;gap:34px;}
+.td-sec-cab{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px;flex-wrap:wrap;}
+.td-sec-cab h2,.td-reco h2,.td-pasos h2{font-size:clamp(1.8rem,3.4vw,2.4rem);}
+.td-vertodo{border:0;background:none;color:#0d86b5;font:800 14px 'Manrope',sans-serif;cursor:pointer;padding:6px 0;}
+.td-card{transition:transform .2s, box-shadow .2s;}
+@media (hover:hover){.td-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(10,26,36,.14);}}
+@media (prefers-reduced-motion:reduce){.td-card{transition:none;}.td-card:hover{transform:none;}}
+.td-eti{position:absolute;top:10px;left:10px;z-index:1;background:#fff;color:#0f1a22;font:800 11px/1 'Manrope',sans-serif;padding:6px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.3px;}
+.td-eti.ok{background:#1f9d55;color:#fff;}
+.td .precio em{display:block;font:600 12px/1.3 'Manrope',sans-serif;color:#0d86b5;font-style:normal;letter-spacing:0;margin-top:4px;}
+.td-card.chica{min-width:0;}
+.td-card.chica .cuerpo{padding:10px 12px 12px;gap:4px;}
+.td-card.chica h3{font-size:14px;}
+.td-card.chica .precio{font-size:24px;}
+.td-reco{margin-top:8px;}
+.td-reco h2{margin-bottom:12px;}
+.td-carrusel{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(200px,240px);gap:12px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory;}
+.td-carrusel>*{scroll-snap-align:start;}
+.td-pasos{background:#fff;border:1px solid var(--td-linea);border-radius:16px;padding:22px;}
+.td-pasos ol{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:paso;}
+.td-pasos li{counter-increment:paso;display:grid;gap:4px;font-size:14px;color:#5b6872;}
+.td-pasos li::before{content:counter(paso);width:34px;height:34px;border-radius:50%;background:var(--azul);color:#0f1a22;display:grid;place-items:center;font:400 20px 'Bebas Neue',sans-serif;}
+.td-pasos li b{color:#0f1a22;font-size:15px;}
+@media (max-width:760px){.td-pasos ol{grid-template-columns:1fr 1fr;}}
+/* Ficha: recomendados abajo a todo lo ancho */
+.td-ficha-reco{grid-column:1/-1;padding:0 20px 22px;border-top:1px solid #e4ecf1;}
+.td-ficha-reco .td-reco h2{font-size:1.6rem;margin-top:16px;}
+.td-listo{background:#e3f6ea;border:1px solid #bfe6cc;border-radius:12px;padding:12px;display:grid;gap:10px;}
+.td-listo b{color:#1f6f3f;}
+.td-listo div{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+/* Botón flotante del carrito */
+.td-boton-carro{position:fixed;left:18px;bottom:18px;z-index:900;display:flex;align-items:center;gap:8px;background:#0f1a22;color:#fff;border:0;border-radius:999px;padding:12px 18px 12px 14px;font:800 15px 'Manrope',sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.3);cursor:pointer;}
+.td-boton-carro .n{background:var(--azul);color:#0f1a22;border-radius:999px;min-width:24px;height:24px;display:grid;place-items:center;font-size:13px;padding:0 6px;}
+.td-boton-carro:not(.lleno){display:none;}
+.td-boton-carro.lleno{background:var(--azul);color:#0f1a22;}
+.td-boton-carro.lleno .n{background:#0f1a22;color:#fff;}
+.td-aviso-carro{position:fixed;left:50%;bottom:84px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:1100;background:#0f1a22;color:#fff;border-radius:12px;padding:10px 12px 10px 16px;display:flex;gap:12px;align-items:center;font-size:14px;max-width:calc(100vw - 32px);transition:.25s;box-shadow:0 8px 24px rgba(0,0,0,.3);}
+.td-aviso-carro.ve{opacity:1;transform:translate(-50%,0);pointer-events:auto;}
+.td-aviso-carro button{background:var(--azul);border:0;border-radius:8px;padding:8px 12px;font:800 13px 'Manrope',sans-serif;cursor:pointer;white-space:nowrap;}
+/* Carrito lateral */
+.td-carro{position:fixed;inset:0;background:rgba(10,20,28,.55);z-index:1050;display:none;justify-content:flex-end;}
+.td-carro.ab{display:flex;}
+.td-carro aside{background:#fff;width:min(460px,100%);height:100%;overflow:auto;padding:18px 18px 28px;display:grid;gap:14px;align-content:start;}
+.td-carro-cab{display:flex;justify-content:space-between;align-items:center;position:sticky;top:-18px;background:#fff;padding:8px 0;z-index:1;}
+.td-carro-cab h2{font-size:2rem;}
+.td-carro-cab .td-cerrar{position:static;box-shadow:none;border:1px solid #d9e3ea;}
+.td-carro-vacio{display:grid;justify-items:center;gap:12px;padding:40px 0;color:#5b6872;}
+.td-carro-vacio svg{width:48px;height:48px;}
+.td-items{list-style:none;margin:0;padding:0;display:grid;gap:12px;}
+.td-items li{display:grid;grid-template-columns:64px 1fr auto;gap:10px;align-items:start;border-bottom:1px solid #eef2f5;padding-bottom:12px;}
+.td-items .mini{width:64px;height:64px;border-radius:10px;overflow:hidden;position:relative;background:#e3ebf0;}
+.td-items .mini img,.td-items .mini .td-marcador{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.td-items .mini .td-marcador svg{width:28px;height:28px;}.td-items .mini .td-marcador span{display:none;}
+.td-items .dat{display:grid;gap:2px;font-size:14px;}
+.td-items .dat>span{color:#5b6872;font-size:13px;}
+.td-items .fila{display:flex;align-items:center;gap:12px;margin-top:4px;}
+.td-items .pr{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.td-items .pr small{font-weight:600;color:#0d86b5;}
+.td-quitar{border:0;background:none;color:#b3261e;font:700 12.5px 'Manrope',sans-serif;cursor:pointer;padding:4px 0;}
+.td-carro-reco{display:grid;gap:8px;background:#f3f8fb;border-radius:12px;padding:12px;}
+.td-reco-mini{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;background:#fff;border:1px solid #d9e3ea;border-radius:10px;padding:6px 10px 6px 6px;text-align:left;font:600 13px 'Manrope',sans-serif;cursor:pointer;color:#0f1a22;}
+.td-reco-mini img,.td-reco-mini i{width:44px;height:44px;border-radius:8px;object-fit:cover;background:#e3ebf0;display:block;}
+.td-reco-mini b{color:#0d86b5;font-size:13px;}
+.td-btn.grande{padding:16px;font-size:16px;}
+.td-carro .td-nota a{text-decoration:underline;}
+@media (max-width:600px){.td-boton-carro{left:12px;bottom:12px;padding:10px 14px 10px 12px;}.td-boton-carro .t{font-size:14px;}}
+.td main>*,.td-ficha>*,.td-reco,.td-secciones>*{min-width:0;}
+@media (max-width:600px){.td-aviso-carro{left:12px;right:12px;max-width:none;transform:translateY(20px);}.td-aviso-carro.ve{transform:none;}}

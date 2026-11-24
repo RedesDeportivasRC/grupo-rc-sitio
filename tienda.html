@@ -16,19 +16,23 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Permanent+Marker&family=Manrope:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="assets/css/styles.css?v=20261029a">
-<link rel="stylesheet" href="assets/css/tienda.css?v=20261123a">
+<link rel="stylesheet" href="assets/css/tienda.css?v=20261124a">
+<script src="assets/js/medicion.js"></script>
 </head>
 <body data-nivel="raiz" class="td">
 <div id="site-header"></div>
-<div class="td-aviso">Borrador sin publicar · fotos provisionales · precios con las reglas del Cotizador, por confirmar</div>
-<main>
-  <section class="td-intro">
+<section class="td-hero">
+  <img src="assets/img/trabajos/porteria-futbol-profesional-red-hexagonal-blanca-pasto-sintetico.jpg" alt="" class="td-hero-foto">
+  <div class="td-hero-txt">
     <span class="ojo">Tienda en línea</span>
-    <h1>Compra tu red en línea</h1>
-    <p>Redes listas para enviar desde Mérida y redes que tejemos a tu medida. Elige tu medida, paga por transferencia o a meses y te avisamos cuando sale tu pedido.</p>
-    <div class="td-confianza"><span>Envío a todo México</span><span>Precio de contado por transferencia</span><span>Hasta 18 meses con tarjeta de crédito</span><span>Aparta con 50%</span></div>
+    <h1>Redes listas para jugar</h1>
+    <p>Redes que ya tenemos tejidas para enviarte desde Mérida, y las que fabricamos a tu medida. Arma tu pedido, paga por transferencia o a meses y te lo mandamos a todo México.</p>
+    <div class="td-hero-btns"><a href="#td-catalogo" class="td-btn pri">Ver productos</a><a href="productos/redes-perimetrales.html#cotizar" class="td-btn claro">Cotizar a mi medida</a></div>
     <div class="td-origen" id="td-origen"></div>
-  </section>
+  </div>
+</section>
+<div class="td-ventajas"><div><b>Envío a todo México</b><span>Paquetería a domicilio</span></div><div><b>Precio de contado</b><span>Pagando por transferencia</span></div><div><b>Hasta 18 meses</b><span>Con tarjeta de crédito</span></div><div><b>Aparta con 50%</b><span>Liquidas antes del envío</span></div></div>
+<main id="td-catalogo">
   <section class="td-cats" aria-label="Categorías" id="td-cats"></section>
   <section class="td-filtros" aria-label="Buscar">
     <label for="td-q" class="td-lbl">Busca por medida, modelo o color</label>
@@ -37,9 +41,19 @@
     <div class="td-chips" role="group" aria-label="Color" id="td-fcolor"></div>
   </section>
   <div class="td-res" id="td-res" aria-live="polite"></div>
-  <section class="td-grid" id="td-grid"></section>
+  <div class="td-grid" id="td-grid"></div>
   <section id="td-extra"></section>
+  <section class="td-pasos" aria-label="Cómo comprar">
+    <h2>Así de fácil compras</h2>
+    <ol><li><b>Arma tu pedido</b><span>Elige medida y color y agrégalo al carrito.</span></li>
+      <li><b>Envíalo por WhatsApp</b><span>Te confirmamos existencias en minutos.</span></li>
+      <li><b>Paga como prefieras</b><span>Transferencia, meses con tarjeta o aparta con 50%.</span></li>
+      <li><b>Recíbelo en casa</b><span>Te mandamos la guía de tu paquete.</span></li></ol>
+  </section>
 </main>
+<button class="td-boton-carro" id="td-boton-carro" aria-label="Abrir carrito"></button>
+<div class="td-aviso-carro" id="td-aviso-carro" role="status"></div>
+<div class="td-carro" id="td-carro" role="dialog" aria-modal="true" aria-label="Tu carrito"><aside><div class="td-carro-cab"><h2>Tu pedido</h2><button class="td-cerrar" data-cerrar-carro aria-label="Cerrar carrito">×</button></div><div id="td-carro-cuerpo"></div></aside></div>
 <div id="site-footer"></div>
 <div class="td-velo" id="td-velo" role="dialog" aria-modal="true" aria-labelledby="td-ftitulo"><article class="td-ficha" id="td-ficha"></article></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -47,6 +61,6 @@
 <script src="assets/js/common.js?v=20261027o"></script>
 <script>renderHeader('tienda'); renderFooter();</script>
 <script src="assets/js/tienda-muestra.js?v=20261121a"></script>
-<script src="assets/js/tienda.js?v=20261123a"></script>
+<script src="assets/js/tienda.js?v=20261124a"></script>
 </body>
 </html>
