@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Cliente buena onda · Porterías</title>
+<!-- Práctica interna para entrenar a Redi (bot de Mensajes). Andy contesta como lo haría en WhatsApp; al final copia sus respuestas. No guarda nada en servidor (solo en el celular, por si se cierra). -->
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#0b141a;display:flex;justify-content:center}
+.app{width:100%;max-width:520px;height:100dvh;display:flex;flex-direction:column;background:#efeae2;position:relative}
+.app::before{content:'';position:absolute;inset:0;opacity:.06;background-image:radial-gradient(#000 1px,transparent 1px);background-size:18px 18px;pointer-events:none}
+header{background:#008069;color:#fff;display:flex;align-items:center;gap:12px;padding:10px 14px;padding-top:max(10px,env(safe-area-inset-top));z-index:2}
+header .atras{font-size:22px;opacity:.9}
+.av{width:42px;height:42px;border-radius:50%;object-fit:cover;flex-shrink:0}
+header b{display:block;font-size:17px;font-weight:600}
+header small{font-size:13px;opacity:.85}
+#chat{flex:1;overflow-y:auto;padding:12px 10px 8px;position:relative;z-index:1;display:flex;flex-direction:column;gap:4px}
+.burbuja{max-width:82%;padding:7px 9px 5px;border-radius:8px;font-size:15.5px;line-height:1.35;position:relative;box-shadow:0 1px .5px rgba(11,20,26,.13);white-space:pre-wrap;word-wrap:break-word}
+.burbuja .hora{display:block;text-align:right;font-size:11px;color:#667781;margin-top:2px}
+.in{background:#fff;align-self:flex-start;border-top-left-radius:0}
+.out{background:#d9fdd3;align-self:flex-end;border-top-right-radius:0}
+.out .hora::after{content:' ✓✓';color:#53bdeb}
+.sistema{align-self:center;background:#fff3c4;color:#54656f;font-size:13px;padding:6px 12px;border-radius:8px;text-align:center;max-width:90%;margin:8px 0;box-shadow:0 1px .5px rgba(11,20,26,.13)}
+.fecha{align-self:center;background:#fff;color:#54656f;font-size:12.5px;padding:5px 12px;border-radius:8px;margin:6px 0;box-shadow:0 1px .5px rgba(11,20,26,.13)}
+.escribiendo{align-self:flex-start;background:#fff;border-radius:8px;border-top-left-radius:0;padding:10px 14px;display:flex;gap:4px}
+.escribiendo i{width:7px;height:7px;border-radius:50%;background:#8696a0;animation:b 1.2s infinite}
+.escribiendo i:nth-child(2){animation-delay:.2s}.escribiendo i:nth-child(3){animation-delay:.4s}
+@keyframes b{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+footer{display:flex;align-items:flex-end;gap:8px;padding:8px;padding-bottom:max(8px,env(safe-area-inset-bottom));z-index:2}
+textarea{flex:1;resize:none;border:0;border-radius:22px;padding:11px 16px;font:inherit;font-size:16px;max-height:140px;outline:none;background:#fff}
+button.enviar{width:48px;height:48px;border-radius:50%;border:0;background:#00a884;color:#fff;font-size:20px;flex-shrink:0;cursor:pointer}
+button.enviar:disabled{opacity:.5}
+.final{align-self:center;background:#fff;border-radius:12px;padding:16px;margin:10px 0;text-align:center;max-width:92%;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.final b{display:block;margin-bottom:6px}
+.final button{margin-top:10px;background:#00a884;color:#fff;border:0;border-radius:20px;padding:11px 18px;font-size:15px;font-weight:600;cursor:pointer}
+.final .sec{background:#fff;color:#008069;border:1px solid #008069;margin-left:6px}
+</style>
+</head>
+<body>
+<div class="app">
+  <header><span class="atras">←</span><img class="av" src="avatar.jpg" alt=""><div><b>Cliente buena onda</b><small id="estado">en línea</small></div></header>
+  <div id="chat"></div>
+  <footer><textarea id="txt" rows="1" placeholder="Mensaje"></textarea><button class="enviar" id="btn" aria-label="Enviar">➤</button></footer>
+</div>
+<script>
+// Guion: cada paso es lo que escribe el cliente (o una nota del sistema) y el tema que queremos aprender de Andy.
+const GUION = [
+  {tema:'Saludo y precio (porterías)', cliente:['Hola buenas tardes','Vi lo de las porterías, ¿qué precio tienen?']},
+  {tema:'Recomendar modelo por uso', cliente:['Son para mis hijos de 6 y 9 años','Para el patio de la casa, mide como 8 x 12 metros']},
+  {tema:'Material y color', cliente:['¿Son de aluminio?','¿Y de qué colores las tienen?']},
+  {tema:'Par y envío', cliente:['Sí, el par','Estoy en Monterrey, ¿cuánto tarda en llegar?']},
+  {tema:'Cierre al mandar la cotización', sistema:'📄 Aquí ya le mandaste la cotización de las porterías ($ total). Escribe el mensaje con el que la acompañas y cierras.'},
+  {tema:'Red de color', cliente:['¿Y la red me la pueden hacer azul en lugar de blanca?','¿Cuesta más?']},
+  {tema:'Armado', cliente:['¿Vienen armadas o cómo se arman? No soy muy bueno para eso 😅']},
+  {tema:'Negociación', cliente:['Oye, está un poco caro','En Mercado Libre vi unas más baratas']},
+  {tema:'Medida personalizada', cliente:['¿Y una de 4 x 2 m la hacen? Es para otra cancha']},
+  {tema:'Fut 7 en blanco', cliente:['Y para la cancha del club queremos de fut 7','¿La tienen en blanco? ¿Cuánto más sale?']},
+  {tema:'Red de portería: medidas incompletas', cliente:['Otra cosa: un amigo ya tiene las porterías, solo quiere la red','Miden 5 de ancho por 2 de alto y como 1 metro de fondo']},
+  {tema:'Red de portería en Mérida instalada', cliente:['Él está en Mérida, en Caucel','¿Se la pueden ir a poner? ¿Cuánto cobran por instalarla?']},
+  {tema:'Entrega inmediata', cliente:['¿Tienen alguna red ya hecha?','La necesita para un torneo el sábado']},
+  {tema:'Seguimiento a los 3 días', sistema:'⏳ Pasaron 3 días y el cliente no contestó. ¿Qué le escribes?'},
+];
+const CLAVE='practica-andy-porterias-v1';
+let estado = JSON.parse(localStorage.getItem(CLAVE)||'null') || {paso:0, respuestas:[]};
+const chat=document.getElementById('chat'), txt=document.getElementById('txt'), btn=document.getElementById('btn'), est=document.getElementById('estado');
+const hora=()=>new Date().toLocaleTimeString('es-MX',{hour:'numeric',minute:'2-digit'});
+const esperar=ms=>new Promise(r=>setTimeout(r,ms));
+function burbuja(texto, clase, h){ const d=document.createElement('div'); d.className='burbuja '+clase; d.textContent=texto; const s=document.createElement('span'); s.className='hora'; s.textContent=h||hora(); d.appendChild(s); chat.appendChild(d); bajar(); }
+function nota(texto, clase){ const d=document.createElement('div'); d.className=clase; d.textContent=texto; chat.appendChild(d); bajar(); }
+function bajar(){ chat.scrollTop=chat.scrollHeight; }
+function guardar(){ localStorage.setItem(CLAVE, JSON.stringify(estado)); }
+let ocupado=false;
+async function turnoCliente(){
+  const p=GUION[estado.paso];
+  if(!p){ terminar(); return; }
+  ocupado=true; btn.disabled=true;
+  if(p.sistema){ await esperar(500); nota(p.sistema,'sistema'); }
+  else for(const m of p.cliente){
+    est.textContent='escribiendo…'; const e=document.createElement('div'); e.className='escribiendo'; e.innerHTML='<i></i><i></i><i></i>'; chat.appendChild(e); bajar();
+    await esperar(900+Math.min(m.length*25,1800)); e.remove(); est.textContent='en línea'; burbuja(m,'in');
+  }
+  ocupado=false; btn.disabled=false; txt.focus();
+}
+function textoFinal(){
+  return 'Práctica de Andy para Redi (porterías)\n\n'+estado.respuestas.map((r,i)=>`${i+1}. ${r.tema}\nCliente: ${r.cliente}\nAndy: ${r.respuesta}`).join('\n\n');
+}
+function terminar(){
+  txt.disabled=true; btn.disabled=true; est.textContent='últ. vez hoy';
+  const f=document.createElement('div'); f.className='final';
+  f.innerHTML='<b>¡Gracias, Andy! 🙌</b>Copia tus respuestas y pégalas en el chat con Reinier.<br><button id="copiar">Copiar mis respuestas</button><button class="sec" id="otra">Empezar de nuevo</button>';
+  chat.appendChild(f); bajar();
+  document.getElementById('copiar').onclick=async e=>{ try{ await navigator.clipboard.writeText(textoFinal()); e.target.textContent='¡Copiado! ✓'; }catch(_){ prompt('Copia este texto:', textoFinal()); } };
+  document.getElementById('otra').onclick=()=>{ if(confirmar()){ localStorage.removeItem(CLAVE); location.reload(); } };
+}
+function confirmar(){ return window.confirm('¿Borrar tus respuestas y empezar otra vez?'); }
+async function enviar(){
+  const t=txt.value.trim(); if(!t||ocupado) return;
+  const p=GUION[estado.paso]; if(!p) return;
+  burbuja(t,'out'); txt.value=''; ajustar();
+  // Andy puede mandar varios mensajes seguidos: el cliente contesta cuando ella deja de escribir 4 s
+  const previo=estado.respuestas.find(r=>r.paso===estado.paso);
+  if(previo) previo.respuesta+='\n'+t; else estado.respuestas.push({paso:estado.paso, tema:p.tema, cliente:p.sistema?p.sistema:p.cliente.join(' / '), respuesta:t});
+  guardar();
+  clearTimeout(window._sig); window._sig=setTimeout(siguiente, 4000);
+}
+async function siguiente(){ estado.paso++; guardar(); await turnoCliente(); }
+function ajustar(){ txt.style.height='auto'; txt.style.height=Math.min(txt.scrollHeight,140)+'px'; }
+txt.addEventListener('input',()=>{ ajustar(); if(window._sig){ clearTimeout(window._sig); if(estado.respuestas.find(r=>r.paso===estado.paso)) window._sig=setTimeout(siguiente,4000);} });
+txt.addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey&&window.innerWidth>700){ e.preventDefault(); enviar(); } });
+btn.addEventListener('click',enviar);
+// Arranque: repinta lo ya contestado (si cerró la página) y sigue donde se quedó
+(async()=>{
+  nota('HOY','fecha');
+  nota('🔒 Esto es una práctica: contesta como lo harías normalmente en WhatsApp. Puedes mandar varios mensajes seguidos.','sistema');
+  for(let i=0;i<estado.paso && i<GUION.length;i++){
+    const p=GUION[i]; if(p.sistema) nota(p.sistema,'sistema'); else p.cliente.forEach(m=>burbuja(m,'in',' '));
+    const r=estado.respuestas.find(x=>x.paso===i); if(r) r.respuesta.split('\n').forEach(m=>burbuja(m,'out',' '));
+  }
+  const r=estado.respuestas.find(x=>x.paso===estado.paso);
+  if(r){ const p=GUION[estado.paso]; if(p.sistema) nota(p.sistema,'sistema'); else p.cliente.forEach(m=>burbuja(m,'in',' ')); r.respuesta.split('\n').forEach(m=>burbuja(m,'out',' ')); window._sig=setTimeout(siguiente,1500); }
+  else await turnoCliente();
+})();
+</script>
+</body>
+</html>
