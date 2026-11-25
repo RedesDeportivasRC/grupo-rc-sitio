@@ -469,13 +469,14 @@ function renderClientCard(c){
 }
 
 function renderResourceCard(r){
-  const iconos = {'Catálogo':'📘','Manual':'🛠️','Ficha técnica':'📐','Guía':'📄'};
+  const iconos = {'Catálogo':'📘','Manual':'🛠️','Ficha técnica':'📐','Guía':'📄','Pruebas':'🔬'};
   // Si el PDF ya está subido se descarga; si no, se pide por WhatsApp y se lo mandamos.
-  const liga = esUrl(r.archivo) ? r.archivo : `https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent('Hola, ¿me pueden mandar el '+r.nombre.toLowerCase()+'?')}`;
+  const subido = esUrl(r.archivo);
+  const liga = subido ? r.archivo : `https://wa.me/${EMPRESA.whatsapp}?text=${encodeURIComponent('Hola, ¿me pueden mandar el '+r.nombre.toLowerCase()+'?')}`;
   return `
     <a class="tarjeta-recurso" href="${liga}" target="_blank" rel="noopener">
       <div class="icono">${iconos[r.categoria]||'📄'}</div>
-      <div><b>${r.nombre}</b><span>${r.descripcion}</span><span style="color:var(--azul);font-weight:700;margin-top:4px;">${esUrl(r.archivo)?'Descargar PDF':'Pídelo por WhatsApp →'}</span></div>
+      <div><b>${r.nombre}</b><span>${r.descripcion}</span><span style="display:block;color:var(--azul);font-weight:700;margin-top:4px;">${subido?'Descargar PDF':'Pídelo por WhatsApp →'}</span></div>
     </a>`;
 }
 
