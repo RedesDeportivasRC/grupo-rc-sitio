@@ -253,12 +253,23 @@ const BLOG_POSTS = BLOG_TODOS
   .filter(b=> !b.publicar || new Date(b.publicar + '-06:00') <= new Date());
 
 // ---------------- RECURSOS / DESCARGAS ----------------
+// tipo = sección de recursos.html (#perimetral, #porteria, #general). El bot de Mensajes
+// manda la liga directo a la sección: redesdeportivasrc.com/recursos.html#perimetral
+const RECURSOS_SECCIONES = [
+  { tipo:'perimetral', titulo:'Red perimetral', texto:'Ficha técnica por abertura y pruebas de laboratorio del material.' },
+  { tipo:'porteria', titulo:'Redes de portería', texto:'Especificaciones de la red hexagonal para portería.' },
+  { tipo:'general', titulo:'Catálogo y guías', texto:'Documentos generales para antes de cotizar.' },
+];
 const RECURSOS = [
-  { slug:'catalogo-general', nombre:'Catálogo general', descripcion:'Todos nuestros productos y medidas en un solo documento.', imagen:null, archivo:'[PLACEHOLDER — subir PDF]', categoria:'Catálogo', fecha:'[PLACEHOLDER]', version:'1.0' },
-  { slug:'manual-instalacion', nombre:'Manual de instalación', descripcion:'Guía paso a paso para instalar tu red perimetral.', imagen:null, archivo:'[PLACEHOLDER — subir PDF]', categoria:'Manual', fecha:'[PLACEHOLDER]', version:'1.0' },
-  { slug:'ficha-tecnica-perimetral', nombre:'Ficha técnica — Red Perimetral', descripcion:'Especificaciones de material, calibre y resistencia.', imagen:null, archivo:'[PLACEHOLDER — subir PDF]', categoria:'Ficha técnica', fecha:'[PLACEHOLDER]', version:'1.0' },
-  { slug:'ficha-tecnica-red-hexagonal', nombre:'Ficha técnica — Red hexagonal para portería', descripcion:'Poliéster trenzado, ~60 filamentos, tejido colmena.', imagen:null, archivo:'[PLACEHOLDER — subir PDF]', categoria:'Ficha técnica', fecha:'[PLACEHOLDER]', version:'1.0' },
-  { slug:'guia-medidas', nombre:'Guía de medidas', descripcion:'Cómo tomar las medidas correctas antes de cotizar.', imagen:null, archivo:'[PLACEHOLDER — subir PDF]', categoria:'Guía', fecha:'[PLACEHOLDER]', version:'1.0' },
+  { tipo:'perimetral', slug:'ficha-perimetral-4', nombre:'Ficha técnica — Red perimetral 4"', descripcion:'Rombo de 4", cordón calibre 18 alquitranado.', archivo:'assets/docs/ficha-red-perimetral-4-pulgadas.pdf', categoria:'Ficha técnica' },
+  { tipo:'perimetral', slug:'ficha-perimetral-3', nombre:'Ficha técnica — Red perimetral 3"', descripcion:'Rombo de 3", cordón calibre 18 alquitranado.', archivo:'assets/docs/ficha-red-perimetral-3-pulgadas.pdf', categoria:'Ficha técnica' },
+  { tipo:'perimetral', slug:'ficha-perimetral-2', nombre:'Ficha técnica — Red perimetral 2"', descripcion:'Rombo de 2", cordón calibre 18 alquitranado.', archivo:'assets/docs/ficha-red-perimetral-2-pulgadas.pdf', categoria:'Ficha técnica' },
+  { tipo:'perimetral', slug:'ficha-perimetral-1', nombre:'Ficha técnica — Red perimetral 1"', descripcion:'Rombo de 1", cordón calibre 18 alquitranado.', archivo:'assets/docs/ficha-red-perimetral-1-pulgada.pdf', categoria:'Ficha técnica' },
+  { tipo:'perimetral', slug:'pruebas-resistencia', nombre:'Pruebas de resistencia de laboratorio', descripcion:'Informe de laboratorio textil acreditado: tracción, flamabilidad y resistencia al sol.', archivo:'assets/docs/pruebas-resistencia-red-perimetral.pdf', categoria:'Pruebas' },
+  { tipo:'porteria', slug:'ficha-tecnica-red-hexagonal', nombre:'Ficha técnica — Red hexagonal para portería', descripcion:'Poliéster trenzado, ~60 filamentos, tejido colmena.', archivo:'[PLACEHOLDER — subir PDF]', categoria:'Ficha técnica' },
+  { tipo:'general', slug:'catalogo-general', nombre:'Catálogo general', descripcion:'Todos nuestros productos y medidas en un solo documento.', archivo:'[PLACEHOLDER — subir PDF]', categoria:'Catálogo' },
+  { tipo:'general', slug:'manual-instalacion', nombre:'Manual de instalación', descripcion:'Guía paso a paso para instalar tu red perimetral.', archivo:'[PLACEHOLDER — subir PDF]', categoria:'Manual' },
+  { tipo:'general', slug:'guia-medidas', nombre:'Guía de medidas', descripcion:'Cómo tomar las medidas correctas antes de cotizar.', archivo:'[PLACEHOLDER — subir PDF]', categoria:'Guía' },
 ];
 
 // ---------------- VIDEOS ----------------
