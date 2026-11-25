@@ -46,3 +46,14 @@ h1,h2{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.5px;li
   .fp-fotos{grid-template-columns:repeat(2,1fr);}
   .fp-envio{grid-template-columns:1fr;}
 }
+/* Porterías y red de portería (PR porterías) */
+.fp-video.ancho{aspect-ratio:4/5;max-width:480px;}
+.fp-diagrama{display:grid;grid-template-columns:minmax(220px,360px) 1fr;gap:20px;align-items:center;}
+.fp-diagrama svg{width:100%;height:auto;}
+.fp-medidas{width:100%;border-collapse:collapse;margin:6px 0 4px;}
+.fp-medidas td{padding:7px 4px;border-bottom:1px solid var(--linea);}
+.fp-medidas td:first-child{font-weight:800;width:44px;}
+.fp-medidas .letra{display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--osc);color:#fff;align-items:center;justify-content:center;font-size:.85rem;}
+.fp-medidas td:last-child{text-align:right;font-weight:700;}
+.fp-nota{font-size:.85rem;color:var(--gris);margin-top:8px;}
+@media (max-width:700px){.fp-diagrama{grid-template-columns:1fr;}}
